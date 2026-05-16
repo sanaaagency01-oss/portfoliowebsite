@@ -3,6 +3,9 @@ import { NextResponse } from "next/server"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"
+const TO_EMAIL   = process.env.RESEND_TO_EMAIL   ?? "baysaauskhuu@gmail.com"
+
 export async function POST(req: Request) {
   try {
     const { name, email, project, budget, message } = await req.json()
@@ -11,9 +14,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const { error } = await resend.emails.send({
-      from: "baysaass <hello@baysaass.com>",
-      to: "baysaauskhuu@gmail.com",
+    const { data, error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
       replyTo: email,
       subject: `New inquiry from ${name}`,
       html: `
@@ -50,13 +53,14 @@ export async function POST(req: Request) {
     })
 
     if (error) {
-      console.error("Resend error:", error)
-      return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
+      console.error("[Resend error]", JSON.stringify(error))
+      return NextResponse.json({ error: error.message ?? "Failed to send email" }, { status: 500 })
     }
 
+    console.log("[Resend ok] id:", data?.id)
     return NextResponse.json({ success: true })
   } catch (err) {
-    console.error("Contact API error:", err)
+    console.error("[Contact API error]", err)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

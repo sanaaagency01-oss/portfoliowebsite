@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://baysaass.com"),
+  metadataBase: new URL("https://baysaass.space"),
   title: {
     default: "baysaass \u2014 Brand Designer | Ulaanbaatar, Mongolia",
     template: "%s | baysaass",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: "baysaass \u2014 Brand Designer | Ulaanbaatar, Mongolia",
     description:
       "Brand identity, logo design, packaging, and visual systems for ambitious brands. Based in Ulaanbaatar, Mongolia.",
-    url: "https://baysaass.com",
+    url: "https://baysaass.space",
     locale: "en_US",
     images: [
       {
@@ -95,9 +95,9 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://baysaass.com/#person",
+      "@id": "https://baysaass.space/#person",
       name: "baysaass",
-      url: "https://baysaass.com",
+      url: "https://baysaass.space",
       email: "baysaauskhuu@gmail.com",
       jobTitle: "Brand Designer",
       description:
@@ -116,12 +116,12 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://baysaass.com/#website",
-      url: "https://baysaass.com",
+      "@id": "https://baysaass.space/#website",
+      url: "https://baysaass.space",
       name: "baysaass",
       description:
         "Portfolio of baysaass \u2014 a brand designer based in Ulaanbaatar, Mongolia.",
-      publisher: { "@id": "https://baysaass.com/#person" },
+      publisher: { "@id": "https://baysaass.space/#person" },
     },
   ],
 }
