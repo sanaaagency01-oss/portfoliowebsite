@@ -59,7 +59,7 @@ const imageData: [ImageSource, ImageSource][] = [
   ],
   [
     { src: "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",             alt: "Beautytech logo" },
-    { src: "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.webp", alt: "Chandmani Goyl" },
+    { src: "/projects/chandmani goyl/3bf4ea194423431.65fbbbf0bda70 6.webp", alt: "Chandmani Goyl" },
   ],
   [
     { src: "/projects/naadam typography/198492229719067.686a12b98ad11.webp", alt: "Naadam typography" },

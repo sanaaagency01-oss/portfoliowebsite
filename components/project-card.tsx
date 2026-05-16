@@ -44,7 +44,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.year}
           </span>
         </div>
-        <p className="text-[#888888] text-[11px] sm:text-[12px] leading-snug line-clamp-1">
+        <p className="text-[#888888] text-[10px] sm:text-[11px] font-medium tracking-[0.08em] uppercase mt-0.5">
+          {project.category}
+        </p>
+        <p className="text-[#aaaaaa] text-[11px] sm:text-[12px] leading-snug line-clamp-1 mt-0.5">
           {tagline}
         </p>
       </div>

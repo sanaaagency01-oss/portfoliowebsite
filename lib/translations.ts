@@ -33,9 +33,9 @@ export const translations = {
       label: "About me",
       role: "Brand Designer.",
       bio: [
-        "I’m a branding designer based in Mongolia, focused on creating meaningful and purposeful visual identity systems. I work with startups, businesses, and individuals to build brands that go beyond aesthetics. Brands with their own presence, value, and emotional connection.",
-        "My work is rooted in system thinking and strategy. To me, good design is not about decoration, but about expressing ideas in their clearest visual form. That’s why every identity I create is built to be consistent, recognizable, and valuable over time.",
-        "Working across visual identity, digital experience, and creative direction, I aim to create brands that people don’t just see — but remember.",
+        "I’m baysaass — a brand designer based in Ulaanbaatar. I work with Mongolian businesses and founders across food, beauty, music, and culture to build visual identities that are specific, strategic, and built to last.",
+        "My process starts with positioning, not sketches. Before any visual decisions, I want to understand where a brand sits in its market, who it’s for, and what it needs to communicate. The design work is the end of that thinking — not the beginning.",
+        "Most of my clients are building something new in Mongolia, which means the work has to feel locally rooted and internationally credible at the same time. That’s the tension I find most interesting to design through.",
       ],
       workWithMe: "Work with me",
       processLabel: "Process",

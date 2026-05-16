@@ -59,10 +59,10 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               <li>
                 <a
-                  href="mailto:baysaauskhuu@gmail.com"
+                  href="mailto:sanaaagency01@gmail.com"
                   className="text-white text-[13px] nav-link hover:text-blue-100 transition-colors duration-200"
                 >
-                  baysaauskhuu@gmail.com
+                  sanaaagency01@gmail.com
                 </a>
               </li>
               <li>

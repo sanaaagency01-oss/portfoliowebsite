@@ -21,7 +21,7 @@ const portfolioImages = [
   { src: "/projects/ganga and khomool/mockup1.png",                                                                                alt: "Zen Tarot Incense" },
   { src: "/projects/Tsuiwan package/mockup.png",                                                                                   alt: "Tsuiwan packaging" },
   { src: "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",                                                       alt: "Beautytech logo" },
-  { src: "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.png",                                                          alt: "Chandmani Goyl" },
+  { src: "/projects/chandmani goyl/3bf4ea194423431.65fbbbf0bda70 6.png",                                                          alt: "Chandmani Goyl" },
   { src: "/projects/naadam typography/198492229719067.686a12b98ad11.webp",                                                         alt: "Naadam typography" },
   { src: "/projects/CAE logo/f57a8e221632127.67d82fadeec41.webp",                                                                  alt: "CAE logo" },
 ]
@@ -257,22 +257,22 @@ export default function HomeContent() {
         </section>
 
         {/* CTA section */}
-        <section className="border-t border-[#e0e0e0] py-14 md:py-20 text-center px-6">
+        <section className="border-t border-[#e0e0e0] py-20 md:py-32 text-center px-6">
           <FadeUp>
             <p className="text-[#888888] text-[12px] font-medium tracking-[0.15em] uppercase mb-6">
               {T.cta.label}
             </p>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <h2 className="text-black text-[clamp(2rem,4.5vw,3.5rem)] font-black tracking-[-0.04em] leading-[1.0] text-balance max-w-[700px] mx-auto">
+            <h2 className="text-black text-[clamp(2.2rem,5vw,4rem)] font-black tracking-[-0.04em] leading-[1.0] text-balance max-w-[760px] mx-auto">
               {T.cta.heading}
             </h2>
           </FadeUp>
           <FadeUp delay={0.2}>
-            <div className="mt-10">
+            <div className="mt-12">
               <Link
                 href="/contact"
-                className="text-blue-600 text-[clamp(1rem,2.5vw,1.5rem)] font-bold nav-link tracking-tight"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[15px] sm:text-[16px] font-semibold tracking-tight px-8 py-4 rounded-full shadow-lg transition-colors duration-200"
               >
                 {T.cta.link} &rarr;
               </Link>

@@ -11,27 +11,82 @@ import { translations } from "@/lib/translations"
 const projectValues = ["brand-identity", "packaging", "lettering", "web-design", "brand-strategy", "other"]
 const budgetValues   = ["5k-10k", "10k-25k", "25k-50k", "50k+", "discuss"]
 
+const inputCls = "w-full bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 placeholder:text-[#aaaaaa]"
+
+function SelectField({
+  id,
+  name,
+  value,
+  onChange,
+  placeholder,
+  options,
+  values,
+}: {
+  id: string
+  name: string
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  placeholder: string
+  options: readonly string[]
+  values: string[]
+}) {
+  return (
+    <div className="relative">
+      <select
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`${inputCls} appearance-none cursor-pointer pr-10`}
+      >
+        <option value="" disabled>{placeholder}</option>
+        {options.map((opt, i) => (
+          <option key={opt} value={values[i]}>{opt}</option>
+        ))}
+      </select>
+      {/* Custom chevron */}
+      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#888888]">
+        <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </span>
+    </div>
+  )
+}
+
 export default function ContactContent() {
   const { lang } = useLang()
   const T = translations[lang].contact
 
   const [submitted, setSubmitted] = useState(false)
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    project: "",
-    budget: "",
-    message: "",
-  })
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState("")
+  const [form, setForm] = useState({ name: "", email: "", project: "", budget: "", message: "" })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSending(true)
+    setSendError("")
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error("Failed")
+      setSubmitted(true)
+    } catch {
+      setSendError(
+        lang === "mn"
+          ? "Илгээхэд алдаа гарлаа. Дахин оролдоно уу."
+          : "Something went wrong. Please try again."
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -45,7 +100,7 @@ export default function ContactContent() {
       <Navigation />
 
       <main className="pt-[68px]">
-        {/* ── Header ── */}
+        {/* Header */}
         <section className="max-w-[1320px] mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-20">
           <FadeUp>
             <p className="text-[#888888] text-[12px] font-medium tracking-[0.12em] uppercase mb-8">
@@ -70,7 +125,7 @@ export default function ContactContent() {
           </FadeUp>
         </section>
 
-        {/* ── Form ── */}
+        {/* Form */}
         <section className="max-w-[1320px] mx-auto px-6 md:px-10 pb-28 md:pb-36">
           <AnimatePresence mode="wait">
             {submitted ? (
@@ -104,14 +159,9 @@ export default function ContactContent() {
                     {T.nameLbl}
                   </label>
                   <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder={T.namePh}
-                    className="bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 placeholder:text-[#aaaaaa]"
+                    id="name" name="name" type="text" required
+                    value={form.name} onChange={handleChange} placeholder={T.namePh}
+                    className={inputCls}
                   />
                 </motion.div>
 
@@ -121,14 +171,9 @@ export default function ContactContent() {
                     {T.emailLbl}
                   </label>
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder={T.emailPh}
-                    className="bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 placeholder:text-[#aaaaaa]"
+                    id="email" name="email" type="email" required
+                    value={form.email} onChange={handleChange} placeholder={T.emailPh}
+                    className={inputCls}
                   />
                 </motion.div>
 
@@ -137,18 +182,12 @@ export default function ContactContent() {
                   <label htmlFor="project" className="text-[#888888] text-[11px] font-medium tracking-[0.12em] uppercase">
                     {T.projectLbl}
                   </label>
-                  <select
-                    id="project"
-                    name="project"
-                    value={form.project}
-                    onChange={handleChange}
-                    className="bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled className="text-[#aaaaaa]">{T.projectPh}</option>
-                    {(T.projectOptions as readonly string[]).map((opt, i) => (
-                      <option key={opt} value={projectValues[i]}>{opt}</option>
-                    ))}
-                  </select>
+                  <SelectField
+                    id="project" name="project" value={form.project} onChange={handleChange}
+                    placeholder={T.projectPh}
+                    options={T.projectOptions as readonly string[]}
+                    values={projectValues}
+                  />
                 </motion.div>
 
                 {/* Budget */}
@@ -156,18 +195,12 @@ export default function ContactContent() {
                   <label htmlFor="budget" className="text-[#888888] text-[11px] font-medium tracking-[0.12em] uppercase">
                     {T.budgetLbl}
                   </label>
-                  <select
-                    id="budget"
-                    name="budget"
-                    value={form.budget}
-                    onChange={handleChange}
-                    className="bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled className="text-[#aaaaaa]">{T.budgetPh}</option>
-                    {(T.budgetOptions as readonly string[]).map((opt, i) => (
-                      <option key={opt} value={budgetValues[i]}>{opt}</option>
-                    ))}
-                  </select>
+                  <SelectField
+                    id="budget" name="budget" value={form.budget} onChange={handleChange}
+                    placeholder={T.budgetPh}
+                    options={T.budgetOptions as readonly string[]}
+                    values={budgetValues}
+                  />
                 </motion.div>
 
                 {/* Message */}
@@ -176,25 +209,27 @@ export default function ContactContent() {
                     {T.messageLbl}
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder={T.messagePh}
-                    className="bg-[#f5f5f5] border border-[#cccccc] text-black text-[15px] px-4 py-3.5 rounded outline-none focus:border-black transition-colors duration-200 placeholder:text-[#aaaaaa] resize-none"
+                    id="message" name="message" required rows={6}
+                    value={form.message} onChange={handleChange} placeholder={T.messagePh}
+                    className={`${inputCls} resize-none`}
                   />
                 </motion.div>
 
-                {/* Submit */}
-                <motion.div variants={fieldVariant}>
+                {/* Submit — prominent CTA */}
+                <motion.div variants={fieldVariant} className="flex flex-col gap-3">
                   <button
                     type="submit"
-                    className="text-black text-[15px] font-bold tracking-tight nav-link"
+                    disabled={sending}
+                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed text-white text-[15px] font-semibold tracking-tight px-6 py-4 rounded-full shadow-lg transition-colors duration-200"
                   >
-                    {T.send} &rarr;
+                    {sending
+                      ? (lang === "mn" ? "Илгээж байна…" : "Sending…")
+                      : <>{T.send} &rarr;</>
+                    }
                   </button>
+                  {sendError && (
+                    <p className="text-red-500 text-[13px] text-center">{sendError}</p>
+                  )}
                 </motion.div>
               </motion.form>
             )}

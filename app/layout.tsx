@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { DM_Sans, Noto_Sans } from "next/font/google"
 import { LanguageProvider } from "@/contexts/language-context"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 
 const dmSans = DM_Sans({
@@ -39,6 +40,15 @@ export const metadata: Metadata = {
     "typography design",
     "baysaass",
   ],
+  icons: {
+    icon: [
+      { url: "/Group 3.svg", type: "image/svg+xml" },
+      { url: "/Group 3.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/Group 1.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   alternates: {
     canonical: "/",
   },
@@ -124,6 +134,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#ffffff]">
       <head>
+        {/* Dark-mode favicon */}
+        <link rel="icon" href="/Group 4.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/Group 4.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)" />
+        <link rel="apple-touch-icon" href="/Group 2.png" sizes="180x180" media="(prefers-color-scheme: dark)" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -133,6 +147,7 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        <SpeedInsights />
       </body>
     </html>
   )

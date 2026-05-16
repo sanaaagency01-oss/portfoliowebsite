@@ -44,6 +44,13 @@ export default function Navigation() {
       active ? "text-black" : "text-[#aaaaaa] hover:text-[#666666]"
     }`
 
+  const linkClass = (href: string) => {
+    const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
+    return `nav-link text-[15px] font-medium tracking-wide hidden md:block transition-colors duration-150 ${
+      active ? "text-black" : "text-[#888888] hover:text-black"
+    }`
+  }
+
   const mobileBtnClass = (active: boolean) =>
     `text-[11px] font-semibold tracking-[0.1em] uppercase transition-colors duration-150 ${
       active ? "text-black" : "text-[#aaaaaa]"
@@ -80,7 +87,7 @@ export default function Navigation() {
         >
           {/* Left */}
           <div className="flex items-center gap-8">
-            <Link href="/about" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
+            <Link href="/about" className={linkClass("/about")}>
               {n.about}
             </Link>
           </div>
@@ -110,10 +117,10 @@ export default function Navigation() {
 
           {/* Right */}
           <div className="flex items-center gap-8">
-            <Link href="/work" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
+            <Link href="/work" className={linkClass("/work")}>
               {n.work}
             </Link>
-            <Link href="/contact" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
+            <Link href="/contact" className={linkClass("/contact")}>
               {n.contact}
             </Link>
 
