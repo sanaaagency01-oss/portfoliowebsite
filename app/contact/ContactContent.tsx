@@ -117,10 +117,10 @@ export default function ContactContent() {
               {T.subheading}
             </p>
             <a
-              href="mailto:baysaauskhuu@gmail.com"
+              href="mailto:sanaaagency01@gmail.com"
               className="inline-block mt-4 text-[#888888] text-[15px] nav-link hover:text-black transition-colors duration-200"
             >
-              baysaauskhuu@gmail.com
+              sanaaagency01@gmail.com
             </a>
           </FadeUp>
         </section>
