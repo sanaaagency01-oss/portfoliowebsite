@@ -30,11 +30,21 @@ export default function ScrollFloat({
 }: ScrollFloatProps) {
   const containerRef = useRef<HTMLHeadingElement>(null)
 
+  // Split into words, animate chars — words never break mid-word
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : ""
-    return text.split("").map((char, index) => (
-      <span className="char" key={index}>
-        {char === " " ? " " : char}
+    const words = text.split(" ")
+    return words.map((word, wi) => (
+      <span key={wi} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+        {word.split("").map((char, ci) => (
+          <span className="char" key={ci}>
+            {char}
+          </span>
+        ))}
+        {wi < words.length - 1 && (
+          // Non-breaking within word, breakable space between words
+          <span style={{ display: "inline-block" }}>&nbsp;</span>
+        )}
       </span>
     ))
   }, [children])

@@ -39,9 +39,9 @@ export default function ProjectContent({ project, next }: Props) {
             <h1 className="text-black text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.04em] leading-[0.95]">
               {project.name}
             </h1>
-            <h1 className="text-[#888888] text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.04em] leading-[0.95]">
+            <p className="text-[#888888] text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.04em] leading-[0.95]">
               {tagline}
-            </h1>
+            </p>
           </FadeUp>
         </section>
 

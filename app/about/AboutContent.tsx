@@ -16,8 +16,14 @@ import { translations } from "@/lib/translations"
 gsap.registerPlugin(ScrollTrigger)
 
 const clients = [
-  "Client One", "Client Two", "Client Three", "Client Four",
-  "Client Five", "Client Six", "Client Seven", "Client Eight",
+  "One More Night",
+  "CAE",
+  "Tsuiwan",
+  "Endeno",
+  "Beautytech LLC",
+  "Chandmani Goyl",
+  "Zen Tarot",
+  "Naadam",
 ]
 
 export default function AboutContent() {
@@ -33,14 +39,14 @@ export default function AboutContent() {
     if (!pin || !track) return
 
     const getScrollAmount = () =>
-      -(track.scrollWidth - pin.offsetWidth)
+      -(track.scrollWidth - pin.offsetWidth + 40)
 
     const tween = gsap.to(track, {
       x: getScrollAmount,
       ease: "none",
       scrollTrigger: {
         trigger: pin,
-        start: "top top",
+        start: "top 68px",
         end: () => `+=${Math.abs(getScrollAmount())}`,
         pin: true,
         scrub: 1.2,
@@ -74,9 +80,9 @@ export default function AboutContent() {
                 <h1 className="text-black text-[clamp(2.5rem,5vw,4rem)] font-black tracking-[-0.04em] leading-[1.0] text-balance mb-8">
                   baysaass.
                 </h1>
-                <h1 className="text-[#888888] text-[clamp(2rem,4vw,3.5rem)] font-black tracking-[-0.04em] leading-[1.0] text-balance mb-12">
+                <p className="text-[#888888] text-[clamp(2rem,4vw,3.5rem)] font-black tracking-[-0.04em] leading-[1.0] text-balance mb-12">
                   {T.role}
-                </h1>
+                </p>
               </FadeUp>
               <FadeUp delay={0.15}>
                 <div className="flex flex-col gap-5 text-[#444444] text-[16px] leading-relaxed">
@@ -122,13 +128,13 @@ export default function AboutContent() {
           <div
             ref={pinRef}
             className="w-full overflow-hidden"
-            style={{ height: "60vh" }}
+            style={{ height: "calc(42vh + 68px)", minHeight: "320px", paddingTop: "68px" }}
           >
             {/* Horizontal track — GSAP translates this leftward */}
             <div
               ref={trackRef}
               className="flex items-start h-full"
-              style={{ width: "max-content", paddingLeft: "max(1.5rem, 2.5vw)", paddingRight: "max(1.5rem, 2.5vw)" }}
+              style={{ width: "max-content", paddingLeft: "max(1.5rem, 2.5vw)", paddingRight: "max(3rem, 10vw)" }}
             >
               {T.steps.map((step, i) => (
                 <div
@@ -156,8 +162,7 @@ export default function AboutContent() {
             </div>
           </div>
 
-          {/* Bottom padding after pin zone */}
-          <div className="pb-16 md:pb-24" />
+
         </section>
 
         {/* Clients list */}

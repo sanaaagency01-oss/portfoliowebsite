@@ -3,13 +3,21 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { useLang } from "@/contexts/language-context"
 import { translations } from "@/lib/translations"
+import StaggeredMenuPanel from "@/components/ui/staggered-menu-panel"
+
+const SOCIAL_ITEMS = [
+  { label: "Instagram", href: "https://www.instagram.com/_baysaa_notfound/" },
+  { label: "Behance",   href: "https://www.behance.net/uskhuulevi" },
+  { label: "Facebook",  href: "https://www.facebook.com/sanaaagency0/" },
+  { label: "TikTok",    href: "https://www.tiktok.com/@_baysaa_notfound" },
+]
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled]  = useState(false)
   const pathname = usePathname()
   const { lang, setLang } = useLang()
   const n = translations[lang].nav
@@ -20,14 +28,40 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Close menu on route change
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
+  }, [menuOpen])
 
   const btnClass = (active: boolean) =>
     `text-[10px] font-semibold tracking-[0.08em] uppercase transition-colors duration-150 ${
       active ? "text-black" : "text-[#aaaaaa] hover:text-[#666666]"
     }`
+
+  const mobileBtnClass = (active: boolean) =>
+    `text-[11px] font-semibold tracking-[0.1em] uppercase transition-colors duration-150 ${
+      active ? "text-black" : "text-[#aaaaaa]"
+    }`
+
+  const menuItems = [
+    { label: n.work,    href: "/work" },
+    { label: n.about,   href: "/about" },
+    { label: n.contact, href: "/contact" },
+  ]
+
+  const langSwitcher = (
+    <div className="flex items-center gap-4">
+      <button onClick={() => setLang("mn")} className={mobileBtnClass(lang === "mn")}>MN</button>
+      <span className="text-[#dddddd] text-[12px]">/</span>
+      <button onClick={() => setLang("en")} className={mobileBtnClass(lang === "en")}>EN</button>
+    </div>
+  )
 
   return (
     <>
@@ -44,14 +78,14 @@ export default function Navigation() {
           role="navigation"
           aria-label="Main navigation"
         >
-          {/* Left group */}
+          {/* Left */}
           <div className="flex items-center gap-8">
             <Link href="/about" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
               {n.about}
             </Link>
           </div>
 
-          {/* Center: MN  [./]  EN */}
+          {/* Center: MN · baysaass · EN */}
           <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
             <button
               onClick={() => setLang("mn")}
@@ -74,58 +108,42 @@ export default function Navigation() {
             </button>
           </div>
 
-          {/* Right group */}
+          {/* Right */}
           <div className="flex items-center gap-8">
             <Link href="/work" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
-              {n.projects}
+              {n.work}
             </Link>
             <Link href="/contact" className="nav-link text-black text-[15px] font-medium tracking-wide hidden md:block">
               {n.contact}
             </Link>
+
+            {/* Mobile toggle */}
             <button
-              className="md:hidden text-black text-[14px] font-medium tracking-widest uppercase nav-link"
-              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden text-black text-[13px] font-semibold tracking-widest uppercase nav-link"
+              onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
               {menuOpen
                 ? (lang === "mn" ? "Хаах" : "Close")
-                : (lang === "mn" ? "Цэс" : "Menu")}
+                : (lang === "mn" ? "Цэс"  : "Menu")}
             </button>
           </div>
         </nav>
       </motion.header>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-[200] bg-[#ffffff] flex flex-col items-center justify-center gap-10"
-          >
-            <Link href="/" className="text-black text-4xl font-black tracking-tight nav-link">
-              baysaass
-            </Link>
-            <Link href="/work" className="text-black text-3xl font-bold tracking-tight nav-link">
-              {n.work}
-            </Link>
-            <Link href="/about" className="text-black text-3xl font-bold tracking-tight nav-link">
-              {n.about}
-            </Link>
-            <Link href="/contact" className="text-black text-3xl font-bold tracking-tight nav-link">
-              {n.contact}
-            </Link>
-            {/* Mobile lang switcher */}
-            <div className="flex items-center gap-4 mt-2">
-              <button onClick={() => setLang("mn")} className={btnClass(lang === "mn")}>MN</button>
-              <span className="text-[#dddddd] text-[12px]">/</span>
-              <button onClick={() => setLang("en")} className={btnClass(lang === "en")}>EN</button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile StaggeredMenu panel */}
+      <div className="md:hidden">
+        <StaggeredMenuPanel
+          open={menuOpen}
+          onClose={() => setMenuOpen(false)}
+          items={menuItems}
+          socialItems={SOCIAL_ITEMS}
+          langSwitcher={langSwitcher}
+          colors={["#bfdbfe", "#2563eb"]}
+          accentColor="#2563eb"
+        />
+      </div>
     </>
   )
 }

@@ -26,6 +26,8 @@ export default function WorkContent({ projects }: WorkContentProps) {
       <main className="pt-[68px]">
         {/* Header */}
         <section className="max-w-[1320px] mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-16">
+  {/* sr-only h1 ensures every page has exactly one h1 for SEO; the visual heading below is an h2 via ScrollFloat */}
+  <h1 className="sr-only">Work — Brand Design Portfolio by baysaass</h1>
   <FadeUp>
     <p className="text-[#888888] text-[12px] font-medium tracking-[0.12em] uppercase mb-8">
       {T.label}
@@ -33,7 +35,7 @@ export default function WorkContent({ projects }: WorkContentProps) {
   </FadeUp>
 
   <ScrollFloat
-    containerClassName="text-black text-[clamp(2.5rem,6vw,5rem)] font-black tracking-[-0.04em] leading-tight max-w-[860px]"
+    containerClassName="text-black text-[clamp(2.5rem,6vw,5rem)] font-black tracking-[-0.04em] leading-tight max-w-[1200px]"
     scrollStart="center bottom+=40%"
     scrollEnd="bottom bottom-=30%"
     stagger={0.02}

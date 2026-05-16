@@ -29,15 +29,15 @@ export const projects: Project[] = [
     slug: "one-more-night",
     name: "One More Night",
     tagline: "Brands That Feel Like Music.",
-    taglineMn: "Хөгжил шиг мэдрэгдэх брэнд.",
+    taglineMn: "Хөгжим шиг мэдрэгдэх брэнд.",
     category: "Brand Identity",
     year: "2023",
     client: "One More Night",
-    services: ["Brand Identity", "Typography", "Art Direction"],
+    services: ["Brand Identity", "Typography", "Visual identity"],
     description:
-      "One More Night is a creative brand built around music, mood, and night culture. My challenge was to design a visual identity that didn't just represent the brand — but felt like it. I developed a complete brand system with a visual language rooted in rhythm, atmosphere, and motion. Every element — from the logotype to the colour palette — was crafted to evoke the feeling of a night that never quite ends. The identity extends across merchandise, social media, and campaign materials, creating a brand world that resonates with its audience on a deeply emotional level.",
+      "One More Night is a creative brand inspired by music, emotion, and night culture. For this project, I developed the visual identity and logo design to capture the brand’s distinctive atmosphere and energy. The design direction focused on translating rhythm, mood, and the feeling of nightlife into a strong visual language. The logotype and supporting graphic elements were created to feel modern, minimal, and emotionally expressive while maintaining a bold and memorable presence. The visual identity was designed to work seamlessly across social media, merchandise, and promotional materials, creating a cohesive and recognizable brand experience across every touchpoint.",
     descriptionMn:
-      "One More Night бол хөгжил, сэтгэл хөдлөл болон шөнийн соёл дээр тулгуурласан бүтээлч брэнд. Миний зорилт нь зөвхөн брэндийг төлөөлөх биш, харин тэр мэдрэмжийг өөрөө дамжуулах харааны айдентити бий болгох байлаа. Хэмнэл, уур амьсгал, хөдөлгөөнд суурилсан харааны хэлтэй бүрэн брэнд систем боловсруулсан. Логотипоос өнгөний палитр хүртэл бүх элемент нь дуусахгүй шөнийн мэдрэмжийг дамжуулахаар бүтээгдсэн. Айдентити нь мерчендайз, сошиал медиа болон кампанийн материалуудад тэлж, хамт олонтойгоо сэтгэл хөдлөлийн түвшинд нийцдэг брэнд ертөнц бүрдүүлсэн.",
+      "One More Night бол хөгжим, мэдрэмж, шөнийн соёлоос санаа авсан бүтээлч брэнд юм. Энэхүү төслийн хүрээнд брэндийн өнгө төрхийг илэрхийлэх visual identity болон logo design-ийг боловсруулсан. Дизайны үндсэн чиглэл нь хэмнэл, уур амьсгал, шөнийн мэдрэмжийг визуал хэлээр илэрхийлэхэд төвлөрсөн. Логотип болон график элементүүдийг орчин үеийн, минимал атлаа хүчтэй мэдрэмж төрүүлэхээр шийдэж, брэндийн онцлог өнгө аясыг бүрдүүлсэн. Үүсгэсэн visual identity нь social media, merchandise болон төрөл бүрийн сурталчилгааны материал дээр уялдаа холбоотой хэрэгжих боломжтойгоор бүтээгдсэн бөгөөд брэндийн мэдрэмжийг бүх сувгаар нэгдмэл байдлаар хүргэх зорилготой.",
     cover: "/projects/One more night branding/01bc89185771485.65694fdb6b312.webp",
     images: [
       "/projects/One more night branding/01bc89185771485.65694fdb6b312.webp",
@@ -60,16 +60,16 @@ export const projects: Project[] = [
     id: "2",
     slug: "cae-logo",
     name: "CAE",
-    tagline: "Mark of Authority.",
-    taglineMn: "Эрх мэдлийн тэмдэг.",
+    tagline: "Work, Growth, Value.",
+    taglineMn: "Хөдөлмөр, хөгжил, үнэ цэнэ.",
     category: "Logo Design",
     year: "2025",
     client: "CAE",
     services: ["Logo Design", "Brand Identity", "Visual System"],
     description:
-      "CAE approached me to design a brand mark that would carry the weight of their authority in their industry. I developed a comprehensive visual identity system — including a logomark, logotype, custom colour system, and detailed usage guidelines. The challenge was to create something that felt established and credible without being rigid or cold. The result is a mark that communicates precision and trust, built to scale consistently across every brand touchpoint — from digital platforms and printed materials to signage and environmental graphics.",
+      "For this project, I developed a complete visual identity system including the logo mark, typography, colour system, logo guidelines, and a range of brand applications. The main challenge was to create a brand identity that felt modern and trustworthy without becoming overly cold or heavy. The logo was designed to communicate movement, stability, and growth through a clean yet powerful visual form inspired by the structure and energy of the industry itself. The final identity system was built to work consistently across both digital and print environments, creating a cohesive and recognizable brand presence across every touchpoint.",
     descriptionMn:
-      "CAE надад тухайн салбарт эрх мэдлийг нь илэрхийлэх брэнд тэмдэг бүтээхийг даалгасан. Лого тэмдэг, лого бичвэр, өнгөний систем болон хэрэглэх заавар бүхий цогц харааны айдентити систем боловсруулсан. Хатуу буюу хүйтэн мэдрэмжгүйгээр байгуулагдсан, итгэл даах мэт санагдуулах зүйл бүтээх нь гол сорилт байв. Үр дүн нь нарийвчлал болон итгэлийг илэрхийлэх, цахим платформоос хэвлэмэл материал болон орчны дизайн хүртэл нэгдмэл байдлаар ашиглагдах тэмдэг болсон.",
+      "Энэхүү төслийн   хүрээнд лого тэмдэг, typography, өнгөний систем, logo guideline болон хэрэглээний бүх үндсэн элементүүдийг нэгдсэн зарчмаар шийдсэн. Гол зорилго нь уул уурхайн салбарын онцлогийг хадгалах атлаа хэт хүнд, хүйтэн мэдрэмж төрүүлэхгүйгээр орчин үеийн, итгэл төрүүлэхүйц визуал төрх бүтээх байсан. Логоны хэлбэр нь хөдөлгөөн, тогтвортой байдал, өсөлтийг илэрхийлж, хүчирхэг атлаа цэвэр минимал хэлбэрээр боловсруулагдсан. Үүсгэсэн visual identity system нь digital болон print орчинд жигд ажиллах боломжтойгоор бүтээгдсэн бөгөөд компанийн брэндийг бүх touchpoint дээр танигдахуйц, нэгдмэл байдлаар илэрхийлэхэд чиглэсэн.",
     cover: "/projects/CAE logo/f57a8e221632127.67d82fadeec41.webp",
     images: [
       "/projects/CAE logo/1.webp",
@@ -107,16 +107,16 @@ export const projects: Project[] = [
     id: "3",
     slug: "tsuiwan-package",
     name: "Tsuiwan",
-    tagline: "Wrapped in Tradition.",
-    taglineMn: "Уламжлалд ороосон.",
+    tagline: "Crafted by hand, tastes like home.",
+    taglineMn: "Хийц нь гарын, амт нь гэрийн",
     category: "Packaging",
     year: "2024",
     client: "Tsuiwan",
     services: ["Packaging Design", "Label Design", "Print Design"],
     description:
-      "Tsuiwan is a Mongolian food brand centred around one of the country's most beloved dishes. I was tasked with creating packaging that honoured the product's cultural roots while giving it a confident, modern shelf presence. The design balances clean contemporary structure with references to Mongolian visual heritage — making it feel familiar locally while remaining compelling internationally. Every detail, from the label layout to the typographic choices, was designed to position the product as premium without sacrificing its authenticity.",
+      "The main challenge was creating a visual identity that could stand out in Mongolia’s highly saturated homemade noodle market, where many small and local brands often share similar packaging styles. The design direction therefore focused on building packaging that feels instantly recognizable on store shelves while giving the brand a stronger, more playful, and contemporary presence. The final design combines a vibrant colour palette, distinctive illustrations, and expressive typography inspired by the warmth of homemade food culture. Every detail, from the label structure to the graphic elements, was carefully crafted to make the product feel approachable, memorable, and visually unique without losing the authentic feeling of traditional Tsuiwan.",
     descriptionMn:
-      "Цуйван бол Монголын хамгийн дуртай хоолуудын нэгэнд зориулагдсан хоолны брэнд. Надад бүтээгдэхүүний соёлын үндэсийг хүндэтгэхийн зэрэгцээ итгэлтэй, орчин үеийн дэлгүүрийн тавцан дээр тод харагдах сав баглаа боодол бүтээх даалгавар өгсөн. Дизайн нь Монголын харааны уламжлалыг лавлан авсан цэвэр орчин үеийн бүтэцтэй тэнцвэртэй хослуулж, дотооддоо таних төрхтэй бас гадаадад ч сонирхол татахуйц болгосон. Шошгоны байрлалаас типографийн сонголт хүртэл бүх дэлгэрэнгүй зүйлийг жинхэнэ чанарыг нь алдагдуулалгүй бүтээгдэхүүнийг premium мэт байрлуулахаар бүтээсэн.",
+      "Гол сорилт нь Монголд гэрийн болон жижиг дунд үйлдвэрлэлийн хэрчсэн гурилын бүтээгдэхүүнүүд маш олон байдаг зах зээл дээр бусдаас ялгарах визуал төрх бий болгох байв. Иймээс дизайны үндсэн чиглэл нь дэлгүүрийн лангуун дээр шууд танигдахуйц, илүү хүчтэй брэнд мэдрэмжтэй, хөгжилтэй шинэлэг харагдах сав баглаа боодол боловсруулахад төвлөрсөн. Эцсийн дизайн нь гар хийцийн хоолны мэдрэмжийг илэрхийлэх өнгөлөг palette, өвөрмөц illustration, чөлөөтэй typography-г хослуулсан. Шошгоны бүтэц, график элементүүд, дүрслэлийн бүх шийдэл нь бүтээгдэхүүнийг илүү дотно, хөгжилтэй, танигдахуйц харагдуулахын зэрэгцээ уламжлалт мэдрэмжийг алдагдуулахгүй байхаар боловсруулагдсан.",
     cover: "/projects/Tsuiwan package/mockup.webp",
     images: [
       "/projects/Tsuiwan package/fa1483206384133.66cc0254f3d2a.webp",
@@ -133,16 +133,16 @@ export const projects: Project[] = [
     id: "4",
     slug: "endeno-label",
     name: "Endeno",
-    tagline: "Distilled to Perfection.",
-    taglineMn: "Төгс болтол нэрлэсэн.",
+    tagline: "Less is more",
+    taglineMn: "Бага байх нь илүү",
     category: "Label Design",
     year: "2025",
     client: "Endeno",
     services: ["Label Design", "Packaging Design", "Print Design"],
     description:
-      "Endeno is a premium beverage brand that required a label with strong shelf presence and a refined sensibility. The design challenge was to create something typographically bold — a label that commands attention without relying on illustration or excessive ornament. I built the identity around a precise typographic system with a carefully chosen material palette, letting the confidence of the letterforms carry the weight of the design. The result is a label that communicates the quality of the product through restraint and clarity.",
+      "Endeno is a product brand designed to make children’s learning and play environments more creative and colorful. The main goal of the design was to create a visual system that feels recognizable, playful, and organized within a crowded children’s product market. The challenge was to avoid relying on excessive decoration or typical “kids style” aesthetics, and instead find the right balance between modern minimal structure and playful visual expression. Because of this, the design system was built around a vibrant color palette, soft typography, simple illustrations, and clean layout compositions. The packaging and overall graphic language were designed to reflect children’s curiosity and sense of play, while also feeling high-quality, safe, and thoughtfully designed from a parent’s perspective.",
     descriptionMn:
-      "Endeno бол дэлгүүрийн тавцан дээр тод харагдах, нарийн мэдрэмжтэй шошго шаардсан шилдэг ундааны брэнд. Дизайны сорилт нь зураг дүрс буюу хэт их чимэглэлд тулгуурлалгүй тавцан дээр анхаарал татах, типографийн хувьд зоримог зүйл бүтээх явдал байв. Дизайны жинг үсгийн хэлбэрийн итгэлд нь үлдээж, нарийн сонгосон материалын палитр бүхий яг нарийн типографийн систем дээр айдентитийг тулгуурлуулсан. Үр дүн нь хязгаарлалт болон тодорхой байдлаар бүтээгдэхүүний чанарыг илэрхийлдэг шошго болсон.",
+      "Endeno нь хүүхдийн боловсрол, тоглоомын орчинг илүү бүтээлч, өнгөлөг болгох зорилготой бүтээгдэхүүний брэнд бөгөөд дизайны гол зорилго нь хүүхдэд зориулсан бүтээгдэхүүнүүд дундаас илүү танигдахуйц, хөгжилтэй атлаа цэгцтэй визуал систем бүтээх байв. Сорилт нь хэт их чимэглэл эсвэл түгээмэл “kids style” шийдэлд найдалгүйгээр, орчин үеийн minimal бүтэц болон playful мэдрэмжийн зөв тэнцвэрийг олох байсан. Иймээс дизайны үндэс нь тод өнгийн palette, зөөлөн хэлбэртэй typography, энгийн illustration болон цэвэр layout систем дээр төвлөрсөн. Сав баглаа боодол болон бүтээгдэхүүний график хэл нь хүүхдийн сониуч зан, тоглох мэдрэмжийг илэрхийлэхийн зэрэгцээ эцэг эхчүүдэд илүү чанартай, аюулгүй, thoughtfully designed бүтээгдэхүүн мэт харагдахаар боловсруулагдсан.",
     cover: "/projects/endeno label/541669682_1524688988526674_6611917079199196278_n.webp",
     images: [
       "/projects/endeno label/541669682_1524688988526674_6611917079199196278_n.webp",
@@ -173,16 +173,16 @@ export const projects: Project[] = [
     id: "5",
     slug: "beautytech-logo",
     name: "Beautytech LLC",
-    tagline: "Beauty, Elevated.",
-    taglineMn: "Гоо сайхан, дээшилсэн.",
+    tagline: "Professional Beauty Services in Mongolia.",
+    taglineMn: "Мэргэжлийн гоо сайхны үйлчилгээ монголд",
     category: "Logo Design",
     year: "2023",
     client: "Beautytech LLC",
     services: ["Logo Design", "Brand Identity", "Visual System"],
     description:
-      "Beautytech LLC is a Mongolian beauty technology company positioned at the intersection of beauty and innovation. They needed an identity that felt modern and credible without losing warmth and approachability — two qualities that are often difficult to balance. I developed a logo and complete brand identity system built on clean, precise forms with a visual tone that makes the brand feel accessible and trustworthy. The system was designed to work cohesively across digital and physical touchpoints, from product packaging and app interfaces to retail environments.",
+      "Beautytech LLC is a modern brand positioned at the intersection of beauty and technology. The goal of the identity was to create a visual system that feels professional and trustworthy while maintaining a warm and approachable character. The logo and brand system were developed using clean geometric forms, minimal structure, and balanced typography. A monochrome palette combined with a bold accent color helps the brand appear both recognizable and contemporary. The system was designed to work consistently across packaging, printed materials, environmental graphics, and digital platforms.",
     descriptionMn:
-      "Beautytech LLC бол гоо сайхан болон инновацийн уулзвар дахь Монголын гоо сайхны технологийн компани. Тэдэнд дулаан, хүртээмжтэй мэдрэмжийг алдагдуулалгүй орчин үеийн, итгэмжлэлтэй мэт санагдуулах айдентити хэрэгтэй байсан — ихэвчлэн тэнцвэрлэхэд хэцүү хоёр шинж чанар. Брэндийг хүртээмжтэй, итгэлтэй мэдрэгдүүлдэг харааны аяс бүхий цэвэр, нарийвчлалтай хэлбэрүүд дээр тулгуурлан лого болон бүрэн брэнд айдентити систем боловсруулсан. Систем нь бүтээгдэхүүний сав баглааснаас апп интерфэйс болон жижиглэн худалдааны орчин хүртэл нэгдмэл байдлаар ажилладгаар бүтээгдсэн.",
+      "Beautytech LLC нь гоо сайхан болон технологийн уулзвар дахь орчин үеийн брэнд юм. Энэхүү айдентитигийн зорилго нь мэргэжлийн, итгэл төрүүлэх мэдрэмжийг хадгалахын зэрэгцээ дулаан, хүртээмжтэй өнгө аястай визуал систем бүтээх байв. Лого болон брэндийн систем нь цэвэр геометр хэлбэр, minimal бүтэц, тэнцвэртэй typography дээр тулгуурлан боловсруулагдсан. Хар, цагаан, саарал өнгийн суурь palette-д тод accent өнгө ашигласнаар брэндийг илүү танигдахуйц, орчин үеийн төрхтэй болгосон. Систем нь сав баглаа боодол, хэвлэмэл материал, орчны график болон дижитал орчинд нэгдмэл байдлаар ашиглагдахаар бүтээгдсэн.",
     cover: "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",
     images: [
       "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",
@@ -212,15 +212,16 @@ export const projects: Project[] = [
     id: "6",
     slug: "chandmani-goyl",
     name: "Chandmani Goyl",
-    tagline: "Байгалийн нугын амт.",
+    tagline: "Delivering Tradition with Every Step.",
+    taglineMn: "Уламжлалыг алхаар түгээв.",
     category: "Brand Identity",
     year: "2023",
     client: "Chandmani Goyl",
     services: ["Brand Identity", "Logo Design"],
     description:
-      "Chandmani Goyl is a brand deeply rooted in Mongolia's natural heritage. I was brought in to develop an identity that could communicate the purity, authenticity, and quiet beauty of the Mongolian landscape without falling into cliché. The challenge was to draw from natural imagery and cultural references in a way that felt considered and contemporary rather than decorative. The result is a restrained, confident identity — one that lets the brand's origins speak clearly while remaining relevant and competitive in a modern market.",
+      "Chandmani Goyol is a brand identity project inspired by Mongolia’s traditional metal craftsmanship and silverwork heritage. The goal of the identity was to translate traditional visual elements into a modern, clean, and recognizable design language without directly replicating historical ornamentation. The core form of the logo was developed from the crescent-shaped patterns and textures found in Dariganga silver craftsmanship, combined with the symbolism of the “Chandmani” motif. Repetitive detailed forms and a minimal structure create a refined and premium aesthetic, balancing traditional culture with contemporary design. The color palette, typography, and graphic system were designed to work consistently across packaging, printed materials, and digital platforms, helping communicate the brand’s heritage and values in a clear and modern way.",
     descriptionMn:
-      "Чандмань Гоул бол Монголын байгалийн өвд гүнзгий үндэслэсэн брэнд. Монголын уудам нутгийн цэвэр ариун байдал, жинхэнэ чанар болон нам гүм гоо сайхныг хэвшмэл ойлголтод орохгүйгээр дамжуулж чадах айдентити боловсруулахад оролцсон. Сорилт нь байгалийн дүрс болон соёлын лавлагаанаас чимэглэлт биш, харин бодолцсон, орчин үеийн байдлаар авах явдал байв. Үр дүн нь орчин үеийн зах зээлд хамааралтай, өрсөлдөхүйц байхын зэрэгцээ брэндийн гарал үүслийг тодорхой ярьдаг хязгаарлагдмал, итгэлтэй айдентити болсон.",
+      "Чандмань Гоёл нь Монголын уламжлалт дарханы урлал, мөнгөн эдлэлийн өв соёлоос санаа авсан брэнд айдентити төсөл юм. Энэхүү айдентитигийн зорилго нь уламжлалт хэв шинжийг шууд хуулбарлахгүйгээр орчин үеийн, цэвэр бөгөөд танигдахуйц визуал хэл рүү хөрвүүлэх байв. Логоны үндсэн хэлбэр нь Дарьганга хийцийн мөнгөн урлалын хавирган хээ, бүтэц болон “чандмань” бэлгэдлээс үүссэн. Нарийн давтагдсан хэлбэрүүд болон minimal бүтэц нь брэндэд тансаг, нямбай мэдрэмж өгч, уламжлал ба орчин үеийн дизайны тэнцвэрийг бий болгосон. Өнгө, typography болон graphic system нь сав баглаа боодол, хэвлэмэл материал болон дижитал орчинд нэгдмэл байдлаар ажиллахаар боловсруулагдсан бөгөөд брэндийн гарал үүсэл, үнэ цэнийг илүү хүчтэй илэрхийлдэг.",
     cover: "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.webp",
     images: [
       "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.webp",
@@ -250,9 +251,9 @@ export const projects: Project[] = [
     client: "Zen Tarot",
     services: ["Label Design", "Packaging", "Print Design"],
     description:
-      "Zen Tarot is a spiritual wellness brand that needed a candle label communicating ritual, intention, and a sense of the sacred. I approached the design by layering gold detailing against deep, dark tones — creating a visual language that feels simultaneously luxurious and grounded. The spiritual motifs are woven into the composition with care, supporting the label's legibility rather than overwhelming it. The result is a label that feels like an object of ritual as much as a product — elevated on a retail shelf while staying completely true to its esoteric identity.",
+      "Zen Tarot is a candle label design project created to express rituals, inner emotion, and spiritual energy. The identity focuses on combining bold color palettes, mystical symbolism, and distinctive typography to create a visual language that feels both modern and mysterious. Each scent was designed with its own unique color and mood while still functioning within a cohesive visual system. Decorative serif typography and spiritual-inspired graphics were paired with a clean composition, allowing the labels to feel expressive while remaining clear and easy to read.",
     descriptionMn:
-      "Zen Tarot бол зан үйл, зорилго болон ариун мэдрэмжийг илэрхийлсэн лааны шошго шаардсан оюун санааны эрүүл мэндийн брэнд. Гүн харанхуй өнгийн аясаас алтан чимэглэлийг давхарлах замаар дизайнд хандсан — тансаг болон газарлаг мэт хоёр аль мэдрэмжийг нэгэн зэрэг дамжуулдаг харааны хэл бүтээсэн. Оюун санааны сэдвийг шошгоны унших боломжийг дарангуйлалгүй найрлагад нарийн нэгтгэсэн. Үр дүн нь жижиглэн худалдааны тавцан дээр өргөмжлөгдсөн байдлаар харагдахын зэрэгцээ нууцлаг айдентитэдээ бүрэн үнэнч, бүтээгдэхүүнээс илүүтэйгээр зан үйлийн эд зүйлс мэт мэдрэгдэх шошго болсон.",
+      "Zen Tarot нь зан үйл, дотоод мэдрэмж, оюун санааны энергийг илэрхийлэх зорилготой лааны шошгоны дизайн төсөл юм. Энэхүү айдентити нь тод өнгийн палитр, мистик бэлгэдэл болон өвөрмөц typography-ийг хослуулан орчин үеийн атлаа нууцлаг уур амьсгалтай визуал хэл бий болгоход төвлөрсөн. Үнэр бүр өөрийн гэсэн өнгө, мэдрэмжтэйгээр ялгардаг ч нийтдээ нэгэн цогц visual system дотор ажиллахаар шийдэгдсэн. Чимэглэлт serif үсэг болон spiritual хэв маягийн графикуудыг цэвэр зохиомжтой хослуулснаар шошго нь илэрхийлэлтэй мөртлөө ойлгомжтой, уншихад хялбар болсон.",
     cover: "/projects/Zen tarot candle label/mockup1.webp",
     images: [
       "/projects/Zen tarot candle label/mockup1.webp",
@@ -281,15 +282,16 @@ export const projects: Project[] = [
     id: "8",
     slug: "naadam-typography",
     name: "Naadam",
-    tagline: "Монгол хэл, орчин дизайн.",
+    tagline: "Reach for the Sky.",
+    taglineMn: "Тэнгэр өөд тэмүүл.",
     category: "Typography",
     year: "2025",
     client: "Personal",
     services: ["Typography", "Art Direction", "Poster Design"],
     description:
-      "Naadam is a personal typographic project exploring Mongolia's greatest national festival through a contemporary design lens. My goal was to bridge traditional Mongolian script and modern typographic systems — to demonstrate that cultural heritage and contemporary design sensibility are not opposites, but conversation partners. I developed a series of poster compositions that take inspiration from the structure and geometry of the Mongolian script while expressing it through a confident, modern visual voice. The project is both a design exploration and a cultural statement.",
+      "Naadam is a personal typography research project inspired by Mongolia’s national festival and the traditional architectural forms of the Bogd Khan Winter Palace Museum. The project explores how the structure, rooflines, and geometry of Mongolian temples and palace gates can be translated into letterforms while preserving a strong cultural identity through a contemporary visual language. Developed as a personal exploration and research-driven project, the typography was later used in Naadam greeting visuals, social media posts, and branded content for companies I collaborated with at the time. Rather than directly replicating traditional elements, the project reinterprets them into a modern graphic system that balances cultural heritage with contemporary design aesthetics.",
     descriptionMn:
-      "Наадам бол Монголын хамгийн агуу үндэсний наадмыг орчин үеийн дизайны призмээр судалсан хувийн типографийн төсөл. Миний зорилт нь уламжлалт Монгол бичиг болон орчин үеийн типографийн системийн хоорондох зайг гүүрдэх — соёлын өв болон орчин үеийн дизайны мэдрэмж нь эсрэг тэсрэг биш, харин ярилцагч нар гэдгийг харуулах байлаа. Монгол бичгийн бүтэц болон геометриэс урам авсан боловч итгэлтэй, орчин үеийн харааны дуугаар илэрхийлдэг нэг цуврал постерын найрлагуудыг боловсруулсан. Энэхүү төсөл нь дизайны судалгаа бөгөөд соёлын мэдэгдэл хоёул юм.",
+      "Наадам бол Монголын үндэсний баяр, Богд хааны зуны ордон музейн уламжлалт архитектур хэлбэрээс санаа авсан typography судалгааны төсөл юм. Энэхүү төслийн хүрээнд Монгол сүм, ордны хаалганы бүтэц, дээврийн хэлбэр, геометрийг үсгийн хэлбэртэй нэгтгэн орчин үеийн атлаа соёлын өнгө аяс хадгалсан typography бүтээхийг зорьсон. Төслийг өөрийн сонирхол, судалгааны хүрээнд хөгжүүлсэн бөгөөд тухайн үед хамтран ажиллаж байсан компаниудын баяр наадмын мэндчилгээ, сошиал пост болон визуал контентод ашиглагдаж байсан. Соёлын элементүүдийг шууд хуулбарлах бус, график хэл рүү хөрвүүлэн орчин үеийн дизайны мэдрэмжтэй уялдуулсан нь энэхүү төслийн гол онцлог болсон.",
     cover: "/projects/naadam typography/198492229719067.686a12b98ad11.webp",
     images: [
       "/projects/naadam typography/198492229719067.686a12b98ad11.webp",
@@ -313,9 +315,9 @@ export const projects: Project[] = [
     client: "Zen Tarot",
     services: ["Packaging Design", "Label Design", "Print Design"],
     description:
-      "Zen Tarot approached me to design packaging for their Thyme and Khomool incense line — two botanicals with deep roots in Mongolian ritual and healing practice. The challenge was to create a visual system that felt ceremonial and premium without being inaccessible. I developed a packaging identity that layers botanical illustration, refined typography, and a muted natural colour palette to evoke the meditative quality of the product. The result is a cohesive package system that honours the cultural significance of both ingredients while positioning the line as a considered, contemporary wellness offering.",
+      "The product line was developed around two ingredients deeply connected to Mongolian ritual and traditional healing culture. Since each product had its own ingredients, purpose, and emotional tone, the packaging system was built using an endorsed branding structure — creating distinct visual identities under one unified brand. The packaging identity combines botanical illustrations, refined typography, and a natural color palette to express the calm and meditative qualities of the products. While each variation carries its own atmosphere and visual character, all of them were designed to work cohesively within a unified visual system. The result is a packaging system that respects the cultural value of traditional incense while positioning the products as modern, premium wellness objects.",
     descriptionMn:
-      "Zen Tarot надад тэдний Гангa болон Хөмөөл утлагын шугамын сав баглаа боодлыг бүтээхийг даалгасан — Монголын зан үйл болон эмчилгээний практикт гүнзгий үндэстэй хоёр ургамал. Сорилт нь хүртээмжгүй санагдуулалгүй зан үйлийн, шилдэг мэт мэдрэгдэх харааны систем бий болгох явдал байв. Бүтээгдэхүүний бясалгалын чанарыг татан дуудахын тулд ургамлын дүрслэл, нарийн типографи болон хэмжсэн байгалийн өнгөний палитрыг давхарласан сав баглаа боодлын айдентити боловсруулсан. Үр дүн нь хоёр орцын соёлын ач холбогдлыг хүндэтгэхийн зэрэгцээ шугамыг бодолцсон, орчин үеийн эрүүл мэндийн бүтээгдэхүүн болгон байрлуулдаг нэгдмэл сав баглаа боодлын систем болсон.",
+      "Монголын зан үйл, уламжлалт эмчилгээний соёлтой гүн холбоотой хоёр төрлийн бүтээгдэхүүн. Бүтээгдэхүүн бүр өөр өөр орц, зориулалт, мэдрэмжтэй байсан тул endorsed branding structure дээр тулгуурлан, нэг брэндийн дор ялгаатай визуал шинжтэйгээр хөгжүүлсэн. Сав баглаа боодлын айдентити нь ургамлын дүрслэл, нарийн typography, байгалийн өнгөний палитрыг хослуулан бүтээгдэхүүний тайван, бясалгалын шинж чанарыг илэрхийлэхэд төвлөрсөн. Бүтээгдэхүүн тус бүр өөрийн гэсэн өнгө аяс, дүрслэлтэй боловч нийтдээ нэгдмэл visual system дотор ажиллахаар шийдэгдсэн. Үр дүнд нь уламжлалт утлагын соёлын үнэ цэнийг хадгалсан атлаа орчин үеийн, premium wellness бүтээгдэхүүн мэт мэдрэмж төрүүлэх сав баглаа боодлын цогц систем бий болсон.",
     cover: "/projects/ganga and khomool/u8229143814_httpss.mj.runI0tF0NXXOAQ_top_view_high_angle_shot.__0ee3f537-da0c-4c75-bb9c-fadfa4444266.webp",
     images: [
       "/projects/ganga and khomool/u8229143814_httpss.mj.runI0tF0NXXOAQ_top_view_high_angle_shot.__0ee3f537-da0c-4c75-bb9c-fadfa4444266.webp",
