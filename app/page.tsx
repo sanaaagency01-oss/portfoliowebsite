@@ -16,12 +16,12 @@ import { useLang } from "@/contexts/language-context"
 import { translations } from "@/lib/translations"
 
 const portfolioImages = [
-  { src: "/projects/One more night branding/t-shirt.png",                                                                          alt: "One More Night t-shirt" },
-  { src: "/projects/Zen tarot candle label/mockup1.png",                                                                           alt: "Zen Tarot candle" },
-  { src: "/projects/ganga and khomool/mockup1.png",                                                                                alt: "Zen Tarot Incense" },
-  { src: "/projects/Tsuiwan package/mockup.png",                                                                                   alt: "Tsuiwan packaging" },
+  { src: "/projects/One more night branding/t-shirt.webp",                                                                          alt: "One More Night t-shirt" },
+  { src: "/projects/Zen tarot candle label/mockup1.webp",                                                                           alt: "Zen Tarot candle" },
+  { src: "/projects/ganga and khomool/mockup1.webp",                                                                                alt: "Zen Tarot Incense" },
+  { src: "/projects/Tsuiwan package/mockup.webp",                                                                                   alt: "Tsuiwan packaging" },
   { src: "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",                                                       alt: "Beautytech logo" },
-  { src: "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.png",                                                          alt: "Chandmani Goyl" },
+  { src: "/projects/Chandmani Goyl/3bf4ea194423431.65fbbbf0bda70 6.webp",                                                          alt: "Chandmani Goyl" },
 ]
 
 export default function HomePage() {

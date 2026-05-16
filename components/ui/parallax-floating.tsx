@@ -25,6 +25,76 @@ interface FloatingProps {
   easingFactor?: number
 }
 
+// ── Gyroscope hook (mobile only) ─────────────────────────────────────────────
+function useGyroPositionRef(containerRef: React.RefObject<HTMLDivElement | null>) {
+  const gyroRef = useRef({ x: 0, y: 0, active: false })
+  const baseRef = useRef<{ beta: number; gamma: number } | null>(null)
+
+  useEffect(() => {
+    // Only activate on touch devices
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches
+
+    if (!isTouchDevice) return
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      const beta  = e.beta  ?? 0   // front-back tilt
+      const gamma = e.gamma ?? 0   // left-right tilt
+
+      // Calibrate: use first reading as neutral
+      if (!baseRef.current) {
+        baseRef.current = { beta, gamma }
+      }
+
+      const db = beta  - baseRef.current.beta    // deviation Y
+      const dg = gamma - baseRef.current.gamma   // deviation X
+
+      const container = containerRef.current
+      if (!container) return
+      const { width, height } = container.getBoundingClientRect()
+
+      // Map ±30° tilt → full container width/height
+      const clamp = (v: number, min: number, max: number) =>
+        Math.min(Math.max(v, min), max)
+
+      gyroRef.current = {
+        x: (clamp(dg, -30, 30) / 30) * (width  / 2) + width  / 2,
+        y: (clamp(db, -30, 30) / 30) * (height / 2) + height / 2,
+        active: true,
+      }
+    }
+
+    // iOS 13+ requires permission
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      typeof (DeviceOrientationEvent as any).requestPermission === "function"
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(DeviceOrientationEvent as any)
+        .requestPermission()
+        .then((state: string) => {
+          if (state === "granted") {
+            window.addEventListener("deviceorientation", handleOrientation, true)
+            gyroRef.current.active = true
+          }
+        })
+        .catch(() => {/* permission denied — fall back to mouse */})
+    } else {
+      window.addEventListener("deviceorientation", handleOrientation, true)
+      gyroRef.current.active = true
+    }
+
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation, true)
+    }
+  }, [containerRef])
+
+  return gyroRef
+}
+
+// ── Main Floating component ───────────────────────────────────────────────────
 const Floating = ({
   children,
   className,
@@ -45,6 +115,7 @@ const Floating = ({
   )
 
   const mousePositionRef = useMousePositionRef(containerRef)
+  const gyroPositionRef  = useGyroPositionRef(containerRef)
 
   const registerElement = useCallback(
     (id: string, element: HTMLDivElement, depth: number) => {
@@ -63,10 +134,16 @@ const Floating = ({
 
   useAnimationFrame(() => {
     if (!containerRef.current) return
+
+    // Use gyro if active (mobile), otherwise mouse
+    const pos = gyroPositionRef.current.active
+      ? gyroPositionRef.current
+      : mousePositionRef.current
+
     elementsMap.current.forEach((data) => {
-      const strength = (data.depth * sensitivity) / 20
-      const newTargetX = mousePositionRef.current.x * strength
-      const newTargetY = mousePositionRef.current.y * strength
+      const strength   = (data.depth * sensitivity) / 20
+      const newTargetX = pos.x * strength
+      const newTargetY = pos.y * strength
       const dx = newTargetX - data.currentPosition.x
       const dy = newTargetY - data.currentPosition.y
       data.currentPosition.x += dx * easingFactor
