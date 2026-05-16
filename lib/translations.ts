@@ -1,0 +1,211 @@
+export const translations = {
+  en: {
+    nav: {
+      work: "Work",
+      about: "About",
+      projects: "Projects",
+      contact: "Contact",
+    },
+    hero: {
+      label: "Brand Designer \u00b7 Ulaanbaatar, Mongolia",
+      greeting: "Hi, I\u2019m baysaass.",
+      iDesign: "I design",
+      rotating: ["identities", "systems", "motion", "experiences", "interfaces", "typography", "strategy", "visual language"],
+      description: "Designing identities through structure, strategy, and systems thinking.",
+      viewWork: "View work",
+      getInTouch: "Get in touch",
+    },
+    selectedWork: {
+      label: "Selected Work",
+      heading: "Collaborating with brands driven by vision, culture, and bold ideas.",
+      viewAll: "View all projects",
+    },
+    services: {
+      label: "Services",
+      items: ["Branding", "Packaging", "Visual Systems", "Poster"],
+    },
+    cta: {
+      label: "Let\u2019s Work Together",
+      heading: "Let\u2019s bring impossible ideas to life, together.",
+      link: "Get in touch",
+    },
+    about: {
+      label: "About me",
+      role: "Brand Designer.",
+      bio: [
+        "I’m a branding designer based in Mongolia, focused on creating meaningful and purposeful visual identity systems. I work with startups, businesses, and individuals to build brands that go beyond aesthetics. Brands with their own presence, value, and emotional connection.",
+        "My work is rooted in system thinking and strategy. To me, good design is not about decoration, but about expressing ideas in their clearest visual form. That’s why every identity I create is built to be consistent, recognizable, and valuable over time.",
+        "Working across visual identity, digital experience, and creative direction, I aim to create brands that people don’t just see — but remember.",
+      ],
+      workWithMe: "Work with me",
+      processLabel: "Process",
+      steps: [
+        {
+          number: "01",
+          title: "Discover",
+          body: "Understanding the business, audience, and ambition. Every project begins with research and clarity. I explore the brand\u2019s goals, audience, market, and competitive landscape to uncover meaningful insights and define the foundation for the work ahead.",
+        },
+        {
+          number: "02",
+          title: "Define",
+          body: "Building positioning, strategy, and brand direction. Insights are transformed into a clear strategic direction. This phase focuses on positioning, brand personality, messaging, and defining the core idea that will guide the entire identity system.",
+        },
+        {
+          number: "03",
+          title: "Design",
+          body: "Creating the visual identity system and language. Strategy becomes visual. Through typography, color, symbols, composition, and motion, I craft cohesive identity systems designed to communicate clearly, scale consistently, and remain recognizable across every platform.",
+        },
+        {
+          number: "04",
+          title: "Apply",
+          body: "Extending the identity across digital and physical touchpoints. The identity is brought into real-world experiences. From websites and social media to packaging, campaigns, and motion, every touchpoint is designed to create a unified and memorable brand presence.",
+        },
+        {
+          number: "05",
+          title: "Launch",
+          body: "Delivering guidelines, assets, and implementation systems. A brand is more than a logo \u2014 it\u2019s a system. Final deliverables include organized assets, usage guidelines, and scalable frameworks that help teams launch confidently and maintain consistency over time.",
+        },
+      ],
+      clientsLabel: "Selected Clients",
+      availableLabel: "Available for new projects",
+      ctaHeading: "Let\u2019s bring impossible ideas to life, together.",
+    },
+    work: {
+      label: "Selected Work",
+      heading: "Collaborating with dreamers, disruptors & originals.",
+      projectsCount: (n: number) => `${n} projects`,
+      filters: ["All", "Brand Identity", "Packaging"],
+      startLabel: "Start a project",
+      ctaHeading: "Let\u2019s bring impossible ideas to life, together.",
+    },
+    project: {
+      client: "Client",
+      services: "Services",
+      year: "Year",
+      overview: "Overview",
+      nextProject: "Next Project",
+    },
+    footer: {
+      tagline: "Based wherever you are.",
+      social: "Social",
+      contact: "Contact",
+      getInTouch: "Get in touch",
+      sitemap: "Site Map",
+      links: { home: "Home", work: "Work", about: "About", contact: "Contact" },
+    },
+    ticker: ["Brand Identity", "Packaging", "Lettering", "Brand Strategy", "Web Design", "Typography", "Art Direction", "Motion"],
+  },
+
+  mn: {
+    nav: {
+      work: "Төслүүд",
+      about: "Миний тухай",
+      projects: "Төслүүд",
+      contact: "Холбогдох",
+    },
+    hero: {
+      label: "Брэнд дизайнер \u00b7 Улаанбаатар, Монгол",
+      greeting: "Сайн байна уу?, Намайг baysaass гэдэг.",
+      iDesign: "\u0411\u0438",
+      rotating: ["Брэнд дизайн хийдэг", "Лого дизайн хийдэг", "Савлагаа дизайн хийдэг", "Таних тэмдэг дизайн хийдэг", "Шошго дизайн хийдэг", "Визуал систем дизайн хийдэг", "Типографи дизайн хийдэг", "Дүрслэл дизайн хийдэг"],
+      description: "Бүтэц, стратеги, системчилсэн сэтгэлгээнд тулгуурлан брэндийн төрх бүтээдэг.",
+      viewWork: "Төслүүдийг үзэх",
+      getInTouch: "Холбогдох",
+    },
+    selectedWork: {
+      label: "Онцлох төслүүд",
+      heading: "Алсын хараа, соёл болон зоримог санаагаар хөдөлдөг брэндүүдтэй хамтран ажилладаг.",
+      viewAll: "Бүх төслүүдийг үзэх",
+    },
+    services: {
+      label: "Үйлчилгээ",
+      items: ["Брэндинг", "Сав баглаа боодол", "Визуал систем", "Постер дизайн"],
+    },
+    cta: {
+      label: "Хамтран ажиллая",
+      heading: "Үл гүйцэлдэх санаануудыг хамтдаа бодит болгоё.",
+      link: "Холбоо барих",
+    },
+    about: {
+      label: "Миний тухай",
+      role: "Брэнд дизайнер.",
+      bio: [
+        "Би Монголд ажиллаж амьдардаг branding designer бөгөөд утга агуулгатай, зорилготой visual identity system бүтээхэд төвлөрдөг. Startup, бизнес, хувь хүмүүстэй хамтран ажиллаж, зөвхөн гоё харагдах биш — өөрийн гэсэн мэдрэмж, үнэ цэнтэй брэндүүдийг бий болгохыг зорьдог.",
+        "Миний ажил system thinking болон strategy дээр суурилдаг. Миний хувьд сайн дизайн гэдэг нь гоё ганган чимэглэл биш, харин санааг хамгийн ойлгомжтой хэлбэрт оруулсан дүрслэл юм. Тиймээс бүтээсэн identity бүр урт хугацаанд үнэ цэнээ хадгалахуйц, нэгдмэл бөгөөд танигдахуйц байх ёстой гэж үздэг.",
+        "Visual identity, digital experience, creative direction чиглэлээр ажиллаж, хүмүүсийн зөвхөн хардаг биш — санадаг брэндүүдийг бүтээхийг зорьдог.",
+      ],
+      workWithMe: "Хамтран ажиллах",
+      processLabel: "Процесс",
+      steps: [
+        {
+          number: "01",
+          title: "Судалгаа хийх",
+          body: "Бизнес, зорилтот хэрэглэгч болон брэндийн зорилгыг ойлгохоос бүх төсөл эхэлдэг. Би тухайн брэндийн зорилго, зах зээл, хэрэглэгч болон өрсөлдөөний орчныг судалж, цаашдын identity системийн суурь болох үндсэн ойлголт, insight-уудыг тодорхойлдог.",
+        },
+        {
+          number: "02",
+          title: "\u0422\u043e\u0434\u043e\u0440\u0445\u043e\u0439\u043b\u043e\u0445",
+          body: "Судалгаанаас гарсан мэдээллийг тодорхой стратеги болгон нэгтгэдэг үе шат. Энэ хэсэгт positioning, brand personality, messaging болон identity-ийн бүх чиглэлийг тодорхойлох гол санаа, үндсэн чиглэлийг боловсруулдаг.",
+        },
+        {
+          number: "03",
+          title: "\u0414\u0438\u0437\u0430\u0439\u043d \u0445\u0438\u0439\u0445",
+          body: "Стратегийг визуал хэл болгон хөрвүүлдэг үе шат. Typography, color, symbol, composition болон motion зэрэг элементүүдээр дамжуулан нэгдмэл, өргөжих боломжтой, танигдахуйц visual identity system бүтээдэг.",
+        },
+        {
+          number: "04",
+          title: "\u0425\u044d\u0440\u044d\u0433\u043b\u044d\u0445",
+          body: "Брэндийн identity-г бодит хэрэглээнд нэвтрүүлдэг үе шат. Website, social media, packaging, campaign, motion зэрэг digital болон physical touchpoint бүр дээр нэгдмэл, дурсагдахуйц brand experience бий болгоход төвлөрдөг.",
+        },
+        {
+          number: "05",
+          title: "\u041d\u044d\u0432\u0442\u0440\u04af\u04af\u043b\u044d\u0445",
+          body: "Брэнд гэдэг нь зөвхөн logo биш — бүтэн систем юм. Төслийн төгсгөлд organized asset-ууд, usage guideline болон цаашид тогтвортой ашиглах implementation system-уудыг хүлээлгэн өгдөг.",
+        },
+      ],
+      clientsLabel: "Онцлох харилцагчид",
+      availableLabel: "Шинэ төслүүд дээр ажиллах боломжтой",
+      ctaHeading: "Үл гүйцэлдэх санаануудыг хамтдаа бодит болгоё.",
+    },
+    work: {
+      label: "Онцлох ажлууд",
+      heading: "Алсын хараатай, өөрийн өнгө төрхөө бүтээхийг зорьдог хүмүүстэй хамтран ажилладаг.",
+      projectsCount: (n: number) => `${n} \u0442\u04e9\u0441\u04e9\u043b`,
+      filters: ["\u0411\u04af\u0433\u0434", "\u0411\u0440\u044d\u043d\u0434\u0438\u0439\u043d \u0442\u0430\u043d\u0438\u0445 \u0442\u044d\u043c\u0434\u044d\u0433", "\u0421\u0430\u0432\u043b\u0430\u0433\u0430\u0430"],
+      startLabel: "Төсөл эхлүүлэх",
+      ctaHeading: "Үл гүйцэлдэх санаануудыг хамтдаа бодит болгоё.",
+    },
+    project: {
+      client: "Захиалагч",
+      services: "Үйлчилгээ",
+      year: "Он",
+      overview: "Тойм",
+      nextProject: "Дараагийн төсөл",
+    },
+    footer: {
+      tagline: "Үл гүйцэлдэх санааг амилуулна.",
+      social: "Сошиал",
+      contact: "Холбоо барих",
+      getInTouch: "Холбогдох",
+      sitemap: "Цэс",
+      links: {
+        home: "Нүүр",
+        work: "Төслүүд",
+        about: "Миний тухай",
+        contact: "Холбоо барих",
+      },
+    },
+    ticker: [
+      "\u0411\u0440\u044d\u043d\u0434\u0438\u0439\u043d \u0442\u0430\u043d\u0438\u0445 \u0442\u044d\u043c\u0434\u044d\u0433",
+      "\u0421\u0430\u0432\u043b\u0430\u0433\u0430\u0430",
+      "\u04ae\u0441\u0433\u0438\u0439\u043d \u0434\u0438\u0437\u0430\u0439\u043d",
+      "\u0411\u0440\u044d\u043d\u0434\u0438\u0439\u043d \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438",
+      "\u0412\u044d\u0431 \u0434\u0438\u0437\u0430\u0439\u043d",
+      "\u0422\u0438\u043f\u043e\u0433\u0440\u0430\u0444\u0438",
+      "\u0423\u0440\u043b\u0430\u0433\u0438\u0439\u043d \u0443\u0434\u0438\u0440\u0434\u043b\u0430\u0433\u0430",
+      "\u0425\u04e9\u0434\u04e9\u043b\u0433\u04e9\u04e9\u043d\u0442 \u0434\u0438\u0437\u0430\u0439\u043d",
+    ],
+  },
+} as const
+
+export type Translations = typeof translations
