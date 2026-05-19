@@ -1,14 +1,18 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import ProjectCard from "@/components/project-card"
+import CollectionCard from "@/components/collection-card"
+import CollectionGallery from "@/components/collection-gallery"
 import FadeUp from "@/components/fade-up"
 import ScrollFloat from "@/components/ui/scroll-float"
 import { useLang } from "@/contexts/language-context"
 import { translations } from "@/lib/translations"
 import type { Project } from "@/lib/projects"
+import { collections, type Collection } from "@/lib/collections"
 
 interface WorkContentProps {
   projects: Project[]
@@ -18,6 +22,7 @@ export default function WorkContent({ projects }: WorkContentProps) {
   const { lang } = useLang()
   const T = translations[lang].work
   const Tc = translations[lang].cta
+  const [activeCollection, setActiveCollection] = useState<Collection | null>(null)
 
   return (
     <>
@@ -26,23 +31,21 @@ export default function WorkContent({ projects }: WorkContentProps) {
       <main className="pt-[68px]">
         {/* Header */}
         <section className="max-w-[1320px] mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-16">
-  {/* sr-only h1 ensures every page has exactly one h1 for SEO; the visual heading below is an h2 via ScrollFloat */}
-  <h1 className="sr-only">Work — Brand Design Portfolio by baysaass</h1>
-  <FadeUp>
-    <p className="text-[#888888] text-[12px] font-medium tracking-[0.12em] uppercase mb-8">
-      {T.label}
-    </p>
-  </FadeUp>
-
-  <ScrollFloat
-    containerClassName="text-black text-[clamp(2.5rem,6vw,5rem)] font-black tracking-[-0.04em] leading-tight max-w-[1200px]"
-    scrollStart="center bottom+=40%"
-    scrollEnd="bottom bottom-=30%"
-    stagger={0.02}
-  >
-    {T.heading}
-  </ScrollFloat>
-</section>
+          <h1 className="sr-only">Work — Brand Design Portfolio by baysaass</h1>
+          <FadeUp>
+            <p className="text-[#888888] text-[12px] font-medium tracking-[0.12em] uppercase mb-8">
+              {T.label}
+            </p>
+          </FadeUp>
+          <ScrollFloat
+            containerClassName="text-black text-[clamp(2.5rem,6vw,5rem)] font-black tracking-[-0.04em] leading-tight max-w-[1200px]"
+            scrollStart="center bottom+=40%"
+            scrollEnd="bottom bottom-=30%"
+            stagger={0.02}
+          >
+            {T.heading}
+          </ScrollFloat>
+        </section>
 
         {/* Project grid */}
         <section className="max-w-[1320px] mx-auto px-6 md:px-10 pb-28 md:pb-36">
@@ -69,7 +72,33 @@ export default function WorkContent({ projects }: WorkContentProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16">
             {projects.map((project, i) => (
               <FadeUp key={project.id} delay={(i % 2) * 0.1}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} priority={i < 2} />
+              </FadeUp>
+            ))}
+          </div>
+        </section>
+
+        {/* Collections */}
+        <section className="max-w-[1320px] mx-auto px-6 md:px-10 pb-28 md:pb-36">
+          <FadeUp>
+            <div className="flex items-center justify-between mb-10 border-t border-[#e0e0e0] pt-8">
+              <p className="text-[#888888] text-[13px]">
+                {lang === "mn" ? `${collections.length} коллекц` : `${collections.length} collections`}
+              </p>
+              <p className="text-[#888888] text-[12px] font-medium tracking-[0.12em] uppercase">
+                {lang === "mn" ? "Коллекц" : "Collections"}
+              </p>
+            </div>
+          </FadeUp>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
+            {collections.map((col, i) => (
+              <FadeUp key={col.id} delay={(i % 3) * 0.08}>
+                <CollectionCard
+                  collection={col}
+                  index={i}
+                  onClick={(c) => setActiveCollection(c)}
+                />
               </FadeUp>
             ))}
           </div>
@@ -104,6 +133,11 @@ export default function WorkContent({ projects }: WorkContentProps) {
       </main>
 
       <Footer />
+
+      <CollectionGallery
+        collection={activeCollection}
+        onClose={() => setActiveCollection(null)}
+      />
     </>
   )
 }

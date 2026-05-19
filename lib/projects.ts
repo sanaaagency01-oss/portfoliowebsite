@@ -272,7 +272,7 @@ export const projects: Project[] = [
       { type: "triple",       images: ["/projects/Zen tarot candle label/d5dceb187363641.6586c722cc718.webp", "/projects/Zen tarot candle label/d7e355187363641.6586c722cb13e.webp", "/projects/Zen tarot candle label/d769bd187363641.6586c722c9d12.webp"] },
       { type: "full",         image:  "/projects/Zen tarot candle label/477c58187363641.6586c7238c558.webp" },
       { type: "full",         image:  "/projects/Zen tarot candle label/78c4d0187363641.6586c7238ab20.webp" },
-      { type: "pair-natural", images: ["/projects/Zen tarot candle label/mockup2.png", "/projects/Zen tarot candle label/mockup3.webp"] },
+      { type: "pair-natural", images: ["/projects/Zen tarot candle label/mockup2.webp", "/projects/Zen tarot candle label/mockup3.webp"] },
       { type: "full",         image:  "/projects/Zen tarot candle label/0790f2187363641.6586c86632a9a.webp" },
     ],
     featured: false,

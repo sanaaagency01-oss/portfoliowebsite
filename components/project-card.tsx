@@ -8,9 +8,10 @@ import { useLang } from "@/contexts/language-context"
 
 interface ProjectCardProps {
   project: Project
+  priority?: boolean
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, priority = false }: ProjectCardProps) {
   const { lang } = useLang()
   const tagline = lang === "mn" && project.taglineMn ? project.taglineMn : project.tagline
   return (
@@ -28,6 +29,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
+            priority={priority}
           />
         </motion.div>
         {/* Subtle overlay on hover */}

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { LayoutGroup, motion } from "framer-motion"
 import Navigation from "@/components/navigation"
 import ServicesTicker from "@/components/services-ticker"
@@ -16,12 +17,12 @@ import { useLang } from "@/contexts/language-context"
 import { translations } from "@/lib/translations"
 
 const portfolioImages = [
-  { src: "/projects/One more night branding/t-shirt.png",                                                                          alt: "One More Night t-shirt" },
-  { src: "/projects/Zen tarot candle label/mockup1.png",                                                                           alt: "Zen Tarot candle" },
-  { src: "/projects/ganga and khomool/mockup1.png",                                                                                alt: "Zen Tarot Incense" },
-  { src: "/projects/Tsuiwan package/mockup.png",                                                                                   alt: "Tsuiwan packaging" },
+  { src: "/projects/One more night branding/t-shirt.webp",                                                                         alt: "One More Night t-shirt" },
+  { src: "/projects/Zen tarot candle label/mockup1.webp",                                                                          alt: "Zen Tarot candle" },
+  { src: "/projects/ganga and khomool/mockup1.webp",                                                                               alt: "Ganga & Khomool" },
+  { src: "/projects/Tsuiwan package/mockup.webp",                                                                                  alt: "Tsuiwan packaging" },
   { src: "/projects/beautytech llc logo/52730b202740915.668ba7ab75cda.webp",                                                       alt: "Beautytech logo" },
-  { src: "/projects/chandmani goyl/3bf4ea194423431.65fbbbf0bda70 6.png",                                                          alt: "Chandmani Goyl" },
+  { src: "/projects/chandmani goyl/3bf4ea194423431.65fbbbf0bda70 6.webp",                                                         alt: "Chandmani Goyl" },
   { src: "/projects/naadam typography/198492229719067.686a12b98ad11.webp",                                                         alt: "Naadam typography" },
   { src: "/projects/CAE logo/f57a8e221632127.67d82fadeec41.webp",                                                                  alt: "CAE logo" },
 ]
@@ -40,94 +41,144 @@ export default function HomeContent() {
         <section className="w-full h-screen overflow-hidden flex flex-col items-center justify-center relative bg-white">
           <Floating sensitivity={-0.5} className="h-full pointer-events-none">
             <FloatingElement depth={0.5} className="top-[18%] left-[2%] md:top-[20%] md:left-[4%]">
-              <motion.img
-                src={portfolioImages[0].src}
-                alt={portfolioImages[0].alt}
-                className="w-20 h-14 md:w-32 md:h-24 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform -rotate-[3deg] shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-20 h-14 md:w-32 md:h-24 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform -rotate-[3deg] shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[0].src}
+                  alt={portfolioImages[0].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 80px, 128px"
+                  priority
+                />
+              </motion.div>
             </FloatingElement>
 
             <FloatingElement depth={1} className="top-[4%] left-[2%] md:top-[5%] md:left-[10%]">
-              <motion.img
-                src={portfolioImages[1].src}
-                alt={portfolioImages[1].alt}
-                className="w-20 h-16 sm:w-28 sm:h-20 md:w-52 md:h-40 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform -rotate-12 shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-20 h-16 sm:w-28 sm:h-20 md:w-52 md:h-40 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform -rotate-12 shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[1].src}
+                  alt={portfolioImages[1].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 80px, (max-width: 768px) 112px, 208px"
+                  priority
+                />
+              </motion.div>
             </FloatingElement>
 
             <FloatingElement depth={4} className="top-[72%] left-[2%] md:top-[72%] md:left-[7%]">
-              <motion.img
-                src={portfolioImages[2].src}
-                alt={portfolioImages[2].alt}
-                className="w-20 h-20 md:w-56 md:h-56 object-cover -rotate-[4deg] pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-20 h-20 md:w-56 md:h-56 overflow-hidden -rotate-[4deg] pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.9 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[2].src}
+                  alt={portfolioImages[2].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 80px, 224px"
+                />
+              </motion.div>
             </FloatingElement>
 
             <FloatingElement depth={2} className="top-[4%] left-[76%] md:top-[3%] md:left-[82%]">
-              <motion.img
-                src={portfolioImages[3].src}
-                alt={portfolioImages[3].alt}
-                className="w-20 h-16 sm:w-28 sm:h-24 md:w-56 md:h-48 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-[6deg] rounded-xl"
+              <motion.div
+                className="relative w-20 h-16 sm:w-28 sm:h-24 md:w-56 md:h-48 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform shadow-2xl rotate-[6deg] rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[3].src}
+                  alt={portfolioImages[3].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 80px, (max-width: 768px) 112px, 224px"
+                />
+              </motion.div>
             </FloatingElement>
 
             <FloatingElement depth={1} className="top-[68%] left-[74%] md:top-[65%] md:left-[81%]">
-              <motion.img
-                src={portfolioImages[4].src}
-                alt={portfolioImages[4].alt}
-                className="w-20 h-20 md:w-64 md:h-64 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-[10deg] rounded-xl"
+              <motion.div
+                className="relative w-20 h-20 md:w-64 md:h-64 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform shadow-2xl rotate-[10deg] rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.3 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[4].src}
+                  alt={portfolioImages[4].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 80px, 256px"
+                />
+              </motion.div>
             </FloatingElement>
 
             {/* Image 6 — middle left */}
             <FloatingElement depth={3} className="top-[45%] left-[0%] md:top-[43%] md:left-[2%]">
-              <motion.img
-                src={portfolioImages[5].src}
-                alt={portfolioImages[5].alt}
-                className="w-16 h-16 md:w-44 md:h-36 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform rotate-[8deg] shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-16 h-16 md:w-44 md:h-36 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform rotate-[8deg] shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[5].src}
+                  alt={portfolioImages[5].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 64px, 176px"
+                />
+              </motion.div>
             </FloatingElement>
 
             {/* Image 7 — middle right */}
             <FloatingElement depth={2} className="top-[34%] left-[76%] md:top-[32%] md:left-[78%]">
-              <motion.img
-                src={portfolioImages[6].src}
-                alt={portfolioImages[6].alt}
-                className="w-16 h-20 md:w-40 md:h-52 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform -rotate-[5deg] shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-16 h-20 md:w-40 md:h-52 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform -rotate-[5deg] shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.7 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[6].src}
+                  alt={portfolioImages[6].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 64px, 160px"
+                />
+              </motion.div>
             </FloatingElement>
 
             {/* Image 8 — between top-right and bottom-right */}
             <FloatingElement depth={1.5} className="top-[54%] left-[77%] md:top-[51%] md:left-[80%]">
-              <motion.img
-                src={portfolioImages[7].src}
-                alt={portfolioImages[7].alt}
-                className="w-14 h-14 md:w-36 md:h-36 object-cover pointer-events-auto hover:scale-105 duration-200 cursor-pointer transition-transform rotate-[3deg] shadow-2xl rounded-xl"
+              <motion.div
+                className="relative w-14 h-14 md:w-36 md:h-36 overflow-hidden pointer-events-auto cursor-pointer hover:scale-105 duration-200 transition-transform rotate-[3deg] shadow-2xl rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.9 }}
-              />
+              >
+                <Image
+                  src={portfolioImages[7].src}
+                  alt={portfolioImages[7].alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 56px, 144px"
+                />
+              </motion.div>
             </FloatingElement>
           </Floating>
 
@@ -239,7 +290,7 @@ export default function HomeContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14">
             {featured.map((project, i) => (
               <FadeUp key={project.id} delay={i * 0.07}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} priority={i < 2} />
               </FadeUp>
             ))}
           </div>
