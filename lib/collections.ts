@@ -44,7 +44,7 @@ export const collections: Collection[] = [
         descriptionMn: "Монголын үндэсний наадам болон Богд хааны зуны ордны архитектур хэлбэрээс санаа авсан typography судалгаа.",
         year: "2025",
         images: [
-          `${TC}/Наадам.webp`,
+          encodeURI(`${TC}/Наадам.webp`),
           `${NT}/198492229719067.686a12b98ad11.webp`,
           `${NT}/dbfaaa229719067.686a12b98a254.webp`,
           `${NT}/5c1933229719067.686a12b98b4e1.webp`,
