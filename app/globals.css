@@ -43,7 +43,7 @@
   body {
     background-color: #ffffff;
     color: #000000;
-    font-family: var(--font-dm-sans), sans-serif;
+    font-family: var(--font-dm-sans), var(--font-noto-sans), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
