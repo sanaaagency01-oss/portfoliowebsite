@@ -211,7 +211,7 @@ export default function StudioAdminDashboard() {
                     >
                       <div className="flex items-center gap-4">
                         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-black text-sm font-bold text-white">
-                          {proj.name.slice(0, 1)}
+                          {(proj.name || 'P').slice(0, 1)}
                         </div>
                         <div>
                           <div className="flex items-center gap-2.5">
@@ -223,7 +223,7 @@ export default function StudioAdminDashboard() {
                             </Link>
                             <span
                               className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
-                                proj.contract.status === 'signed'
+                                proj.contract?.status === 'signed'
                                   ? 'border border-[#d2ebd6] bg-[#f0fdf4] text-[#226738]'
                                   : proj.status === 'contract_pending'
                                   ? 'border border-[#fed7aa] bg-[#fff7ed] text-[#c2410c]'
@@ -234,7 +234,7 @@ export default function StudioAdminDashboard() {
                                   : 'border border-[#e0e0e0] bg-[#fafafa] text-[#666666]'
                               }`}
                             >
-                              {proj.contract.status === 'signed'
+                              {proj.contract?.status === 'signed'
                                 ? '✅ Гэрээ баталгаажсан'
                                 : proj.status === 'contract_pending'
                                 ? '✍️ Санал зөвшөөрсөн (Гарын үсэг хүлээж буй)'
@@ -246,7 +246,7 @@ export default function StudioAdminDashboard() {
                             </span>
                           </div>
                           <p className="mt-0.5 text-xs text-[#666666]">
-                            {proj.company} · Төлөвлөсөн: {proj.due} · {proj.contract.tasks?.length || 0} task · {proj.contract.deliverables?.length || 0} материал
+                            {proj.company || 'Байгууллага'} · Төлөвлөсөн: {proj.due || 'Товлоогүй'} · {proj.contract?.tasks?.length || 0} task · {proj.contract?.deliverables?.length || 0} материал
                           </p>
                         </div>
                       </div>
@@ -255,12 +255,12 @@ export default function StudioAdminDashboard() {
                         <div className="hidden w-28 sm:block">
                           <div className="mb-1 flex justify-between text-[10px] text-[#888888]">
                             <span>Явц</span>
-                            <span className="font-bold text-black">{proj.progress}%</span>
+                            <span className="font-bold text-black">{proj.progress || 0}%</span>
                           </div>
                           <div className="h-1.5 overflow-hidden rounded-full bg-[#f0f0f0]">
                             <div
                               className="h-full rounded-full bg-black"
-                              style={{ width: `${proj.progress}%` }}
+                              style={{ width: `${proj.progress || 0}%` }}
                             />
                           </div>
                         </div>

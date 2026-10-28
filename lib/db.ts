@@ -116,14 +116,79 @@ function saveStore(store: StudioStore): void {
 }
 
 // ------------------- Project CRUD -------------------
+export function normalizeProject(data: any): Project {
+  if (!data) {
+    throw new Error('Project data is empty')
+  }
+
+  return {
+    id: data.id || `proj_${Date.now()}`,
+    token: data.token || Math.random().toString(36).substring(2, 9),
+    name: data.name || 'Шинэ төсөл',
+    company: data.company || 'Захиалагч байгууллага',
+    contactName: data.contactName || 'Захиалагч',
+    email: data.email || '',
+    phone: data.phone || '',
+    type: data.type || 'Brand Identity',
+    status: data.status || 'lead',
+    progress: typeof data.progress === 'number' ? data.progress : 0,
+    due: data.due || 'Товлоогүй',
+    createdAt: data.createdAt || new Date().toISOString(),
+    contract: data.contract ? {
+      number: data.contract.number || `BT-${new Date().getFullYear()}-000`,
+      date: data.contract.date || new Date().toISOString().split('T')[0],
+      start: data.contract.start || new Date().toISOString().split('T')[0],
+      end: data.contract.end || new Date(Date.now() + 60 * 24 * 3600 * 1000).toISOString().split('T')[0],
+      total: data.contract.total || 0,
+      revisions: data.contract.revisions || 2,
+      status: data.contract.status || 'draft',
+      isPublishedToClient: Boolean(data.contract.isPublishedToClient),
+      tasks: data.contract.tasks || [],
+      deliverables: data.contract.deliverables || [],
+      stages: data.contract.stages || [],
+      customSections: data.contract.customSections || [],
+      proposalNote: data.contract.proposalNote || '',
+      clientNote: data.contract.clientNote || '',
+      proposals: data.contract.proposals || [],
+    } : {
+      number: `BT-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`,
+      date: new Date().toISOString().split('T')[0],
+      start: new Date().toISOString().split('T')[0],
+      end: new Date(Date.now() + 60 * 24 * 3600 * 1000).toISOString().split('T')[0],
+      total: 0,
+      revisions: 2,
+      status: 'draft',
+      isPublishedToClient: false,
+      tasks: [],
+      deliverables: [],
+      stages: [],
+      customSections: [],
+      proposalNote: '',
+      clientNote: '',
+      proposals: [],
+    },
+    brief: data.brief || {
+      answers: {},
+      messages: [],
+      progress: 0,
+      complete: false,
+    },
+    assets: data.assets || [],
+  }
+}
+
 export async function getAllProjects(): Promise<Project[]> {
   if (isCloudflareConfigured()) {
     try {
       const d1Projects = await fetchProjectsFromCloudflareD1()
       if (d1Projects !== null) {
         const store = ensureStoreExists()
-        store.projects = { ...store.projects, ...d1Projects }
-        return Object.values(d1Projects).sort(
+        const normalizedMap: Record<string, Project> = {}
+        for (const [t, p] of Object.entries(d1Projects)) {
+          normalizedMap[t] = normalizeProject(p)
+        }
+        store.projects = { ...store.projects, ...normalizedMap }
+        return Object.values(normalizedMap).sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
       }
@@ -133,7 +198,7 @@ export async function getAllProjects(): Promise<Project[]> {
   }
 
   const store = ensureStoreExists()
-  return Object.values(store.projects).sort(
+  return Object.values(store.projects).map(normalizeProject).sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   )
 }
@@ -147,9 +212,10 @@ export async function getProjectByToken(token: string): Promise<Project | null> 
         const row = res.results[0]
         const proj = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
         if (proj && proj.token) {
+          const normalized = normalizeProject(proj)
           const store = ensureStoreExists()
-          store.projects[token] = proj
-          return proj
+          store.projects[token] = normalized
+          return normalized
         }
       }
     } catch (e) {
@@ -158,7 +224,8 @@ export async function getProjectByToken(token: string): Promise<Project | null> 
   }
 
   const store = ensureStoreExists()
-  return store.projects[token] || null
+  const local = store.projects[token]
+  return local ? normalizeProject(local) : null
 }
 
 export async function deleteProject(token: string): Promise<boolean> {
