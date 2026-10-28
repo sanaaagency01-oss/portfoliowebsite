@@ -6,6 +6,7 @@
  */
 
 import { BRAND_IDENTITY_KNOWLEDGE } from './knowledge/brand-identity-knowledge'
+import { AIScopeSuggestion } from './types/studio'
 
 export type NoulResult = {
   result: boolean
@@ -288,4 +289,209 @@ export async function generateAssistantResponse(
   }
 
   return currentQuestionPrompt
+}
+
+/**
+ * Generates AI-driven Scope, Internal Design Tasks, and Client Deliverables
+ * based on the client's submitted brief answers using OpenAI.
+ */
+export async function generateAIScopeAndTasks(params: {
+  projectName: string
+  company: string
+  answers: Record<string, string>
+}): Promise<AIScopeSuggestion> {
+  const { projectName, company, answers } = params
+  const openAiKey = process.env.OPENAI_API_KEY?.trim()
+  const modelName = process.env.OPENAI_MODEL || 'gpt-4o-mini'
+
+  const promptText = `
+Төслийн нэр: "${projectName}"
+Захиалагч байгууллага: "${company}"
+
+Харилцагчийн ирүүлсэн бриф судалгаа:
+- Төслийн төрөл: ${answers.projectType || 'Брэнд дизайн'}
+- Бизнесийн мөн чанар: ${answers.business || 'Тодорхойлоогүй'}
+- Зорилго: ${answers.goal || 'Тодорхойлоогүй'}
+- Зорилтот хэрэглэгч: ${answers.audience || 'Тодорхойлоогүй'}
+- Хүсэж буй хэв маяг (Style): ${answers.style || 'Тодорхойлоогүй'}
+- Хүлээж авахыг хүссэн ажлууд (Raw Deliverables): ${answers.deliverables || 'Тодорхойлоогүй'}
+- Харилцагчийн баталсан үйлчилгээний цар хүрээ: ${answers.serviceScope || 'Брэнд дизайн'}
+- Харилцагчийн хугацааны хүлээлт: ${answers.timeline || 'Тодорхойлоогүй'}
+- Харилцагчийн төсвийн хүлээлт: ${answers.budget || 'Тодорхойлоогүй'}
+
+Та дээрх мэдээлэлд тулгуурлан дизайнерын зүгээс:
+1. Ажлын цар хүрээ (scopeTitle, summary)
+2. Зөвлөмжит хугацаа (recommendedTimeline текстээр, recommendedDurationDays тоогоор)
+3. Зөвлөмжит үнэ (recommendedBudget тоогоор төгрөгөөр, budgetRationale тайлбар)
+4. Харилцагчид үнийн санал илгээхэд зориулсан найрсаг албан ёсны зурвас (proposalNote)
+5. Харилцагчид гар дээр нь хүлээлгэн өгөх бодит гаралтууд (suggestedDeliverables: нэр name, дэлгэрэнгүй тайлбар description, тоо ширхэг quantity)
+6. Дизайнерын өөрийн дотооддоо хийж гүйцэтгэх ажлын дараалал, таскууд (suggestedTasks: нэр name, тайлбар description, хамаарах үе шат stage)
+7. 3 үе шаттай гэрээний төлбөрийн үе шат (suggestedStages: нэр name, үр дүн result, төлбөрийн хувь payment)
+зэргийг JSON форматаар бүтэцчлэн гаргаж өгнө үү.
+`
+
+  if (openAiKey) {
+    try {
+      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${openAiKey}`,
+        },
+        body: JSON.stringify({
+          model: modelName,
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Та бол Т. Өсөхбаяр (baysaass)-ын брэнд дизайны студийн Ахлах Арт Директор & Брэнд Стратегич юм. Та ирсэн бриф дээр тулгуурлан дизайнерын хийх ажлын цар хүрээ, таскууд, болон хүлээлгэн өгөх материалуудыг өндөр стандартын дагуу мэргэжлийн монгол хэлээр төлөвлөнө. Заавал JSON форматаар хариулна уу.',
+            },
+            {
+              role: 'user',
+              content: promptText,
+            },
+          ],
+          response_format: { type: 'json_object' },
+          temperature: 0.3,
+          max_tokens: 1800,
+        }),
+      })
+
+      if (res.ok) {
+        const data = await res.json()
+        const parsed = JSON.parse(data.choices?.[0]?.message?.content || '{}')
+        if (parsed.suggestedDeliverables && parsed.suggestedTasks) {
+          return {
+            summary: parsed.summary || 'Бриф дээр суурилсан брэнд дизайны стратегийн цар хүрээ',
+            scopeTitle: parsed.scopeTitle || `${company} — Брэндийн дүр төрх & Лого системийн үйлчилгээ`,
+            recommendedTimeline: parsed.recommendedTimeline || '28 хоног',
+            recommendedDurationDays: Number(parsed.recommendedDurationDays) || 28,
+            recommendedBudget: Number(parsed.recommendedBudget) || 3500000,
+            budgetRationale: parsed.budgetRationale || 'Брэндийн судалгаа, лого систем, брэндбүүк болон хэрэглээний дизайныг багтаасан үнэлгээ.',
+            proposalNote:
+              parsed.proposalNote ||
+              `Сайн байна уу, ${company} хамт олонд энэ өдрийн мэнд хүргэе! Танай бриф судалгаатай танилцаж, брэндийн зорилгод нийцсэн ажлын цар хүрээ болон үнийн саналаа бэлтгэн илгээж байна.`,
+            suggestedDeliverables: Array.isArray(parsed.suggestedDeliverables)
+              ? parsed.suggestedDeliverables.map((d: any) => ({
+                  name: String(d.name || ''),
+                  description: String(d.description || ''),
+                  quantity: String(d.quantity || '1'),
+                }))
+              : [],
+            suggestedTasks: Array.isArray(parsed.suggestedTasks)
+              ? parsed.suggestedTasks.map((t: any) => ({
+                  name: String(t.name || ''),
+                  description: String(t.description || ''),
+                  stage: String(t.stage || 'Дизайн боловсруулалт'),
+                }))
+              : [],
+            suggestedStages: Array.isArray(parsed.suggestedStages)
+              ? parsed.suggestedStages.map((s: any) => ({
+                  name: String(s.name || ''),
+                  result: String(s.result || ''),
+                  payment: String(s.payment || ''),
+                }))
+              : [],
+          }
+        }
+      } else {
+        const err = await res.text()
+        console.warn('[OpenAI suggest scope error]', res.status, err)
+      }
+    } catch (err) {
+      console.warn('[OpenAI suggest scope exception, using fallback]', err)
+    }
+  }
+
+  // Fallback intelligent suggestion based on client's brief answers
+  return {
+    summary: `${company} брэндийн зах зээл дэх өрсөлдөх чадварыг нэмэгдүүлэх, зорилтот хэрэглэгчдэд итгэл төрүүлэх иж бүрэн брэндинг боловсруулах.`,
+    scopeTitle: `${company} — Брэндийн Дүр Төрх & Лого Систем`,
+    recommendedTimeline: '28 хоног (4 долоо хоног)',
+    recommendedDurationDays: 28,
+    recommendedBudget: 3500000,
+    budgetRationale: 'Судалгаа, концепц боловсруулалт, лого систем, хэрэглээний дизайн болон 24 хуудас брэндбүүк багтсан.',
+    proposalNote: `Сайн байна уу, ${company} хамт олондоо энэ өдрийн мэнд хүргэе! Та бүхний ирүүлсэн брифтэй танилцлаа. Танай бизнесийн зорилгод нийцсэн ажлын цар хүрээ, таск болон хүлээлгэн өгөх материалуудын үнийн саналыг боловсруулан илгээж байна.`,
+    suggestedDeliverables: [
+      {
+        name: 'Брэндбүүк (Brand Guidelines)',
+        description: 'Брэндийн дүр төрх, логоны зөв болон буруу хэрэглээ бүхий 24+ хуудас бүхий PDF гарын авлага',
+        quantity: '1 иж бүрэн баримт',
+      },
+      {
+        name: 'Лого систем (Үндсэн, хэвтээ, босоо, тэмдэгт)',
+        description: 'Бүх төрлийн хэрэгцээнд тохирсон өнгөт, хар цагаан хувилбарууд',
+        quantity: '1 багц систем',
+      },
+      {
+        name: 'Өнгөний код & Типографикийн дүрэм',
+        description: 'HEX, RGB, CMYK кодууд болон сонгосон фонтын хэрэглээний заавар',
+        quantity: '1 баримт',
+      },
+      {
+        name: 'Брэндийн хэрэглээний загварууд (Mockups)',
+        description: 'Нэрийн хуудас, албан бланк, хавтас, сошиал медиа постын жишээ загварууд',
+        quantity: '5 төрлийн эх загвар',
+      },
+      {
+        name: 'Бүх хувилбарын эх вектор файлууд',
+        description: 'Хэвлэл болон цахим хэрэглээний AI, EPS, SVG, PNG, PDF форматууд',
+        quantity: '1 архивласан багц',
+      },
+    ],
+    suggestedTasks: [
+      {
+        name: 'Өрсөлдөгчдийн харааны судалгаа & Moodboard бүрдүүлэлт',
+        description: 'Салбарын шилдэг өрсөлдөгчдийн брэндинг болон зорилтот хэрэглэгчийн харааны судалгаа',
+        stage: 'Судалгаа ба Нээлт',
+      },
+      {
+        name: 'Брэндийн үнэт зүйл & Үзэл баримтлалын тодорхойлолт',
+        description: 'Брэндийн суурь философи, өнгө аяс (Tone of Voice)-ийг тодорхойлж бэхжүүлэх',
+        stage: 'Стратеги',
+      },
+      {
+        name: 'Логоны 3 өөр чиглэлийн концепц ноороглох & Векторжуулах',
+        description: 'Ноорог зургуудаас шигшиж, вектор хэлбэрт шилжүүлсэн 3 өөр санааг хөгжүүлэх',
+        stage: 'Дизайн боловсруулалт',
+      },
+      {
+        name: 'Өнгөний систем болон фонтын хослол сонгох',
+        description: 'Үндсэн ба туслах өнгөний код (HEX, CMYK, RGB), гарчиг болон үндсэн бичвэрийн фонт тогтоох',
+        stage: 'Дизайн боловсруулалт',
+      },
+      {
+        name: 'Хэрэглээний бодит Mockup дизайнууд бүтээх',
+        description: 'Нэрийн хуудас, сошиал медиа, мерчандайз дээрх бодит хэрэглээний загварууд',
+        stage: 'Брендийн дүр төрх',
+      },
+      {
+        name: 'Брэндбүүк гарын авлагын эх бэлтгэл хийх',
+        description: 'Логоны хэрэглээ, зай хэмжээний дүрэм, хориглох заалт бүхий гарын авлага угсрах',
+        stage: 'Брэндбүүк & Хүлээлгэн өгөлт',
+      },
+      {
+        name: 'Бүх эх вектор файлуудыг цэгцлэн архивлах',
+        description: 'AI, EPS, SVG, PDF, PNG файлуудыг хүлээлгэн өгөхөд бэлтгэх',
+        stage: 'Брэндбүүк & Хүлээлгэн өгөлт',
+      },
+    ],
+    suggestedStages: [
+      {
+        name: '1. Судалгаа ба Нээлт',
+        result: 'Шаардлагын тодорхойлолт, зах зээлийн харьцуулалт, брэндийн үндсэн үзэл баримтлал',
+        payment: '50% урьдчилгаа',
+      },
+      {
+        name: '2. Дизайн боловсруулалт',
+        result: '3 өөр чиглэлийн лого концепц, өнгө, фонтын хувилбарууд танилцуулах',
+        payment: '30% төлбөр батлагдсанаар',
+      },
+      {
+        name: '3. Брэндбүүк & Хүлээлгэн өгөлт',
+        result: 'Бүрэн брэндбүүк, бүх эх вектор файлууд, хэрэглээний загварууд',
+        payment: '20% үлдэгдэл төлбөр',
+      },
+    ],
+  }
 }

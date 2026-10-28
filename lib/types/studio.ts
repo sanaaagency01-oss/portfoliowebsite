@@ -215,6 +215,31 @@ export type BriefAnswerState = {
   analysis?: BriefAnalysis
 }
 
+export type AIScopeSuggestion = {
+  summary: string
+  scopeTitle: string
+  recommendedTimeline: string
+  recommendedDurationDays: number
+  recommendedBudget: number
+  budgetRationale: string
+  proposalNote: string
+  suggestedDeliverables: {
+    name: string
+    description: string
+    quantity: string
+  }[]
+  suggestedTasks: {
+    name: string
+    description: string
+    stage?: string
+  }[]
+  suggestedStages: {
+    name: string
+    result: string
+    payment: string
+  }[]
+}
+
 export type Project = {
   id: string
   token: string

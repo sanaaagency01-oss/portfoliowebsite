@@ -21,9 +21,10 @@ import {
   AlertCircle,
   Eye,
 } from 'lucide-react'
-import { DeliverableItem, StageItem, Project } from '@/lib/types/studio'
+import { DeliverableItem, StageItem, Project, ProjectTask } from '@/lib/types/studio'
 import ContractExportButton from '@/components/studio/ContractExportButton'
 import BriefAnalysisDetailModal from '@/components/studio/admin/BriefAnalysisDetailModal'
+import AIScopeAdvisorModal from '@/components/studio/admin/AIScopeAdvisorModal'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
 
 const defaultDeliverables: DeliverableItem[] = [
@@ -112,6 +113,60 @@ function ContractsEditorContent() {
   const [draftSavedSuccess, setDraftSavedSuccess] = useState(false)
   const [copied, setCopied] = useState(false)
   const [showBriefModal, setShowBriefModal] = useState(false)
+  const [showAIScopeModal, setShowAIScopeModal] = useState(false)
+
+  const handleApplyAISuggestion = async (data: {
+    deliverables: DeliverableItem[]
+    tasks: ProjectTask[]
+    stages: StageItem[]
+    total: number
+    proposalNote: string
+    durationDays: number
+  }) => {
+    if (data.deliverables && data.deliverables.length > 0) {
+      setDeliverables(data.deliverables)
+    }
+    if (data.stages && data.stages.length > 0) {
+      setStages(data.stages)
+    }
+
+    const today = new Date()
+    const endIso = new Date(today.getTime() + (data.durationDays || 28) * 24 * 3600 * 1000)
+      .toISOString()
+      .split('T')[0]
+
+    setMeta((prev) => ({
+      ...prev,
+      total: String(data.total),
+      end: endIso,
+    }))
+
+    if (data.proposalNote) {
+      setProposalNote(data.proposalNote)
+    }
+
+    // Persist tasks and deliverables to project store in background
+    if (token) {
+      try {
+        await fetch(`/api/projects/${token}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contract: {
+              tasks: data.tasks,
+              deliverables: data.deliverables,
+              stages: data.stages,
+              total: data.total,
+              end: endIso,
+              proposalNote: data.proposalNote,
+            },
+          }),
+        })
+      } catch (e) {
+        console.warn('Failed auto-saving tasks from AI suggestion', e)
+      }
+    }
+  }
 
   // Load all projects for project picker
   const loadProjects = async () => {
@@ -585,6 +640,29 @@ function ContractsEditorContent() {
                     </p>
                   </div>
                 )}
+
+                {/* OpenAI Scope & Task Proposal CTA */}
+                <div className="sm:col-span-2 lg:col-span-3 mt-2 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black bg-black p-4.5 text-white shadow-xs">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-9 items-center justify-center rounded-xl bg-white/10 text-amber-300">
+                      <Sparkles className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white">OpenAI — Ажлын цар хүрээ, Таск & Гаралт санал болгох</h4>
+                      <p className="text-[11px] text-white/70">
+                        Харилцагчийн брифт нийцсэн цар хүрээ, дотоод таскууд, болон хүлээлгэн өгөх материалуудыг автоматаар бэлтгэх.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowAIScopeModal(true)}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-black hover:bg-[#f0f0f0] transition shadow-xs cursor-pointer"
+                  >
+                    <Sparkles className="size-3.5 text-amber-600" />
+                    AI Санал дэвшүүлэгч нээх →
+                  </button>
+                </div>
               </div>
             </section>
           )}
@@ -628,13 +706,23 @@ function ContractsEditorContent() {
                 </p>
                 <h2 className="mt-1 text-lg font-bold text-black">Хүлээлгэн өгөх материалууд</h2>
               </div>
-              <button
-                type="button"
-                onClick={addDeliverable}
-                className="flex items-center gap-1.5 rounded-full bg-black px-4 py-1.5 text-xs font-semibold text-white hover:bg-[#222222] transition"
-              >
-                <Plus className="size-3.5" /> Нэмэх
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowAIScopeModal(true)}
+                  className="flex items-center gap-1.5 rounded-full border border-black bg-black px-4 py-1.5 text-xs font-bold text-white hover:bg-[#222222] transition shadow-xs cursor-pointer"
+                >
+                  <Sparkles className="size-3.5 text-amber-300" />
+                  AI Санал авах
+                </button>
+                <button
+                  type="button"
+                  onClick={addDeliverable}
+                  className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3.5 py-1.5 text-xs font-semibold text-black hover:bg-[#f0f0f0] transition"
+                >
+                  <Plus className="size-3.5" /> Нэмэх
+                </button>
+              </div>
             </div>
 
             <div className="mt-6 flex flex-col gap-3">
@@ -871,6 +959,14 @@ function ContractsEditorContent() {
         isOpen={showBriefModal}
         onClose={() => setShowBriefModal(false)}
         onUpdate={loadProjects}
+      />
+
+      {/* OpenAI Scope & Tasks Advisor Modal */}
+      <AIScopeAdvisorModal
+        isOpen={showAIScopeModal}
+        onClose={() => setShowAIScopeModal(false)}
+        project={currentProject}
+        onApplyAll={handleApplyAISuggestion}
       />
     </main>
   )

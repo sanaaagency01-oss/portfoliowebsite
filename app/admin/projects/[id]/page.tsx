@@ -18,6 +18,7 @@ import VisualPinpointCanvas from '@/components/studio/visual-pinpoint-canvas'
 import ProjectTasksManager from '@/components/studio/admin/ProjectTasksManager'
 import ProjectDeliverablesManager from '@/components/studio/admin/ProjectDeliverablesManager'
 import BriefAnalysisDetailModal from '@/components/studio/admin/BriefAnalysisDetailModal'
+import AIScopeAdvisorModal from '@/components/studio/admin/AIScopeAdvisorModal'
 import ContractExportButton from '@/components/studio/ContractExportButton'
 import { openInvoicePrintWindow } from '@/lib/invoice-export'
 import { Project, DesignAsset, ProjectMessage, ProjectTask, DeliverableItem } from '@/lib/types/studio'
@@ -35,6 +36,7 @@ export default function AdminProjectInspectorPage({
   const [selectedAssetIndex, setSelectedAssetIndex] = useState(0)
   const [copiedLink, setCopiedLink] = useState(false)
   const [showBriefModal, setShowBriefModal] = useState(false)
+  const [showAIScopeModal, setShowAIScopeModal] = useState(false)
   const [activeTab, setActiveTab] = useState<'deliverables' | 'canvas' | 'messages'>('deliverables')
 
   // Mockup Asset State
@@ -166,6 +168,45 @@ export default function AdminProjectInspectorPage({
       console.error('Failed sending reply', e)
     } finally {
       setSendingReply(false)
+    }
+  }
+
+  const handleApplyAISuggestion = async (data: {
+    deliverables: DeliverableItem[]
+    tasks: ProjectTask[]
+    stages: any[]
+    total: number
+    proposalNote: string
+    durationDays: number
+  }) => {
+    if (!project) return
+
+    const updatedContract = {
+      ...project.contract,
+      deliverables: data.deliverables,
+      tasks: data.tasks,
+      stages: data.stages.length > 0 ? data.stages : project.contract.stages,
+      total: data.total || project.contract.total,
+      proposalNote: data.proposalNote || project.contract.proposalNote,
+    }
+
+    const updatedProject = {
+      ...project,
+      contract: updatedContract,
+    }
+
+    setProject(updatedProject)
+
+    try {
+      await fetch(`/api/projects/${token}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contract: updatedContract,
+        }),
+      })
+    } catch (e) {
+      console.error('Failed applying AI scope to project', e)
     }
   }
 
@@ -368,14 +409,24 @@ export default function AdminProjectInspectorPage({
             </button>
           </div>
 
-          {activeTab === 'canvas' && (
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setShowAddAsset(!showAddAsset)}
-              className="flex items-center gap-1.5 rounded-full bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-[#222222] transition"
+              onClick={() => setShowAIScopeModal(true)}
+              className="flex items-center gap-1.5 rounded-full border border-black bg-black px-4 py-2 text-xs font-bold text-white hover:bg-[#222222] transition shadow-xs cursor-pointer"
             >
-              <Plus className="size-3.5" /> Шинэ дизайн хувилбар оруулах
+              <Sparkles className="size-3.5 text-amber-300" />
+              OpenAI: Таск & Гаралт санал авах
             </button>
-          )}
+
+            {activeTab === 'canvas' && (
+              <button
+                onClick={() => setShowAddAsset(!showAddAsset)}
+                className="flex items-center gap-1.5 rounded-full bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-[#222222] transition"
+              >
+                <Plus className="size-3.5" /> Шинэ дизайн хувилбар оруулах
+              </button>
+            )}
+          </div>
         </div>
 
         {/* TAB 1: DELIVERABLES & TASKS CHECKLIST */}
@@ -572,6 +623,14 @@ export default function AdminProjectInspectorPage({
               if (data.project) setProject(data.project)
             })
         }}
+      />
+
+      {/* OpenAI Scope & Tasks Advisor Modal */}
+      <AIScopeAdvisorModal
+        isOpen={showAIScopeModal}
+        onClose={() => setShowAIScopeModal(false)}
+        project={project}
+        onApplyAll={handleApplyAISuggestion}
       />
     </main>
   )
