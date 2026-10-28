@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAllProjects, updateProject, getProjectByToken } from '@/lib/db'
+import { getAllProjects, updateProject, getProjectByToken, deleteProject } from '@/lib/db'
 import { analyzeBriefWithTypeSafe } from '@/lib/typesafe-brief-analyzer'
 import { Project, ProjectStatus } from '@/lib/types/studio'
 
@@ -194,6 +194,22 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ project: updated })
   } catch (error) {
     console.error('Failed in CRM API PATCH', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const token = searchParams.get('token')
+    if (!token) {
+      return NextResponse.json({ error: 'Token is required' }, { status: 400 })
+    }
+
+    await deleteProject(token)
+    return NextResponse.json({ success: true, token })
+  } catch (error) {
+    console.error('Failed deleting project in CRM API', error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }

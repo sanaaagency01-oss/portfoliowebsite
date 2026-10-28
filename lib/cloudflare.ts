@@ -146,6 +146,17 @@ export async function syncProjectToCloudflareD1(project: Project): Promise<boole
 }
 
 /**
+ * Deletes a project from Cloudflare D1.
+ */
+export async function deleteProjectFromCloudflareD1(token: string): Promise<boolean> {
+  if (!isCloudflareConfigured()) return false
+
+  const sql = `DELETE FROM studio_projects WHERE token = ?;`
+  const res = await executeD1Query(sql, [token])
+  return res.success
+}
+
+/**
  * Fetches all projects from Cloudflare D1.
  */
 export async function fetchProjectsFromCloudflareD1(): Promise<Record<string, Project> | null> {

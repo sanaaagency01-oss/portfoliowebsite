@@ -21,6 +21,7 @@ import {
   Clock,
   Eye,
   Plus,
+  Trash2,
 } from 'lucide-react'
 import { Project, ProjectStatus } from '@/lib/types/studio'
 import { formatCurrency } from '@/lib/studio-utils'
@@ -57,6 +58,30 @@ export default function ClientCrmManager({
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [updatingToken, setUpdatingToken] = useState<string | null>(null)
+  const [deletingToken, setDeletingToken] = useState<string | null>(null)
+
+  const handleDeleteProject = async (token: string, name: string) => {
+    if (!window.confirm(`"${name}" төслийг бүрмөсөн устгах уу? Энэ үйлдлийг буцах боломжгүй.`)) {
+      return
+    }
+
+    setDeletingToken(token)
+    try {
+      const res = await fetch(`/api/admin/crm?token=${token}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        onUpdate()
+      } else {
+        alert('Төсөл устгахад алдаа гарлаа.')
+      }
+    } catch (e) {
+      console.error('Failed deleting project', e)
+      alert('Сүлжээний алдаа гарлаа.')
+    } finally {
+      setDeletingToken(null)
+    }
+  }
 
   const copyUrl = (token: string, type: 'portal' | 'brief' | 'contract') => {
     const origin = window.location.origin
@@ -497,6 +522,15 @@ export default function ClientCrmManager({
                           >
                             Удирдах <ArrowUpRight className="size-3" />
                           </Link>
+
+                          <button
+                            onClick={() => handleDeleteProject(proj.token, proj.name)}
+                            disabled={deletingToken === proj.token}
+                            title="Төсөл устгах"
+                            className="flex size-7 items-center justify-center rounded-full border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition disabled:opacity-50"
+                          >
+                            <Trash2 className="size-3" />
+                          </button>
                         </div>
                       </td>
                     </tr>

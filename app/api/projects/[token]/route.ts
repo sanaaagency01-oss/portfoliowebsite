@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getProjectByToken, updateProject } from '@/lib/db'
+import { getProjectByToken, updateProject, deleteProject } from '@/lib/db'
 import { sendTelegramNotification } from '@/lib/telegram'
 
 export async function GET(
@@ -47,6 +47,20 @@ export async function PATCH(
     return NextResponse.json({ project: updated })
   } catch (error) {
     console.error('Failed updating project', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ token: string }> }
+) {
+  try {
+    const { token } = await params
+    await deleteProject(token)
+    return NextResponse.json({ success: true, token })
+  } catch (error) {
+    console.error('Failed deleting project', error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
