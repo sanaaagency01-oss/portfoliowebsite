@@ -60,6 +60,7 @@ export default function Navigation() {
     { label: n.work,    href: "/work" },
     { label: n.about,   href: "/about" },
     { label: n.contact, href: "/contact" },
+    { label: lang === "mn" ? "Client талбар" : "Client Portal", href: "/client" },
   ]
 
   const langSwitcher = (
@@ -116,12 +117,18 @@ export default function Navigation() {
           </div>
 
           {/* Right */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <Link href="/work" className={linkClass("/work")}>
               {n.work}
             </Link>
             <Link href="/contact" className={linkClass("/contact")}>
               {n.contact}
+            </Link>
+            <Link
+              href="/client"
+              className="hidden md:inline-flex items-center text-[12px] font-semibold tracking-wide px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-200 shadow-xs"
+            >
+              Portal
             </Link>
 
             {/* Mobile toggle */}

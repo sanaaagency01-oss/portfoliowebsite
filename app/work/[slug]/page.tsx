@@ -55,5 +55,58 @@ export default async function ProjectPage({ params }: Props) {
   const currentIndex = all.findIndex((p) => p.slug === slug)
   const next = all[(currentIndex + 1) % all.length]
 
-  return <ProjectContent project={project} next={next} />
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        "@id": `https://baysaass.space/work/${slug}#work`,
+        name: project.name,
+        description: project.description,
+        creator: {
+          "@type": "Person",
+          name: "baysaass",
+          alternateName: "Т. Өсөхбаяр",
+          url: "https://baysaass.space",
+        },
+        image: project.cover ? `https://baysaass.space${project.cover}` : undefined,
+        genre: project.category,
+        dateCreated: project.year,
+        inLanguage: ["mn-MN", "en-US"],
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://baysaass.space",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Work",
+            item: "https://baysaass.space/work",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.name,
+            item: `https://baysaass.space/work/${slug}`,
+          },
+        ],
+      },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+      />
+      <ProjectContent project={project} next={next} />
+    </>
+  )
 }

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       "Brand designer based in Ulaanbaatar, Mongolia. Discover the design process, philosophy, and clients behind baysaass.",
     url: "/about",
-    type: "website",
+    type: "profile",
     images: [
       {
         url: "/about-portrait.jpg",
@@ -26,5 +26,32 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
-  return <AboutContent />
+  const aboutJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://baysaass.space",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About",
+        item: "https://baysaass.space/about",
+      },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
+      <AboutContent />
+    </>
+  )
 }
