@@ -8,6 +8,7 @@ import {
   FileCheck2,
   Users,
   Sparkles,
+  ShieldCheck,
   Plus,
   ArrowLeft,
   RefreshCw,
@@ -90,6 +91,13 @@ function AdminCrmContent() {
               <Sparkles className="size-4" />
               Бриф судалгаа (AI)
             </button>
+            <Link
+              href="/admin/audits"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"
+            >
+              <ShieldCheck className="size-4" />
+              Брэнд аудитууд
+            </Link>
             <Link
               href="/admin/contracts"
               className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"

@@ -2,6 +2,7 @@ export const translations = {
   en: {
     nav: {
       work: "Work",
+      audit: "Brand Audit",
       about: "About",
       projects: "Projects",
       contact: "Contact",
@@ -119,6 +120,7 @@ export const translations = {
   mn: {
     nav: {
       work: "Төслүүд",
+      audit: "Брэнд аудит",
       about: "Миний тухай",
       projects: "Төслүүд",
       contact: "Холбогдох",

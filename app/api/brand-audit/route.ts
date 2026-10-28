@@ -1,0 +1,152 @@
+import { NextRequest, NextResponse } from 'next/server'
+import {
+  BrandAuditRecord,
+  AuditScope,
+  AuditMedium,
+  ModuleId,
+} from '@/lib/brand-audit/types'
+import { saveBrandAudit, listBrandAudits } from '@/lib/brand-audit/db'
+import { extractTextFromPdfBuffer, ExtractedPdfContent } from '@/lib/brand-audit/pdf-helper'
+import { runBrandAuditAnalysis } from '@/lib/brand-audit/engine'
+import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
+
+export const dynamic = 'force-dynamic'
+
+export async function GET(req: NextRequest) {
+  try {
+    const audits = await listBrandAudits()
+    return NextResponse.json({ success: true, audits })
+  } catch (e: any) {
+    return NextResponse.json({ success: false, error: e.message }, { status: 500 })
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const contentType = req.headers.get('content-type') || ''
+    let company = 'Миний брэнд'
+    let email = ''
+    let scope: AuditScope = 'full_brandbook'
+    let medium: AuditMedium = 'both'
+    let pdfContent: ExtractedPdfContent = {
+      totalPages: 10,
+      textByPage: [],
+      fullText: '',
+    }
+    let fileName = 'brandbook.pdf'
+    let fileSizeBytes = 1024 * 1024
+
+    if (contentType.includes('multipart/form-data')) {
+      const formData = await req.formData()
+      company = (formData.get('company') as string) || 'Миний брэнд'
+      email = (formData.get('email') as string) || ''
+      scope = ((formData.get('scope') as string) || 'full_brandbook') as AuditScope
+      medium = ((formData.get('medium') as string) || 'both') as AuditMedium
+
+      const file = formData.get('file') as File | null
+      if (file && typeof file.arrayBuffer === 'function') {
+        fileName = file.name || 'brandbook.pdf'
+        fileSizeBytes = file.size || 1024 * 1024
+        const arrayBuffer = await file.arrayBuffer()
+        const buffer = Buffer.from(arrayBuffer)
+        pdfContent = extractTextFromPdfBuffer(buffer)
+      } else {
+        const sampleText = (formData.get('extractedText') as string) || ''
+        pdfContent = {
+          totalPages: Number(formData.get('totalPages')) || 12,
+          textByPage: [],
+          fullText: sampleText || `${company} brandbook guidelines and standards.`,
+        }
+      }
+    } else {
+      const body = await req.json()
+      company = body.company || 'Миний брэнд'
+      email = body.email || ''
+      scope = (body.scope || 'full_brandbook') as AuditScope
+      medium = (body.medium || 'both') as AuditMedium
+      fileName = body.fileName || 'brandbook.pdf'
+      fileSizeBytes = body.fileSizeBytes || 1024 * 500
+      const text = body.extractedText || `${company} brandbook guidelines and standards.`
+      pdfContent = {
+        totalPages: Number(body.totalPages) || 12,
+        textByPage: [],
+        fullText: text,
+      }
+    }
+
+    const auditId = `audit_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`
+
+    const initialRecord: BrandAuditRecord = {
+      id: auditId,
+      company,
+      email,
+      scope,
+      medium,
+      status: 'queued',
+      progressPct: 5,
+      currentStageMn: 'Аудитын хүсэлтийг хүлээн авч, дараалалд орууллаа...',
+      qualityScore: 0,
+      coveragePct: 0,
+      documentInfo: {
+        fileName,
+        fileSizeBytes,
+        totalPages: pdfContent.totalPages,
+        extractedTextLength: pdfContent.fullText.length,
+      },
+      executiveSummaryMn: 'Аудит хийгдэж байна...',
+      modules: {
+        strategy: createInitialModule('strategy'),
+        nomenclature: createInitialModule('nomenclature'),
+        logo: createInitialModule('logo'),
+        color: createInitialModule('color'),
+        typography: createInitialModule('typography'),
+        imagery: createInitialModule('imagery'),
+        application: createInitialModule('application'),
+        governance: createInitialModule('governance'),
+        assets: createInitialModule('assets'),
+      },
+      findings: [],
+      criticalFindingsCount: 0,
+      improvementFindingsCount: 0,
+      passFindingsCount: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
+
+    await saveBrandAudit(initialRecord)
+
+    // Trigger analysis asynchronously in the background while returning auditId immediately
+    // If in serverless edge without long background workers, we can initiate analysis
+    runBrandAuditAnalysis(initialRecord, pdfContent).catch((err) => {
+      console.error('[Background Audit Analysis Error]', err)
+      initialRecord.status = 'failed'
+      initialRecord.errorMessage = err.message || 'Алдаа гарлаа'
+      saveBrandAudit(initialRecord)
+    })
+
+    return NextResponse.json({
+      success: true,
+      auditId,
+      record: initialRecord,
+    })
+  } catch (e: any) {
+    console.error('[API Brand Audit POST error]', e)
+    return NextResponse.json({ success: false, error: e.message }, { status: 500 })
+  }
+}
+
+function createInitialModule(id: ModuleId) {
+  return {
+    moduleId: id,
+    moduleNameMn: MODULE_DEFINITIONS[id].nameMn,
+    weightTotal: 0,
+    evaluatedWeight: 0,
+    scoreWeightedSum: 0,
+    qualityScore: 0,
+    coveragePct: 0,
+    status: 'needs_work' as const,
+    criticalCount: 0,
+    improvementCount: 0,
+    passCount: 0,
+  }
+}

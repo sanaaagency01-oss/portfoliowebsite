@@ -14,6 +14,7 @@ import {
   Plus,
   Users,
   Sparkles,
+  ShieldCheck,
 } from 'lucide-react'
 import { Project } from '@/lib/types/studio'
 import { formatCurrency } from '@/lib/studio-utils'
@@ -87,6 +88,13 @@ export default function StudioAdminDashboard() {
             >
               <Sparkles className="size-4" />
               Бриф судалгаа (AI)
+            </Link>
+            <Link
+              href="/admin/audits"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"
+            >
+              <ShieldCheck className="size-4" />
+              Брэнд аудитууд
             </Link>
             <Link
               href="/admin/contracts"

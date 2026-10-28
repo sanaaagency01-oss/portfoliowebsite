@@ -58,6 +58,7 @@ export default function Navigation() {
 
   const menuItems = [
     { label: n.work,    href: "/work" },
+    { label: n.audit,   href: "/brand-audit" },
     { label: n.about,   href: "/about" },
     { label: n.contact, href: "/contact" },
     { label: lang === "mn" ? "Client талбар" : "Client Portal", href: "/client" },
@@ -87,9 +88,12 @@ export default function Navigation() {
           aria-label="Main navigation"
         >
           {/* Left */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-7">
             <Link href="/about" className={linkClass("/about")}>
               {n.about}
+            </Link>
+            <Link href="/brand-audit" className={linkClass("/brand-audit")}>
+              {n.audit}
             </Link>
           </div>
 

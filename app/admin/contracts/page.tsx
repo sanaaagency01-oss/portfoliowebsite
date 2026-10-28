@@ -428,6 +428,10 @@ function ContractsEditorContent() {
             CRM & Бриф
           </Link>
           <span className="text-[#e0e0e0]">/</span>
+          <Link href="/admin/audits" className="text-xs font-semibold text-[#666666] hover:text-black transition">
+            Брэнд аудит
+          </Link>
+          <span className="text-[#e0e0e0]">/</span>
           <h1 className="text-base font-bold tracking-tight text-black">
             Үнийн санал & Гэрээ боловсруулах
           </h1>
