@@ -268,6 +268,15 @@ export async function POST(
         : project.status,
     })
 
+    // If client just finished the brief, alert the designer immediately via Telegram
+    if (currentBrief.complete && !project.brief.complete) {
+      await sendTelegramNotification({
+        title: '📋 БРИФИЙН СУДАЛГАА АМЖИЛТТАЙ ДҮҮРЛЭЭ!',
+        message: `<b>Төсөл:</b> ${project.name}\n<b>Байгууллага:</b> ${project.company}\n<b>Төсөв:</b> ${currentBrief.answers.budget || 'Тодорхойлоогүй'}\n<b>Хугацаа:</b> ${currentBrief.answers.timeline || 'Тодорхойлоогүй'}\n<b>Үйлчилгээ:</b> ${currentBrief.answers.serviceScope || 'Брэнд дизайн'}\n\n👉 <i>Админ CRM дээрээс шалган үнийн санал илгээнэ үү.</i>`,
+        projectToken: token,
+      })
+    }
+
     return NextResponse.json({
       answers: currentBrief.answers,
       messages: currentBrief.messages,
