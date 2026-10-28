@@ -9,10 +9,8 @@ import {
   deleteProjectFromCloudflareD1,
   executeD1Query,
   isCloudflareConfigured,
+  fetchMetaFromCloudflareD1,
 } from './cloudflare'
-
-const DATA_DIR = path.join(process.cwd(), 'data')
-const STORE_FILE = path.join(DATA_DIR, 'studio-store.json')
 
 interface StudioStore {
   projects: Record<string, Project>
@@ -20,38 +18,96 @@ interface StudioStore {
   messages?: Record<string, ProjectMessage[]>
 }
 
+// In-memory cache across serverless warm requests
+let inMemoryStore: StudioStore | null = null
+
+// Serverless detection (Vercel / AWS Lambda have read-only root filesystems)
+const IS_SERVERLESS = Boolean(
+  process.env.VERCEL ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME ||
+  process.env.LAMBDA_TASK_ROOT
+)
+
+const LOCAL_DATA_DIR = path.join(process.cwd(), 'data')
+const LOCAL_STORE_FILE = path.join(LOCAL_DATA_DIR, 'studio-store.json')
+const TMP_STORE_FILE = path.join('/tmp', 'studio-store.json')
+
+function getStoreFilePath(): string {
+  return IS_SERVERLESS ? TMP_STORE_FILE : LOCAL_STORE_FILE
+}
+
 function ensureStoreExists(): StudioStore {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true })
+  if (inMemoryStore) {
+    return inMemoryStore
   }
 
-  if (!fs.existsSync(STORE_FILE)) {
-    const initialData: StudioStore = {
-      projects: {},
-      comments: {},
-      messages: {},
+  const initialData: StudioStore = {
+    projects: {},
+    comments: {},
+    messages: {},
+  }
+
+  // 1. Try reading from /tmp if in serverless environment
+  if (IS_SERVERLESS && fs.existsSync(TMP_STORE_FILE)) {
+    try {
+      const raw = fs.readFileSync(TMP_STORE_FILE, 'utf-8')
+      const parsed = JSON.parse(raw) as StudioStore
+      inMemoryStore = {
+        projects: parsed.projects || {},
+        comments: parsed.comments || {},
+        messages: parsed.messages || {},
+      }
+      return inMemoryStore
+    } catch (e) {
+      console.warn('Failed reading from /tmp/studio-store.json', e)
     }
-
-    fs.writeFileSync(STORE_FILE, JSON.stringify(initialData, null, 2), 'utf-8')
-    return initialData
   }
 
-  try {
-    const raw = fs.readFileSync(STORE_FILE, 'utf-8')
-    const store = JSON.parse(raw) as StudioStore
-    if (!store.projects) store.projects = {}
-    if (!store.comments) store.comments = {}
-    if (!store.messages) store.messages = {}
-    return store
-  } catch (err) {
-    console.error('Failed reading studio-store.json, creating fallback', err)
-    return { projects: {}, comments: {}, messages: {} }
+  // 2. Try reading from bundled data/studio-store.json
+  if (fs.existsSync(LOCAL_STORE_FILE)) {
+    try {
+      const raw = fs.readFileSync(LOCAL_STORE_FILE, 'utf-8')
+      const parsed = JSON.parse(raw) as StudioStore
+      inMemoryStore = {
+        projects: parsed.projects || {},
+        comments: parsed.comments || {},
+        messages: parsed.messages || {},
+      }
+      return inMemoryStore
+    } catch (e) {
+      console.warn('Failed reading from bundled studio-store.json', e)
+    }
   }
+
+  inMemoryStore = initialData
+  return inMemoryStore
 }
 
 function saveStore(store: StudioStore): void {
-  ensureStoreExists()
-  fs.writeFileSync(STORE_FILE, JSON.stringify(store, null, 2), 'utf-8')
+  inMemoryStore = store
+
+  // Safe file write that NEVER throws or crashes the serverless process
+  try {
+    const targetFile = getStoreFilePath()
+    const targetDir = path.dirname(targetFile)
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true })
+    }
+    fs.writeFileSync(targetFile, JSON.stringify(store, null, 2), 'utf-8')
+  } catch (fsErr) {
+    // If writing to process.cwd() failed with EROFS (read-only filesystem), fallback to /tmp
+    try {
+      if (!fs.existsSync('/tmp')) {
+        fs.mkdirSync('/tmp', { recursive: true })
+      }
+      fs.writeFileSync(TMP_STORE_FILE, JSON.stringify(store, null, 2), 'utf-8')
+    } catch (tmpErr) {
+      // In-memory cache handles current runtime
+      console.warn('Filesystem is read-only, maintained in-memory cache:', tmpErr)
+    }
+  }
+
+  // If Cloudflare D1 is configured, sync in background without throwing
   if (isCloudflareConfigured()) {
     syncStoreToCloudflareD1('studio_store', store).catch((e) =>
       console.warn('Background sync to Cloudflare D1 error:', e)
@@ -65,6 +121,8 @@ export async function getAllProjects(): Promise<Project[]> {
     try {
       const d1Projects = await fetchProjectsFromCloudflareD1()
       if (d1Projects !== null) {
+        const store = ensureStoreExists()
+        store.projects = { ...store.projects, ...d1Projects }
         return Object.values(d1Projects).sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
@@ -88,7 +146,11 @@ export async function getProjectByToken(token: string): Promise<Project | null> 
       if (res.success && res.results && res.results.length > 0) {
         const row = res.results[0]
         const proj = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
-        if (proj && proj.token) return proj
+        if (proj && proj.token) {
+          const store = ensureStoreExists()
+          store.projects[token] = proj
+          return proj
+        }
       }
     } catch (e) {
       console.warn('Failed reading project from D1, falling back to local', e)
@@ -162,17 +224,23 @@ export async function createProject(data: Partial<Project>): Promise<Project> {
   saveStore(store)
 
   if (isCloudflareConfigured()) {
-    syncProjectToCloudflareD1(newProject).catch((e) =>
-      console.warn('Background sync project to Cloudflare D1 error:', e)
-    )
+    try {
+      await syncProjectToCloudflareD1(newProject)
+    } catch (e) {
+      console.warn('Sync project to Cloudflare D1 error:', e)
+    }
   }
 
   return newProject
 }
 
 export async function updateProject(token: string, updates: Partial<Project>): Promise<Project | null> {
+  // Ensure we have current project state
+  let existing = await getProjectByToken(token)
   const store = ensureStoreExists()
-  const existing = store.projects[token]
+  if (!existing) {
+    existing = store.projects[token]
+  }
   if (!existing) return null
 
   let updatedContract = existing.contract
@@ -195,7 +263,7 @@ export async function updateProject(token: string, updates: Partial<Project>): P
     updatedStatus = 'active'
   }
 
-  const updatedProject = {
+  const updatedProject: Project = {
     ...existing,
     ...updates,
     status: updatedStatus,
@@ -207,9 +275,11 @@ export async function updateProject(token: string, updates: Partial<Project>): P
   saveStore(store)
 
   if (isCloudflareConfigured()) {
-    syncProjectToCloudflareD1(updatedProject).catch((e) =>
-      console.warn('Background sync updated project to Cloudflare D1 error:', e)
-    )
+    try {
+      await syncProjectToCloudflareD1(updatedProject)
+    } catch (e) {
+      console.warn('Sync updated project to Cloudflare D1 error:', e)
+    }
   }
 
   return updatedProject
@@ -218,6 +288,16 @@ export async function updateProject(token: string, updates: Partial<Project>): P
 // ------------------- Visual Comments CRUD -------------------
 export async function getCommentsByAsset(assetId: string): Promise<VisualComment[]> {
   const store = ensureStoreExists()
+  if (!store.comments[assetId] && isCloudflareConfigured()) {
+    try {
+      const meta = await fetchMetaFromCloudflareD1<StudioStore>('studio_store')
+      if (meta?.comments) {
+        store.comments = { ...store.comments, ...meta.comments }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
   return store.comments[assetId] || []
 }
 
@@ -280,6 +360,16 @@ export async function addCommentReply(
 // ------------------- Project Messages (Conversation / Харилцан яриа) -------------------
 export async function getProjectMessages(projectToken: string): Promise<ProjectMessage[]> {
   const store = ensureStoreExists()
+  if ((!store.messages || !store.messages[projectToken]) && isCloudflareConfigured()) {
+    try {
+      const meta = await fetchMetaFromCloudflareD1<StudioStore>('studio_store')
+      if (meta?.messages) {
+        store.messages = { ...store.messages, ...meta.messages }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
   return store.messages?.[projectToken] || []
 }
 
@@ -302,4 +392,3 @@ export async function addProjectMessage(
   saveStore(store)
   return newMessage
 }
-

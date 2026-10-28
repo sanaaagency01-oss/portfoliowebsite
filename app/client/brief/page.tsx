@@ -1,18 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Sparkles, ArrowRight } from 'lucide-react'
+import { Sparkles, ArrowRight, AlertCircle } from 'lucide-react'
 
 export default function GenericBriefEntryPage() {
   const router = useRouter()
   const [starting, setStarting] = useState(false)
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleStart = async (e?: React.FormEvent) => {
     if (e) e.preventDefault()
+    setErrorMessage(null)
     setStarting(true)
 
     try {
@@ -28,9 +30,13 @@ export default function GenericBriefEntryPage() {
           router.push(data.briefUrl)
           return
         }
+      } else {
+        const data = await res.json().catch(() => ({}))
+        setErrorMessage(data.message || 'Бриф эхлүүлэхэд серверээс алдаа буцаалаа. Түр хүлээгээд дахин оролдоно уу.')
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed starting brief', e)
+      setErrorMessage('Сүлжээний холболтоо шалгаад дахин оролдоно уу.')
     } finally {
       setStarting(false)
     }
@@ -56,6 +62,13 @@ export default function GenericBriefEntryPage() {
         <p className="mt-2 text-xs leading-relaxed text-[#666666]">
           Та өөрийн бизнесийн зорилго, хэв маяг, шаардлагатай ажлуудаа манай AI туслахтай чатлан 3 минутад тодорхойлж илгээх боломжтой.
         </p>
+
+        {errorMessage && (
+          <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3 text-xs leading-relaxed text-red-600">
+            <AlertCircle className="size-4 shrink-0 text-red-500 mt-0.5" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
 
         <form onSubmit={handleStart} className="mt-6 flex flex-col gap-3">
           <input

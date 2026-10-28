@@ -26,20 +26,30 @@ export async function POST(req: Request) {
       status: 'brief_pending',
     })
 
-    // Send Telegram Notification to Designer
-    await sendTelegramNotification({
-      title: '✨ Шинэ захиалагч Ажлын шаардлага (AI бриф) эхлүүллээ!',
-      message: `<b>Захиалагч:</b> ${clientName}\n<b>Компани:</b> ${company}\n<b>Төрөл:</b> ${projectType}\n<b>Төлөв:</b> AI бриф туслахтай чатлаж байна.`,
-      projectToken: newProject.token,
-    })
+    // Send Telegram Notification to Designer (Non-blocking)
+    try {
+      await sendTelegramNotification({
+        title: '✨ Шинэ захиалагч Ажлын шаардлага (AI бриф) эхлүүллээ!',
+        message: `<b>Захиалагч:</b> ${clientName}\n<b>Компани:</b> ${company}\n<b>Төрөл:</b> ${projectType}\n<b>Төлөв:</b> AI бриф туслахтай чатлаж байна.`,
+        projectToken: newProject.token,
+      })
+    } catch (telegramErr) {
+      console.warn('Telegram notification skipped on start:', telegramErr)
+    }
 
     return NextResponse.json({
       success: true,
       token: newProject.token,
       briefUrl: `/client/brief/${newProject.token}`,
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to start AI brief session', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: 'Failed to start AI brief session',
+        message: error?.message || 'Internal server error',
+      },
+      { status: 500 }
+    )
   }
 }
