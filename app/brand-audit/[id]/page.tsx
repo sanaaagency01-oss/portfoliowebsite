@@ -231,19 +231,30 @@ export default function BrandAuditDetailPage({
   }, [audit?.status, id])
 
   const handleRerun = async () => {
+    if (!isAdmin && (audit?.clientRerunCount || 0) >= 1) {
+      showToast('Дахин шалгах 1 удаагийн эрх ашиглагдсан байна.')
+      return
+    }
+
     setRerunning(true)
     setVisualProgress(65)
     try {
-      const res = await fetch(`/api/brand-audit/${id}/rerun`, { method: 'POST' })
-      if (res.ok) {
-        const data = await res.json()
-        if (data.audit) {
-          setAudit(data.audit)
-          setVisualProgress(100)
-        }
+      const res = await fetch(`/api/brand-audit/${id}/rerun`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isUserTriggered: true }),
+      })
+      const data = await res.json()
+      if (res.ok && data.audit) {
+        setAudit(data.audit)
+        setVisualProgress(100)
+        showToast('Аудитыг дахин амжилттай шалгалаа (1/1 ашиглагдлаа).')
+      } else {
+        showToast(data.error || 'Дахин шалгахад алдаа гарлаа')
       }
     } catch (e) {
       console.error(e)
+      showToast('Сүлжээний алдаа гарлаа')
     } finally {
       setRerunning(false)
     }
@@ -551,14 +562,27 @@ export default function BrandAuditDetailPage({
                 <span>Хуваалцах</span>
               </button>
               <AuditExportButton audit={audit} variant="black" />
-              <button
-                onClick={handleRerun}
-                disabled={rerunning}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e0e0e0] text-xs font-semibold text-black hover:border-black disabled:opacity-50 transition-colors"
-              >
-                <RefreshCw className={`size-3.5 ${rerunning ? 'animate-spin' : ''}`} />
-                <span>Дахин шалгах</span>
-              </button>
+              {!isAdmin && (audit.clientRerunCount || 0) >= 1 ? (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#e4e4e7] bg-[#f4f4f5] text-xs font-semibold text-[#888888] cursor-not-allowed transition-colors"
+                  title="Дахин шалгах 1 удаагийн эрх ашиглагдсан байна"
+                >
+                  <CheckCircle2 className="size-3.5 text-emerald-600" />
+                  <span>Дахин шалгасан (1/1)</span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleRerun}
+                  disabled={rerunning}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e0e0e0] text-xs font-semibold text-black hover:border-black disabled:opacity-50 transition-colors"
+                  title={isAdmin ? "Админ горим: Хязгааргүй дахин шалгах" : "Дахин шалгах (1 удаа ашиглах боломжтой)"}
+                >
+                  <RefreshCw className={`size-3.5 ${rerunning ? 'animate-spin' : ''}`} />
+                  <span>Дахин шалгах {!isAdmin ? '(1 удаа)' : ''}</span>
+                </button>
+              )}
             </div>
           </div>
 

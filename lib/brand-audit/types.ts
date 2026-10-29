@@ -109,4 +109,5 @@ export interface BrandAuditRecord {
   errorMessage?: string
   versionInfo?: AuditRunVersionInfo
   expiresAt?: string // ISO timestamp when the shareable link expires (defaults to 3 days from creation)
+  clientRerunCount?: number // Number of times client re-checked (limited to 1 for non-admin clients)
 }

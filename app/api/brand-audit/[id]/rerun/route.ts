@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getBrandAuditById, saveBrandAudit } from '@/lib/brand-audit/db'
 import { runBrandAuditAnalysis } from '@/lib/brand-audit/engine'
+import { cookies } from 'next/headers'
+import { ADMIN_COOKIE_NAME, verifyAdminSessionToken } from '@/lib/admin-auth'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -19,9 +21,37 @@ export async function POST(
       )
     }
 
+    // Check admin authorization
+    const cookieStore = await cookies()
+    const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value
+    const isAdmin = await verifyAdminSessionToken(token)
+
+    let isUserTriggered = false
+    try {
+      const body = await req.json()
+      if (body && body.isUserTriggered) {
+        isUserTriggered = true
+      }
+    } catch {}
+
+    // Enforce 1-time rerun limit for non-admin clients
+    if (!isAdmin && isUserTriggered && (audit.clientRerunCount || 0) >= 1) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Дахин шалгах боломжийг зөвхөн 1 удаа ашиглах эрхтэй байдаг тул хязгаарлагдсан байна.',
+          clientRerunCount: audit.clientRerunCount,
+        },
+        { status: 400 }
+      )
+    }
+
     audit.status = 'queued'
     audit.progressPct = 5
     audit.currentStageMn = 'Аудитыг дахин эхлүүлж байна...'
+    if (isUserTriggered && !isAdmin) {
+      audit.clientRerunCount = (audit.clientRerunCount || 0) + 1
+    }
     await saveBrandAudit(audit)
 
     // Reconstruct pdf content from document info, ensuring no binary junk
