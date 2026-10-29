@@ -1,8 +1,21 @@
 import type { Metadata, Viewport } from "next"
+import { DM_Sans, Noto_Sans } from "next/font/google"
 import { LanguageProvider } from "@/contexts/language-context"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700", "900"],
+})
+
+const notoSans = Noto_Sans({
+  subsets: ["cyrillic", "cyrillic-ext"],
+  variable: "--font-noto-sans",
+  weight: ["400", "500", "600", "700", "900"],
+})
 
 /** Viewport — exported separately so Next.js injects the <meta> tag server-side */
 export const viewport: Viewport = {
@@ -204,21 +217,6 @@ export default function RootLayout({
         <meta name="geo.position" content="47.9184;106.9177" />
         <meta name="ICBM" content="47.9184, 106.9177" />
 
-        {/* Font preloads for zero-latency font rendering */}
-        <link
-          rel="preload"
-          href="/fonts/dm-sans-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/noto-sans-cyrillic.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
         {/* Favicons */}
         <link rel="icon" href="/Group 4.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/Group 4.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)" />
@@ -228,7 +226,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#ffffff] text-black">
+      <body className={`${dmSans.variable} ${notoSans.variable} font-sans antialiased bg-[#ffffff] text-black`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>
