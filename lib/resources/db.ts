@@ -41,7 +41,7 @@ function ensureInitialStore(): ResourcesStore {
     initial.categories[cat.id] = cat
   }
 
-  // Pre-seed default resources
+  // Resources start empty - all resources are created by admin
   for (const res of DEFAULT_RESOURCES) {
     initial.resources[res.id] = res
   }
@@ -52,9 +52,9 @@ function ensureInitialStore(): ResourcesStore {
       const raw = fs.readFileSync(targetFile, 'utf-8')
       const parsed = JSON.parse(raw) as ResourcesStore
       if (parsed && typeof parsed === 'object') {
-        initial.resources = { ...initial.resources, ...(parsed.resources || {}) }
+        initial.resources = parsed.resources || {}
         initial.categories = { ...initial.categories, ...(parsed.categories || {}) }
-        initial.assets = { ...initial.assets, ...(parsed.assets || {}) }
+        initial.assets = parsed.assets || {}
       }
     }
   } catch (e) {
@@ -160,7 +160,7 @@ export async function getAllResources(options?: {
 
       sql += ` ORDER BY updated_at DESC LIMIT 200;`
       const res = await executeD1Query<{ data: string }>(sql, params)
-      if (res.success && res.results && res.results.length > 0) {
+      if (res.success && Array.isArray(res.results)) {
         const d1Items: ResourceItem[] = []
         for (const row of res.results) {
           try {
@@ -173,9 +173,7 @@ export async function getAllResources(options?: {
             console.warn('Error parsing resource row from D1', err)
           }
         }
-        if (d1Items.length > 0) {
-          return applySearchAndSort(d1Items, options?.search)
-        }
+        return applySearchAndSort(d1Items, options?.search)
       }
     } catch (e) {
       console.warn('[D1 resources fetch error]', e)
@@ -224,53 +222,54 @@ function applySearchAndSort(items: ResourceItem[], search?: string): ResourceIte
 export async function getResourceBySlug(slug: string): Promise<ResourceItem | null> {
   const store = ensureInitialStore()
 
-  // Match local first
-  const localMatch = Object.values(store.resources).find((r) => r.slug === slug)
-  if (localMatch) return localMatch
-
   if (isCloudflareConfigured()) {
     try {
       await initD1ResourcesSchema()
       const sql = `SELECT data FROM resources WHERE slug = ? LIMIT 1;`
       const res = await executeD1Query<{ data: string }>(sql, [slug])
-      if (res.success && res.results && res.results.length > 0) {
-        const row = res.results[0]
-        const parsed = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
-        if (parsed) {
-          store.resources[parsed.id] = parsed
-          return parsed
+      if (res.success) {
+        if (res.results && res.results.length > 0) {
+          const row = res.results[0]
+          const parsed = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
+          if (parsed) {
+            store.resources[parsed.id] = parsed
+            return parsed
+          }
         }
+        return null
       }
     } catch (e) {
       console.warn('[D1 getResourceBySlug error]', e)
     }
   }
 
-  return null
+  return Object.values(store.resources).find((r) => r.slug === slug) || null
 }
 
 export async function getResourceById(id: string): Promise<ResourceItem | null> {
   const store = ensureInitialStore()
-  if (store.resources[id]) return store.resources[id]
 
   if (isCloudflareConfigured()) {
     try {
       await initD1ResourcesSchema()
       const sql = `SELECT data FROM resources WHERE id = ? LIMIT 1;`
       const res = await executeD1Query<{ data: string }>(sql, [id])
-      if (res.success && res.results && res.results.length > 0) {
-        const parsed = typeof res.results[0].data === 'string' ? JSON.parse(res.results[0].data) : res.results[0].data
-        if (parsed) {
-          store.resources[parsed.id] = parsed
-          return parsed
+      if (res.success) {
+        if (res.results && res.results.length > 0) {
+          const parsed = typeof res.results[0].data === 'string' ? JSON.parse(res.results[0].data) : res.results[0].data
+          if (parsed) {
+            store.resources[parsed.id] = parsed
+            return parsed
+          }
         }
+        return null
       }
     } catch (e) {
       console.warn('[D1 getResourceById error]', e)
     }
   }
 
-  return null
+  return store.resources[id] || null
 }
 
 export async function saveResource(item: ResourceItem): Promise<void> {
