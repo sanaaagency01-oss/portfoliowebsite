@@ -154,9 +154,19 @@ export default function BrandAuditDetailPage({
               />
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-[#71717a]">
-              <RefreshCw className="size-3.5 animate-spin text-blue-600" />
-              <span>Түр хүлээнэ үү. Тайлан автоматаар гарч ирнэ.</span>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3">
+              <div className="flex items-center gap-2 text-[11px] text-[#71717a]">
+                <RefreshCw className="size-3.5 animate-spin text-blue-600" />
+                <span>Түр хүлээнэ үү. Тайлан автоматаар гарч ирнэ.</span>
+              </div>
+              <button
+                type="button"
+                onClick={handleRerun}
+                disabled={rerunning}
+                className="text-[11px] font-bold text-black hover:text-blue-600 underline underline-offset-2 transition-colors disabled:opacity-50"
+              >
+                {rerunning ? 'Боловсруулж байна...' : 'Удаж байвал энд дарж шууд тооцоолох'}
+              </button>
             </div>
           </div>
         </div>

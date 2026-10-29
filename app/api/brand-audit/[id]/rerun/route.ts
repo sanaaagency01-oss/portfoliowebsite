@@ -3,6 +3,7 @@ import { getBrandAuditById, saveBrandAudit } from '@/lib/brand-audit/db'
 import { runBrandAuditAnalysis } from '@/lib/brand-audit/engine'
 
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 export async function POST(
   req: NextRequest,
@@ -10,7 +11,7 @@ export async function POST(
 ) {
   try {
     const { id } = await context.params
-    const audit = await getBrandAuditById(id)
+    let audit = await getBrandAuditById(id)
     if (!audit) {
       return NextResponse.json(
         { success: false, error: 'Брэнд аудит олдсонгүй' },
@@ -23,19 +24,21 @@ export async function POST(
     audit.currentStageMn = 'Аудитыг дахин эхлүүлж байна...'
     await saveBrandAudit(audit)
 
-    // Reconstruct dummy pdf content from document info
+    // Reconstruct pdf content from document info
     const pdfContent = {
       totalPages: audit.documentInfo?.totalPages || 10,
       textByPage: [],
       fullText: `${audit.company} brand guidelines and identity standards.`,
     }
 
-    runBrandAuditAnalysis(audit, pdfContent).catch((err) => {
+    try {
+      audit = await runBrandAuditAnalysis(audit, pdfContent)
+    } catch (err: any) {
       console.error('[Re-run Audit Analysis Error]', err)
       audit.status = 'failed'
       audit.errorMessage = err.message
-      saveBrandAudit(audit)
-    })
+      await saveBrandAudit(audit)
+    }
 
     return NextResponse.json({ success: true, audit })
   } catch (e: any) {

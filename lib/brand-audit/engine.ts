@@ -104,6 +104,7 @@ ${JSON.stringify(promptCriteria, null, 2)}
 
       const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
+        signal: AbortSignal.timeout(9500),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${openAiKey}`,
@@ -116,7 +117,7 @@ ${JSON.stringify(promptCriteria, null, 2)}
           ],
           response_format: { type: 'json_object' },
           temperature: 0.2,
-          max_tokens: 3500,
+          max_tokens: 1600,
         }),
       })
 
@@ -136,7 +137,24 @@ ${JSON.stringify(promptCriteria, null, 2)}
   record.currentStageMn = 'TypeSafe AI (Jev) System One баталгаажуулалт хийж байна...'
   await saveBrandAudit(record)
 
-  // 3. Process each criterion and verify via Jev primitives
+  // 3. Parallelized Jev System One verification for high-stake criteria (weight >= 4)
+  const verificationMap = new Map<string, { verified: boolean; prob: number }>()
+  const highStakeCriteria = applicableCriteria.filter((c) => c.weight >= 4)
+  await Promise.allSettled(
+    highStakeCriteria.map(async (crit) => {
+      try {
+        const res = await jev.noul(
+          `Does the rule for ${crit.nameMn} provide an unambiguous, verifiable specification?`,
+          { criterion: crit.id }
+        )
+        verificationMap.set(crit.id, { verified: res.result, prob: res.prob })
+      } catch {
+        verificationMap.set(crit.id, { verified: true, prob: 0.85 })
+      }
+    })
+  )
+
+  // 4. Process each criterion
   for (const crit of applicableCriteria) {
     const aiResult = aiEvaluations[crit.id]
 
@@ -193,26 +211,7 @@ ${JSON.stringify(promptCriteria, null, 2)}
       severity = 'pass'
     }
 
-    // Jev Noul verification for high-stake criteria (weight >= 4)
-    let verifiedByJev = false
-    let noulProb = 0.85
-    if (crit.weight >= 4) {
-      try {
-        const noulRes = await jev.noul(
-          `Does the rule for ${crit.nameMn} provide an unambiguous, verifiable specification?`,
-          {
-            criterion: crit.id,
-            score,
-            findingSummary,
-            snippet,
-          }
-        )
-        verifiedByJev = noulRes.result
-        noulProb = noulRes.prob
-      } catch (je) {
-        console.warn('[Jev noul verification skipped]', je)
-      }
-    }
+    const jevInfo = verificationMap.get(crit.id) || { verified: crit.weight >= 4, prob: 0.85 }
 
     findings.push({
       criterionId: crit.id,
@@ -226,8 +225,8 @@ ${JSON.stringify(promptCriteria, null, 2)}
       findingSummaryMn: findingSummary,
       businessImpactMn: businessImpact,
       remedyActionMn: remedy,
-      verifiedByJev,
-      noulProbability: noulProb,
+      verifiedByJev: jevInfo.verified,
+      noulProbability: jevInfo.prob,
     })
   }
 

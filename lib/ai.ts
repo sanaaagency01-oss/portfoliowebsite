@@ -43,6 +43,7 @@ export class JevEngine {
     try {
       const res = await fetch('https://api.typesafe.ai/v1/systemone', {
         method: 'POST',
+        signal: AbortSignal.timeout(3500),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.apiKey}`,

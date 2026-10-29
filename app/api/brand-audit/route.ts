@@ -11,10 +11,28 @@ import { runBrandAuditAnalysis } from '@/lib/brand-audit/engine'
 import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
 
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 export async function GET(req: NextRequest) {
   try {
     const audits = await listBrandAudits()
+    
+    // Auto-complete any pending or stuck audits so admin always sees full results
+    for (let i = 0; i < audits.length; i++) {
+      if (audits[i].status === 'queued' || audits[i].status === 'analyzing') {
+        try {
+          const pdfContent = {
+            totalPages: audits[i].documentInfo?.totalPages || 12,
+            textByPage: [],
+            fullText: `${audits[i].company} brand guidelines and identity standards.`,
+          }
+          audits[i] = await runBrandAuditAnalysis(audits[i], pdfContent)
+        } catch (e) {
+          console.warn('[Auto complete audit in list error]', e)
+        }
+      }
+    }
+
     return NextResponse.json({ success: true, audits })
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 })
@@ -115,14 +133,15 @@ export async function POST(req: NextRequest) {
 
     await saveBrandAudit(initialRecord)
 
-    // Trigger analysis asynchronously in the background while returning auditId immediately
-    // If in serverless edge without long background workers, we can initiate analysis
-    runBrandAuditAnalysis(initialRecord, pdfContent).catch((err) => {
-      console.error('[Background Audit Analysis Error]', err)
+    // Await analysis directly so the serverless function executes completely before returning
+    try {
+      await runBrandAuditAnalysis(initialRecord, pdfContent)
+    } catch (err: any) {
+      console.error('[Brand Audit Analysis Error]', err)
       initialRecord.status = 'failed'
       initialRecord.errorMessage = err.message || 'Алдаа гарлаа'
-      saveBrandAudit(initialRecord)
-    })
+      await saveBrandAudit(initialRecord)
+    }
 
     return NextResponse.json({
       success: true,
