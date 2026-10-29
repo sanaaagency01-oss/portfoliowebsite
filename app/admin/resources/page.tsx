@@ -208,7 +208,7 @@ export default function AdminResourcesPage() {
               className="flex items-center gap-2.5 rounded-xl bg-black px-3 py-2 text-xs font-semibold text-white"
             >
               <BookOpen className="size-4" />
-              Resources CMS
+              Дизайны сан (CMS)
             </Link>
             <Link
               href="/admin/contracts"
@@ -246,10 +246,10 @@ export default function AdminResourcesPage() {
               <div className="flex items-center gap-2 text-xs text-[#71717a] mb-1">
                 <span>Studio OS</span>
                 <span>/</span>
-                <span className="font-semibold text-black">Resources Manager</span>
+                <span className="font-semibold text-black">Дизайны сан</span>
               </div>
               <h1 className="text-2xl md:text-3xl font-extrabold text-black tracking-tight">
-                Resources CMS
+                Дизайны сан (CMS)
               </h1>
               <p className="text-xs text-[#71717a] mt-1">
                 Нийтлэл, татах загвар, хэрэгслүүдийг код бичих, deploy хийхгүйгээр шууд удирдах
@@ -278,7 +278,7 @@ export default function AdminResourcesPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition shadow-xs"
               >
                 <Plus className="size-3.5" />
-                <span>Шинэ Resource</span>
+                <span>Шинэ материал</span>
               </Link>
             </div>
           </div>
@@ -287,7 +287,7 @@ export default function AdminResourcesPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="rounded-2xl border border-[#e0e0e0] bg-[#fafafa] p-5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#71717a]">
-                Нийт ресурс
+                Нийт материал
               </span>
               <div className="text-2xl font-black text-black mt-2">{totalCount}</div>
             </div>
@@ -386,7 +386,7 @@ export default function AdminResourcesPage() {
               <table className="w-full text-left text-xs">
                 <thead className="bg-[#fafafa] border-b border-[#e0e0e0] text-[#71717a] font-bold uppercase tracking-wider text-[10px]">
                   <tr>
-                    <th className="px-6 py-4">Ресурс / Гарчиг</th>
+                    <th className="px-6 py-4">Материал / Гарчиг</th>
                     <th className="px-6 py-4">Төрөл & Ангилал</th>
                     <th className="px-6 py-4 text-center">Төлөв</th>
                     <th className="px-6 py-4 text-center">Үзэлт / Таталт</th>
@@ -405,7 +405,7 @@ export default function AdminResourcesPage() {
                   ) : filteredResources.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-6 py-12 text-center text-[#71717a]">
-                        Тохирох ресурс олдсонгүй.
+                        Тохирох материал олдсонгүй.
                       </td>
                     </tr>
                   ) : (

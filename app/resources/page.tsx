@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 
 export const metadata = {
-  title: 'Resources & Downloads | baysaass',
+  title: 'Дизайны сан — Практик гарын авлага, татах загварууд & AI хэрэгслүүд | baysaass',
   description:
     'Брэндийн дизайн, стратеги, сав баглаа боодол, үсгийн соёлын практик гарын авлага, үнэгүй загварууд болон AI хэрэгслүүдийн нэгдсэн сан.',
 }
@@ -77,14 +77,14 @@ export default async function PublicResourcesPage({
           {/* Top Micro-label */}
           <div className="mb-4">
             <p className="text-[#888888] text-[11px] sm:text-[12px] font-medium tracking-[0.18em] uppercase">
-              Curated Knowledge & Tools
+              Дизайны сан & Хэрэгслүүд
             </p>
           </div>
 
           {/* Header */}
           <div className="max-w-[800px] mb-12">
             <h1 className="text-black text-[clamp(2.2rem,5vw,3.8rem)] font-black tracking-[-0.03em] leading-tight text-balance mb-4">
-              Resources & Downloads
+              Дизайны сан
             </h1>
             <p className="text-[#666666] text-[15px] sm:text-[17px] leading-relaxed">
               Брэнд дизайнер Т. Өсөхбаярын бодит туршлага дээр суурилсан практик удирдамж, үнэгүй татах загварууд болон AI хэрэгслүүдийн нэгдсэн сан.
@@ -158,7 +158,7 @@ export default async function PublicResourcesPage({
                     <div>
                       <div className="flex items-center gap-2 mb-4">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
-                          ★ Онцлох Resource
+                          ★ Онцлох материал
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-black text-white uppercase tracking-wider">
                           {getTypeIcon(featured.type)}
@@ -211,15 +211,15 @@ export default async function PublicResourcesPage({
           {resources.length === 0 ? (
             <div className="rounded-3xl border border-[#e0e0e0] p-16 text-center bg-[#fafafa]">
               <BookOpen className="size-12 text-[#a1a1aa] mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-black mb-1">Ресурс олдсонгүй</h3>
+              <h3 className="text-lg font-bold text-black mb-1">Материал олдсонгүй</h3>
               <p className="text-xs text-[#888888] mb-6">
-                Сонгосон ангилалд нийтлэгдсэн нөөц одоогоор байхгүй байна.
+                Сонгосон ангилалд нийтлэгдсэн материал одоогоор байхгүй байна.
               </p>
               <Link
                 href="/resources"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black text-white text-xs font-semibold"
               >
-                <span>Бүх ресурсуудыг харах</span>
+                <span>Бүх материалыг харах</span>
               </Link>
             </div>
           ) : (

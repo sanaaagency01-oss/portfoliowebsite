@@ -157,7 +157,7 @@ export default function AdminAuditsPage() {
               className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"
             >
               <BookOpen className="size-4" />
-              Resources CMS
+              Дизайны сан (CMS)
             </Link>
           </div>
 

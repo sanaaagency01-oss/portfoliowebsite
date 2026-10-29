@@ -105,7 +105,7 @@ export default function AdminCategoriesPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#71717a] hover:text-black transition"
           >
             <ArrowLeft className="size-4" />
-            <span>Ресурсын удирдлага руу буцах</span>
+            <span>Дизайны сан руу буцах</span>
           </Link>
           <span className="text-xs text-[#71717a] font-semibold">
             Нийт {categories.length} ангилал
@@ -116,7 +116,7 @@ export default function AdminCategoriesPage() {
           Ангилал удирдах
         </h1>
         <p className="text-xs text-[#71717a] mb-8">
-          Ресурсуудыг сэдэв, чиглэлээр нь бүлэглэх ангиллууд
+          Дизайны сангийн материалуудыг сэдэв, чиглэлээр нь бүлэглэх ангиллууд
         </p>
 
         {error && (

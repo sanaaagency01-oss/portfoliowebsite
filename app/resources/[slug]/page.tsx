@@ -33,10 +33,10 @@ export async function generateMetadata({
 }) {
   const { slug } = await params
   const res = await getResourceBySlug(slug)
-  if (!res) return { title: 'Resource олдсонгүй | baysaass' }
+  if (!res) return { title: 'Материал олдсонгүй | baysaass' }
 
   return {
-    title: `${res.title} | baysaass resources`,
+    title: `${res.title} | baysaass дизайны сан`,
     description: res.summary,
     openGraph: {
       title: res.title,
@@ -81,7 +81,7 @@ export default async function PublicResourceDetailPage({
               className="inline-flex items-center gap-2 text-xs font-semibold text-[#888888] hover:text-black transition"
             >
               <ArrowLeft className="size-4" />
-              <span>Бүх эх сурвалжууд руу буцах</span>
+              <span>Дизайны сан руу буцах</span>
             </Link>
 
             <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">

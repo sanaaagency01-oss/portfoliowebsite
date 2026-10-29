@@ -238,7 +238,7 @@ export default function ResourceEditorForm({
           className="inline-flex items-center gap-2 text-xs font-semibold text-[#71717a] hover:text-black transition"
         >
           <ArrowLeft className="size-4" />
-          <span>Бүх ресурсууд руу буцах</span>
+          <span>Дизайны сан руу буцах</span>
         </Link>
 
         <div className="flex items-center gap-3">
@@ -284,7 +284,7 @@ export default function ResourceEditorForm({
       {/* 1. RESOURCE TYPE SELECTION */}
       <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
         <label className="block text-xs font-bold text-[#18181b] mb-3">
-          Ресурсын төрөл сонгох <span className="text-rose-500">*</span>
+          Материалын төрөл сонгох <span className="text-rose-500">*</span>
         </label>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {[

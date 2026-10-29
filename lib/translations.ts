@@ -122,7 +122,7 @@ export const translations = {
     nav: {
       work: "Төслүүд",
       audit: "Брэнд аудит",
-      resources: "Ресурс",
+      resources: "Дизайны сан",
       about: "Миний тухай",
       projects: "Төслүүд",
       contact: "Холбогдох",
