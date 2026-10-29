@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-blue-600 border-t border-blue-500 pt-20 pb-0 overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 pb-20 border-b border-blue-500">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 pb-16 border-b border-blue-500">
           {/* Copyright */}
           <div>
             <p className="text-blue-200 text-[12px] font-medium tracking-[0.08em] uppercase mb-5">
@@ -100,6 +100,26 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Bottom Legal Sub-bar for Merchant & Bank Compliance */}
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200 border-b border-blue-500/60">
+          <p>&copy; {currentYear} baysaass. {lang === "mn" ? "Бүх эрх хуулиар хамгаалагдсан." : "All rights reserved."}</p>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <Link
+              href="/terms"
+              className="text-white hover:text-blue-100 transition-colors underline-offset-4 hover:underline"
+            >
+              {lang === "mn" ? "Үйлчилгээний нөхцөл, Хүргэлт & Буцаалт" : "Terms, Delivery & Refund"}
+            </Link>
+            <span className="text-blue-400">·</span>
+            <Link
+              href="/privacy"
+              className="text-white hover:text-blue-100 transition-colors underline-offset-4 hover:underline"
+            >
+              {lang === "mn" ? "Нууцлалын бодлого" : "Privacy Policy"}
+            </Link>
           </div>
         </div>
       </div>
