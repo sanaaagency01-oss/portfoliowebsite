@@ -25,6 +25,7 @@ import { DeliverableItem, StageItem, Project, ProjectTask } from '@/lib/types/st
 import ContractExportButton from '@/components/studio/ContractExportButton'
 import BriefAnalysisDetailModal from '@/components/studio/admin/BriefAnalysisDetailModal'
 import AIScopeAdvisorModal from '@/components/studio/admin/AIScopeAdvisorModal'
+import ContractProjectSelector from '@/components/studio/admin/ContractProjectSelector'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
 
 const defaultDeliverables: DeliverableItem[] = [
@@ -477,62 +478,16 @@ function ContractsEditorContent() {
       <div className="mx-auto grid max-w-[1360px] gap-8 px-6 py-8 xl:grid-cols-[minmax(0,1fr)_440px] sm:px-8">
         {/* Editor Sections */}
         <div className="flex flex-col gap-6">
-          {/* PROJECT SELECTOR BAR */}
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#e0e0e0] bg-[#fafafa] p-5 shadow-xs">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#888888]">
-                Төсөл сонгох:
-              </span>
-              <select
-                value={token}
-                onChange={(e) => handleSelectChange(e.target.value)}
-                className="rounded-xl border border-[#e0e0e0] bg-white px-3.5 py-2 text-xs font-bold text-black outline-none focus:border-black cursor-pointer shadow-xs max-w-sm truncate"
-              >
-                {projectsList.map((p) => {
-                  const isSigned = p.contract?.status === 'signed'
-                  const isPub = p.contract?.isPublishedToClient
-                  const badge = isSigned ? '✅ Баталгаажсан' : isPub ? '📨 Санал илгээсэн' : '⏳ Үнийн санал хүлээж буй'
-                  return (
-                    <option key={p.token} value={p.token}>
-                      {p.name} ({p.company}) · {badge}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span
-                className={`rounded-full px-3 py-1 text-xs font-bold ${
-                  isContractSigned
-                    ? 'border border-[#d2ebd6] bg-[#f0fdf4] text-[#166534]'
-                    : currentProject?.status === 'contract_pending'
-                    ? 'border border-[#fed7aa] bg-[#fff7ed] text-[#c2410c]'
-                    : currentProject?.status === 'proposal_sent'
-                    ? 'border border-[#fef08a] bg-[#fefce8] text-[#854d0e]'
-                    : 'border border-[#fed7aa] bg-[#fffaf5] text-[#9a3412]'
-                }`}
-              >
-                {isContractSigned
-                  ? '✅ Цахим гарын үсэг зурсан'
-                  : currentProject?.status === 'contract_pending'
-                  ? '✍️ Санал батлагдсан (Гарын үсэг хүлээж буй)'
-                  : currentProject?.status === 'proposal_sent'
-                  ? `📨 Үнийн санал илгээсэн (${currentProject?.contract?.total?.toLocaleString()} ₮)`
-                  : '⏳ Харилцагч үнийн санал хүлээж байна'}
-              </span>
-
-              {currentProject && (
-                <button
-                  type="button"
-                  onClick={() => setShowBriefModal(true)}
-                  className="flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3 py-1 text-xs font-semibold text-black hover:bg-[#fafafa]"
-                >
-                  <Eye className="size-3.5 text-[#888888]" /> Бриф харах
-                </button>
-              )}
-            </div>
-          </div>
+          {/* ENHANCED SEARCHABLE PROJECT SELECTOR BAR */}
+          <ContractProjectSelector
+            projects={projectsList}
+            currentProject={currentProject}
+            onSelectProject={(proj) => {
+              handleSelectChange(proj.token)
+            }}
+            onOpenBriefModal={() => setShowBriefModal(true)}
+            onOpenAIScopeModal={() => setShowAIScopeModal(true)}
+          />
 
           {/* Success Banner when Proposal is Sent */}
           {sentSuccess && (
