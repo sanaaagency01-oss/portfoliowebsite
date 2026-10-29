@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
     }
     let fileName = 'brandbook.pdf'
     let fileSizeBytes = 1024 * 1024
+    let fileUrl = ''
 
     if (contentType.includes('multipart/form-data')) {
       const formData = await req.formData()
@@ -65,6 +66,7 @@ export async function POST(req: NextRequest) {
       const clientExtractedText = (formData.get('extractedText') as string) || ''
       fileName = (formData.get('fileName') as string) || file?.name || 'brandbook.pdf'
       fileSizeBytes = Number(formData.get('fileSizeBytes')) || file?.size || 1024 * 1024
+      fileUrl = (formData.get('fileKey') as string) || (formData.get('fileUrl') as string) || ''
 
       if (clientExtractedText && clientExtractedText.trim().length > 30) {
         pdfContent = {
@@ -91,6 +93,7 @@ export async function POST(req: NextRequest) {
       medium = (body.medium || 'both') as AuditMedium
       fileName = body.fileName || 'brandbook.pdf'
       fileSizeBytes = body.fileSizeBytes || 1024 * 500
+      fileUrl = body.fileKey || body.fileUrl || ''
       const text = body.extractedText || `${company} brandbook guidelines and standards.`
       pdfContent = {
         totalPages: Number(body.totalPages) || 12,
@@ -121,6 +124,7 @@ export async function POST(req: NextRequest) {
         totalPages: pdfContent.totalPages,
         extractedTextLength: pdfContent.fullText.length,
         textSnippet: pdfContent.fullText.slice(0, 12000),
+        fileUrl: fileUrl || undefined,
       },
       executiveSummaryMn: 'Аудит хийгдэж байна...',
       modules: {

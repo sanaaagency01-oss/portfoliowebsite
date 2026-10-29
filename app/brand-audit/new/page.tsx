@@ -90,7 +90,37 @@ export default function NewBrandAuditPage() {
         formData.append('fileName', selectedFile.name)
         formData.append('fileSizeBytes', String(selectedFile.size))
 
-        // Pre-extract text in browser using unpdf to allow any file size without 4.5MB Vercel serverless limit
+        // 1. Direct upload raw binary to Cloudflare R2 (Bypasses Vercel 4.5MB limit completely)
+        let uploadedFileKey = ''
+        try {
+          const urlRes = await fetch('/api/brand-audit/upload-url', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fileName: selectedFile.name,
+              contentType: selectedFile.type || 'application/pdf',
+              fileSizeBytes: selectedFile.size,
+            }),
+          })
+          if (urlRes.ok) {
+            const { uploadUrl, fileKey } = await urlRes.json()
+            if (uploadUrl) {
+              const r2Res = await fetch(uploadUrl, {
+                method: 'PUT',
+                body: selectedFile,
+                headers: { 'Content-Type': selectedFile.type || 'application/pdf' },
+              })
+              if (r2Res.ok) {
+                uploadedFileKey = fileKey
+                formData.append('fileKey', fileKey)
+              }
+            }
+          }
+        } catch (r2Err) {
+          console.warn('[Direct R2 upload attempt error, continuing with client extraction]', r2Err)
+        }
+
+        // 2. Pre-extract text in browser using unpdf for zero-latency audit analysis
         let extractedClientText = ''
         let clientPagesCount = 12
 
@@ -109,10 +139,10 @@ export default function NewBrandAuditPage() {
           formData.append('totalPages', String(clientPagesCount))
         }
 
-        // Only attach binary file if file is under 4MB (to avoid Vercel 4.5MB payload block)
-        if (selectedFile.size < 4 * 1024 * 1024) {
+        // Only attach binary directly to Vercel route if file is under 4MB and R2 wasn't already uploaded
+        if (!uploadedFileKey && selectedFile.size < 4 * 1024 * 1024) {
           formData.append('file', selectedFile)
-        } else if (!extractedClientText || extractedClientText.length <= 50) {
+        } else if (!uploadedFileKey && (!extractedClientText || extractedClientText.length <= 50)) {
           throw new Error('Файлын хэмжээ 4.5MB-аас их бөгөөд уншигдах бичвэр олдсонгүй (сканнердсан зураг байх магадлалтай). 4.5MB-аас бага эсвэл вектор бичвэртэй PDF оруулна уу.')
         }
       } else {

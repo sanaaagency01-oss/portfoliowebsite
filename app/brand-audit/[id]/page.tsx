@@ -599,9 +599,34 @@ export default function BrandAuditDetailPage({
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-black">
               {audit.company} — Чанарын аудитын тайлан
             </h1>
-            <p className="text-xs md:text-sm text-[#888888] mt-2">
-              Файл: {audit.documentInfo.fileName} ({audit.documentInfo.totalPages} хуудас)
-            </p>
+            <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm text-[#888888] mt-2">
+              <span>Файл: {audit.documentInfo.fileName} ({audit.documentInfo.totalPages} хуудас)</span>
+              {audit.documentInfo.fileUrl && (
+                <>
+                  <span>·</span>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        const res = await fetch(
+                          `/api/brand-audit/upload-url?key=${encodeURIComponent(audit.documentInfo.fileUrl!)}`
+                        )
+                        if (res.ok) {
+                          const data = await res.json()
+                          if (data.downloadUrl) window.open(data.downloadUrl, '_blank')
+                        }
+                      } catch (err) {
+                        console.error('Download error', err)
+                      }
+                    }}
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-bold underline hover:no-underline text-xs print:hidden"
+                  >
+                    <Download className="size-3" />
+                    <span>R2 эх файл татах</span>
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Hero Scorecard */}
