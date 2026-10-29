@@ -19,6 +19,7 @@ import {
   Loader2,
 } from 'lucide-react'
 import { AuditScope, AuditMedium } from '@/lib/brand-audit/types'
+import { extractText } from 'unpdf'
 
 export default function NewBrandAuditPage() {
   const router = useRouter()
@@ -86,7 +87,34 @@ export default function NewBrandAuditPage() {
       formData.append('medium', medium)
 
       if (selectedFile) {
-        formData.append('file', selectedFile)
+        formData.append('fileName', selectedFile.name)
+        formData.append('fileSizeBytes', String(selectedFile.size))
+
+        // Pre-extract text in browser using unpdf to allow any file size without 4.5MB Vercel serverless limit
+        let extractedClientText = ''
+        let clientPagesCount = 12
+
+        try {
+          const arrayBuffer = await selectedFile.arrayBuffer()
+          const result = await extractText(new Uint8Array(arrayBuffer))
+          const rawPages = Array.isArray(result.text) ? result.text : [result.text]
+          clientPagesCount = Math.max(1, result.totalPages || rawPages.length || 1)
+          extractedClientText = rawPages.filter(Boolean).join('\n\n').trim()
+        } catch (clientErr) {
+          console.warn('[Client PDF text extraction error, falling back to server]:', clientErr)
+        }
+
+        if (extractedClientText && extractedClientText.length > 50) {
+          formData.append('extractedText', extractedClientText)
+          formData.append('totalPages', String(clientPagesCount))
+        }
+
+        // Only attach binary file if file is under 4MB (to avoid Vercel 4.5MB payload block)
+        if (selectedFile.size < 4 * 1024 * 1024) {
+          formData.append('file', selectedFile)
+        } else if (!extractedClientText || extractedClientText.length <= 50) {
+          throw new Error('Файлын хэмжээ 4.5MB-аас их бөгөөд уншигдах бичвэр олдсонгүй (сканнердсан зураг байх магадлалтай). 4.5MB-аас бага эсвэл вектор бичвэртэй PDF оруулна уу.')
+        }
       } else {
         // If sample, pass rich representative brandbook text
         const sampleText = `
@@ -121,8 +149,41 @@ export default function NewBrandAuditPage() {
         body: formData,
       })
 
+      if (!res.ok) {
+        const status = res.status
+        const text = await res.text()
+        let errMsg = 'Аудит эхлүүлэхэд алдаа гарлаа.'
+        if (status === 413) {
+          errMsg = 'Файлын хэмжээ серверийн хязгаараас (4.5MB) хэтэрсэн байна. Бага хэмжээтэй файл эсвэл шахсан PDF оруулна уу.'
+        } else {
+          try {
+            const parsed = JSON.parse(text)
+            if (parsed.error) errMsg = parsed.error
+          } catch {
+            if (text) errMsg = `Серверийн хариу: ${text.slice(0, 120)}`
+          }
+        }
+
+        // Log the upload error to our tracker
+        try {
+          await fetch('/api/brand-audit/log-error', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              company: company.trim(),
+              fileName: selectedFile?.name || 'unknown.pdf',
+              fileSizeBytes: selectedFile?.size || 0,
+              errorMessage: errMsg,
+              statusCode: status,
+            }),
+          })
+        } catch {}
+
+        throw new Error(errMsg)
+      }
+
       const data = await res.json()
-      if (!res.ok || !data.success) {
+      if (!data.success) {
         throw new Error(data.error || 'Аудит эхлүүлэхэд алдаа гарлаа')
       }
 

@@ -62,18 +62,25 @@ export async function POST(req: NextRequest) {
       medium = ((formData.get('medium') as string) || 'both') as AuditMedium
 
       const file = formData.get('file') as File | null
-      if (file && typeof file.arrayBuffer === 'function') {
-        fileName = file.name || 'brandbook.pdf'
-        fileSizeBytes = file.size || 1024 * 1024
+      const clientExtractedText = (formData.get('extractedText') as string) || ''
+      fileName = (formData.get('fileName') as string) || file?.name || 'brandbook.pdf'
+      fileSizeBytes = Number(formData.get('fileSizeBytes')) || file?.size || 1024 * 1024
+
+      if (clientExtractedText && clientExtractedText.trim().length > 30) {
+        pdfContent = {
+          totalPages: Number(formData.get('totalPages')) || 12,
+          textByPage: [],
+          fullText: clientExtractedText.trim(),
+        }
+      } else if (file && typeof file.arrayBuffer === 'function') {
         const arrayBuffer = await file.arrayBuffer()
         const buffer = Buffer.from(arrayBuffer)
         pdfContent = await extractTextFromPdfBuffer(buffer)
       } else {
-        const sampleText = (formData.get('extractedText') as string) || ''
         pdfContent = {
           totalPages: Number(formData.get('totalPages')) || 12,
           textByPage: [],
-          fullText: sampleText || `${company} brandbook guidelines and standards.`,
+          fullText: clientExtractedText || `${company} brandbook guidelines and standards.`,
         }
       }
     } else {

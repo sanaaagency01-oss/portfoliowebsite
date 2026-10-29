@@ -34,11 +34,22 @@ import { QualityMetricsSummary, ExpertFindingLabel, ErrorStage } from '@/lib/bra
 import { BrandAuditRecord, AuditFinding } from '@/lib/brand-audit/types'
 import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
 
+interface UploadErrorItem {
+  id: string
+  company: string
+  fileName: string
+  fileSizeBytes: number
+  errorMessage: string
+  statusCode: number
+  createdAt: string
+}
+
 export default function AIQualityDashboardPage() {
   const [metrics, setMetrics] = useState<QualityMetricsSummary | null>(null)
   const [audits, setAudits] = useState<any[]>([])
+  const [uploadErrors, setUploadErrors] = useState<UploadErrorItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'overview' | 'review' | 'benchmark'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'review' | 'benchmark' | 'errors'>('overview')
   const [selectedAuditId, setSelectedAuditId] = useState<string | null>(null)
   const [activeAudit, setActiveAudit] = useState<BrandAuditRecord | null>(null)
   const [activeReviews, setActiveReviews] = useState<Record<string, any>>({})
@@ -59,6 +70,12 @@ export default function AIQualityDashboardPage() {
         const data = await res.json()
         if (data.metrics) setMetrics(data.metrics)
         if (data.audits) setAudits(data.audits)
+      }
+
+      const errRes = await fetch('/api/brand-audit/log-error')
+      if (errRes.ok) {
+        const errData = await errRes.json()
+        if (errData.errors) setUploadErrors(errData.errors)
       }
     } catch (e) {
       console.error('Failed fetching AI quality data', e)
@@ -270,17 +287,21 @@ export default function AIQualityDashboardPage() {
                 { id: 'overview', label: 'Нэгдсэн хэмжүүр (KPIs & Metrics)' },
                 { id: 'review', label: selectedAuditId ? `Шалгах Workspace (${selectedAuditId})` : 'Аудит хянах (Human Review)' },
                 { id: 'benchmark', label: 'OpenAI vs Jev Харьцуулалт (Benchmark)' },
+                { id: 'errors', label: `Файлын алдааны бүртгэл (${uploadErrors.length})` },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 ${
                     activeTab === tab.id
                       ? 'bg-black text-white shadow-xs'
                       : 'bg-white text-[#666666] hover:bg-[#f4f4f5]'
                   }`}
                 >
-                  {tab.label}
+                  <span>{tab.label}</span>
+                  {tab.id === 'errors' && uploadErrors.length > 0 && (
+                    <span className="size-2 rounded-full bg-rose-500 animate-pulse" />
+                  )}
                 </button>
               ))}
             </div>
@@ -843,6 +864,109 @@ export default function AIQualityDashboardPage() {
                     <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs text-[#1e40af] leading-relaxed">
                       <strong>Дүгнэлт:</strong> Jev-ийг семантик давхаргад оруулснаар боловсруулах хугацаа ердөө 0.3 секунд, зардал $0.0024-оор нэмэгдсэн ч <strong>худал дүгнэлт (False Positives) 13.9%-иар эрс буурсан</strong> нь туршилтаар батлагдаж байна.
                     </div>
+                  </div>
+                )}
+
+                {/* TAB 4: UPLOAD & PROCESSING ERRORS */}
+                {activeTab === 'errors' && (
+                  <div className="space-y-6">
+                    <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div>
+                        <h3 className="text-xl font-black text-black flex items-center gap-2">
+                          <AlertOctagon className="size-5 text-rose-500" />
+                          <span>Файл оруулалт болон боловсруулалтын алдааны бүртгэл</span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#666666] mt-1 max-w-[700px] leading-relaxed">
+                          Хэрэглэгчид брэндбүүк оруулах үед гарсан сүлжээ, файлын хэмжээ (413 Payload Too Large) болон системийн алдаануудыг бодит цагт хянаж, сайжруулах самбар.
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-rose-100 text-rose-800">
+                          Нийт алдаа: {uploadErrors.length}
+                        </span>
+                      </div>
+                    </div>
+
+                    {uploadErrors.length === 0 ? (
+                      <div className="rounded-3xl border border-[#e0e0e0] p-12 text-center bg-white">
+                        <CheckCircle2 className="size-8 text-emerald-500 mx-auto mb-3" />
+                        <h4 className="text-sm font-bold text-black">Одоогоор файл оруулалтын алдаа бүртгэгдээгүй байна</h4>
+                        <p className="text-xs text-[#888888] mt-1">
+                          Бүх PDF боловсруулалт болон хэмжээний шалгуурууд амжилттай ажиллаж байна.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="rounded-3xl border border-[#e0e0e0] bg-white overflow-hidden shadow-sm">
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-xs">
+                            <thead className="bg-[#fafafa] border-b border-[#e0e0e0] text-[#888888] font-bold uppercase tracking-wider text-[10px]">
+                              <tr>
+                                <th className="py-3 px-6">Огноо / Цаг</th>
+                                <th className="py-3 px-6">Компани</th>
+                                <th className="py-3 px-6">Файлын нэр</th>
+                                <th className="py-3 px-6">Хэмжээ</th>
+                                <th className="py-3 px-6">Status</th>
+                                <th className="py-3 px-6">Алдааны мэдээлэл & Онош</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-[#f0f0f0]">
+                              {uploadErrors.map((err) => {
+                                const sizeMb = (err.fileSizeBytes / (1024 * 1024)).toFixed(2)
+                                const isSizeLimit =
+                                  err.statusCode === 413 ||
+                                  err.errorMessage.includes('4.5MB') ||
+                                  err.errorMessage.includes('Request Entity Too Large')
+                                return (
+                                  <tr key={err.id} className="hover:bg-[#fafafa] transition">
+                                    <td className="py-3.5 px-6 font-mono text-[11px] text-[#666666]">
+                                      {new Date(err.createdAt).toLocaleString()}
+                                    </td>
+                                    <td className="py-3.5 px-6 font-bold text-black">{err.company}</td>
+                                    <td
+                                      className="py-3.5 px-6 font-mono text-[11px] text-[#333333] max-w-[180px] truncate"
+                                      title={err.fileName}
+                                    >
+                                      {err.fileName}
+                                    </td>
+                                    <td className="py-3.5 px-6">
+                                      <span
+                                        className={`font-mono font-bold text-[11px] ${
+                                          Number(sizeMb) > 4.5 ? 'text-rose-600' : 'text-[#666666]'
+                                        }`}
+                                      >
+                                        {sizeMb} MB
+                                      </span>
+                                    </td>
+                                    <td className="py-3.5 px-6">
+                                      <span
+                                        className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                                          err.statusCode === 413
+                                            ? 'bg-rose-100 text-rose-800'
+                                            : err.statusCode >= 500
+                                            ? 'bg-amber-100 text-amber-800'
+                                            : 'bg-gray-100 text-gray-800'
+                                        }`}
+                                      >
+                                        HTTP {err.statusCode}
+                                      </span>
+                                    </td>
+                                    <td className="py-3.5 px-6">
+                                      <p className="text-xs text-rose-700 font-medium">{err.errorMessage}</p>
+                                      {isSizeLimit && (
+                                        <p className="text-[10px] text-[#888888] mt-0.5">
+                                          💡 <strong>Онош:</strong> Vercel serverless 4.5MB payload limit. Вэб хөтөч дээр текст урьдчилан задлах шинэчлэлтээр 50MB+ хүртэлх том файлуудыг дэмждэг болсон.
+                                        </p>
+                                      )}
+                                    </td>
+                                  </tr>
+                                )
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </>
