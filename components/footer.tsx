@@ -86,6 +86,8 @@ export default function Footer() {
                 [
                   { key: "home", href: "/" },
                   { key: "work", href: "/work" },
+                  { key: "audit", href: "/brand-audit" },
+                  { key: "resources", href: "/resources" },
                   { key: "about", href: "/about" },
                   { key: "contact", href: "/contact" },
                 ] as const

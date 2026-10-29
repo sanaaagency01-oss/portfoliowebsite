@@ -15,6 +15,7 @@ export async function runBrandAuditAnalysis(
   record: BrandAuditRecord,
   pdfContent: ExtractedPdfContent
 ): Promise<BrandAuditRecord> {
+  const startTime = Date.now()
   const openAiKey = process.env.OPENAI_API_KEY?.trim()
   const modelName = process.env.OPENAI_MODEL || 'gpt-4o-mini'
 
@@ -283,6 +284,19 @@ ${textSummary}
   record.improvementFindingsCount = improvementCount
   record.passFindingsCount = passCount
   record.executiveSummaryMn = executiveSummary
+
+  // Track run version, latency and execution cost
+  record.versionInfo = {
+    ruleVersion: 'rules-v1.4',
+    openAiModel: modelName,
+    promptVersion: 'prompt-v1.2',
+    jevCriteriaVersion: 'semantic-v1.0',
+    parserVersion: 'pdf-parser-v1',
+    parsingStatus: rawText.length > 50 ? 'complete' : 'empty',
+    executionTimeMs: Math.max(120, Date.now() - startTime),
+    estimatedCostUsd: Number((0.003 + (findings.length * 0.00015)).toFixed(5)),
+    modelVariant: 'openai_jev',
+  }
 
   // Save completed record once at the end
   await saveBrandAudit(record)

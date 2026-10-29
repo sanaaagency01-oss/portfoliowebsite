@@ -1,3 +1,5 @@
+import type { AuditRunVersionInfo } from './quality-types'
+
 export type AuditScope = 'logo_only' | 'visual_identity' | 'full_brandbook'
 export type AuditMedium = 'digital' | 'print' | 'both'
 export type AuditStatus = 'queued' | 'analyzing' | 'completed' | 'failed'
@@ -105,4 +107,5 @@ export interface BrandAuditRecord {
   createdAt: string
   updatedAt: string
   errorMessage?: string
+  versionInfo?: AuditRunVersionInfo
 }

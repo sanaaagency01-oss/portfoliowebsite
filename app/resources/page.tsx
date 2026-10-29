@@ -99,15 +99,15 @@ export default async function PublicResourcesPage({
           </div>
 
           {/* Filters Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-12 border-b border-[#e0e0e0]">
-            {/* Category Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-12 border-b border-[#e0e0e0]">
+            {/* Category Links */}
+            <div className="flex items-center gap-6 overflow-x-auto pb-1 scrollbar-none">
               <Link
                 href="/resources"
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`text-[13px] font-medium tracking-wide transition-colors whitespace-nowrap cursor-pointer ${
                   catFilter === 'all'
-                    ? 'bg-black text-white shadow-xs'
-                    : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black hover:text-black'
+                    ? 'text-black font-bold border-b-2 border-black pb-1'
+                    : 'text-[#888888] hover:text-black pb-1'
                 }`}
               >
                 Бүгд
@@ -116,10 +116,10 @@ export default async function PublicResourcesPage({
                 <Link
                   key={c.id}
                   href={`/resources?category=${c.id}`}
-                  className={`px-5 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  className={`text-[13px] font-medium tracking-wide transition-colors whitespace-nowrap cursor-pointer ${
                     catFilter === c.id
-                      ? 'bg-black text-white shadow-xs'
-                      : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black hover:text-black'
+                      ? 'text-black font-bold border-b-2 border-black pb-1'
+                      : 'text-[#888888] hover:text-black pb-1'
                   }`}
                 >
                   {c.nameMn}
@@ -128,7 +128,7 @@ export default async function PublicResourcesPage({
             </div>
 
             {/* Total Count */}
-            <p className="text-[#888888] text-[13px] font-medium shrink-0 hidden sm:block">
+            <p className="text-[#888888] text-[13px] font-medium shrink-0">
               {resources.length} материал
             </p>
           </div>
@@ -136,24 +136,24 @@ export default async function PublicResourcesPage({
           {/* Featured Resource Hero */}
           {featured && catFilter === 'all' && (
             <div className="mb-14">
-              <div className="group rounded-3xl border border-[#e0e0e0] bg-[#fafafa] overflow-hidden hover:border-black/30 hover:shadow-xl transition-all">
+              <div className="group rounded-2xl border border-[#e0e0e0] bg-white overflow-hidden hover:border-black/30 transition-all">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                   <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
-                          ★ Онцлох материал
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
+                          ★ Онцлох
                         </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-black text-white uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black text-white uppercase tracking-wider">
                           {getTypeIcon(featured.type)}
                           <span>{getTypeLabel(featured.type)}</span>
                         </span>
                       </div>
 
-                      <h2 className="text-2xl md:text-4xl font-extrabold text-black tracking-tight mb-4">
+                      <h2 className="text-2xl md:text-3xl font-black text-black tracking-tight mb-3">
                         {featured.title}
                       </h2>
-                      <p className="text-sm md:text-base text-[#666666] leading-relaxed mb-6 line-clamp-3">
+                      <p className="text-sm text-[#666666] leading-relaxed mb-6 line-clamp-3">
                         {featured.summary}
                       </p>
                     </div>
@@ -167,7 +167,7 @@ export default async function PublicResourcesPage({
 
                       <Link
                         href={featured.destinationUrl || `/resources/${featured.slug}`}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-lg"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-bold transition"
                       >
                         <span>{featured.ctaLabel}</span>
                         <ArrowRight className="size-3.5" />
@@ -175,7 +175,7 @@ export default async function PublicResourcesPage({
                     </div>
                   </div>
 
-                  <div className="lg:col-span-5 bg-[#f4f4f5] min-h-[260px] relative overflow-hidden flex items-center justify-center">
+                  <div className="lg:col-span-5 bg-[#f0f0f0] min-h-[260px] relative overflow-hidden flex items-center justify-center">
                     <img
                       src={getCoverImage(featured.coverImage, 1)}
                       alt={featured.title}
@@ -189,7 +189,7 @@ export default async function PublicResourcesPage({
 
           {/* Resources Grid */}
           {resources.length === 0 ? (
-            <div className="rounded-3xl border border-[#e0e0e0] p-16 text-center bg-[#fafafa]">
+            <div className="rounded-2xl border border-[#e0e0e0] p-16 text-center bg-[#fafafa]">
               <BookOpen className="size-12 text-[#a1a1aa] mx-auto mb-4" />
               <h3 className="text-lg font-bold text-black mb-1">Материал олдсонгүй</h3>
               <p className="text-xs text-[#888888] mb-6">
@@ -203,62 +203,55 @@ export default async function PublicResourcesPage({
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
               {(catFilter === 'all' ? nonFeaturedList : resources).map((res, idx) => {
                 const catName = categories.find((c) => c.id === res.category)?.nameMn || res.category
                 const linkHref = res.destinationUrl || `/resources/${res.slug}`
 
                 return (
-                  <div
+                  <Link
                     key={res.id}
-                    className="group rounded-3xl border border-[#e0e0e0] bg-[#fafafa] overflow-hidden hover:border-black/30 hover:shadow-lg transition-all flex flex-col justify-between"
+                    href={linkHref}
+                    className="group block"
                   >
-                    <div>
-                      {/* Thumbnail */}
-                      <div className="h-48 bg-[#f4f4f5] relative overflow-hidden flex items-center justify-center border-b border-[#e0e0e0]">
-                        <img
-                          src={getCoverImage(res.coverImage, idx + 1)}
-                          alt={res.title}
-                          className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                    {/* Thumbnail */}
+                    <div className="relative overflow-hidden bg-[#f0f0f0] aspect-[16/10] rounded-xl mb-4 border border-[#e0e0e0]">
+                      <img
+                        src={getCoverImage(res.coverImage, idx + 1)}
+                        alt={res.title}
+                        className="size-full object-cover group-hover:scale-104 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/90 backdrop-blur-xs text-black shadow-xs">
-                            {getTypeIcon(res.type)}
-                            <span>{getTypeLabel(res.type)}</span>
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold text-blue-600 mb-2">
-                          <span>{catName}</span>
-                          <span>·</span>
-                          <span className="text-[#888888]">{res.readTimeMinutes || 5} мин</span>
-                        </div>
-
-                        <h3 className="text-base font-bold text-black tracking-tight mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                          {res.title}
-                        </h3>
-
-                        <p className="text-xs text-[#666666] leading-relaxed line-clamp-3 mb-4">
-                          {res.summary}
-                        </p>
+                      <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/95 backdrop-blur-xs text-black shadow-xs">
+                          {getTypeIcon(res.type)}
+                          <span>{getTypeLabel(res.type)}</span>
+                        </span>
                       </div>
                     </div>
 
-                    {/* Footer CTA */}
-                    <div className="p-6 pt-0">
-                      <Link
-                        href={linkHref}
-                        className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-full border border-[#e0e0e0] bg-white text-xs font-semibold text-black hover:border-black hover:bg-black hover:text-white transition-all shadow-xs"
-                      >
+                    {/* Metadata & Typography */}
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between text-[11px] font-medium tracking-[0.06em] text-[#888888] uppercase">
+                        <span>{catName}</span>
+                        <span>{res.readTimeMinutes || 5} мин</span>
+                      </div>
+
+                      <h3 className="text-black text-[17px] sm:text-[19px] font-bold tracking-tight leading-snug group-hover:translate-x-1 transition-transform duration-300">
+                        {res.title}
+                      </h3>
+
+                      <p className="text-[#666666] text-[12px] sm:text-[13px] leading-relaxed line-clamp-2 mt-1">
+                        {res.summary}
+                      </p>
+
+                      <div className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-black group-hover:text-blue-600 transition-colors">
                         <span>{res.ctaLabel}</span>
-                        <ArrowRight className="size-3.5" />
-                      </Link>
+                        <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 )
               })}
             </div>

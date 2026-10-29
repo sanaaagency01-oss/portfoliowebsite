@@ -153,49 +153,49 @@ export default function BrandAuditLandingPage() {
         </section>
 
         {/* Why Brand Audit Matters */}
-        <section className="bg-[#fafafa] border-y border-[#e0e0e0] py-20 mb-20 md:mb-28">
+        <section className="bg-white border-y border-[#e0e0e0] py-20 mb-20 md:mb-28">
           <div className="max-w-[1320px] mx-auto px-6 md:px-10">
-            <div className="max-w-[760px] mb-12">
+            <div className="max-w-[800px] mb-12">
               <span className="text-[#888888] text-[11px] sm:text-[12px] font-medium tracking-[0.18em] uppercase">
                 Брэндбүүкийн аудит яагаад чухал вэ?
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-black tracking-tight mt-2">
-                Брэндбүүк байгаа нь хангалтгүй. Зөв хэрэгжих ёстой.
+                Брэндбүүк бол зүгээр нэг гоё зураглал биш. Брэндийг бодитоор хэрэгжүүлэх стандарт юм.
               </h2>
               <p className="text-sm md:text-base text-[#666666] leading-relaxed mt-3">
-                Сайн брэндбүүк нь зөвхөн визуал танилцуулга биш, брэндийн таних тэмдгийг бүх орчинд нэгдмэл, зөв ашиглахад чиглэсэн гарын авлага юм.
+                Брэндбүүк байгаа нь хангалтгүй. Зөв хэрэгжих ёстой. Сайн брэндбүүк нь зөвхөн визуал танилцуулга биш, брэндийн таних тэмдгийг бүх орчинд нэгдмэл, зөв ашиглахад чиглэсэн гарын авлага юм.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="rounded-3xl bg-white border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col">
-                <div className="size-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center mb-6">
-                  <AlertTriangle className="size-6 text-rose-600" />
+              <div className="rounded-2xl bg-[#fafafa] border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#888888]">01</span>
+                  <h3 className="text-lg font-bold text-black mt-2 mb-3">Үйлдвэрлэлийн алдаа, нэмэлт зардал</h3>
+                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
+                    Өнгөний код, файлын формат, хэвлэлийн шаардлага тодорхойгүй бол эцсийн бүтээгдэхүүн анхны дизайнаас зөрөх эрсдэлтэй. Аудит техникийн заавар, үйлдвэрлэлд хэрэглэх мэдээллийн бүрдлийг шалгана.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-black mb-3">01. Үйлдвэрлэлийн алдаа, нэмэлт зардал</h3>
-                <p className="text-sm text-[#666666] leading-relaxed">
-                  Өнгөний код, файлын формат, хэвлэлийн шаардлага тодорхойгүй бол эцсийн бүтээгдэхүүн анхны дизайнаас зөрөх эрсдэлтэй. Аудит техникийн заавар, үйлдвэрлэлд хэрэглэх мэдээллийн бүрдлийг шалгана.
-                </p>
               </div>
 
-              <div className="rounded-3xl bg-white border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col">
-                <div className="size-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center mb-6">
-                  <Layers className="size-6 text-amber-600" />
+              <div className="rounded-2xl bg-[#fafafa] border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#888888]">02</span>
+                  <h3 className="text-lg font-bold text-black mt-2 mb-3">Брэндийн дүрмийн зөрүүтэй хэрэглээ</h3>
+                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
+                    Логоны хамгаалалтын зай, хамгийн бага хэмжээ, зөв ба буруу хэрэглээний дүрэм дутуу байвал баг бүр өөр өөрөөр ашиглах эрсдэлтэй. Аудит ойлгомжгүй, дутуу заавруудыг илрүүлнэ.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-black mb-3">02. Брэндийн дүрмийн зөрүүтэй хэрэглээ</h3>
-                <p className="text-sm text-[#666666] leading-relaxed">
-                  Логоны хамгаалалтын зай, хамгийн бага хэмжээ, зөв ба буруу хэрэглээний дүрэм дутуу байвал баг бүр өөр өөрөөр ашиглах эрсдэлтэй. Аудит ойлгомжгүй, дутуу заавруудыг илрүүлнэ.
-                </p>
               </div>
 
-              <div className="rounded-3xl bg-white border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col">
-                <div className="size-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6">
-                  <ShieldCheck className="size-6 text-blue-600" />
+              <div className="rounded-2xl bg-[#fafafa] border border-[#e0e0e0] p-8 hover:border-black/30 transition-all flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#888888]">03</span>
+                  <h3 className="text-lg font-bold text-black mt-2 mb-3">Брэндийн нэгдмэл төрх алдагдах</h3>
+                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
+                    Өнгө, фонт, дүрслэл, мессежийн хэрэглээ хоорондоо зөрчилтэй байвал вэб, сошиал, савлагааны дизайн нэг брэндийнх мэт харагдахад хүндрэлтэй. Аудит визуал системийн уялдаа, дүрмийн нийцлийг үнэлнэ.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-black mb-3">03. Брэндийн нэгдмэл төрх алдагдах</h3>
-                <p className="text-sm text-[#666666] leading-relaxed">
-                  Өнгө, фонт, дүрслэл, мессежийн хэрэглээ хоорондоо зөрчилтэй байвал вэб, сошиал, савлагааны дизайн нэг брэндийнх мэт харагдахад хүндрэлтэй. Аудит визуал системийн уялдаа, дүрмийн нийцлийг үнэлнэ.
-                </p>
               </div>
             </div>
           </div>

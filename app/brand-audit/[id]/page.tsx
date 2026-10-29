@@ -6,6 +6,7 @@ import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 import {
   ArrowLeft,
+  ArrowRight,
   CheckCircle2,
   AlertTriangle,
   AlertOctagon,
@@ -50,6 +51,50 @@ export default function BrandAuditDetailPage({
   const [visualProgress, setVisualProgress] = useState(25)
   const [pollCount, setPollCount] = useState(0)
 
+  // Evaluation & Feedback State (AI Quality Improvement)
+  const [findingVotes, setFindingVotes] = useState<Record<string, string>>({})
+  const [clarityScore, setClarityScore] = useState<number>(5)
+  const [discoveredNew, setDiscoveredNew] = useState<string>('yes_new')
+  const [feedbackNote, setFeedbackNote] = useState('')
+  const [submittingFeedback, setSubmittingFeedback] = useState(false)
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
+
+  const handleFindingVote = async (criterionId: string, vote: 'correct' | 'false_positive' | 'unclear') => {
+    setFindingVotes((prev) => ({ ...prev, [criterionId]: vote }))
+    try {
+      await fetch(`/api/brand-audit/${id}/finding-feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ criterionId, userVote: vote }),
+      })
+    } catch (e) {
+      console.error('Failed submitting finding vote', e)
+    }
+  }
+
+  const handleSubmitReportFeedback = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmittingFeedback(true)
+    try {
+      const res = await fetch(`/api/brand-audit/${id}/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clarityScore,
+          discoveredNewIssues: discoveredNew,
+          inaccurateFindingsNote: feedbackNote,
+        }),
+      })
+      if (res.ok) {
+        setFeedbackSubmitted(true)
+      }
+    } catch (e) {
+      console.error('Failed submitting report feedback', e)
+    } finally {
+      setSubmittingFeedback(false)
+    }
+  }
+
   const fetchAudit = async () => {
     try {
       const res = await fetch(`/api/brand-audit/${id}`)
@@ -60,6 +105,19 @@ export default function BrandAuditDetailPage({
           if (data.audit.status === 'completed') {
             setVisualProgress(100)
           }
+        }
+      }
+
+      // Load existing finding votes if any
+      const revRes = await fetch(`/api/brand-audit/${id}/finding-feedback`)
+      if (revRes.ok) {
+        const revData = await revRes.json()
+        if (revData.reviews) {
+          const votesMap: Record<string, string> = {}
+          for (const [k, v] of Object.entries(revData.reviews as Record<string, any>)) {
+            if (v.userVote) votesMap[k] = v.userVote
+          }
+          setFindingVotes(votesMap)
         }
       }
     } catch (e) {
@@ -653,6 +711,48 @@ export default function BrandAuditDetailPage({
                           </p>
                         </div>
                       </div>
+
+                      {/* Finding-Level Feedback Bar (AI Quality Evaluation) */}
+                      <div className="mt-4 pt-3.5 border-t border-[#e0e0e0] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <span className="text-[11px] font-semibold text-[#888888]">
+                          Энэ дүгнэлтийг та хэрхэн үнэлэх вэ?
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => handleFindingVote(finding.criterionId, 'correct')}
+                            className={`px-3 py-1 rounded-full text-[11px] font-bold transition ${
+                              findingVotes[finding.criterionId] === 'correct'
+                                ? 'bg-emerald-600 text-white shadow-xs'
+                                : 'bg-white text-[#52525b] border border-[#e0e0e0] hover:border-black'
+                            }`}
+                          >
+                            ✓ Зөв дүгнэлт
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleFindingVote(finding.criterionId, 'false_positive')}
+                            className={`px-3 py-1 rounded-full text-[11px] font-bold transition ${
+                              findingVotes[finding.criterionId] === 'false_positive'
+                                ? 'bg-rose-600 text-white shadow-xs'
+                                : 'bg-white text-[#52525b] border border-[#e0e0e0] hover:border-black'
+                            }`}
+                          >
+                            ✕ Буруу — Энэ дүрэм байгаа
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleFindingVote(finding.criterionId, 'unclear')}
+                            className={`px-3 py-1 rounded-full text-[11px] font-bold transition ${
+                              findingVotes[finding.criterionId] === 'unclear'
+                                ? 'bg-amber-600 text-white shadow-xs'
+                                : 'bg-white text-[#52525b] border border-[#e0e0e0] hover:border-black'
+                            }`}
+                          >
+                            ? Тайлбар ойлгомжгүй
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   )
                 })}
@@ -661,7 +761,7 @@ export default function BrandAuditDetailPage({
           </div>
 
           {/* Download Report Card */}
-          <div className="rounded-3xl border border-[#e0e0e0] p-8 md:p-10 bg-[#fafafa] mb-14 print:hidden">
+          <div className="rounded-3xl border border-[#e0e0e0] p-8 md:p-10 bg-[#fafafa] mb-8 print:hidden">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-700 uppercase tracking-wider mb-2">
@@ -702,6 +802,112 @@ export default function BrandAuditDetailPage({
                   <span>Текст (.txt)</span>
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* User Report Feedback Widget (AI Audit Quality Program) */}
+          <div className="rounded-3xl border border-[#e0e0e0] p-8 md:p-10 bg-white mb-14 print:hidden">
+            <div className="max-w-[760px]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-700 uppercase tracking-wider mb-2">
+                <Sparkles className="size-3" />
+                <span>AI Чанарын сайжруулалт</span>
+              </div>
+              <h2 className="text-xl md:text-2xl font-black text-black">
+                Энэхүү аудитын тайлан танд хэр өгөөжтэй байв?
+              </h2>
+              <p className="text-xs text-[#666666] mt-1 leading-relaxed">
+                Бид хиймэл оюуны бодит алдаа илрүүлэлт, дүрэм унших нарийвчлалыг тасралтгүй сайжруулж байна. 30 секундийн үнэлгээ өгч чанарыг сайжруулахад тусална уу.
+              </p>
+
+              {feedbackSubmitted ? (
+                <div className="mt-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
+                  <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+                  <span>Баярлалаа! Таны санал хүсэлт амжилттай бүртгэгдлээ. AI загварын цаашдын сайжруулалтад тусгагдах болно.</span>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmitReportFeedback} className="mt-6 space-y-6">
+                  {/* Question 1: Clarity */}
+                  <div>
+                    <label className="block text-xs font-bold text-black mb-2">
+                      1. Тайлангийн дүгнэлтүүд хэр ойлгомжтой байна вэ?
+                    </label>
+                    <div className="flex items-center gap-2">
+                      {[1, 2, 3, 4, 5].map((score) => (
+                        <button
+                          key={score}
+                          type="button"
+                          onClick={() => setClarityScore(score)}
+                          className={`size-10 rounded-xl text-xs font-bold transition-all ${
+                            clarityScore === score
+                              ? 'bg-black text-white'
+                              : 'bg-[#fafafa] border border-[#e0e0e0] text-[#666666] hover:border-black hover:text-black'
+                          }`}
+                        >
+                          {score}
+                        </button>
+                      ))}
+                      <span className="text-[11px] text-[#888888] ml-2">
+                        {clarityScore === 1 && 'Маш ойлгомжгүй'}
+                        {clarityScore === 2 && 'Ойлгомжгүй'}
+                        {clarityScore === 3 && 'Дундаж'}
+                        {clarityScore === 4 && 'Ойлгомжтой'}
+                        {clarityScore === 5 && 'Маш ойлгомжтой'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Question 2: Discovered New Issues */}
+                  <div>
+                    <label className="block text-xs font-bold text-black mb-2">
+                      2. Та өмнө нь анзаараагүй шинэ алдаа, эрсдэл олж мэдсэн үү?
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        { id: 'yes_new', label: 'Тийм, шинэ асуудал олсон' },
+                        { id: 'some_new', label: 'Зарим нь шинэ байсан' },
+                        { id: 'no', label: 'Үгүй, бүгдийг нь мэдэж байсан' },
+                        { id: 'unsure', label: 'Мэдэхгүй / Эргэлзээтэй' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.id}
+                          type="button"
+                          onClick={() => setDiscoveredNew(opt.id)}
+                          className={`p-3 rounded-xl text-[11px] font-semibold text-left transition-all ${
+                            discoveredNew === opt.id
+                              ? 'bg-black text-white'
+                              : 'bg-[#fafafa] border border-[#e0e0e0] text-[#666666] hover:border-black hover:text-black'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Question 3: Inaccurate Findings */}
+                  <div>
+                    <label className="block text-xs font-bold text-black mb-1">
+                      3. Буруу эсвэл дутуу дүгнэсэн зүйл байвал бичнэ үү (Сонголттой):
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={feedbackNote}
+                      onChange={(e) => setFeedbackNote(e.target.value)}
+                      placeholder="Жишээ нь: 14-р хуудсанд хамгаалалтын зай тодорхой байхад алдаа гэж заасан байна..."
+                      className="w-full text-xs p-3 rounded-xl border border-[#e0e0e0] bg-[#fafafa] text-black focus:outline-none focus:border-black transition"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submittingFeedback}
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-bold transition disabled:opacity-50"
+                  >
+                    <span>{submittingFeedback ? 'Илгээж байна...' : 'Үнэлгээ илгээх'}</span>
+                    <ArrowRight className="size-3.5" />
+                  </button>
+                </form>
+              )}
             </div>
           </div>
 
