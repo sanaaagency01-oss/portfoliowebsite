@@ -18,8 +18,10 @@ import {
   Plus,
   BookOpen,
   RotateCw,
+  Download,
 } from 'lucide-react'
 import { BrandAuditRecord } from '@/lib/brand-audit/types'
+import { openAuditPrintWindow } from '@/lib/brand-audit/export'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
 import { CloudflareStatusBadge } from '@/components/studio/CloudflareStatusBadge'
 
@@ -343,6 +345,17 @@ export default function AdminAuditsPage() {
 
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                openAuditPrintWindow(a)
+                              }}
+                              className="p-2 rounded-lg text-black hover:bg-[#eaeaea] transition"
+                              title="Тайлан татах / PDF"
+                            >
+                              <Download className="size-4" />
+                            </button>
                             <button
                               type="button"
                               onClick={(e) => handleRerun(a.id, e)}

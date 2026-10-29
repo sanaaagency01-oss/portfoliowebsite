@@ -18,6 +18,7 @@ import {
   Filter,
   Search,
   Check,
+  Download,
 } from 'lucide-react'
 import {
   BrandAuditRecord,
@@ -26,6 +27,8 @@ import {
   ModuleId,
 } from '@/lib/brand-audit/types'
 import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
+import AuditExportButton from '@/components/brand-audit/AuditExportButton'
+import { openAuditPrintWindow, downloadAuditDocument } from '@/lib/brand-audit/export'
 
 export default function BrandAuditDetailPage({
   params,
@@ -281,17 +284,11 @@ export default function BrandAuditDetailPage({
           </Link>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[#e4e4e7] text-xs font-semibold text-black hover:bg-[#fafafa] transition-colors"
-            >
-              <Printer className="size-3.5" />
-              <span>Тайлан хэвлэх / PDF</span>
-            </button>
+            <AuditExportButton audit={audit} variant="black" />
             <button
               onClick={handleRerun}
               disabled={rerunning}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#e4e4e7] text-xs font-semibold text-black hover:bg-[#fafafa] disabled:opacity-50 transition-colors"
             >
               <RefreshCw className={`size-3.5 ${rerunning ? 'animate-spin' : ''}`} />
               <span>Дахин шалгах</span>
@@ -319,6 +316,14 @@ export default function BrandAuditDetailPage({
             <span className="text-[11px] text-[#71717a]">
               Огноо: {new Date(audit.createdAt).toLocaleDateString('mn-MN')}
             </span>
+            <button
+              type="button"
+              onClick={() => openAuditPrintWindow(audit)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold hover:bg-blue-100 transition print:hidden"
+            >
+              <Download className="size-3" />
+              <span>PDF татах</span>
+            </button>
           </div>
 
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black">
@@ -668,6 +673,51 @@ export default function BrandAuditDetailPage({
                 </div>
               ))
             )}
+          </div>
+        </div>
+
+        {/* Download & Export Section */}
+        <div className="rounded-3xl border border-[#e4e4e7] p-8 md:p-10 bg-[#fafafa] mb-12 print:hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-700 uppercase tracking-wider mb-2">
+                <Download className="size-3" />
+                <span>Тайлан татах боломж</span>
+              </div>
+              <h2 className="text-xl md:text-2xl font-black text-black">
+                {audit.company} брэндийн аудитын тайланг татаж авах
+              </h2>
+              <p className="text-xs text-[#71717a] mt-1 max-w-[580px]">
+                Бүх 30 шалгуурын оноо, стандартын зөрчил, эрсдэл болон дизайнер, удирдлагад зориулсан засах зөвлөмжүүдийг албан ёсны A4 PDF болон бусад форматаар хадгалж аваарай.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={() => openAuditPrintWindow(audit)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-xs font-bold hover:bg-neutral-800 transition shadow-sm"
+              >
+                <Printer className="size-4" />
+                <span>Албан ёсны PDF татах</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadAuditDocument(audit, 'md')}
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-full border border-[#e4e4e7] bg-white text-black text-xs font-semibold hover:bg-[#fafafa] transition"
+              >
+                <FileText className="size-4 text-emerald-600" />
+                <span>Markdown (.md)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadAuditDocument(audit, 'txt')}
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-full border border-[#e4e4e7] bg-white text-black text-xs font-semibold hover:bg-[#fafafa] transition"
+              >
+                <FileText className="size-4 text-[#71717a]" />
+                <span>Текст (.txt)</span>
+              </button>
+            </div>
           </div>
         </div>
 
