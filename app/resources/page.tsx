@@ -26,17 +26,15 @@ export const dynamic = 'force-dynamic'
 export default async function PublicResourcesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string; category?: string; search?: string }>
+  searchParams: Promise<{ category?: string; search?: string }>
 }) {
   const params = await searchParams
-  const typeFilter = params.type as ResourceType | undefined
   const catFilter = params.category || 'all'
   const searchFilter = params.search || ''
 
   // Fetch only published resources
   const resources = await getAllResources({
     status: 'published',
-    type: typeFilter,
     category: catFilter,
     search: searchFilter,
   })
@@ -44,7 +42,7 @@ export default async function PublicResourcesPage({
   const categories = await getAllCategories()
 
   const featured = resources.find((r) => r.featured)
-  const nonFeaturedList = featured ? resources.filter((r) => r.id !== featured.id) : resources
+  const nonFeaturedList = featured && catFilter === 'all' ? resources.filter((r) => r.id !== featured.id) : resources
 
   const getTypeIcon = (type: ResourceType) => {
     switch (type) {
@@ -66,6 +64,15 @@ export default async function PublicResourcesPage({
       case 'tool':
         return 'Хэрэгсэл'
     }
+  }
+
+  const getCoverImage = (img?: string, idx = 1) => {
+    if (!img) return `/projects/brand-0${(idx % 8) + 1}.webp`
+    if (img.includes('/work/one-more-night')) return '/projects/brand-01.webp'
+    if (img.includes('/work/cae-logo')) return '/projects/brand-02.webp'
+    if (img.includes('/work/tsuiwan-package')) return '/projects/brand-03.webp'
+    if (img.startsWith('/work/')) return `/projects/brand-0${(idx % 8) + 1}.webp`
+    return img
   }
 
   return (
@@ -92,15 +99,15 @@ export default async function PublicResourcesPage({
           </div>
 
           {/* Filters Bar */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 mb-10 border-b border-[#e0e0e0]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-12 border-b border-[#e0e0e0]">
             {/* Category Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
               <Link
-                href={`/resources${typeFilter ? `?type=${typeFilter}` : ''}`}
-                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition ${
+                href="/resources"
+                className={`px-5 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                   catFilter === 'all'
                     ? 'bg-black text-white shadow-xs'
-                    : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black'
+                    : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black hover:text-black'
                 }`}
               >
                 Бүгд
@@ -108,11 +115,11 @@ export default async function PublicResourcesPage({
               {categories.map((c) => (
                 <Link
                   key={c.id}
-                  href={`/resources?category=${c.id}${typeFilter ? `&type=${typeFilter}` : ''}`}
-                  className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition ${
+                  href={`/resources?category=${c.id}`}
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                     catFilter === c.id
                       ? 'bg-black text-white shadow-xs'
-                      : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black'
+                      : 'bg-white text-[#666666] border border-[#e0e0e0] hover:border-black hover:text-black'
                   }`}
                 >
                   {c.nameMn}
@@ -120,37 +127,14 @@ export default async function PublicResourcesPage({
               ))}
             </div>
 
-            {/* Type Filter Tabs */}
-            <div className="flex items-center gap-1 bg-[#fafafa] border border-[#e0e0e0] p-1 rounded-full shrink-0">
-              {[
-                { id: undefined, label: 'Бүгд' },
-                { id: 'article', label: 'Нийтлэл' },
-                { id: 'download', label: 'Татах файл' },
-                { id: 'tool', label: 'Хэрэгсэл' },
-              ].map((t) => {
-                const active = typeFilter === t.id
-                const query = new URLSearchParams()
-                if (catFilter !== 'all') query.set('category', catFilter)
-                if (t.id) query.set('type', t.id)
-                const href = `/resources${query.toString() ? `?${query.toString()}` : ''}`
-
-                return (
-                  <Link
-                    key={t.label}
-                    href={href}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
-                      active ? 'bg-black text-white shadow-xs' : 'text-[#888888] hover:text-black'
-                    }`}
-                  >
-                    {t.label}
-                  </Link>
-                )
-              })}
-            </div>
+            {/* Total Count */}
+            <p className="text-[#888888] text-[13px] font-medium shrink-0 hidden sm:block">
+              {resources.length} материал
+            </p>
           </div>
 
           {/* Featured Resource Hero */}
-          {featured && catFilter === 'all' && !typeFilter && (
+          {featured && catFilter === 'all' && (
             <div className="mb-14">
               <div className="group rounded-3xl border border-[#e0e0e0] bg-[#fafafa] overflow-hidden hover:border-black/30 hover:shadow-xl transition-all">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
@@ -192,15 +176,11 @@ export default async function PublicResourcesPage({
                   </div>
 
                   <div className="lg:col-span-5 bg-[#f4f4f5] min-h-[260px] relative overflow-hidden flex items-center justify-center">
-                    {featured.coverImage ? (
-                      <img
-                        src={featured.coverImage}
-                        alt={featured.title}
-                        className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <BookOpen className="size-16 text-[#a1a1aa]" />
-                    )}
+                    <img
+                      src={getCoverImage(featured.coverImage, 1)}
+                      alt={featured.title}
+                      className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                 </div>
               </div>
@@ -224,7 +204,7 @@ export default async function PublicResourcesPage({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {(catFilter === 'all' && !typeFilter ? nonFeaturedList : resources).map((res) => {
+              {(catFilter === 'all' ? nonFeaturedList : resources).map((res, idx) => {
                 const catName = categories.find((c) => c.id === res.category)?.nameMn || res.category
                 const linkHref = res.destinationUrl || `/resources/${res.slug}`
 
@@ -236,15 +216,11 @@ export default async function PublicResourcesPage({
                     <div>
                       {/* Thumbnail */}
                       <div className="h-48 bg-[#f4f4f5] relative overflow-hidden flex items-center justify-center border-b border-[#e0e0e0]">
-                        {res.coverImage ? (
-                          <img
-                            src={res.coverImage}
-                            alt={res.title}
-                            className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        ) : (
-                          <BookOpen className="size-10 text-[#a1a1aa]" />
-                        )}
+                        <img
+                          src={getCoverImage(res.coverImage, idx + 1)}
+                          alt={res.title}
+                          className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
 
                         <div className="absolute top-3 left-3 flex items-center gap-1.5">
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/90 backdrop-blur-xs text-black shadow-xs">

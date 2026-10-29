@@ -51,7 +51,7 @@ export const DEFAULT_RESOURCES: ResourceItem[] = [
     slug: 'brandbook-quality-auditor',
     summary:
       'Брэндбүүкийн логоны дүрэм, хамгаалалтын зай, CMYK өнгөний код, үсгийн шатлалыг 30 нарийвчилсан шалгуураар үнэлэх интерактив хэрэгсэл.',
-    coverImage: '/work/one-more-night/01.jpg',
+    coverImage: '/projects/brand-01.webp',
     category: 'tools',
     tags: ['Brandbook', 'Audit', 'AI Tool', 'Quality'],
     content: `
@@ -94,7 +94,7 @@ export const DEFAULT_RESOURCES: ResourceItem[] = [
     slug: 'logo-design-checklist',
     summary:
       'Лого болон брэндийн үндсэн айдентити боловсруулах үед үйлдвэрлэлд орохоос өмнө шалгах 20 чухал шалгуурын PDF хуудас.',
-    coverImage: '/work/cae-logo/01.jpg',
+    coverImage: '/projects/brand-02.webp',
     category: 'templates',
     tags: ['Logo Design', 'Checklist', 'PDF Download', 'Vector'],
     content: `
@@ -113,7 +113,7 @@ export const DEFAULT_RESOURCES: ResourceItem[] = [
       {
         id: 'dl_01',
         name: 'Baysaass_Logo_Design_Checklist_v1.pdf',
-        fileUrl: '/work/cae-logo/01.jpg',
+        fileUrl: '/projects/brand-02.webp',
         fileSize: '1.2 MB',
         format: 'PDF',
         description: 'Хэвлэх боломжтой A4 форматын бэлэн хуудас',
@@ -147,7 +147,7 @@ export const DEFAULT_RESOURCES: ResourceItem[] = [
     slug: 'logo-vs-brand-identity',
     summary:
       'Лого бол брэндийн таних тэмдгийн зөвхөн нэг хэсэг юм. Байгууллагын үнэт зүйлсийг бүрэн дүүрэн визуал систем болгон хөгжүүлэх практик гарын авлага.',
-    coverImage: '/work/tsuiwan-package/01.jpg',
+    coverImage: '/projects/brand-03.webp',
     category: 'guides',
     tags: ['Branding', 'Strategy', 'Identity', 'Visual System'],
     content: `

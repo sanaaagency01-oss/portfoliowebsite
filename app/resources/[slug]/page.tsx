@@ -68,6 +68,15 @@ export default async function PublicResourceDetailPage({
   const allInCat = await getAllResources({ status: 'published', category: resource.category })
   const related = allInCat.filter((r) => r.id !== resource.id).slice(0, 3)
 
+  const getCoverImage = (img?: string) => {
+    if (!img) return '/projects/brand-01.webp'
+    if (img.includes('/work/one-more-night')) return '/projects/brand-01.webp'
+    if (img.includes('/work/cae-logo')) return '/projects/brand-02.webp'
+    if (img.includes('/work/tsuiwan-package')) return '/projects/brand-03.webp'
+    if (img.startsWith('/work/')) return '/projects/brand-01.webp'
+    return img
+  }
+
   return (
     <>
       <Navigation />
@@ -129,7 +138,7 @@ export default async function PublicResourceDetailPage({
           {resource.coverImage && (
             <div className="rounded-3xl border border-[#e0e0e0] overflow-hidden mb-12 shadow-sm bg-[#fafafa]">
               <img
-                src={resource.coverImage}
+                src={getCoverImage(resource.coverImage)}
                 alt={resource.title}
                 className="w-full h-auto max-h-[500px] object-cover"
               />
