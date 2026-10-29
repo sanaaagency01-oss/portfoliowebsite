@@ -184,7 +184,7 @@ export default function ResourceEditorForm({
       title: title.trim(),
       slug: slug.trim() || `resource-${Date.now()}`,
       summary: summary.trim(),
-      coverImage: coverImage.trim() || '/work/one-more-night/01.jpg',
+      coverImage: coverImage.trim(),
       category,
       tags,
       content,
@@ -410,7 +410,7 @@ export default function ResourceEditorForm({
             </div>
 
             <div className="flex-1 w-full space-y-2">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => coverInputRef.current?.click()}
@@ -420,11 +420,21 @@ export default function ResourceEditorForm({
                   {uploadingCover ? <Loader2 className="size-3.5 animate-spin" /> : <UploadCloud className="size-3.5" />}
                   <span>{uploadingCover ? 'Хуулж байна...' : 'Зураг upload хийх'}</span>
                 </button>
-                <span className="text-[11px] text-[#71717a]">эсвэл URL оруулах:</span>
+                {coverImage && (
+                  <button
+                    type="button"
+                    onClick={() => setCoverImage('')}
+                    className="inline-flex items-center gap-1 px-3 py-2 rounded-xl border border-rose-200 text-rose-600 text-xs font-bold hover:bg-rose-50 transition"
+                  >
+                    <Trash2 className="size-3.5" />
+                    <span>Зураг хасах (Зөвхөн гарчиг харуулах)</span>
+                  </button>
+                )}
+                <span className="text-[11px] text-[#71717a]">эсвэл зураггүй үлдээж болно:</span>
               </div>
               <input
                 type="text"
-                placeholder="/work/one-more-night/01.jpg эсвэл https://..."
+                placeholder="Зураг оруулаагүй үед карт дотор гарчиг (title) нь текстээр багтаж харагдана"
                 value={coverImage}
                 onChange={(e) => setCoverImage(e.target.value)}
                 className="w-full px-3.5 py-2 rounded-xl border border-[#e0e0e0] bg-white text-xs text-black focus:outline-none focus:border-black font-mono"

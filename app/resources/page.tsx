@@ -66,13 +66,13 @@ export default async function PublicResourcesPage({
     }
   }
 
-  const getCoverImage = (img?: string, idx = 1) => {
-    if (!img) return `/projects/brand-0${(idx % 8) + 1}.webp`
-    if (img.includes('/work/one-more-night')) return '/projects/brand-01.webp'
-    if (img.includes('/work/cae-logo')) return '/projects/brand-02.webp'
-    if (img.includes('/work/tsuiwan-package')) return '/projects/brand-03.webp'
-    if (img.startsWith('/work/')) return `/projects/brand-0${(idx % 8) + 1}.webp`
-    return img
+  const getCoverImage = (img?: string) => {
+    if (!img) return ''
+    if (img.includes('/work/one-more-night')) return ''
+    if (img.includes('/work/cae-logo')) return ''
+    if (img.includes('/work/tsuiwan-package')) return ''
+    if (img.startsWith('/work/')) return ''
+    return img.trim()
   }
 
   return (
@@ -134,58 +134,65 @@ export default async function PublicResourcesPage({
           </div>
 
           {/* Featured Resource Hero */}
-          {featured && catFilter === 'all' && (
-            <div className="mb-14">
-              <div className="group rounded-2xl border border-[#e0e0e0] bg-white overflow-hidden hover:border-black/30 transition-all">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                  <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
-                          ★ Онцлох
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black text-white uppercase tracking-wider">
-                          {getTypeIcon(featured.type)}
-                          <span>{getTypeLabel(featured.type)}</span>
-                        </span>
+          {featured && catFilter === 'all' && (() => {
+            const featuredCover = getCoverImage(featured.coverImage)
+            const hasCover = Boolean(featuredCover)
+
+            return (
+              <div className="mb-14">
+                <div className="group rounded-2xl border border-[#e0e0e0] bg-white overflow-hidden hover:border-black/30 transition-all">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                    <div className={`${hasCover ? 'lg:col-span-7' : 'lg:col-span-12'} p-8 md:p-12 flex flex-col justify-between`}>
+                      <div>
+                        <div className="flex items-center gap-2 mb-4">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
+                            ★ Онцлох
+                          </span>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black text-white uppercase tracking-wider">
+                            {getTypeIcon(featured.type)}
+                            <span>{getTypeLabel(featured.type)}</span>
+                          </span>
+                        </div>
+
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-black tracking-tight mb-3">
+                          {featured.title}
+                        </h2>
+                        <p className="text-sm md:text-base text-[#666666] leading-relaxed mb-6 line-clamp-3 max-w-3xl">
+                          {featured.summary}
+                        </p>
                       </div>
 
-                      <h2 className="text-2xl md:text-3xl font-black text-black tracking-tight mb-3">
-                        {featured.title}
-                      </h2>
-                      <p className="text-sm text-[#666666] leading-relaxed mb-6 line-clamp-3">
-                        {featured.summary}
-                      </p>
-                    </div>
+                      <div className="pt-6 border-t border-[#e0e0e0] flex items-center justify-between">
+                        <div className="flex items-center gap-3 text-xs text-[#888888]">
+                          <span>{featured.readTimeMinutes || 5} мин унших</span>
+                          <span>·</span>
+                          <span>{categories.find((c) => c.id === featured.category)?.nameMn}</span>
+                        </div>
 
-                    <div className="pt-6 border-t border-[#e0e0e0] flex items-center justify-between">
-                      <div className="flex items-center gap-3 text-xs text-[#888888]">
-                        <span>{featured.readTimeMinutes || 5} мин унших</span>
-                        <span>·</span>
-                        <span>{categories.find((c) => c.id === featured.category)?.nameMn}</span>
+                        <Link
+                          href={featured.destinationUrl || `/resources/${featured.slug}`}
+                          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-bold transition"
+                        >
+                          <span>{featured.ctaLabel}</span>
+                          <ArrowRight className="size-3.5" />
+                        </Link>
                       </div>
-
-                      <Link
-                        href={featured.destinationUrl || `/resources/${featured.slug}`}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-bold transition"
-                      >
-                        <span>{featured.ctaLabel}</span>
-                        <ArrowRight className="size-3.5" />
-                      </Link>
                     </div>
-                  </div>
 
-                  <div className="lg:col-span-5 bg-[#f0f0f0] min-h-[260px] relative overflow-hidden flex items-center justify-center">
-                    <img
-                      src={getCoverImage(featured.coverImage, 1)}
-                      alt={featured.title}
-                      className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    {hasCover && (
+                      <div className="lg:col-span-5 bg-[#f0f0f0] min-h-[260px] relative overflow-hidden flex items-center justify-center">
+                        <img
+                          src={featuredCover}
+                          alt={featured.title}
+                          className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )
+          })()}
 
           {/* Resources Grid */}
           {resources.length === 0 ? (
@@ -207,6 +214,8 @@ export default async function PublicResourcesPage({
               {(catFilter === 'all' ? nonFeaturedList : resources).map((res, idx) => {
                 const catName = categories.find((c) => c.id === res.category)?.nameMn || res.category
                 const linkHref = res.destinationUrl || `/resources/${res.slug}`
+                const cover = getCoverImage(res.coverImage)
+                const hasCover = Boolean(cover)
 
                 return (
                   <Link
@@ -214,43 +223,94 @@ export default async function PublicResourcesPage({
                     href={linkHref}
                     className="group block"
                   >
-                    {/* Thumbnail */}
-                    <div className="relative overflow-hidden bg-[#f0f0f0] aspect-[16/10] rounded-xl mb-4 border border-[#e0e0e0]">
-                      <img
-                        src={getCoverImage(res.coverImage, idx + 1)}
-                        alt={res.title}
-                        className="size-full object-cover group-hover:scale-104 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                    {hasCover ? (
+                      /* CASE 1: Card WITH uploaded cover image */
+                      <>
+                        <div className="relative overflow-hidden bg-[#f0f0f0] aspect-[16/10] rounded-2xl mb-4 border border-[#e0e0e0]">
+                          <img
+                            src={cover}
+                            alt={res.title}
+                            className="size-full object-cover group-hover:scale-104 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/95 backdrop-blur-xs text-black shadow-xs">
-                          {getTypeIcon(res.type)}
-                          <span>{getTypeLabel(res.type)}</span>
-                        </span>
-                      </div>
-                    </div>
+                          <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/95 backdrop-blur-xs text-black shadow-xs">
+                              {getTypeIcon(res.type)}
+                              <span>{getTypeLabel(res.type)}</span>
+                            </span>
+                          </div>
+                        </div>
 
-                    {/* Metadata & Typography */}
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center justify-between text-[11px] font-medium tracking-[0.06em] text-[#888888] uppercase">
-                        <span>{catName}</span>
-                        <span>{res.readTimeMinutes || 5} мин</span>
-                      </div>
+                        {/* Metadata & Typography */}
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center justify-between text-[11px] font-medium tracking-[0.06em] text-[#888888] uppercase">
+                            <span>{catName}</span>
+                            <span>{res.readTimeMinutes || 5} мин</span>
+                          </div>
 
-                      <h3 className="text-black text-[17px] sm:text-[19px] font-bold tracking-tight leading-snug group-hover:translate-x-1 transition-transform duration-300">
-                        {res.title}
-                      </h3>
+                          <h3 className="text-black text-[17px] sm:text-[19px] font-bold tracking-tight leading-snug group-hover:translate-x-1 transition-transform duration-300">
+                            {res.title}
+                          </h3>
 
-                      <p className="text-[#666666] text-[12px] sm:text-[13px] leading-relaxed line-clamp-2 mt-1">
-                        {res.summary}
-                      </p>
+                          {res.summary && (
+                            <p className="text-[#666666] text-[12px] sm:text-[13px] leading-relaxed line-clamp-2 mt-1">
+                              {res.summary}
+                            </p>
+                          )}
 
-                      <div className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-black group-hover:text-blue-600 transition-colors">
-                        <span>{res.ctaLabel}</span>
-                        <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
+                          <div className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-black group-hover:text-blue-600 transition-colors">
+                            <span>{res.ctaLabel}</span>
+                            <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      /* CASE 2: Card WITHOUT image -> Title fitted inside the card box */
+                      <>
+                        <div className="relative overflow-hidden bg-[#fafafa] aspect-[16/10] rounded-2xl mb-4 border border-[#e4e4e7] p-5 sm:p-6 flex flex-col justify-between group-hover:border-black/40 group-hover:bg-[#f4f4f5] transition-all shadow-2xs">
+                          {/* Top Row: Type Badge + Read time */}
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-black border border-[#e4e4e7] shadow-2xs">
+                              {getTypeIcon(res.type)}
+                              <span>{getTypeLabel(res.type)}</span>
+                            </span>
+                            <span className="text-[10px] font-mono font-bold text-[#888888] tracking-wider uppercase">
+                              {res.readTimeMinutes || 5} МИН
+                            </span>
+                          </div>
+
+                          {/* Center: Title fitted inside the card */}
+                          <div className="my-auto py-2">
+                            <h3 className="text-black text-[18px] sm:text-[20px] font-black tracking-tight leading-snug line-clamp-3 group-hover:text-blue-600 transition-colors">
+                              {res.title}
+                            </h3>
+                          </div>
+
+                          {/* Bottom Row inside card */}
+                          <div className="flex items-center justify-between pt-2.5 border-t border-[#e4e4e7]/70 text-[11px] font-medium text-[#71717a]">
+                            <span className="truncate">{catName}</span>
+                            <span className="font-mono text-[10px] text-[#a1a1aa] shrink-0 uppercase tracking-wider">
+                              baysaass
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Metadata & Summary below card */}
+                        <div className="flex flex-col gap-1">
+                          {res.summary && (
+                            <p className="text-[#666666] text-[12px] sm:text-[13px] leading-relaxed line-clamp-2">
+                              {res.summary}
+                            </p>
+                          )}
+
+                          <div className="mt-1.5 inline-flex items-center gap-1 text-xs font-bold text-black group-hover:text-blue-600 transition-colors">
+                            <span>{res.ctaLabel}</span>
+                            <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </Link>
                 )
               })}

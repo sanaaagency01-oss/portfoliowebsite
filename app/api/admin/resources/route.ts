@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       title: body.title.trim(),
       slug,
       summary: body.summary || '',
-      coverImage: body.coverImage || '/work/one-more-night/01.jpg',
+      coverImage: body.coverImage ? String(body.coverImage).trim() : '',
       category: body.category || 'guides',
       tags: Array.isArray(body.tags) ? body.tags : [],
       content: body.content || '',
