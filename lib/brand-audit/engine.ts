@@ -19,9 +19,12 @@ export async function runBrandAuditAnalysis(
   const openAiKey = process.env.OPENAI_API_KEY?.trim()
   const modelName = process.env.OPENAI_MODEL || 'gpt-4o-mini'
 
-  // Preserve text snippet in record so reruns & self-healing always have the real text
-  const rawText = pdfContent.fullText || record.documentInfo?.textSnippet || ''
-  if (rawText && rawText.length > 30) {
+  // Preserve clean text snippet in record so reruns & self-healing always have the real text
+  const rawText = (pdfContent.fullText || record.documentInfo?.textSnippet || '')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, ' ')
+    .trim()
+
+  if (rawText && rawText.length > 20) {
     if (!record.documentInfo) {
       record.documentInfo = {
         fileName: 'brandbook.pdf',
@@ -30,7 +33,7 @@ export async function runBrandAuditAnalysis(
         extractedTextLength: rawText.length,
       }
     }
-    record.documentInfo.textSnippet = rawText.slice(0, 12000)
+    record.documentInfo.textSnippet = rawText.slice(0, 16000)
     record.documentInfo.extractedTextLength = rawText.length
     record.documentInfo.totalPages = pdfContent.totalPages || record.documentInfo.totalPages || 12
   }
@@ -55,36 +58,47 @@ export async function runBrandAuditAnalysis(
     return true
   })
 
-  // 2. Perform fast, structured evaluation via OpenAI (streamlined schema for ultra-fast 2s turnaround)
+  // 2. Perform deep structured evaluation via OpenAI (up to 24k chars to cover full brandbook)
   const findings: AuditFinding[] = []
-  const textSummary = rawText.slice(0, 8000)
+  const textSummary = rawText.slice(0, 24000)
 
   let aiScores: Record<string, number> = {}
   let aiSummaryMn = ''
   let aiTopStrengths: string[] = []
   let aiTopWeaknesses: string[] = []
+  let aiEvidence: Record<string, { findingMn?: string; remedyMn?: string; page?: number }> = {}
 
-  if (openAiKey && textSummary.length > 60) {
+  if (openAiKey && textSummary.length > 40) {
     try {
       record.progressPct = 45
       record.currentStageMn = 'AI загвараар шалгууруудыг нэг бүрчлэн үнэлж байна...'
 
       const criteriaKeys = applicableCriteria.map((c) => `${c.id}: ${c.nameMn} (${c.module})`).join('\n')
 
-      const systemPrompt = `Та бол Baysaass студийн Ахлах Брэнд Аудитор юм. Брэндбүүк баримт бичгийн агуулгад олон улсын мэргэжлийн стандартын дагуу үнэлгээ хийнэ.
+      const systemPrompt = `Та бол Baysaass студийн Ахлах Брэнд Аудитор юм. Брэнд дизайнер Т. Өсөхбаярын өндөр мэргэжлийн стандартаар брэндбүүк баримт бичгийн агуулгад бодитой, нарийвчилсан аудит хийнэ.
+Брэндбүүкт тусгагдсан логоны дүрэм, хамгаалалтын зай, өнгөний код (CMYK/RGB/HEX/Pantone), үсгийн фонт, бодит хэрэглээг нягтлан үзэж, бодит байдалд нийцүүлэн үнэлнэ.
+Хэт хатуугаар шууд 0 өгөхгүй, бодитоор тусгагдсан зүйлст зөв оноо өгч, дутуу болон алдаатай зүйлс дээр дизайнерт зориулсан бодит засах зөвлөмж өгнө.
+
 Дараах JSON бүтцээр хариул:
 {
   "scores": { [criterionId]: number (0-4) },
-  "summaryMn": "Баримт бичгийн ерөнхий түвшний 2-3 өгүүлбэртэй товч дүгнэлт (монголоор)",
+  "summaryMn": "Баримт бичгийн ерөнхий түвшний 2-3 өгүүлбэртэй бодит дүгнэлт (монголоор)",
   "topStrengthsMn": ["Онцлох давуу тал 1", "Онцлох давуу тал 2"],
-  "topWeaknessesMn": ["Засах чухал асуудал 1", "Засах чухал асуудал 2"]
+  "topWeaknessesMn": ["Засах чухал асуудал 1", "Засах чухал асуудал 2"],
+  "criterionEvidence": {
+    [criterionId]: {
+      "findingMn": "Бодит байдлын товч үнэлгээ (1 өгүүлбэр)",
+      "remedyMn": "Хэрхэн засах зөвлөмж",
+      "page": number
+    }
+  }
 }
 Онооны шалгуур (0-4):
 0: Огт тусгагдаагүй эсвэл зөрчилтэй.
-1: Тодорхойгүй, таамаглахаас өөр аргагүй.
-2: Хэсэгчлэн тусгасан ч техникийн үзүүлэлт дутуу.
-3: Тодорхой, шууд хэрэгжүүлэх боломжтой.
-4: Бүрэн төгс жишиг стандарт.`
+1: Тодорхойгүй, таамаглахаас өөр аргагүй (жишээ нь зөвхөн зураг тавьсан, хэмжээ код байхгүй).
+2: Хэсэгчлэн тусгасан ч техникийн үзүүлэлт дутуу (жишээ нь зөвхөн HEX байгаа, CMYK/Pantone байхгүй).
+3: Тодорхой, үйлдвэрлэлд шууд ашиглах боломжтой сайн стандарт.
+4: Бүрэн төгс олон улсын жишиг стандарт.`
 
       const userPrompt = `Байгууллагын нэр: "${record.company}"
 Шалгах хүрээ: ${record.scope} (${record.medium})
@@ -100,7 +114,7 @@ ${textSummary}
 
       const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
-        signal: AbortSignal.timeout(5000), // Max 5s to ensure execution within serverless limit
+        signal: AbortSignal.timeout(25000), // Generous 25s for thorough reasoning
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${openAiKey}`,
@@ -112,8 +126,8 @@ ${textSummary}
             { role: 'user', content: userPrompt },
           ],
           response_format: { type: 'json_object' },
-          temperature: 0.2,
-          max_tokens: 800,
+          temperature: 0.15,
+          max_tokens: 2200,
         }),
       })
 
@@ -126,9 +140,12 @@ ${textSummary}
         if (parsed.summaryMn) aiSummaryMn = parsed.summaryMn
         if (Array.isArray(parsed.topStrengthsMn)) aiTopStrengths = parsed.topStrengthsMn
         if (Array.isArray(parsed.topWeaknessesMn)) aiTopWeaknesses = parsed.topWeaknessesMn
+        if (parsed.criterionEvidence && typeof parsed.criterionEvidence === 'object') {
+          aiEvidence = parsed.criterionEvidence
+        }
       }
     } catch (e) {
-      console.warn('[Fast OpenAI evaluation fallback to rubric heuristic]:', e)
+      console.warn('[OpenAI evaluation fallback to rubric heuristic]:', e)
     }
   }
 
@@ -162,15 +179,17 @@ ${textSummary}
       severity = 'pass'
     }
 
-    // Spread pages across PDF logically
-    const pageNum = Math.min(totalPages, Math.max(1, Math.floor((idx / applicableCriteria.length) * (totalPages - 1)) + 1))
+    // Grounding: Find exact page evidence from pdfContent.textByPage
+    const verifiedPage = findCriterionPage(crit.id, pdfContent.textByPage)
+    const aiSuggestedPage = aiEvidence[crit.id]?.page
+    const pageNum = verifiedPage || (aiSuggestedPage && aiSuggestedPage <= totalPages ? aiSuggestedPage : Math.min(totalPages, Math.max(1, Math.floor((idx / applicableCriteria.length) * (totalPages - 1)) + 1)))
     const pages = [pageNum]
 
-    // Hydrate finding summary & remedy directly from verified rubric anchors
-    const anchorSummary = crit.scoringAnchorsMn[score as 0 | 1 | 2 | 3 | 4] || crit.descriptionMn
-    const remedy = score < 3
+    // Hydrate finding summary & remedy directly from AI evidence or verified rubric anchors
+    const anchorSummary = aiEvidence[crit.id]?.findingMn || crit.scoringAnchorsMn[score as 0 | 1 | 2 | 3 | 4] || crit.descriptionMn
+    const remedy = aiEvidence[crit.id]?.remedyMn || (score < 3
       ? crit.scoringAnchorsMn[3] || 'Стандартын дагуу хэрэглээний тодорхой заалт боловсруулах.'
-      : 'Одоогийн стандартыг тогтвортой баримтлах.'
+      : 'Одоогийн стандартыг тогтвортой баримтлах.')
 
     let businessImpact = 'Брэндийн нэгдмэл чанар болон хэрэгжүүлэлтэд эрсдэлгүй.'
     if (severity === 'critical') {
@@ -301,6 +320,51 @@ ${textSummary}
   // Save completed record once at the end
   await saveBrandAudit(record)
   return record
+}
+
+function findCriterionPage(critId: string, textByPage?: { pageNumber: number; text: string }[]): number | null {
+  if (!textByPage || textByPage.length === 0) return null
+  const keywordsByCriterion: Record<string, string[]> = {
+    C01: ['pantone', 'cmyk', 'primary color', 'үндсэн өнгө', 'өнгөний код', 'hex'],
+    C02: ['cmyk', 'pantone', 'rgb', 'hex', 'өнгө'],
+    C03: ['contrast', 'дэвсгэр', 'эсрэгцэл', 'black', 'white', 'арын дэвсгэр'],
+    L01: ['logo', 'лого', 'brandmark', 'тэмдэг', 'локап', 'үндсэн лого'],
+    L02: ['monochrome', 'хар цагаан', 'өнгөгүй', 'inverted', 'дан хар'],
+    L03: ['clear space', 'хамгаалалтын зай', 'зай', 'exclusion', 'x-space', 'margin'],
+    L04: ['min size', 'minimum size', 'хамгийн бага', 'хэмжээ', 'мм', 'px'],
+    L05: ['incorrect', 'хориглох', 'буруу', 'do not', 'don\'t', 'хориотой'],
+    T01: ['font', 'фонт', 'typeface', 'үндсэн фонт', 'гарчиг'],
+    T02: ['hierarchy', 'шатлал', 'h1', 'h2', 'body', 'гарчиг', 'текст'],
+    T03: ['fallback', 'system font', 'систем фонт', 'arial'],
+    T04: ['leading', 'tracking', 'kerning', 'мөр хоорондын', 'үсэг хоорондын'],
+    S01: ['mission', 'vision', 'зорилго', 'алсын хараа'],
+    S02: ['value', 'үнэт зүйл', 'positioning', 'байр суурь'],
+    B01: ['name', 'нэршил', 'бичиглэл', 'brand name'],
+    B02: ['tagline', 'уриа', 'мессеж', 'slogan'],
+    B03: ['tone', 'өнгө аяс', 'voice'],
+    V01: ['photo', 'гэрэл зураг', 'photography', 'зураг авалт'],
+    V02: ['grid', 'layout', 'зохиомж', 'тор'],
+    V03: ['graphic element', 'хээ', 'pattern', 'дүрслэл'],
+    A01: ['stationery', 'нэрийн хуудас', 'албан бланк'],
+    A02: ['social', 'instagram', 'facebook', 'дижитал'],
+    A03: ['print', 'хэвлэл', 'цаас', 'finish', 'bleed', 'зүсэлт'],
+    D01: ['гарчиг', 'хөтөч', 'structure', 'бүтэц'],
+    D02: ['удирдамж', 'заавар', 'guidelines'],
+    D03: ['version', 'хувилбар', 'холбоо барих', 'contact'],
+    F01: ['vector', 'вектор', '.ai', '.eps', '.svg'],
+    F02: ['folder', 'хавтас', 'naming', 'файлын бүтэц'],
+  }
+
+  const kws = keywordsByCriterion[critId] || []
+  for (const p of textByPage) {
+    const pLower = (p.text || '').toLowerCase()
+    for (const kw of kws) {
+      if (pLower.includes(kw)) {
+        return p.pageNumber
+      }
+    }
+  }
+  return null
 }
 
 function evaluateCriterionHeuristic(id: string, text: string, weight: number): number {

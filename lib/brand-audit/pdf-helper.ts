@@ -1,7 +1,10 @@
 /**
  * Resilient PDF Text Extractor
- * Extracts plain text and page estimates from PDF buffers without heavy binary C++ dependencies.
+ * Extracts plain text and page structure from PDF buffers using unpdf (Mozilla pdfjs).
+ * Handles compressed streams, font encodings (CMap), and Cyrillic/Latin text cleanly.
  */
+
+import { extractText } from 'unpdf'
 
 export interface ExtractedPdfContent {
   totalPages: number
@@ -9,26 +12,66 @@ export interface ExtractedPdfContent {
   fullText: string
 }
 
-export function extractTextFromPdfBuffer(buffer: Buffer): ExtractedPdfContent {
+function sanitizeText(str: string): string {
+  if (!str) return ''
+  return str
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, ' ')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n\s*\n+/g, '\n')
+    .trim()
+}
+
+export async function extractTextFromPdfBuffer(buffer: Buffer): Promise<ExtractedPdfContent> {
+  try {
+    const uint8Data = new Uint8Array(buffer)
+    const result = await extractText(uint8Data)
+
+    const rawPages = Array.isArray(result.text) ? result.text : [result.text]
+    const totalPages = Math.max(1, result.totalPages || rawPages.length || 1)
+
+    const textByPage: { pageNumber: number; text: string }[] = []
+    const fullTextParts: string[] = []
+
+    for (let i = 0; i < totalPages; i++) {
+      const pageText = sanitizeText(rawPages[i] || '')
+      textByPage.push({
+        pageNumber: i + 1,
+        text: pageText || `Хуудас ${i + 1}`,
+      })
+      if (pageText) {
+        fullTextParts.push(`--- Хуудас ${i + 1} ---\n${pageText}`)
+      }
+    }
+
+    const fullText = fullTextParts.join('\n\n')
+
+    // If unpdf successfully extracted readable text, return it
+    if (fullText.length > 50) {
+      return {
+        totalPages,
+        textByPage,
+        fullText,
+      }
+    }
+  } catch (err) {
+    console.warn('[unpdf extraction failed, using fallback stream parser]:', err)
+  }
+
+  // Fallback: Safe text block extractor without reading binary streams
   const binaryString = buffer.toString('binary')
-  
-  // 1. Estimate total pages by counting /Type\s*\/Page\b (excluding /Pages)
   const pageMatches = binaryString.match(/\/Type\s*\/Page\b/g)
   let estimatedPages = pageMatches ? pageMatches.length : 1
   if (estimatedPages === 0) estimatedPages = 1
 
-  // 2. Extract text chunks between BT and ET operators
   const textChunks: string[] = []
   const btRegex = /BT[\s\S]*?ET/g
   let match: RegExpExecArray | null
 
   while ((match = btRegex.exec(binaryString)) !== null) {
     const block = match[0]
-    // Look for parenthesized strings (e.g. (Hello World) Tj or [(Hello) 10 (World)] TJ)
     const parenMatches = block.match(/\((?:[^()\\]|\\.)*\)/g)
     if (parenMatches) {
       const extractedWords = parenMatches.map((str) => {
-        // remove outer parens and clean escape sequences
         return str
           .slice(1, -1)
           .replace(/\\([()\\])/g, '$1')
@@ -36,34 +79,14 @@ export function extractTextFromPdfBuffer(buffer: Buffer): ExtractedPdfContent {
           .replace(/\\n/g, ' ')
           .replace(/\\t/g, ' ')
       })
-      const line = extractedWords.join(' ').trim()
+      const line = sanitizeText(extractedWords.join(' '))
       if (line.length > 0) {
         textChunks.push(line)
       }
     }
   }
 
-  // Fallback: If BT...ET extraction is sparse (e.g., compressed streams), search for readable text strings
-  if (textChunks.length < 5) {
-    const rawMatches = binaryString.match(/[A-Za-z0-9\u0400-\u04FF\s.,:;!?/#%()'"-]{4,}/g)
-    if (rawMatches) {
-      for (const m of rawMatches.slice(0, 1500)) {
-        const trimmed = m.trim()
-        if (
-          trimmed.length > 5 &&
-          !trimmed.startsWith('/Type') &&
-          !trimmed.startsWith('/Filter') &&
-          !trimmed.startsWith('endobj')
-        ) {
-          textChunks.push(trimmed)
-        }
-      }
-    }
-  }
-
   const fullText = textChunks.join('\n')
-  
-  // Divide text chunks across estimated pages
   const textByPage: { pageNumber: number; text: string }[] = []
   const chunksPerPage = Math.max(1, Math.ceil(textChunks.length / estimatedPages))
 
@@ -74,13 +97,13 @@ export function extractTextFromPdfBuffer(buffer: Buffer): ExtractedPdfContent {
     const pageSlice = textChunks.slice(start, end).join('\n')
     textByPage.push({
       pageNumber: pageNum,
-      text: pageSlice || `Хуудас ${pageNum} мэдээлэл`,
+      text: pageSlice || `Хуудас ${pageNum}`,
     })
   }
 
   return {
     totalPages: estimatedPages,
     textByPage,
-    fullText,
+    fullText: fullText || 'Баримт бичигт уншигдах вектор текст олдсонгүй.',
   }
 }

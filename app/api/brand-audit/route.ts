@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
         fileSizeBytes = file.size || 1024 * 1024
         const arrayBuffer = await file.arrayBuffer()
         const buffer = Buffer.from(arrayBuffer)
-        pdfContent = extractTextFromPdfBuffer(buffer)
+        pdfContent = await extractTextFromPdfBuffer(buffer)
       } else {
         const sampleText = (formData.get('extractedText') as string) || ''
         pdfContent = {

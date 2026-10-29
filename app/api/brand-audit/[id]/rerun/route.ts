@@ -24,11 +24,17 @@ export async function POST(
     audit.currentStageMn = 'Аудитыг дахин эхлүүлж байна...'
     await saveBrandAudit(audit)
 
-    // Reconstruct pdf content from document info
+    // Reconstruct pdf content from document info, ensuring no binary junk
+    let text = (audit.documentInfo?.textSnippet || '').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, ' ').trim()
+    const weirdBinaryChars = (text.match(/[^\x20-\x7E\u0400-\u04FF\s.,:;!?/#%()'"–—«»""'']/g) || []).length
+    if (weirdBinaryChars > 15 || text.length < 30) {
+      text = `${audit.company} брэндийн логоны дүрэм, хамгаалалтын зай, өнгөний код, үсгийн фонт болон брэндбүүк хэрэглээний стандарт.`
+    }
+
     const pdfContent = {
-      totalPages: audit.documentInfo?.totalPages || 10,
+      totalPages: audit.documentInfo?.totalPages || 12,
       textByPage: [],
-      fullText: audit.documentInfo?.textSnippet || `${audit.company} brand guidelines and identity standards.`,
+      fullText: text,
     }
 
     try {
