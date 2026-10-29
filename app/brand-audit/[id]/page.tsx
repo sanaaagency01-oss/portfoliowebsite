@@ -23,6 +23,9 @@ import {
   Check,
   Download,
   Share2,
+  Clock,
+  Copy,
+  X,
 } from 'lucide-react'
 import {
   BrandAuditRecord,
@@ -34,6 +37,22 @@ import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
 import AuditExportButton from '@/components/brand-audit/AuditExportButton'
 import { openAuditPrintWindow, downloadAuditDocument } from '@/lib/brand-audit/export'
 
+function getRemainingTimeLabel(expiresAt?: string) {
+  if (!expiresAt) return '3 хоног үлдсэн'
+  const diffMs = new Date(expiresAt).getTime() - Date.now()
+  if (diffMs <= 0) return 'Хугацаа дууссан'
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  if (diffHours >= 48) {
+    const days = Math.floor(diffHours / 24)
+    return `${days} хоног үлдсэн`
+  }
+  if (diffHours >= 1) {
+    return `${diffHours} цаг үлдсэн`
+  }
+  const diffMins = Math.floor(diffMs / (1000 * 60))
+  return `${Math.max(1, diffMins)} минут үлдсэн`
+}
+
 export default function BrandAuditDetailPage({
   params,
 }: {
@@ -41,6 +60,12 @@ export default function BrandAuditDetailPage({
 }) {
   const { id } = use(params)
   const [audit, setAudit] = useState<BrandAuditRecord | null>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [isExpired, setIsExpired] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false)
+  const [copiedLink, setCopiedLink] = useState(false)
+  const [extending, setExtending] = useState(false)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [rerunning, setRerunning] = useState(false)
   const [selectedSeverity, setSelectedSeverity] = useState<
@@ -50,6 +75,45 @@ export default function BrandAuditDetailPage({
   const [searchQuery, setSearchQuery] = useState('')
   const [visualProgress, setVisualProgress] = useState(25)
   const [pollCount, setPollCount] = useState(0)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => setToastMessage(null), 3000)
+  }
+
+  const handleCopyLink = () => {
+    const url = typeof window !== 'undefined' ? window.location.href : `https://baysaass.space/brand-audit/${id}`
+    navigator.clipboard.writeText(url)
+    setCopiedLink(true)
+    setTimeout(() => setCopiedLink(false), 2500)
+    showToast('Хуваалцах линк санах ойд хуулагдлаа!')
+  }
+
+  const handleExtendAudit = async (days: number = 3) => {
+    setExtending(true)
+    try {
+      const res = await fetch(`/api/brand-audit/${id}/extend`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ days }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.audit) {
+          setAudit(data.audit)
+          setIsExpired(false)
+          showToast(`Хүчинтэй хугацааг ${days} хоногоор амжилттай сэргээлээ!`)
+        }
+      } else {
+        const err = await res.json()
+        showToast(err.error || 'Сунгахад алдаа гарлаа')
+      }
+    } catch {
+      showToast('Сүлжээний алдаа гарлаа')
+    } finally {
+      setExtending(false)
+    }
+  }
 
   // Evaluation & Feedback State (AI Quality Improvement)
   const [findingVotes, setFindingVotes] = useState<Record<string, string>>({})
@@ -102,6 +166,8 @@ export default function BrandAuditDetailPage({
         const data = await res.json()
         if (data.audit) {
           setAudit(data.audit)
+          setIsAdmin(Boolean(data.isAdmin))
+          setIsExpired(Boolean(data.isExpired))
           if (data.audit.status === 'completed') {
             setVisualProgress(100)
           }
@@ -218,6 +284,81 @@ export default function BrandAuditDetailPage({
               <ArrowLeft className="size-4" />
               <span>Брэнд аудит руу буцах</span>
             </Link>
+          </div>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
+  // Check if expired and user is not admin
+  if (isExpired && !isAdmin) {
+    return (
+      <>
+        <Navigation />
+        <main className="min-h-screen bg-white text-black pt-[110px] md:pt-[130px] pb-24 md:pb-32">
+          <div className="max-w-[700px] mx-auto px-6 md:px-10 text-center">
+            <div className="inline-flex size-16 items-center justify-center rounded-3xl bg-rose-50 text-rose-600 mb-6 border border-rose-100 shadow-xs">
+              <Clock className="size-8" />
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-xs font-bold text-rose-700 uppercase tracking-wider mb-4">
+              <span>Хугацаа дууссан (Link Expired)</span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-black mb-4">
+              Энэхүү брэнд аудитын хуваалцах холбоосны хугацаа дууссан байна
+            </h1>
+
+            <p className="text-sm sm:text-base text-[#666666] leading-relaxed mb-8 max-w-[580px] mx-auto">
+              Аюулгүй байдал болон өгөгдлийн шинэчлэлийг хангах үүднээс брэнд аудитыг хуваалцах линк нь <strong>3 хоног (72 цаг)</strong>-ийн хугацаанд хүчинтэй байдаг. Уг хугацаа өнгөрсөн тул тайланг түр хаасан байна.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-8">
+              <div className="rounded-2xl border border-[#e0e0e0] bg-[#fafafa] p-5">
+                <h3 className="text-sm font-bold text-black mb-1.5 flex items-center gap-2">
+                  <ShieldCheck className="size-4 text-blue-600" />
+                  <span>Та энэ брэндийн эзэмшигч үү?</span>
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed mb-4">
+                  Хэрэв та брэнд аудитын тайлангаа дахин харах эсвэл бусдад хуваалцах шаардлагатай бол админтай холбогдон холбоосоо дахин 3 хоногоор сэргээлгэх боломжтой.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white text-xs font-bold hover:bg-[#27272a] transition"
+                >
+                  <span>Админтай холбогдох</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+
+              <div className="rounded-2xl border border-[#e0e0e0] bg-[#fafafa] p-5">
+                <h3 className="text-sm font-bold text-black mb-1.5 flex items-center gap-2">
+                  <Sparkles className="size-4 text-purple-600" />
+                  <span>Шинэ брэндбүүк аудит хийлгэх</span>
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed mb-4">
+                  Өөрийн шинэчилсэн брэндбүүк эсвэл шинэ загварын PDF-ээ 30 шалгуураар дахин үнэгүй үнэлүүлэх боломжтой.
+                </p>
+                <Link
+                  href="/brand-audit/new"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#e0e0e0] bg-white text-black text-xs font-bold hover:border-black transition"
+                >
+                  <span>Шинэ аудит эхлүүлэх</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-[#f0f0f0] text-xs text-[#888888] flex items-center justify-center gap-4">
+              <Link href="/brand-audit" className="hover:text-black transition">
+                ← Брэнд аудитын үндсэн хуудас
+              </Link>
+              <span>·</span>
+              <Link href="/admin/login" className="hover:text-black transition">
+                Админ нэвтрэх
+              </Link>
+            </div>
           </div>
         </main>
         <Footer />
@@ -353,8 +494,43 @@ export default function BrandAuditDetailPage({
         <Navigation />
       </div>
 
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-2xl bg-black px-4 py-3 text-xs font-bold text-white shadow-xl animate-in fade-in slide-in-from-top-4 print:hidden">
+          <Check className="size-4 text-emerald-400" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       <main className="bg-white text-black pt-[110px] md:pt-[130px] pb-24 md:pb-32 min-h-screen print:pt-4 print:pb-0">
         <div className="max-w-[1320px] mx-auto px-6 md:px-10 print:p-0">
+          {/* Admin Banner for Expired Audits */}
+          {isAdmin && isExpired && (
+            <div className="mb-8 rounded-2xl bg-amber-50 border border-amber-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 print:hidden">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="size-5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs sm:text-sm font-bold text-amber-900">
+                    Админ горим: Энэхүү аудитын олон нийтийн 3 хоногийн линк хүчингүй (expired) болсон байна.
+                  </p>
+                  <p className="text-xs text-amber-700 mt-0.5">
+                    Та админ эрхтэй тул үзэж байна. Бусад гадны хэрэглэгчдэд линкийг дахин нээхийн тулд хугацааг сунгана уу.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleExtendAudit(3)}
+                disabled={extending}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-600 text-white text-xs font-bold hover:bg-amber-700 transition shrink-0 disabled:opacity-50"
+              >
+                <Clock className="size-3.5" />
+                <span>{extending ? 'Сэргээж байна...' : 'Дахин 3 хоногоор сэргээх'}</span>
+              </button>
+            </div>
+          )}
+
           {/* Top Breadcrumb & Actions Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-[#e0e0e0] print:hidden">
             <Link
@@ -366,6 +542,14 @@ export default function BrandAuditDetailPage({
             </Link>
 
             <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setShowShareModal(true)}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-black text-white text-xs font-semibold hover:bg-[#27272a] transition-colors shadow-xs"
+              >
+                <Share2 className="size-3.5" />
+                <span>Хуваалцах</span>
+              </button>
               <AuditExportButton audit={audit} variant="black" />
               <button
                 onClick={handleRerun}
@@ -952,6 +1136,118 @@ export default function BrandAuditDetailPage({
             </div>
           </section>
         </div>
+
+        {/* Share Modal Dialog */}
+        {showShareModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in print:hidden">
+            <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-[#e0e0e0] animate-in zoom-in-95">
+              <button
+                type="button"
+                onClick={() => setShowShareModal(false)}
+                className="absolute top-5 right-5 p-2 rounded-full text-[#888888] hover:text-black hover:bg-[#f4f4f5] transition"
+              >
+                <X className="size-5" />
+              </button>
+
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex size-10 items-center justify-center rounded-2xl bg-black text-white shrink-0">
+                  <Share2 className="size-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-black">Брэнд аудитыг хуваалцах</h3>
+                  <p className="text-xs text-[#888888]">{audit.company} брэндийн тайлан</p>
+                </div>
+              </div>
+
+              {/* Countdown / Expiry card */}
+              <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50/70 p-4 text-xs">
+                <div className="flex items-center justify-between font-bold text-blue-900 mb-1">
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="size-4 text-blue-600" />
+                    <span>3 хоног хүчинтэй холбоос</span>
+                  </span>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                    {getRemainingTimeLabel(audit.expiresAt)}
+                  </span>
+                </div>
+                <p className="text-[#475569] leading-relaxed text-[11px] mt-1.5">
+                  Энэхүү холбоосыг хуулан харилцагч, багийн гишүүд болон удирдлагадаа илгээх боломжтой. Аюулгүй байдлыг хангах үүднээс 72 цагийн дараа холбоос автоматаар хаагдах ба хүсвэл админ сэргээж эрхийг дахин нээх боломжтой.
+                </p>
+              </div>
+
+              {/* Copy Link Input */}
+              <div className="mt-5">
+                <label className="block text-xs font-bold text-black mb-1.5">
+                  Хуваалцах холбоос:
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    readOnly
+                    value={
+                      typeof window !== 'undefined'
+                        ? window.location.href
+                        : `https://baysaass.space/brand-audit/${id}`
+                    }
+                    className="flex-1 rounded-2xl border border-[#e0e0e0] bg-[#fafafa] px-3.5 py-2.5 text-xs font-mono text-[#333333] select-all outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCopyLink}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-black text-white text-xs font-bold hover:bg-[#27272a] transition shrink-0"
+                  >
+                    {copiedLink ? (
+                      <>
+                        <Check className="size-4 text-emerald-400" />
+                        <span>Хуулагдлаа!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="size-4" />
+                        <span>Линк хуулах</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Admin quick controls if logged in as admin */}
+              {isAdmin && (
+                <div className="mt-6 pt-5 border-t border-[#f0f0f0]">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#888888] mb-2.5">
+                    Админ удирдлага: Хугацааг сунгах / Сэргээх
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleExtendAudit(3)}
+                      disabled={extending}
+                      className="px-3.5 py-1.5 rounded-xl border border-[#e0e0e0] text-xs font-bold text-black hover:bg-[#f4f4f5] transition disabled:opacity-50"
+                    >
+                      +3 хоног
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleExtendAudit(7)}
+                      disabled={extending}
+                      className="px-3.5 py-1.5 rounded-xl border border-[#e0e0e0] text-xs font-bold text-black hover:bg-[#f4f4f5] transition disabled:opacity-50"
+                    >
+                      +7 хоног
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleExtendAudit(365)}
+                      disabled={extending}
+                      className="px-3.5 py-1.5 rounded-xl border border-purple-200 bg-purple-50 text-xs font-bold text-purple-700 hover:bg-purple-100 transition disabled:opacity-50"
+                    >
+                      Хязгааргүй (1 жил)
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </main>
 
       <div className="print:hidden">

@@ -20,11 +20,33 @@ import {
   RotateCw,
   Download,
   Activity,
+  Share2,
+  Clock,
+  Check,
 } from 'lucide-react'
 import { BrandAuditRecord } from '@/lib/brand-audit/types'
 import { openAuditPrintWindow } from '@/lib/brand-audit/export'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
 import { CloudflareStatusBadge } from '@/components/studio/CloudflareStatusBadge'
+
+function getRemainingTimeInfo(expiresAt?: string) {
+  if (!expiresAt) return { isExpired: false, label: '3 хоног' }
+  const expiry = new Date(expiresAt).getTime()
+  const now = Date.now()
+  const diffMs = expiry - now
+  if (diffMs <= 0) return { isExpired: true, label: 'Хугацаа дууссан' }
+
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  if (diffHours >= 48) {
+    const days = Math.floor(diffHours / 24)
+    return { isExpired: false, label: `${days} хоног үлдсэн` }
+  }
+  if (diffHours >= 1) {
+    return { isExpired: false, label: `${diffHours} цаг үлдсэн` }
+  }
+  const diffMins = Math.floor(diffMs / (1000 * 60))
+  return { isExpired: false, label: `${Math.max(1, diffMins)} мин үлдсэн` }
+}
 
 export default function AdminAuditsPage() {
   const [audits, setAudits] = useState<BrandAuditRecord[]>([])
@@ -32,6 +54,47 @@ export default function AdminAuditsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [rerunningId, setRerunningId] = useState<string | null>(null)
+  const [extendingId, setExtendingId] = useState<string | null>(null)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => setToastMessage(null), 3000)
+  }
+
+  const handleExtend = async (id: string, days: number = 3, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setExtendingId(id)
+    try {
+      const res = await fetch(`/api/brand-audit/${id}/extend`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ days }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.audit) {
+          setAudits((prev) => prev.map((a) => (a.id === id ? data.audit : a)))
+          showToast(`Холбоосны эрхийг ${days} хоногоор амжилттай сэргээлээ!`)
+        }
+      } else {
+        const err = await res.json()
+        showToast(err.error || 'Сунгахад алдаа гарлаа')
+      }
+    } catch (err) {
+      console.error(err)
+      showToast('Сүлжээний алдаа гарлаа')
+    } finally {
+      setExtendingId(null)
+    }
+  }
+
+  const handleCopyShareLink = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    const url = `${window.location.origin}/brand-audit/${id}`
+    navigator.clipboard.writeText(url)
+    showToast('Хуваалцах линк санах ойд хуулагдлаа!')
+  }
 
   const handleRerun = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
@@ -105,6 +168,14 @@ export default function AdminAuditsPage() {
 
   return (
     <main className="min-h-screen bg-white text-black">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-2xl bg-black px-4 py-3 text-xs font-bold text-white shadow-xl animate-in fade-in slide-in-from-top-4">
+          <Check className="size-4 text-emerald-400" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       <div className="flex min-h-screen">
         {/* Sidebar */}
         <aside className="hidden w-[240px] shrink-0 flex-col border-r border-[#e0e0e0] bg-[#fafafa] px-5 py-6 lg:flex">
@@ -288,20 +359,21 @@ export default function AdminAuditsPage() {
                     <th className="px-6 py-4 text-center">Хамралт</th>
                     <th className="px-6 py-4">Алдааны тоо</th>
                     <th className="px-6 py-4">Огноо</th>
+                    <th className="px-6 py-4">Холбоос & Хугацаа</th>
                     <th className="px-6 py-4 text-right">Үйлдэл</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#e4e4e7]">
                   {loading ? (
                     <tr>
-                      <td colSpan={7} className="px-6 py-12 text-center text-[#71717a]">
+                      <td colSpan={8} className="px-6 py-12 text-center text-[#71717a]">
                         <RefreshCw className="size-5 animate-spin mx-auto mb-2 text-blue-600" />
                         <span>Уншиж байна...</span>
                       </td>
                     </tr>
                   ) : filteredAudits.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="px-6 py-12 text-center text-[#71717a]">
+                      <td colSpan={8} className="px-6 py-12 text-center text-[#71717a]">
                         Одоогоор ямар ч брэнд аудит бүртгэгдээгүй байна.
                       </td>
                     </tr>
@@ -358,8 +430,48 @@ export default function AdminAuditsPage() {
                           {new Date(a.createdAt).toLocaleDateString('mn-MN')}
                         </td>
 
+                        <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
+                          {(() => {
+                            const info = getRemainingTimeInfo(a.expiresAt)
+                            return (
+                              <div className="flex flex-col gap-1 items-start">
+                                <span
+                                  className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                                    info.isExpired
+                                      ? 'bg-rose-100 text-rose-700'
+                                      : 'bg-emerald-100 text-emerald-800'
+                                  }`}
+                                >
+                                  <Clock className="size-3" />
+                                  <span>{info.label}</span>
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleExtend(a.id, 3, e)}
+                                  disabled={extendingId === a.id}
+                                  className="text-[10px] font-bold text-blue-600 hover:text-blue-800 transition disabled:opacity-50"
+                                >
+                                  {extendingId === a.id
+                                    ? 'Сунгаж байна...'
+                                    : info.isExpired
+                                    ? '+ Сэргээх (3 хоног)'
+                                    : '+ 3 хоног нэмэх'}
+                                </button>
+                              </div>
+                            )
+                          })()}
+                        </td>
+
                         <td className="px-6 py-4 text-right">
-                          <div className="flex items-center justify-end gap-2">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              type="button"
+                              onClick={(e) => handleCopyShareLink(a.id, e)}
+                              className="p-2 rounded-lg text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 transition"
+                              title="Хуваалцах линк хуулах (3 хоног хүчинтэй)"
+                            >
+                              <Share2 className="size-4" />
+                            </button>
                             <button
                               type="button"
                               onClick={(e) => {

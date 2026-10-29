@@ -101,6 +101,9 @@ export async function POST(req: NextRequest) {
 
     const auditId = `audit_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`
 
+    const now = new Date()
+    const expiresAt = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000).toISOString()
+
     const initialRecord: BrandAuditRecord = {
       id: auditId,
       company,
@@ -135,8 +138,9 @@ export async function POST(req: NextRequest) {
       criticalFindingsCount: 0,
       improvementFindingsCount: 0,
       passFindingsCount: 0,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: now.toISOString(),
+      updatedAt: now.toISOString(),
+      expiresAt,
     }
 
     await saveBrandAudit(initialRecord)

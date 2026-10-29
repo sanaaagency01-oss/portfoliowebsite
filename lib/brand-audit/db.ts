@@ -82,6 +82,10 @@ async function initD1AuditTable(): Promise<boolean> {
 
 export async function saveBrandAudit(record: BrandAuditRecord): Promise<void> {
   record.updatedAt = new Date().toISOString()
+  if (!record.expiresAt) {
+    const createdTime = record.createdAt ? new Date(record.createdAt).getTime() : Date.now()
+    record.expiresAt = new Date(createdTime + 3 * 24 * 60 * 60 * 1000).toISOString()
+  }
   inMemoryAudits[record.id] = record
   saveLocalStore()
 
@@ -120,14 +124,22 @@ export async function saveBrandAudit(record: BrandAuditRecord): Promise<void> {
   }
 }
 
+function ensureExpiresAt(record: BrandAuditRecord): BrandAuditRecord {
+  if (!record.expiresAt) {
+    const createdTime = record.createdAt ? new Date(record.createdAt).getTime() : Date.now()
+    record.expiresAt = new Date(createdTime + 3 * 24 * 60 * 60 * 1000).toISOString()
+  }
+  return record
+}
+
 export async function getBrandAuditById(id: string): Promise<BrandAuditRecord | null> {
   if (inMemoryAudits[id]) {
-    return inMemoryAudits[id]
+    return ensureExpiresAt(inMemoryAudits[id])
   }
 
   loadLocalStore()
   if (inMemoryAudits[id]) {
-    return inMemoryAudits[id]
+    return ensureExpiresAt(inMemoryAudits[id])
   }
 
   if (isCloudflareConfigured()) {
@@ -139,8 +151,8 @@ export async function getBrandAuditById(id: string): Promise<BrandAuditRecord | 
         const row = res.results[0]
         const parsed = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
         if (parsed) {
-          inMemoryAudits[id] = parsed
-          return parsed
+          inMemoryAudits[id] = ensureExpiresAt(parsed)
+          return inMemoryAudits[id]
         }
       }
     } catch (e) {
@@ -164,7 +176,7 @@ export async function listBrandAudits(): Promise<BrandAuditRecord[]> {
           try {
             const parsed = typeof row.data === 'string' ? JSON.parse(row.data) : row.data
             if (parsed && parsed.id) {
-              inMemoryAudits[parsed.id] = parsed
+              inMemoryAudits[parsed.id] = ensureExpiresAt(parsed)
             }
           } catch (err) {
             console.warn('[BrandAudit parse row error]', err)
@@ -176,9 +188,9 @@ export async function listBrandAudits(): Promise<BrandAuditRecord[]> {
     }
   }
 
-  return Object.values(inMemoryAudits).sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  )
+  return Object.values(inMemoryAudits)
+    .map(ensureExpiresAt)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 }
 
 export async function deleteBrandAudit(id: string): Promise<boolean> {
