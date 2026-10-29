@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, Check, CheckCircle2, Link2, Send, Sparkles } from 'lucide-react'
+import { ThinkingLoader } from '@/components/ui/thinking-loader'
 
 type Question = { key: string; text: string; chips: string[]; category?: string }
 type State = {
@@ -246,7 +247,7 @@ export default function BriefAssistantPage({
             ))}
 
             {/* Next question prompt & quick chips */}
-            {state.next && !state.complete && (
+            {state.next && !state.complete && !sending && (
               <div className="pt-2">
                 <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
                   <p className="text-[11px] font-bold uppercase tracking-wider text-blue-700">
@@ -272,8 +273,24 @@ export default function BriefAssistantPage({
             )}
 
             {sending && (
-              <div className="max-w-[84%] rounded-2xl rounded-bl-sm border border-[#e0e0e0] bg-[#fafafa] px-4 py-3 text-xs text-[#888888] animate-pulse">
-                AI дизайн туслах хариу боловсруулж байна...
+              <div className="flex flex-col items-start gap-1.5 pt-1">
+                <p className="text-[9px] font-bold uppercase tracking-wider text-[#888888] px-1">
+                  Дизайн Зөвлөх
+                </p>
+                <div className="inline-flex">
+                  <ThinkingLoader
+                    size="md"
+                    variant="pill"
+                    phases={[
+                      'Хариултыг бодож байна...',
+                      'Брифийн шаардлагыг шинжилж байна...',
+                      'Дизайн чиглэлийг боловсруулж байна...',
+                      'Хариулт бэлтгэж байна...',
+                    ]}
+                    interval={2000}
+                    loop={true}
+                  />
+                </div>
               </div>
             )}
 
