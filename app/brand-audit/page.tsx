@@ -155,12 +155,12 @@ export default function BrandAuditLandingPage() {
         {/* Why Brand Audit Matters */}
         <section className="bg-[#fafafa] border-y border-[#e0e0e0] py-20 mb-20 md:mb-28">
           <div className="max-w-[1320px] mx-auto px-6 md:px-10">
-            <div className="max-w-[680px] mb-12">
+            <div className="max-w-[740px] mb-12">
               <span className="text-[#888888] text-[11px] sm:text-[12px] font-medium tracking-[0.18em] uppercase">
-                Яагаад аудит чухал вэ?
+                Брэндбүүкийн аудит яагаад чухал вэ?
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-black tracking-tight mt-2">
-                Брэндбүүк бол үзэсгэлэнгийн зураг биш, хэрэгжүүлэлтийн гэрээ юм.
+                Брэндбүүк бол зүгээр нэг гоё зураглал биш. Брэндийг бодитоор хэрэгжүүлэх стандарт юм.
               </h2>
             </div>
 
