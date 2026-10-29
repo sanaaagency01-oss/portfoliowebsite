@@ -3,6 +3,8 @@
 import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
 import {
   UploadCloud,
   FileText,
@@ -133,252 +135,256 @@ export default function NewBrandAuditPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black pt-[90px] pb-24">
-      <div className="max-w-[780px] mx-auto px-6">
-        {/* Back Link */}
-        <Link
-          href="/brand-audit"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-[#71717a] hover:text-black mb-8 transition-colors"
-        >
-          <ArrowLeft className="size-4" />
-          <span>Буцах</span>
-        </Link>
+    <>
+      <Navigation />
 
-        {/* Title */}
-        <div className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[11px] font-bold text-blue-600 uppercase tracking-wider mb-3">
-            <Sparkles className="size-3.5" />
-            <span>AI Automated Rubric Engine</span>
+      <main className="bg-white text-black pt-[110px] md:pt-[130px] pb-24 md:pb-32 min-h-screen">
+        <div className="max-w-[860px] mx-auto px-6 md:px-10">
+          {/* Back Link */}
+          <Link
+            href="/brand-audit"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-[#888888] hover:text-black mb-8 transition-colors"
+          >
+            <ArrowLeft className="size-4" />
+            <span>Брэнд аудит руу буцах</span>
+          </Link>
+
+          {/* Title */}
+          <div className="mb-10">
+            <p className="text-[#888888] text-[11px] sm:text-[12px] font-medium tracking-[0.18em] uppercase mb-2">
+              Baysaass Brandbook Quality Auditor
+            </p>
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-black">
+              Брэндбүүк чанарын аудит эхлүүлэх
+            </h1>
+            <p className="text-[#666666] text-sm md:text-base mt-3 leading-relaxed">
+              Брэндийн нэр болон PDF файлаа оруулахад систем 30 шалгуураар бодит заалтуудыг нэг бүрчлэн үнэлнэ.
+            </p>
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-black">
-            Брэндбүүк чанарын аудит эхлүүлэх
-          </h1>
-          <p className="text-sm text-[#52525b] mt-2">
-            Брэндийн нэр болон PDF файлаа оруулахад систем 30 шалгуураар бодит заалтуудыг нэг бүрчлэн үнэлнэ.
-          </p>
-        </div>
 
-        {error && (
-          <div className="mb-8 rounded-2xl bg-rose-50 border border-rose-200 p-4 flex items-start gap-3">
-            <AlertCircle className="size-5 text-rose-600 shrink-0 mt-0.5" />
-            <p className="text-xs text-rose-800 font-medium">{error}</p>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Card 1: Basic Info */}
-          <div className="rounded-3xl border border-[#e4e4e7] p-6 md:p-8 bg-[#fafafa]">
-            <h2 className="text-base font-bold text-black mb-4 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-full bg-black text-white text-xs font-bold">
-                1
-              </span>
-              <span>Байгууллагын мэдээлэл</span>
-            </h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-[#18181b] mb-1.5">
-                  Брэнд / Компанийн нэр <span className="text-rose-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Жишээ: Nomad Roast Coffee"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-[#e4e4e7] bg-white text-sm text-black focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#18181b] mb-1.5">
-                  Холбоо барих и-мэйл (Нэмэлт)
-                </label>
-                <input
-                  type="email"
-                  placeholder="name@company.mn"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-[#e4e4e7] bg-white text-sm text-black focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black transition-all"
-                />
-              </div>
+          {error && (
+            <div className="mb-8 rounded-2xl bg-rose-50 border border-rose-200 p-4 flex items-start gap-3">
+              <AlertCircle className="size-5 text-rose-600 shrink-0 mt-0.5" />
+              <p className="text-xs text-rose-800 font-medium">{error}</p>
             </div>
-          </div>
+          )}
 
-          {/* Card 2: Scope & Medium Selection */}
-          <div className="rounded-3xl border border-[#e4e4e7] p-6 md:p-8 bg-[#fafafa]">
-            <h2 className="text-base font-bold text-black mb-4 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-full bg-black text-white text-xs font-bold">
-                2
-              </span>
-              <span>Аудитын хүрээ ба орчин</span>
-            </h2>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-xs font-bold text-[#18181b] mb-2">
-                  Баримт бичгийн төрөл (Scope)
-                </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {[
-                    {
-                      id: 'full_brandbook',
-                      label: 'Бүрэн брэндбүүк',
-                      desc: '9 модуль, 30 шалгуур бүрэн хамрагдана',
-                    },
-                    {
-                      id: 'visual_identity',
-                      label: 'Visual Identity',
-                      desc: 'Лого, өнгө, үсэг, дүрслэл, хэрэглээ',
-                    },
-                    {
-                      id: 'logo_only',
-                      label: 'Лого гарын авлага',
-                      desc: 'Логоны дүрэм, зай, өнгө, хэмжээ',
-                    },
-                  ].map((item) => (
-                    <button
-                      type="button"
-                      key={item.id}
-                      onClick={() => setScope(item.id as AuditScope)}
-                      className={`text-left p-4 rounded-2xl border transition-all ${
-                        scope === item.id
-                          ? 'border-black bg-white ring-2 ring-black shadow-xs'
-                          : 'border-[#e4e4e7] bg-white hover:border-[#a1a1aa]'
-                      }`}
-                    >
-                      <p className="text-xs font-bold text-black">{item.label}</p>
-                      <p className="text-[11px] text-[#71717a] mt-1">{item.desc}</p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#18181b] mb-2">
-                  Ашиглах орчин (Medium)
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { id: 'both', label: 'Хоёулаа (Print & Digital)' },
-                    { id: 'digital', label: 'Зөвхөн Дижитал' },
-                    { id: 'print', label: 'Зөвхөн Хэвлэмэл' },
-                  ].map((m) => (
-                    <button
-                      type="button"
-                      key={m.id}
-                      onClick={() => setMedium(m.id as AuditMedium)}
-                      className={`text-center py-2.5 px-3 rounded-2xl border text-xs font-semibold transition-all ${
-                        medium === m.id
-                          ? 'border-black bg-black text-white'
-                          : 'border-[#e4e4e7] bg-white text-[#52525b] hover:border-[#a1a1aa]'
-                      }`}
-                    >
-                      {m.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: File Upload */}
-          <div className="rounded-3xl border border-[#e4e4e7] p-6 md:p-8 bg-[#fafafa]">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-black flex items-center gap-2">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Card 1: Basic Info */}
+            <div className="rounded-3xl border border-[#e0e0e0] p-6 md:p-8 bg-[#fafafa]">
+              <h2 className="text-base font-bold text-black mb-4 flex items-center gap-2">
                 <span className="flex size-6 items-center justify-center rounded-full bg-black text-white text-xs font-bold">
-                  3
+                  1
                 </span>
-                <span>Брэндбүүк PDF файл оруулах</span>
+                <span>Байгууллагын мэдээлэл</span>
               </h2>
 
-              <button
-                type="button"
-                onClick={handleUseSample}
-                className="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors"
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-black mb-1.5">
+                    Брэнд / Компанийн нэр <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Жишээ: Nomad Roast Coffee"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    className="w-full px-4 py-3 rounded-2xl border border-[#e0e0e0] bg-white text-sm text-black focus:outline-none focus:border-black transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-black mb-1.5">
+                    Холбоо барих и-мэйл (Нэмэлт)
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="name@company.mn"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-2xl border border-[#e0e0e0] bg-white text-sm text-black focus:outline-none focus:border-black transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Scope & Medium Selection */}
+            <div className="rounded-3xl border border-[#e0e0e0] p-6 md:p-8 bg-[#fafafa]">
+              <h2 className="text-base font-bold text-black mb-4 flex items-center gap-2">
+                <span className="flex size-6 items-center justify-center rounded-full bg-black text-white text-xs font-bold">
+                  2
+                </span>
+                <span>Аудитын хүрээ ба орчин</span>
+              </h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-xs font-bold text-black mb-2">
+                    Баримт бичгийн төрөл (Scope)
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {[
+                      {
+                        id: 'full_brandbook',
+                        label: 'Бүрэн брэндбүүк',
+                        desc: '9 модуль, 30 шалгуур бүрэн хамрагдана',
+                      },
+                      {
+                        id: 'visual_identity',
+                        label: 'Visual Identity',
+                        desc: 'Лого, өнгө, үсэг, дүрслэл, хэрэглээ',
+                      },
+                      {
+                        id: 'logo_only',
+                        label: 'Лого гарын авлага',
+                        desc: 'Логоны дүрэм, зай, өнгө, хэмжээ',
+                      },
+                    ].map((item) => (
+                      <button
+                        type="button"
+                        key={item.id}
+                        onClick={() => setScope(item.id as AuditScope)}
+                        className={`text-left p-4 rounded-2xl border transition-all ${
+                          scope === item.id
+                            ? 'border-black bg-white ring-2 ring-black shadow-xs'
+                            : 'border-[#e0e0e0] bg-white hover:border-[#888888]'
+                        }`}
+                      >
+                        <p className="text-xs font-bold text-black">{item.label}</p>
+                        <p className="text-[11px] text-[#666666] mt-1">{item.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-black mb-2">
+                    Ашиглах орчин (Medium)
+                  </label>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { id: 'both', label: 'Хоёулаа (Print & Digital)' },
+                      { id: 'digital', label: 'Зөвхөн Дижитал' },
+                      { id: 'print', label: 'Зөвхөн Хэвлэмэл' },
+                    ].map((m) => (
+                      <button
+                        type="button"
+                        key={m.id}
+                        onClick={() => setMedium(m.id as AuditMedium)}
+                        className={`text-center py-2.5 px-3 rounded-2xl border text-xs font-semibold transition-all ${
+                          medium === m.id
+                            ? 'border-black bg-black text-white'
+                            : 'border-[#e0e0e0] bg-white text-[#666666] hover:border-[#888888]'
+                        }`}
+                      >
+                        {m.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: File Upload */}
+            <div className="rounded-3xl border border-[#e0e0e0] p-6 md:p-8 bg-[#fafafa]">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-base font-bold text-black flex items-center gap-2">
+                  <span className="flex size-6 items-center justify-center rounded-full bg-black text-white text-xs font-bold">
+                    3
+                  </span>
+                  <span>Брэндбүүк PDF файл оруулах</span>
+                </h2>
+
+                <button
+                  type="button"
+                  onClick={handleUseSample}
+                  className="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  Жишээ өгөгдөл бөглөх
+                </button>
+              </div>
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="application/pdf"
+                className="hidden"
+              />
+
+              <div
+                onDragOver={(e) => {
+                  e.preventDefault()
+                  setDragOver(true)
+                }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={`border-2 border-dashed rounded-3xl p-8 text-center cursor-pointer transition-all ${
+                  dragOver
+                    ? 'border-blue-600 bg-blue-50/50'
+                    : selectedFile
+                    ? 'border-emerald-500 bg-emerald-50/20'
+                    : 'border-[#d0d0d0] bg-white hover:border-black'
+                }`}
               >
-                Жишээ өгөгдөл бөглөх
+                {selectedFile ? (
+                  <div className="flex flex-col items-center">
+                    <div className="size-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
+                      <FileText className="size-6" />
+                    </div>
+                    <p className="text-sm font-bold text-black">{selectedFile.name}</p>
+                    <p className="text-xs text-[#888888] mt-1">
+                      {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB · Өөрчлөх бол товшино уу
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <div className="size-12 rounded-2xl bg-[#f4f4f5] text-[#52525b] flex items-center justify-center mb-3">
+                      <UploadCloud className="size-6" />
+                    </div>
+                    <p className="text-sm font-bold text-black">
+                      PDF файлаа чирж эсвэл товшиж сонгоно уу
+                    </p>
+                    <p className="text-xs text-[#888888] mt-1">
+                      Хамгийн ихдээ 50MB хүртэлх албан ёсны brandbook / guideline PDF
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {!selectedFile && (
+                <p className="text-[11px] text-[#888888] mt-3">
+                  Хэрэв танд яг одоо PDF файл байхгүй бол дээрх "Жишээ өгөгдөл бөглөх" товчийг дарж туршиж болно.
+                </p>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-4 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-[15px] font-semibold tracking-tight shadow-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" />
+                    <span>Аудитыг боловсруулж байна...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Аудит эхлүүлж тайлан харах &rarr;</span>
+                  </>
+                )}
               </button>
             </div>
+          </form>
+        </div>
+      </main>
 
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="application/pdf"
-              className="hidden"
-            />
-
-            <div
-              onDragOver={(e) => {
-                e.preventDefault()
-                setDragOver(true)
-              }}
-              onDragLeave={() => setDragOver(false)}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-3xl p-8 text-center cursor-pointer transition-all ${
-                dragOver
-                  ? 'border-blue-600 bg-blue-50/50'
-                  : selectedFile
-                  ? 'border-emerald-500 bg-emerald-50/20'
-                  : 'border-[#d4d4d8] bg-white hover:border-black'
-              }`}
-            >
-              {selectedFile ? (
-                <div className="flex flex-col items-center">
-                  <div className="size-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
-                    <FileText className="size-6" />
-                  </div>
-                  <p className="text-sm font-bold text-black">{selectedFile.name}</p>
-                  <p className="text-xs text-[#71717a] mt-1">
-                    {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB · Өөрчлөх бол товшино уу
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <div className="size-12 rounded-2xl bg-[#f4f4f5] text-[#52525b] flex items-center justify-center mb-3">
-                    <UploadCloud className="size-6" />
-                  </div>
-                  <p className="text-sm font-bold text-black">
-                    PDF файлаа чирж эсвэл товшиж сонгоно уу
-                  </p>
-                  <p className="text-xs text-[#71717a] mt-1">
-                    Хамгийн ихдээ 50MB хүртэлх албан ёсны brandbook / guideline PDF
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {!selectedFile && (
-              <p className="text-[11px] text-[#71717a] mt-3">
-                Хэрэв танд яг одоо PDF файл байхгүй бол дээрх "Жишээ өгөгдөл бөглөх" товчийг дарж туршиж болно.
-              </p>
-            )}
-          </div>
-
-          {/* Submit Button */}
-          <div className="pt-2">
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-4 px-6 rounded-full bg-black text-white text-sm font-bold hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" />
-                  <span>Аудитыг боловсруулж байна...</span>
-                </>
-              ) : (
-                <>
-                  <span>Аудит эхлүүлж тайлан харах</span>
-                  <ArrowRight className="size-4" />
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <Footer />
+    </>
   )
 }
