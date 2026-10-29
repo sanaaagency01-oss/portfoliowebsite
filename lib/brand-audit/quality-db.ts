@@ -240,10 +240,111 @@ export async function getFindingReviewsForAudit(auditId: string): Promise<Record
   return result
 }
 
+// ---------------- SYNC STORES FROM CLOUDFLARE D1 ----------------
+
+export async function syncD1Stores(): Promise<void> {
+  loadLocalStores()
+  if (!isCloudflareConfigured()) return
+  try {
+    await initD1QualityTables()
+
+    // 1. Sync User Feedback from D1
+    const resFb = await executeD1Query<any>('SELECT * FROM audit_feedback;')
+    if (resFb.success && resFb.results) {
+      for (const row of resFb.results) {
+        inMemoryFeedback[row.audit_id] = {
+          auditId: row.audit_id,
+          clarityScore: row.clarity_score,
+          discoveredNewIssues: row.discovered_new,
+          inaccurateFindingsNote: row.notes || '',
+          createdAt: row.created_at,
+        }
+      }
+    }
+
+    // 2. Sync Finding Reviews from D1
+    const resRev = await executeD1Query<any>('SELECT * FROM audit_finding_reviews;')
+    if (resRev.success && resRev.results) {
+      for (const row of resRev.results) {
+        const key = row.id || `${row.audit_id}:${row.criterion_id}`
+        inMemoryReviews[key] = {
+          auditId: row.audit_id,
+          criterionId: row.criterion_id,
+          userVote: row.user_vote,
+          expertLabel: row.expert_label,
+          errorStage: row.error_stage,
+          expertNote: row.expert_note,
+          correctEvidencePages: row.correct_pages ? JSON.parse(row.correct_pages) : undefined,
+          reviewedAt: row.updated_at,
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[QualityDB syncD1Stores error]', e)
+  }
+}
+
+export async function getAuditQualitySummaries(): Promise<
+  Record<
+    string,
+    {
+      userFeedback?: UserReportFeedback
+      userVoteSummary: {
+        totalVotes: number
+        correctCount: number
+        falsePositiveCount: number
+      }
+    }
+  >
+> {
+  await syncD1Stores()
+  const result: Record<
+    string,
+    {
+      userFeedback?: UserReportFeedback
+      userVoteSummary: {
+        totalVotes: number
+        correctCount: number
+        falsePositiveCount: number
+      }
+    }
+  > = {}
+
+  for (const [auditId, fb] of Object.entries(inMemoryFeedback)) {
+    if (!result[auditId]) {
+      result[auditId] = {
+        userVoteSummary: { totalVotes: 0, correctCount: 0, falsePositiveCount: 0 },
+      }
+    }
+    result[auditId].userFeedback = fb
+  }
+
+  for (const review of Object.values(inMemoryReviews)) {
+    const aid = review.auditId
+    if (!aid) continue
+    if (!result[aid]) {
+      result[aid] = {
+        userVoteSummary: { totalVotes: 0, correctCount: 0, falsePositiveCount: 0 },
+      }
+    }
+    if (review.userVote || review.expertLabel) {
+      result[aid].userVoteSummary.totalVotes++
+      const vote = review.expertLabel || review.userVote
+      if (vote === 'correct') {
+        result[aid].userVoteSummary.correctCount++
+      } else if (vote === 'false_positive') {
+        result[aid].userVoteSummary.falsePositiveCount++
+      }
+    }
+  }
+
+  return result
+}
+
 // ---------------- AGGREGATED QUALITY KPI METRICS ----------------
 
 export async function getQualityMetricsSummary(): Promise<QualityMetricsSummary> {
-  loadLocalStores()
+  await syncD1Stores()
   const audits = await listBrandAudits()
 
   let totalFindings = 0
@@ -255,6 +356,17 @@ export async function getQualityMetricsSummary(): Promise<QualityMetricsSummary>
   let missedIssuesCount = 0
 
   const humanReviewedRunsSet = new Set<string>()
+
+  // Mark all audits with report feedback or finding reviews as human-reviewed
+  for (const [aid, fb] of Object.entries(inMemoryFeedback)) {
+    if (fb && fb.clarityScore) humanReviewedRunsSet.add(aid)
+  }
+  for (const rev of Object.values(inMemoryReviews)) {
+    if (rev.userVote || rev.expertLabel) {
+      humanReviewedRunsSet.add(rev.auditId)
+    }
+  }
+
   const stageErrorBreakdown: Record<ErrorStage, number> = {
     parser: 0,
     extraction: 0,
@@ -330,7 +442,7 @@ export async function getQualityMetricsSummary(): Promise<QualityMetricsSummary>
 
   // Calculate Precision & Evidence Accuracy
   const evaluatedTotal = correctFindingsCount + falsePositiveCount + wrongEvidenceCount + wrongSeverityCount
-  const precisionPct = evaluatedTotal > 0
+  const precisionPct = (correctFindingsCount + falsePositiveCount) > 0
     ? Math.round((correctFindingsCount / (correctFindingsCount + falsePositiveCount)) * 100)
     : 92 // High baseline default
 

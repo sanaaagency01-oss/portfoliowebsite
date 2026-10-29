@@ -30,7 +30,12 @@ import {
 } from 'lucide-react'
 import { CloudflareStatusBadge } from '@/components/studio/CloudflareStatusBadge'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
-import { QualityMetricsSummary, ExpertFindingLabel, ErrorStage } from '@/lib/brand-audit/quality-types'
+import {
+  QualityMetricsSummary,
+  ExpertFindingLabel,
+  ErrorStage,
+  UserReportFeedback,
+} from '@/lib/brand-audit/quality-types'
 import { BrandAuditRecord, AuditFinding } from '@/lib/brand-audit/types'
 import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
 
@@ -53,6 +58,7 @@ export default function AIQualityDashboardPage() {
   const [selectedAuditId, setSelectedAuditId] = useState<string | null>(null)
   const [activeAudit, setActiveAudit] = useState<BrandAuditRecord | null>(null)
   const [activeReviews, setActiveReviews] = useState<Record<string, any>>({})
+  const [activeReportFeedback, setActiveReportFeedback] = useState<UserReportFeedback | null>(null)
   const [savingFindingId, setSavingFindingId] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
@@ -84,10 +90,6 @@ export default function AIQualityDashboardPage() {
     }
   }
 
-  useEffect(() => {
-    fetchQualityData()
-  }, [])
-
   const loadAuditForReview = async (id: string) => {
     setSelectedAuditId(id)
     setActiveTab('review')
@@ -103,10 +105,30 @@ export default function AIQualityDashboardPage() {
         const revData = await revRes.json()
         if (revData.reviews) setActiveReviews(revData.reviews)
       }
+
+      const fbRes = await fetch(`/api/brand-audit/${id}/feedback`)
+      if (fbRes.ok) {
+        const fbData = await fbRes.json()
+        if (fbData.feedback) setActiveReportFeedback(fbData.feedback)
+        else setActiveReportFeedback(null)
+      } else {
+        setActiveReportFeedback(null)
+      }
     } catch (e) {
       console.error('Failed loading audit review details', e)
     }
   }
+
+  useEffect(() => {
+    fetchQualityData()
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const qAuditId = params.get('auditId')
+      if (qAuditId) {
+        loadAuditForReview(qAuditId)
+      }
+    }
+  }, [])
 
   const handleSaveExpertLabel = async (
     criterionId: string,
@@ -543,6 +565,21 @@ export default function AIQualityDashboardPage() {
                                 Оноо: <strong className="text-black">{audit.qualityScore}/100</strong> ·{' '}
                                 Шалгуур: {audit.findingsCount} · {new Date(audit.createdAt).toLocaleDateString()}
                               </p>
+
+                              {(audit.userFeedback || (audit.userVoteSummary && audit.userVoteSummary.totalVotes > 0)) && (
+                                <div className="flex flex-wrap items-center gap-2 mt-2">
+                                  {audit.userFeedback && (
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                                      ⭐ {audit.userFeedback.clarityScore}/5 хэрэглэгчийн үнэлгээ
+                                    </span>
+                                  )}
+                                  {audit.userVoteSummary && audit.userVoteSummary.totalVotes > 0 && (
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                                      ✓ {audit.userVoteSummary.totalVotes} шалгуурт санал өгсөн ({audit.userVoteSummary.correctCount} зөв, {audit.userVoteSummary.falsePositiveCount} худал)
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                             </div>
 
                             <div className="flex items-center gap-3">
@@ -617,6 +654,90 @@ export default function AIQualityDashboardPage() {
                             </Link>
                           </div>
                         </div>
+
+                        {/* User Report Quality Feedback Banner */}
+                        {activeReportFeedback ? (
+                          <div className="rounded-3xl border border-amber-200 bg-amber-50/70 p-6 shadow-xs">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-amber-200/80">
+                              <div className="flex items-center gap-2">
+                                <div className="size-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700">
+                                  <Star className="size-4 fill-amber-500 text-amber-500" />
+                                </div>
+                                <div>
+                                  <h4 className="text-sm font-bold text-black">
+                                    Хэрэглэгчийн тайлангийн үнэлгээ (User Quality Review)
+                                  </h4>
+                                  <p className="text-[11px] text-[#666666]">
+                                    Тайлангийн төгсгөлд хэрэглэгчийн бөглөсөн бодит санал хүсэлт
+                                  </p>
+                                </div>
+                              </div>
+                              <span className="text-[11px] font-mono text-[#888888]">
+                                {new Date(activeReportFeedback.createdAt).toLocaleString('mn-MN')}
+                              </span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <div className="p-4 rounded-2xl bg-white border border-amber-100/80">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block">
+                                  1. Тайлангийн ойлгомжтой байдал
+                                </span>
+                                <div className="flex items-center gap-2 mt-1.5">
+                                  <span className="text-xl font-black text-black">
+                                    {activeReportFeedback.clarityScore} / 5
+                                  </span>
+                                  <div className="flex items-center text-amber-500">
+                                    {Array.from({ length: 5 }).map((_, i) => (
+                                      <Star
+                                        key={i}
+                                        className={`size-3.5 ${
+                                          i < activeReportFeedback.clarityScore
+                                            ? 'fill-amber-500 text-amber-500'
+                                            : 'text-zinc-200 fill-zinc-100'
+                                        }`}
+                                      />
+                                    ))}
+                                  </div>
+                                </div>
+                                <span className="text-[11px] font-semibold text-emerald-700 block mt-1">
+                                  {activeReportFeedback.clarityScore === 5
+                                    ? 'Маш ойлгомжтой'
+                                    : activeReportFeedback.clarityScore === 4
+                                    ? 'Ойлгомжтой'
+                                    : 'Дунд зэрэг'}
+                                </span>
+                              </div>
+
+                              <div className="p-4 rounded-2xl bg-white border border-amber-100/80">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block">
+                                  2. Шинэ асуудал илрүүлсэн эсэх
+                                </span>
+                                <p className="text-xs font-bold text-black mt-2">
+                                  {activeReportFeedback.discoveredNewIssues === 'all_new'
+                                    ? '✓ Бүх асуудал шинэ байсан'
+                                    : activeReportFeedback.discoveredNewIssues === 'some_new'
+                                    ? '✓ Зарим нь шинэ, зарим нь мэдэж байсан'
+                                    : activeReportFeedback.discoveredNewIssues === 'already_known'
+                                    ? '• Өмнө нь бүгдийг мэдэж байсан'
+                                    : '✕ Асуудал илрүүлээгүй'}
+                                </p>
+                              </div>
+
+                              <div className="p-4 rounded-2xl bg-white border border-amber-100/80">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block">
+                                  3. Нэмэлт сэтгэгдэл / Алдаа
+                                </span>
+                                <p className="text-xs text-[#444444] mt-2 italic">
+                                  {activeReportFeedback.inaccurateFindingsNote || 'Сэтгэгдэл бичээгүй'}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="rounded-3xl border border-dashed border-[#e0e0e0] p-5 bg-[#fafafa] flex items-center justify-between text-xs text-[#71717a]">
+                            <span>Энэ аудит дээр хэрэглэгч хараахан одтой үнэлгээний судалгаа илгээгээгүй байна.</span>
+                          </div>
+                        )}
 
                         {/* Findings Annotation List */}
                         <div className="space-y-4">
@@ -694,13 +815,25 @@ export default function AIQualityDashboardPage() {
 
                                 {/* User vote indicator if client voted */}
                                 {rev.userVote && (
-                                  <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#f4f4f5] text-[11px] text-[#666666]">
-                                    <span>Хэрэглэгчийн санал:</span>
-                                    <strong className="text-black">
-                                      {rev.userVote === 'correct' && '✓ Зөв гэсэн'}
-                                      {rev.userVote === 'false_positive' && '✕ Буруу (Дүрэм байгаа) гэсэн'}
-                                      {rev.userVote === 'unclear' && '? Ойлгомжгүй гэсэн'}
-                                    </strong>
+                                  <div className="mb-4 flex flex-wrap items-center gap-2">
+                                    <span className="text-xs text-[#71717a] font-medium">Хэрэглэгчийн санал:</span>
+                                    {rev.userVote === 'correct' && (
+                                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                        <Check className="size-3.5" />
+                                        <span>Зөв олсон гэж vote өгсөн</span>
+                                      </span>
+                                    )}
+                                    {rev.userVote === 'false_positive' && (
+                                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200">
+                                        <X className="size-3.5" />
+                                        <span>Худал дүгнэлт (дүрэм нь байгаа) гэж vote өгсөн</span>
+                                      </span>
+                                    )}
+                                    {rev.userVote === 'unclear' && (
+                                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-100 text-zinc-700">
+                                        <span>Ойлгомжгүй гэсэн</span>
+                                      </span>
+                                    )}
                                   </div>
                                 )}
 

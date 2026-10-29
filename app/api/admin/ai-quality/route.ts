@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getQualityMetricsSummary, saveFindingReview, getFindingReviewsForAudit } from '@/lib/brand-audit/quality-db'
+import {
+  getQualityMetricsSummary,
+  saveFindingReview,
+  getFindingReviewsForAudit,
+  getUserReportFeedback,
+  getAuditQualitySummaries,
+} from '@/lib/brand-audit/quality-db'
 import { listBrandAudits } from '@/lib/brand-audit/db'
 import { ExpertFindingLabel, ErrorStage } from '@/lib/brand-audit/quality-types'
 
@@ -12,10 +18,13 @@ export async function GET(req: NextRequest) {
 
     const metrics = await getQualityMetricsSummary()
     const audits = await listBrandAudits()
+    const summaries = await getAuditQualitySummaries()
 
     let activeAuditReviews: any = null
+    let activeAuditFeedback: any = null
     if (auditId) {
       activeAuditReviews = await getFindingReviewsForAudit(auditId)
+      activeAuditFeedback = await getUserReportFeedback(auditId)
     }
 
     return NextResponse.json({
@@ -37,8 +46,11 @@ export async function GET(req: NextRequest) {
         createdAt: a.createdAt,
         updatedAt: a.updatedAt,
         versionInfo: a.versionInfo,
+        userFeedback: summaries[a.id]?.userFeedback,
+        userVoteSummary: summaries[a.id]?.userVoteSummary,
       })),
       activeAuditReviews,
+      activeAuditFeedback,
     })
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 })

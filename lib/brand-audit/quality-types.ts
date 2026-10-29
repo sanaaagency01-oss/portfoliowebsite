@@ -1,7 +1,16 @@
 import { ModuleId, CriterionId, FindingSeverity } from './types'
 
 export type UserClarityRating = 1 | 2 | 3 | 4 | 5
-export type DiscoveredNewIssues = 'yes_new' | 'partial' | 'no' | 'unknown'
+export type DiscoveredNewIssues =
+  | 'all_new'
+  | 'some_new'
+  | 'already_known'
+  | 'none'
+  | 'yes_new'
+  | 'partial'
+  | 'no'
+  | 'unknown'
+  | string
 export type UserFindingVote = 'correct' | 'false_positive' | 'unclear' | 'unknown'
 
 export type ExpertFindingLabel =

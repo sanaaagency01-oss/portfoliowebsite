@@ -6,6 +6,7 @@ import {
   ModuleId,
 } from '@/lib/brand-audit/types'
 import { saveBrandAudit, listBrandAudits } from '@/lib/brand-audit/db'
+import { getAuditQualitySummaries } from '@/lib/brand-audit/quality-db'
 import { extractTextFromPdfBuffer, ExtractedPdfContent } from '@/lib/brand-audit/pdf-helper'
 import { runBrandAuditAnalysis } from '@/lib/brand-audit/engine'
 import { MODULE_DEFINITIONS } from '@/lib/brand-audit/rubric'
@@ -33,7 +34,14 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, audits })
+    const summaries = await getAuditQualitySummaries()
+    const enrichedAudits = audits.map((a) => ({
+      ...a,
+      userFeedback: summaries[a.id]?.userFeedback,
+      userVoteSummary: summaries[a.id]?.userVoteSummary,
+    }))
+
+    return NextResponse.json({ success: true, audits: enrichedAudits })
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 })
   }

@@ -387,6 +387,30 @@ export default function AdminAuditsPage() {
                         <td className="px-6 py-4">
                           <p className="font-bold text-black text-sm">{a.company}</p>
                           <p className="text-[11px] text-[#71717a]">{a.email || 'Имэйлгүй'}</p>
+                          {(a.userFeedback || (a.userVoteSummary && a.userVoteSummary.totalVotes > 0)) && (
+                            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                              {a.userFeedback && (
+                                <Link
+                                  href={`/admin/ai-quality?auditId=${a.id}`}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 transition"
+                                  title="Хэрэглэгчийн үнэлгээ харах"
+                                >
+                                  ⭐ {a.userFeedback.clarityScore}/5 хэрэглэгчийн үнэлгээ
+                                </Link>
+                              )}
+                              {a.userVoteSummary && a.userVoteSummary.totalVotes > 0 && (
+                                <Link
+                                  href={`/admin/ai-quality?auditId=${a.id}`}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition"
+                                  title="Хэрэглэгчийн санал, дүгнэлтүүдийг шалгах"
+                                >
+                                  ✓ {a.userVoteSummary.totalVotes} санал ({a.userVoteSummary.correctCount} зөв, {a.userVoteSummary.falsePositiveCount} худал)
+                                </Link>
+                              )}
+                            </div>
+                          )}
                         </td>
 
                         <td className="px-6 py-4">
@@ -492,6 +516,14 @@ export default function AdminAuditsPage() {
                             >
                               <RotateCw className={`size-4 ${rerunningId === a.id ? 'animate-spin' : ''}`} />
                             </button>
+                            <Link
+                              href={`/admin/ai-quality?auditId=${a.id}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="p-2 rounded-lg text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition"
+                              title="AI чанарын хяналт, санал баталгаажуулах"
+                            >
+                              <ShieldCheck className="size-4" />
+                            </Link>
                             <Link
                               href={`/brand-audit/${a.id}`}
                               target="_blank"
