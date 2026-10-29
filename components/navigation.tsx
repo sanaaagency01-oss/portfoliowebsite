@@ -57,10 +57,11 @@ export default function Navigation() {
     }`
 
   const menuItems = [
-    { label: n.work,    href: "/work" },
-    { label: n.audit,   href: "/brand-audit" },
-    { label: n.about,   href: "/about" },
-    { label: n.contact, href: "/contact" },
+    { label: n.work,      href: "/work" },
+    { label: n.audit,     href: "/brand-audit" },
+    { label: n.resources, href: "/resources" },
+    { label: n.about,     href: "/about" },
+    { label: n.contact,   href: "/contact" },
     { label: lang === "mn" ? "Client талбар" : "Client Portal", href: "/client" },
   ]
 
@@ -122,6 +123,9 @@ export default function Navigation() {
 
           {/* Right */}
           <div className="flex items-center gap-6">
+            <Link href="/resources" className={linkClass("/resources")}>
+              {n.resources}
+            </Link>
             <Link href="/work" className={linkClass("/work")}>
               {n.work}
             </Link>

@@ -15,6 +15,7 @@ import {
   Users,
   Sparkles,
   ShieldCheck,
+  BookOpen,
 } from 'lucide-react'
 import { Project } from '@/lib/types/studio'
 import { formatCurrency } from '@/lib/studio-utils'
@@ -102,6 +103,13 @@ export default function StudioAdminDashboard() {
             >
               <FileCheck2 className="size-4" />
               Contracts
+            </Link>
+            <Link
+              href="/admin/resources"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"
+            >
+              <BookOpen className="size-4" />
+              Resources CMS
             </Link>
           </div>
 

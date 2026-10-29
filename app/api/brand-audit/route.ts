@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
           const pdfContent = {
             totalPages: audits[i].documentInfo?.totalPages || 12,
             textByPage: [],
-            fullText: `${audits[i].company} brand guidelines and identity standards.`,
+            fullText: audits[i].documentInfo?.textSnippet || `${audits[i].company} brand guidelines and identity standards.`,
           }
           audits[i] = await runBrandAuditAnalysis(audits[i], pdfContent)
         } catch (e) {
@@ -110,6 +110,7 @@ export async function POST(req: NextRequest) {
         fileSizeBytes,
         totalPages: pdfContent.totalPages,
         extractedTextLength: pdfContent.fullText.length,
+        textSnippet: pdfContent.fullText.slice(0, 12000),
       },
       executiveSummaryMn: 'Аудит хийгдэж байна...',
       modules: {

@@ -16,6 +16,8 @@ import {
   AlertTriangle,
   CheckCircle2,
   Plus,
+  BookOpen,
+  RotateCw,
 } from 'lucide-react'
 import { BrandAuditRecord } from '@/lib/brand-audit/types'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
@@ -26,6 +28,25 @@ export default function AdminAuditsPage() {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [rerunningId, setRerunningId] = useState<string | null>(null)
+
+  const handleRerun = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setRerunningId(id)
+    try {
+      const res = await fetch(`/api/brand-audit/${id}/rerun`, { method: 'POST' })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.audit) {
+          setAudits((prev) => prev.map((a) => (a.id === id ? data.audit : a)))
+        }
+      }
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setRerunningId(null)
+    }
+  }
 
   const loadAudits = async () => {
     setLoading(true)
@@ -128,6 +149,13 @@ export default function AdminAuditsPage() {
             >
               <FileCheck2 className="size-4" />
               Contracts
+            </Link>
+            <Link
+              href="/admin/resources"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-[#666666] hover:bg-[#eaeaea] hover:text-black transition"
+            >
+              <BookOpen className="size-4" />
+              Resources CMS
             </Link>
           </div>
 
@@ -315,6 +343,15 @@ export default function AdminAuditsPage() {
 
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
+                            <button
+                              type="button"
+                              onClick={(e) => handleRerun(a.id, e)}
+                              disabled={rerunningId === a.id}
+                              className="p-2 rounded-lg text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition disabled:opacity-50"
+                              title="Дахин бодох / шинэчлэх"
+                            >
+                              <RotateCw className={`size-4 ${rerunningId === a.id ? 'animate-spin' : ''}`} />
+                            </button>
                             <Link
                               href={`/brand-audit/${a.id}`}
                               target="_blank"

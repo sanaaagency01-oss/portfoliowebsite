@@ -41,6 +41,8 @@ export default function BrandAuditDetailPage({
   >('all')
   const [selectedModule, setSelectedModule] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [visualProgress, setVisualProgress] = useState(25)
+  const [pollCount, setPollCount] = useState(0)
 
   const fetchAudit = async () => {
     try {
@@ -49,6 +51,9 @@ export default function BrandAuditDetailPage({
         const data = await res.json()
         if (data.audit) {
           setAudit(data.audit)
+          if (data.audit.status === 'completed') {
+            setVisualProgress(100)
+          }
         }
       }
     } catch (e) {
@@ -62,26 +67,50 @@ export default function BrandAuditDetailPage({
     fetchAudit()
   }, [id])
 
-  // Polling while running
+  // Polling & Smooth visual progress while running
   useEffect(() => {
     if (!audit || audit.status === 'completed' || audit.status === 'failed') {
       return
     }
 
-    const interval = setInterval(() => {
-      fetchAudit()
-    }, 2500)
+    const timer = setInterval(() => {
+      setVisualProgress((prev) => (prev < 90 ? prev + 5 : 92))
+    }, 800)
 
-    return () => clearInterval(interval)
+    const interval = setInterval(() => {
+      setPollCount((c) => {
+        const next = c + 1
+        // Auto-heal: If polled 3 times (approx 6s) and still not completed, trigger rerun
+        if (next === 3) {
+          fetch(`/api/brand-audit/${id}/rerun`, { method: 'POST' })
+            .then((r) => r.json())
+            .then((d) => {
+              if (d.audit) setAudit(d.audit)
+            })
+            .catch(() => {})
+        }
+        return next
+      })
+      fetchAudit()
+    }, 2000)
+
+    return () => {
+      clearInterval(timer)
+      clearInterval(interval)
+    }
   }, [audit?.status, id])
 
   const handleRerun = async () => {
     setRerunning(true)
+    setVisualProgress(65)
     try {
       const res = await fetch(`/api/brand-audit/${id}/rerun`, { method: 'POST' })
       if (res.ok) {
         const data = await res.json()
-        if (data.audit) setAudit(data.audit)
+        if (data.audit) {
+          setAudit(data.audit)
+          setVisualProgress(100)
+        }
       }
     } catch (e) {
       console.error(e)
@@ -144,28 +173,38 @@ export default function BrandAuditDetailPage({
           <div className="rounded-3xl border border-[#e4e4e7] p-8 bg-[#fafafa] shadow-sm mb-6">
             <div className="flex items-center justify-between text-xs font-bold text-black mb-2">
               <span>{audit.currentStageMn || 'Шалгаж байна...'}</span>
-              <span>{audit.progressPct}%</span>
+              <span>{Math.max(audit.progressPct, visualProgress)}%</span>
             </div>
 
             <div className="w-full h-3 rounded-full bg-[#e4e4e7] overflow-hidden">
               <div
-                className="h-full bg-blue-600 rounded-full transition-all duration-500"
-                style={{ width: `${audit.progressPct}%` }}
+                className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                style={{ width: `${Math.max(audit.progressPct, visualProgress)}%` }}
               />
             </div>
 
             <div className="mt-6 flex flex-col items-center justify-center gap-3">
               <div className="flex items-center gap-2 text-[11px] text-[#71717a]">
                 <RefreshCw className="size-3.5 animate-spin text-blue-600" />
-                <span>Түр хүлээнэ үү. Тайлан автоматаар гарч ирнэ.</span>
+                <span>Түр хүлээнэ үү. Систем шалгууруудыг автоматаар бодож байна...</span>
               </div>
               <button
                 type="button"
                 onClick={handleRerun}
                 disabled={rerunning}
-                className="text-[11px] font-bold text-black hover:text-blue-600 underline underline-offset-2 transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black text-white text-xs font-bold hover:bg-[#27272a] transition disabled:opacity-50"
               >
-                {rerunning ? 'Боловсруулж байна...' : 'Удаж байвал энд дарж шууд тооцоолох'}
+                {rerunning ? (
+                  <>
+                    <RefreshCw className="size-3.5 animate-spin" />
+                    <span>Үр дүнг бодож байна...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="size-3.5" />
+                    <span>Шууд үр дүнг тооцоолох</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

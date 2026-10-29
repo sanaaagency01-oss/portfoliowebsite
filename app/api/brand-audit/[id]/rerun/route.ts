@@ -28,7 +28,7 @@ export async function POST(
     const pdfContent = {
       totalPages: audit.documentInfo?.totalPages || 10,
       textByPage: [],
-      fullText: `${audit.company} brand guidelines and identity standards.`,
+      fullText: audit.documentInfo?.textSnippet || `${audit.company} brand guidelines and identity standards.`,
     }
 
     try {

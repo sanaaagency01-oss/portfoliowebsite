@@ -24,7 +24,7 @@ export async function GET(
       const pdfContent = {
         totalPages: audit.documentInfo?.totalPages || 12,
         textByPage: [],
-        fullText: `${audit.company} brand guidelines and standards.`,
+        fullText: audit.documentInfo?.textSnippet || `${audit.company} brand guidelines and standards.`,
       }
       try {
         audit = await runBrandAuditAnalysis(audit, pdfContent)

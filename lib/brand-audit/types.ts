@@ -81,6 +81,7 @@ export interface AuditDocumentInfo {
   totalPages: number
   extractedTextLength: number
   fileUrl?: string
+  textSnippet?: string
 }
 
 export interface BrandAuditRecord {
