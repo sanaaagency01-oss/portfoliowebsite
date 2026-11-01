@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
+import MarkdownRenderer from '@/components/studio/MarkdownRenderer'
 import {
   getResourceBySlug,
   getAllResources,
@@ -152,9 +153,7 @@ export default async function PublicResourceDetailPage({
           {/* Type A: ARTICLE */}
           {resource.type === 'article' && (
             <div className="max-w-none mb-16 text-[#222222] leading-relaxed text-base md:text-lg">
-              <div className="whitespace-pre-line leading-relaxed space-y-6">
-                {resource.content}
-              </div>
+              <MarkdownRenderer content={resource.content} />
             </div>
           )}
 
@@ -213,8 +212,8 @@ export default async function PublicResourceDetailPage({
               </div>
 
               {resource.content && (
-                <div className="max-w-none text-base text-[#222222] leading-relaxed whitespace-pre-line">
-                  {resource.content}
+                <div className="max-w-none text-base text-[#222222] leading-relaxed">
+                  <MarkdownRenderer content={resource.content} />
                 </div>
               )}
             </div>
@@ -247,8 +246,8 @@ export default async function PublicResourceDetailPage({
               </div>
 
               {resource.content && (
-                <div className="max-w-none text-base text-[#222222] leading-relaxed whitespace-pre-line">
-                  {resource.content}
+                <div className="max-w-none text-base text-[#222222] leading-relaxed">
+                  <MarkdownRenderer content={resource.content} />
                 </div>
               )}
             </div>

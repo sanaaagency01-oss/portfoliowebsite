@@ -25,11 +25,17 @@ import {
   Bold,
   Italic,
   List,
+  ListOrdered,
   Quote,
   Loader2,
   ExternalLink,
+  Code,
+  Table,
+  Minus,
+  Columns2,
 } from 'lucide-react'
 import { ResourceItem, ResourceType, ResourceStatus, ResourceCategory, DownloadFileItem } from '@/lib/resources/types'
+import MarkdownRenderer from '@/components/studio/MarkdownRenderer'
 
 interface ResourceEditorFormProps {
   initialResource?: ResourceItem
@@ -70,7 +76,7 @@ export default function ResourceEditorForm({
   const [seoDescription, setSeoDescription] = useState(initialResource?.seo?.description || '')
 
   // UI state
-  const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit')
+  const [activeTab, setActiveTab] = useState<'edit' | 'split' | 'preview'>('edit')
   const [saving, setSaving] = useState(false)
   const [uploadingCover, setUploadingCover] = useState(false)
   const [uploadingFile, setUploadingFile] = useState(false)
@@ -161,6 +167,23 @@ export default function ResourceEditorForm({
       textarea.focus()
       textarea.setSelectionRange(start + prefix.length, start + prefix.length + (selected ? selected.length : 7))
     }, 0)
+  }
+
+  const insertSnippet = (snippet: string) => {
+    const textarea = contentTextareaRef.current
+    if (!textarea) return
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    const nextContent = content.substring(0, start) + snippet + content.substring(end)
+    setContent(nextContent)
+    setTimeout(() => {
+      textarea.focus()
+      textarea.setSelectionRange(start + snippet.length, start + snippet.length)
+    }, 0)
+  }
+
+  const insertTable = () => {
+    insertSnippet('\n| Цөм үзүүлэлт | Тайлбар | Төлөв |\n|:---|:---|:---|\n| Контент 1 | Дэлгэрэнгүй мэдээлэл | Идэвхтэй |\n| Контент 2 | Дэлгэрэнгүй мэдээлэл | Бэлэн |\n\n')
   }
 
   // Save handler
@@ -519,13 +542,13 @@ export default function ResourceEditorForm({
       {/* Case A: ARTICLE / GUIDE -> Structured Rich Markdown Editor */}
       {type === 'article' && (
         <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
             <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2">
               <FileText className="size-4" />
               <span>Нийтлэлийн агуулга (Rich Text / Markdown Editor)</span>
             </h2>
 
-            <div className="flex items-center gap-1 rounded-xl bg-white border border-[#e0e0e0] p-1">
+            <div className="flex items-center gap-1 rounded-xl bg-white border border-[#e0e0e0] p-1 shadow-2xs">
               <button
                 type="button"
                 onClick={() => setActiveTab('edit')}
@@ -537,19 +560,169 @@ export default function ResourceEditorForm({
               </button>
               <button
                 type="button"
+                onClick={() => setActiveTab('split')}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition items-center gap-1 hidden sm:inline-flex ${
+                  activeTab === 'split' ? 'bg-black text-white' : 'text-[#71717a] hover:text-black'
+                }`}
+                title="Бичих явцдаа шууд харах (Split View)"
+              >
+                <Columns2 className="size-3.5" />
+                <span>Зэрэгцээ (Шууд)</span>
+              </button>
+              <button
+                type="button"
                 onClick={() => setActiveTab('preview')}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition items-center gap-1 inline-flex ${
                   activeTab === 'preview' ? 'bg-black text-white' : 'text-[#71717a] hover:text-black'
                 }`}
               >
-                Урьдчилан харах
+                <Eye className="size-3.5" />
+                <span>Урьдчилан харах</span>
               </button>
             </div>
           </div>
 
-          {activeTab === 'edit' ? (
+          {activeTab === 'split' ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+              {/* Left Column: Markdown Input */}
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-1 p-2 bg-white rounded-t-2xl border border-b-0 border-[#e0e0e0]">
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('## ')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="H2 Гарчиг"
+                  >
+                    <Heading2 className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('### ')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="H3 Дэд гарчиг"
+                  >
+                    <Heading3 className="size-4" />
+                  </button>
+                  <div className="w-[1px] h-4 bg-[#e0e0e0] mx-0.5" />
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('**', '**')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Тод (Bold)"
+                  >
+                    <Bold className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('*', '*')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Налуу (Italic)"
+                  >
+                    <Italic className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('`', '`')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Код (Inline Code)"
+                  >
+                    <Code className="size-4" />
+                  </button>
+                  <div className="w-[1px] h-4 bg-[#e0e0e0] mx-0.5" />
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('- ')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Жагсаалт (List)"
+                  >
+                    <List className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('1. ')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Дугаарласан жагсаалт"
+                  >
+                    <ListOrdered className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('> ')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Ишлэл (Quote)"
+                  >
+                    <Quote className="size-4" />
+                  </button>
+                  <div className="w-[1px] h-4 bg-[#e0e0e0] mx-0.5" />
+                  <button
+                    type="button"
+                    onClick={() => insertTable()}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Хүснэгт оруулах (Table)"
+                  >
+                    <Table className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertSnippet('\n---\n')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Хөндлөн зураас (Divider)"
+                  >
+                    <Minus className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('[Холбоосын нэр](', ')')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Холбоос оруулах (Link)"
+                  >
+                    <Link2 className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => insertMarkdown('![Зургийн тайлбар](', ')')}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                    title="Зураг оруулах (Image)"
+                  >
+                    <ImageIcon className="size-4" />
+                  </button>
+                </div>
+
+                <textarea
+                  ref={contentTextareaRef}
+                  rows={22}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;### Дэд сэдэв&#10;- Гол санаа 1&#10;- Гол санаа 2"
+                  className="w-full h-[520px] px-4 py-3 rounded-b-2xl border border-[#e0e0e0] bg-white text-xs font-mono text-black leading-relaxed focus:outline-none focus:border-black resize-y"
+                />
+              </div>
+
+              {/* Right Column: Live Rendered Output */}
+              <div className="min-w-0">
+                <div className="flex items-center justify-between p-2.5 bg-[#f4f4f5] rounded-t-2xl border border-b-0 border-[#e0e0e0]">
+                  <span className="text-xs font-bold text-black flex items-center gap-1.5">
+                    <Sparkles className="size-3.5 text-blue-600" />
+                    <span>Шууд харагдах байдал (Live Preview)</span>
+                  </span>
+                  <span className="text-[11px] text-[#71717a]">
+                    Бичих явцад шууд хөрвөнө
+                  </span>
+                </div>
+                <div className="rounded-b-2xl border border-[#e0e0e0] bg-white p-5 md:p-6 h-[520px] overflow-y-auto">
+                  {content ? (
+                    <MarkdownRenderer content={content} />
+                  ) : (
+                    <p className="text-xs text-[#71717a] italic">
+                      Одоогоор агуулга бичигдээгүй байна. Зүүн талд бичсэнээр энд шууд хувирч харагдана.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : activeTab === 'edit' ? (
             <div>
-              {/* Quick Formatting Toolbar */}
+              {/* Full Width Quick Formatting Toolbar */}
               <div className="flex flex-wrap items-center gap-1.5 p-2 bg-white rounded-t-2xl border border-b-0 border-[#e0e0e0]">
                 <button
                   type="button"
@@ -584,6 +757,14 @@ export default function ResourceEditorForm({
                 >
                   <Italic className="size-4" />
                 </button>
+                <button
+                  type="button"
+                  onClick={() => insertMarkdown('`', '`')}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                  title="Код (Inline Code)"
+                >
+                  <Code className="size-4" />
+                </button>
                 <div className="w-[1px] h-4 bg-[#e0e0e0] mx-1" />
                 <button
                   type="button"
@@ -595,25 +776,58 @@ export default function ResourceEditorForm({
                 </button>
                 <button
                   type="button"
+                  onClick={() => insertMarkdown('1. ')}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                  title="Дугаарласан жагсаалт"
+                >
+                  <ListOrdered className="size-4" />
+                </button>
+                <button
+                  type="button"
                   onClick={() => insertMarkdown('> ')}
                   className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
                   title="Ишлэл (Quote)"
                 >
                   <Quote className="size-4" />
                 </button>
+                <div className="w-[1px] h-4 bg-[#e0e0e0] mx-1" />
                 <button
                   type="button"
-                  onClick={() => insertMarkdown('[Холбоосын нэр](', ')') }
+                  onClick={() => insertTable()}
                   className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
-                  title="Холбоос оруулах"
+                  title="Хүснэгт оруулах (Table)"
+                >
+                  <Table className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => insertSnippet('\n---\n')}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                  title="Хөндлөн зураас (Divider)"
+                >
+                  <Minus className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => insertMarkdown('[Холбоосын нэр](', ')')}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                  title="Холбоос оруулах (Link)"
                 >
                   <Link2 className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => insertMarkdown('![Зургийн тайлбар](', ')')}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
+                  title="Зураг оруулах (Image)"
+                >
+                  <ImageIcon className="size-4" />
                 </button>
               </div>
 
               <textarea
                 ref={contentTextareaRef}
-                rows={16}
+                rows={18}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;### Дэд сэдэв&#10;- Гол санаа 1&#10;- Гол санаа 2"
@@ -621,10 +835,12 @@ export default function ResourceEditorForm({
               />
             </div>
           ) : (
-            <div className="rounded-2xl border border-[#e0e0e0] bg-white p-6 md:p-8 max-h-[500px] overflow-y-auto prose prose-sm max-w-none text-xs leading-relaxed">
-              <div className="whitespace-pre-line font-sans text-sm text-[#27272a]">
-                {content || 'Одоогоор агуулга бичигдээгүй байна.'}
-              </div>
+            <div className="rounded-2xl border border-[#e0e0e0] bg-white p-6 md:p-10 min-h-[400px] max-h-[650px] overflow-y-auto shadow-xs">
+              {content ? (
+                <MarkdownRenderer content={content} />
+              ) : (
+                <p className="text-xs text-[#71717a] italic">Одоогоор агуулга бичигдээгүй байна.</p>
+              )}
             </div>
           )}
         </div>
