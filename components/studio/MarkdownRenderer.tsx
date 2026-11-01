@@ -137,19 +137,19 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
             </pre>
           ),
           img: ({ src, alt }) => (
-            <span className="block my-6">
+            <figure className="my-8 text-center">
               <img
                 src={typeof src === 'string' ? src : ''}
                 alt={alt || ''}
-                className="rounded-2xl max-h-[500px] w-auto mx-auto object-cover border border-[#e4e4e7] shadow-sm"
+                className="rounded-2xl max-h-[600px] w-auto max-w-full mx-auto object-contain border border-[#e4e4e7] shadow-sm bg-neutral-50"
                 loading="lazy"
               />
               {alt && (
-                <span className="block text-center text-xs text-[#71717a] mt-2 italic">
+                <figcaption className="text-center text-xs text-[#71717a] mt-2.5 font-medium italic">
                   {alt}
-                </span>
+                </figcaption>
               )}
-            </span>
+            </figure>
           ),
           a: ({ href, children }) => (
             <a

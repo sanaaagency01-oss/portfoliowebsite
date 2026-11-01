@@ -33,6 +33,7 @@ import {
   Table,
   Minus,
   Columns2,
+  X,
 } from 'lucide-react'
 import { ResourceItem, ResourceType, ResourceStatus, ResourceCategory, DownloadFileItem } from '@/lib/resources/types'
 import MarkdownRenderer from '@/components/studio/MarkdownRenderer'
@@ -52,6 +53,7 @@ export default function ResourceEditorForm({
   const coverInputRef = useRef<HTMLInputElement>(null)
   const downloadFileInputRef = useRef<HTMLInputElement>(null)
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null)
+  const inlineImageInputRef = useRef<HTMLInputElement>(null)
 
   // Form states
   const [type, setType] = useState<ResourceType>(initialResource?.type || 'article')
@@ -80,6 +82,13 @@ export default function ResourceEditorForm({
   const [saving, setSaving] = useState(false)
   const [uploadingCover, setUploadingCover] = useState(false)
   const [uploadingFile, setUploadingFile] = useState(false)
+  const [uploadingInlineImage, setUploadingInlineImage] = useState(false)
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false)
+  const [imageModalTab, setImageModalTab] = useState<'upload' | 'url'>('upload')
+  const [imageUrlInput, setImageUrlInput] = useState('')
+  const [imageCaptionInput, setImageCaptionInput] = useState('')
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null)
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
@@ -184,6 +193,103 @@ export default function ResourceEditorForm({
 
   const insertTable = () => {
     insertSnippet('\n| Цөм үзүүлэлт | Тайлбар | Төлөв |\n|:---|:---|:---|\n| Контент 1 | Дэлгэрэнгүй мэдээлэл | Идэвхтэй |\n| Контент 2 | Дэлгэрэнгүй мэдээлэл | Бэлэн |\n\n')
+  }
+
+  // Upload and insert inline image into article content
+  const uploadAndInsertImage = async (file: File, customCaption?: string) => {
+    if (!file.type.startsWith('image/')) {
+      setError('Зөвхөн зурган файл (PNG, JPG, WebP, GIF, SVG) оруулах боломжтой.')
+      return
+    }
+
+    if (file.size > 30 * 1024 * 1024) {
+      setError('Зургийн хэмжээ 30MB-аас ихгүй байх ёстой.')
+      return
+    }
+
+    setUploadingInlineImage(true)
+    setError(null)
+
+    const textarea = contentTextareaRef.current
+    const cursor = textarea ? textarea.selectionStart : content.length
+
+    const cleanName = file.name.replace(/\.[^/.]+$/, '').trim()
+    const captionText = customCaption?.trim() || cleanName || 'Зураг'
+    const placeholder = `\n\n![⏳ Зураг байршуулж байна (${captionText})...]()\n\n`
+
+    // Insert placeholder at cursor
+    const nextContent = content.substring(0, cursor) + placeholder + content.substring(cursor)
+    setContent(nextContent)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/admin/resources/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Зураг хуулахад алдаа гарлаа')
+      }
+
+      const finalMarkdown = `\n\n![${captionText}](${data.url})\n\n`
+      setContent((curr) => curr.replace(placeholder, finalMarkdown))
+      setSuccessMsg('Зураг амжилттай нийтлэлд оруулагдлаа!')
+      setTimeout(() => setSuccessMsg(null), 3000)
+
+      // Reset modal state if open
+      setIsImageModalOpen(false)
+      setSelectedImageFile(null)
+      setImagePreviewUrl(null)
+      setImageCaptionInput('')
+    } catch (err: any) {
+      setContent((curr) => curr.replace(placeholder, ''))
+      setError(err.message || 'Зураг байршуулахад алдаа гарлаа')
+    } finally {
+      setUploadingInlineImage(false)
+    }
+  }
+
+  // Insert image via direct URL
+  const handleInsertImageUrl = () => {
+    if (!imageUrlInput.trim()) {
+      setError('Зургийн URL хаягийг оруулна уу.')
+      return
+    }
+
+    const caption = imageCaptionInput.trim() || 'Зураг'
+    const markdown = `\n\n![${caption}](${imageUrlInput.trim()})\n\n`
+    insertSnippet(markdown)
+    setIsImageModalOpen(false)
+    setImageUrlInput('')
+    setImageCaptionInput('')
+    setSuccessMsg('Зургийн холбоос амжилттай оруулагдлаа!')
+    setTimeout(() => setSuccessMsg(null), 3000)
+  }
+
+  // Handle Drag & Drop on Textarea
+  const handleDropOnTextarea = (e: React.DragEvent<HTMLTextAreaElement>) => {
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0]
+      if (file.type.startsWith('image/')) {
+        e.preventDefault()
+        uploadAndInsertImage(file)
+      }
+    }
+  }
+
+  // Handle Paste (Ctrl+V) of images on Textarea
+  const handlePasteOnTextarea = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    if (e.clipboardData.files && e.clipboardData.files.length > 0) {
+      const file = e.clipboardData.files[0]
+      if (file.type.startsWith('image/')) {
+        e.preventDefault()
+        uploadAndInsertImage(file, 'Дэлгэцийн агшин')
+      }
+    }
   }
 
   // Save handler
@@ -680,20 +786,40 @@ export default function ResourceEditorForm({
                   </button>
                   <button
                     type="button"
-                    onClick={() => insertMarkdown('![Зургийн тайлбар](', ')')}
-                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
-                    title="Зураг оруулах (Image)"
+                    onClick={() => {
+                      setSelectedImageFile(null)
+                      setImagePreviewUrl(null)
+                      setImageCaptionInput('')
+                      setImageUrlInput('')
+                      setIsImageModalOpen(true)
+                    }}
+                    disabled={uploadingInlineImage}
+                    className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black transition flex items-center gap-1"
+                    title="Зураг оруулах (Upload эсвэл URL)"
                   >
-                    <ImageIcon className="size-4" />
+                    {uploadingInlineImage ? (
+                      <Loader2 className="size-4 animate-spin text-blue-600" />
+                    ) : (
+                      <ImageIcon className="size-4 text-black" />
+                    )}
                   </button>
                 </div>
+
+                {uploadingInlineImage && (
+                  <div className="flex items-center gap-2 px-3.5 py-2 bg-blue-50 border border-blue-200 text-blue-700 text-xs rounded-xl mb-2 animate-pulse font-medium">
+                    <Loader2 className="size-3.5 animate-spin shrink-0 text-blue-600" />
+                    <span>Зураг сервер рүү байршуулж байна... Нийтлэлд автоматаар орох болно.</span>
+                  </div>
+                )}
 
                 <textarea
                   ref={contentTextareaRef}
                   rows={22}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;### Дэд сэдэв&#10;- Гол санаа 1&#10;- Гол санаа 2"
+                  onDrop={handleDropOnTextarea}
+                  onPaste={handlePasteOnTextarea}
+                  placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
                   className="w-full h-[520px] px-4 py-3 rounded-b-2xl border border-[#e0e0e0] bg-white text-xs font-mono text-black leading-relaxed focus:outline-none focus:border-black resize-y"
                 />
               </div>
@@ -817,20 +943,40 @@ export default function ResourceEditorForm({
                 </button>
                 <button
                   type="button"
-                  onClick={() => insertMarkdown('![Зургийн тайлбар](', ')')}
-                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black"
-                  title="Зураг оруулах (Image)"
+                  onClick={() => {
+                    setSelectedImageFile(null)
+                    setImagePreviewUrl(null)
+                    setImageCaptionInput('')
+                    setImageUrlInput('')
+                    setIsImageModalOpen(true)
+                  }}
+                  disabled={uploadingInlineImage}
+                  className="p-1.5 rounded-lg hover:bg-[#fafafa] text-xs font-bold text-black transition flex items-center gap-1"
+                  title="Зураг оруулах (Upload эсвэл URL)"
                 >
-                  <ImageIcon className="size-4" />
+                  {uploadingInlineImage ? (
+                    <Loader2 className="size-4 animate-spin text-blue-600" />
+                  ) : (
+                    <ImageIcon className="size-4 text-black" />
+                  )}
                 </button>
               </div>
+
+              {uploadingInlineImage && (
+                <div className="flex items-center gap-2 px-3.5 py-2 bg-blue-50 border border-blue-200 text-blue-700 text-xs rounded-xl mb-2 animate-pulse font-medium">
+                  <Loader2 className="size-3.5 animate-spin shrink-0 text-blue-600" />
+                  <span>Зураг сервер рүү байршуулж байна... Нийтлэлд автоматаар орох болно.</span>
+                </div>
+              )}
 
               <textarea
                 ref={contentTextareaRef}
                 rows={18}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;### Дэд сэдэв&#10;- Гол санаа 1&#10;- Гол санаа 2"
+                onDrop={handleDropOnTextarea}
+                onPaste={handlePasteOnTextarea}
+                placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
                 className="w-full px-4 py-3 rounded-b-2xl border border-[#e0e0e0] bg-white text-xs font-mono text-black leading-relaxed focus:outline-none focus:border-black"
               />
             </div>
@@ -974,6 +1120,228 @@ export default function ResourceEditorForm({
           />
         </div>
       </div>
+
+      {/* Hidden File Input for Inline Images */}
+      <input
+        ref={inlineImageInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0]
+            setSelectedImageFile(file)
+            setImagePreviewUrl(URL.createObjectURL(file))
+            if (!imageCaptionInput) {
+              setImageCaptionInput(file.name.replace(/\.[^/.]+$/, ''))
+            }
+          }
+        }}
+      />
+
+      {/* INLINE IMAGE INSERTION MODAL */}
+      {isImageModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl border border-[#e0e0e0] max-w-md w-full p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-[#f4f4f5]">
+              <div className="flex items-center gap-2.5">
+                <div className="size-9 rounded-xl bg-black text-white flex items-center justify-center">
+                  <ImageIcon className="size-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-black">Нийтлэлд зураг оруулах</h3>
+                  <p className="text-[11px] text-[#71717a]">Файлаас хуулах эсвэл холбоос ашиглана</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsImageModalOpen(false)
+                  setSelectedImageFile(null)
+                  setImagePreviewUrl(null)
+                }}
+                className="p-1.5 rounded-full hover:bg-[#f4f4f5] text-[#71717a] hover:text-black transition"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+
+            {/* Mode Switcher Tabs */}
+            <div className="flex items-center gap-1 rounded-xl bg-[#f4f4f5] p-1 my-4">
+              <button
+                type="button"
+                onClick={() => setImageModalTab('upload')}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                  imageModalTab === 'upload' ? 'bg-white text-black shadow-2xs' : 'text-[#71717a] hover:text-black'
+                }`}
+              >
+                <UploadCloud className="size-3.5" />
+                <span>Компьютерээс хуулах</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setImageModalTab('url')}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                  imageModalTab === 'url' ? 'bg-white text-black shadow-2xs' : 'text-[#71717a] hover:text-black'
+                }`}
+              >
+                <Link2 className="size-3.5" />
+                <span>Холбоос (URL)</span>
+              </button>
+            </div>
+
+            {/* Tab A: Upload File */}
+            {imageModalTab === 'upload' ? (
+              <div className="space-y-4">
+                <div
+                  onClick={() => inlineImageInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault()
+                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                      const file = e.dataTransfer.files[0]
+                      if (file.type.startsWith('image/')) {
+                        setSelectedImageFile(file)
+                        setImagePreviewUrl(URL.createObjectURL(file))
+                        if (!imageCaptionInput) {
+                          setImageCaptionInput(file.name.replace(/\.[^/.]+$/, ''))
+                        }
+                      }
+                    }
+                  }}
+                  className="border-2 border-dashed border-[#d4d4d8] hover:border-black rounded-2xl p-6 text-center cursor-pointer transition bg-[#fafafa] hover:bg-neutral-50"
+                >
+                  {imagePreviewUrl ? (
+                    <div className="space-y-3">
+                      <img
+                        src={imagePreviewUrl}
+                        alt="Preview"
+                        className="max-h-48 mx-auto rounded-xl object-contain border border-[#e4e4e7] bg-white shadow-2xs"
+                      />
+                      <p className="text-xs font-semibold text-black truncate">{selectedImageFile?.name}</p>
+                      <span className="text-[11px] text-blue-600 font-medium">Өөр зураг сонгох бол энд дарна уу</span>
+                    </div>
+                  ) : (
+                    <div className="space-y-2 py-4">
+                      <div className="size-10 rounded-full bg-white border border-[#e4e4e7] text-black flex items-center justify-center mx-auto shadow-2xs">
+                        <UploadCloud className="size-5" />
+                      </div>
+                      <p className="text-xs font-bold text-black">Зураг сонгох эсвэл энд чирч оруулна уу</p>
+                      <p className="text-[11px] text-[#71717a]">PNG, JPG, WebP, GIF, SVG (30MB хүртэл)</p>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1">
+                    Зургийн тайлбар (Caption / Alt)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Жишээ: Интерфэйсийн дэлгэц"
+                    value={imageCaptionInput}
+                    onChange={(e) => setImageCaptionInput(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#e0e0e0] bg-white text-xs text-black focus:outline-none focus:border-black"
+                  />
+                </div>
+
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f4f4f5]">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsImageModalOpen(false)
+                      setSelectedImageFile(null)
+                      setImagePreviewUrl(null)
+                    }}
+                    className="px-4 py-2 rounded-xl border border-[#e0e0e0] text-xs font-bold text-[#71717a] hover:text-black transition"
+                  >
+                    Болих
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (selectedImageFile) {
+                        uploadAndInsertImage(selectedImageFile, imageCaptionInput)
+                      }
+                    }}
+                    disabled={!selectedImageFile || uploadingInlineImage}
+                    className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-black text-white text-xs font-bold hover:bg-neutral-800 transition disabled:opacity-50 shadow-xs"
+                  >
+                    {uploadingInlineImage && <Loader2 className="size-3.5 animate-spin" />}
+                    <span>{uploadingInlineImage ? 'Байршуулж байна...' : 'Нийтлэлд оруулах'}</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Tab B: URL Input */
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1">
+                    Зургийн URL хаяг
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://example.com/images/screenshot.png"
+                    value={imageUrlInput}
+                    onChange={(e) => setImageUrlInput(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#e0e0e0] bg-white text-xs text-black focus:outline-none focus:border-black font-mono"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1">
+                    Зургийн тайлбар (Caption / Alt)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Жишээ: DaVinci Resolve төслийн дэлгэц"
+                    value={imageCaptionInput}
+                    onChange={(e) => setImageCaptionInput(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#e0e0e0] bg-white text-xs text-black focus:outline-none focus:border-black"
+                  />
+                </div>
+
+                {imageUrlInput.trim() && (
+                  <div className="rounded-xl border border-[#e4e4e7] p-2 bg-[#fafafa] text-center">
+                    <p className="text-[10px] text-[#71717a] mb-1 font-semibold">Урьдчилан харах:</p>
+                    <img
+                      src={imageUrlInput.trim()}
+                      alt="Preview"
+                      className="max-h-36 mx-auto rounded-lg object-contain"
+                      onError={(e) => {
+                        ;(e.currentTarget as HTMLElement).style.display = 'none'
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f4f4f5]">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsImageModalOpen(false)
+                      setImageUrlInput('')
+                      setImageCaptionInput('')
+                    }}
+                    className="px-4 py-2 rounded-xl border border-[#e0e0e0] text-xs font-bold text-[#71717a] hover:text-black transition"
+                  >
+                    Болих
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertImageUrl}
+                    disabled={!imageUrlInput.trim()}
+                    className="px-5 py-2 rounded-xl bg-black text-white text-xs font-bold hover:bg-neutral-800 transition disabled:opacity-50 shadow-xs"
+                  >
+                    Нийтлэлд оруулах
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* STICKY BOTTOM ACTIONS BAR */}
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#e0e0e0] bg-white/95 backdrop-blur-md px-6 py-4 shadow-lg">
