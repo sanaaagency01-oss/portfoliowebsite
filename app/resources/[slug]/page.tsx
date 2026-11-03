@@ -32,8 +32,12 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
-  const res = await getResourceBySlug(slug)
+  const { slug: rawSlug } = await params
+  let slug = rawSlug
+  try {
+    slug = decodeURIComponent(rawSlug)
+  } catch {}
+  const res = (await getResourceBySlug(slug)) || (await getResourceBySlug(rawSlug))
   if (!res) return { title: 'Материал олдсонгүй | baysaass' }
 
   return {
@@ -52,8 +56,12 @@ export default async function PublicResourceDetailPage({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
-  const resource = await getResourceBySlug(slug)
+  const { slug: rawSlug } = await params
+  let slug = rawSlug
+  try {
+    slug = decodeURIComponent(rawSlug)
+  } catch {}
+  const resource = (await getResourceBySlug(slug)) || (await getResourceBySlug(rawSlug))
 
   if (!resource || resource.status !== 'published') {
     notFound()
@@ -170,12 +178,12 @@ export default async function PublicResourceDetailPage({
                 </p>
 
                 <div className="space-y-3">
-                  {resource.downloadFiles.length === 0 ? (
+                  {(resource.downloadFiles || []).length === 0 ? (
                     <div className="p-4 rounded-2xl bg-white border border-[#e0e0e0] text-xs text-[#888888]">
                       Одоогоор татах файл байршуулаагүй байна.
                     </div>
                   ) : (
-                    resource.downloadFiles.map((file, idx) => (
+                    (resource.downloadFiles || []).map((file, idx) => (
                       <div
                         key={file.id || idx}
                         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl border border-[#e0e0e0] bg-white hover:border-black/30 transition shadow-xs"

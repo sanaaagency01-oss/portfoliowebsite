@@ -22,6 +22,7 @@ interface ResourcesStore {
 
 let inMemoryStore: ResourcesStore | null = null
 let d1Initialized = false
+let d1InitPromise: Promise<boolean> | null = null
 
 function getStoreFilePath(): string {
   return IS_SERVERLESS ? TMP_STORE_FILE : LOCAL_STORE_FILE
@@ -88,42 +89,48 @@ function saveStore(): void {
 
 async function initD1ResourcesSchema(): Promise<boolean> {
   if (d1Initialized || !isCloudflareConfigured()) return d1Initialized
-  const sql = `
-    CREATE TABLE IF NOT EXISTS resources (
-      id TEXT PRIMARY KEY,
-      slug TEXT UNIQUE NOT NULL,
-      type TEXT NOT NULL,
-      title TEXT NOT NULL,
-      category TEXT NOT NULL,
-      status TEXT NOT NULL,
-      featured INTEGER NOT NULL DEFAULT 0,
-      data TEXT NOT NULL,
-      created_at TEXT NOT NULL,
-      updated_at TEXT NOT NULL,
-      published_at TEXT
-    );
-    CREATE TABLE IF NOT EXISTS resource_categories (
-      id TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      name_mn TEXT NOT NULL,
-      slug TEXT UNIQUE NOT NULL,
-      description TEXT,
-      sort_order INTEGER DEFAULT 0
-    );
-    CREATE TABLE IF NOT EXISTS resource_assets (
-      id TEXT PRIMARY KEY,
-      file_name TEXT NOT NULL,
-      mime_type TEXT NOT NULL,
-      file_size INTEGER NOT NULL,
-      data_base64 TEXT NOT NULL,
-      created_at TEXT NOT NULL
-    );
-  `
-  const res = await executeD1Query(sql)
-  if (res.success) {
-    d1Initialized = true
-  }
-  return res.success
+  if (d1InitPromise) return d1InitPromise
+
+  d1InitPromise = (async () => {
+    const sql = `
+      CREATE TABLE IF NOT EXISTS resources (
+        id TEXT PRIMARY KEY,
+        slug TEXT UNIQUE NOT NULL,
+        type TEXT NOT NULL,
+        title TEXT NOT NULL,
+        category TEXT NOT NULL,
+        status TEXT NOT NULL,
+        featured INTEGER NOT NULL DEFAULT 0,
+        data TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        published_at TEXT
+      );
+      CREATE TABLE IF NOT EXISTS resource_categories (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        name_mn TEXT NOT NULL,
+        slug TEXT UNIQUE NOT NULL,
+        description TEXT,
+        sort_order INTEGER DEFAULT 0
+      );
+      CREATE TABLE IF NOT EXISTS resource_assets (
+        id TEXT PRIMARY KEY,
+        file_name TEXT NOT NULL,
+        mime_type TEXT NOT NULL,
+        file_size INTEGER NOT NULL,
+        data_base64 TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      );
+    `
+    const res = await executeD1Query(sql)
+    if (res.success) {
+      d1Initialized = true
+    }
+    return res.success
+  })()
+
+  return d1InitPromise
 }
 
 export async function getAllResources(options?: {
@@ -220,13 +227,24 @@ function applySearchAndSort(items: ResourceItem[], search?: string): ResourceIte
 }
 
 export async function getResourceBySlug(slug: string): Promise<ResourceItem | null> {
+  if (!slug) return null
   const store = ensureInitialStore()
+
+  let decodedSlug = slug
+  try {
+    decodedSlug = decodeURIComponent(slug)
+  } catch {}
+
+  let encodedSlug = slug
+  try {
+    encodedSlug = encodeURIComponent(decodedSlug)
+  } catch {}
 
   if (isCloudflareConfigured()) {
     try {
       await initD1ResourcesSchema()
-      const sql = `SELECT data FROM resources WHERE slug = ? LIMIT 1;`
-      const res = await executeD1Query<{ data: string }>(sql, [slug])
+      const sql = `SELECT data FROM resources WHERE slug = ? OR slug = ? OR slug = ? LIMIT 1;`
+      const res = await executeD1Query<{ data: string }>(sql, [decodedSlug, slug, encodedSlug])
       if (res.success) {
         if (res.results && res.results.length > 0) {
           const row = res.results[0]
@@ -243,7 +261,11 @@ export async function getResourceBySlug(slug: string): Promise<ResourceItem | nu
     }
   }
 
-  return Object.values(store.resources).find((r) => r.slug === slug) || null
+  return (
+    Object.values(store.resources).find(
+      (r) => r.slug === slug || r.slug === decodedSlug || r.slug === encodedSlug
+    ) || null
+  )
 }
 
 export async function getResourceById(id: string): Promise<ResourceItem | null> {
@@ -274,6 +296,13 @@ export async function getResourceById(id: string): Promise<ResourceItem | null> 
 
 export async function saveResource(item: ResourceItem): Promise<void> {
   const store = ensureInitialStore()
+  if (item.slug) {
+    try {
+      item.slug = decodeURIComponent(item.slug.trim())
+    } catch {
+      item.slug = item.slug.trim()
+    }
+  }
   item.updatedAt = new Date().toISOString()
   if (item.status === 'published' && !item.publishedAt) {
     item.publishedAt = new Date().toISOString()

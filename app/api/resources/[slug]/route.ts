@@ -8,8 +8,12 @@ export async function GET(
   context: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { slug } = await context.params
-    const resource = await getResourceBySlug(slug)
+    const { slug: rawSlug } = await context.params
+    let slug = rawSlug
+    try {
+      slug = decodeURIComponent(rawSlug)
+    } catch {}
+    const resource = (await getResourceBySlug(slug)) || (await getResourceBySlug(rawSlug))
 
     if (!resource || resource.status !== 'published') {
       return NextResponse.json(

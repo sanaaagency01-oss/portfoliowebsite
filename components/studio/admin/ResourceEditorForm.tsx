@@ -92,15 +92,26 @@ export default function ResourceEditorForm({
   const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
-  // Auto-generate slug on title change
+  // Auto-generate clean, URL-friendly slug on title change
   const handleTitleChange = (val: string) => {
     setTitle(val)
     if (!isEditing || !slug) {
-      const autoSlug = val
+      const MONGOLIAN_MAP: Record<string, string> = {
+        а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'ye', ё: 'yo', ж: 'j', з: 'z',
+        и: 'i', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', ө: 'u', п: 'p',
+        р: 'r', с: 's', т: 't', у: 'u', ү: 'u', ф: 'f', х: 'kh', ц: 'ts', ч: 'ch',
+        ш: 'sh', щ: 'shch', ъ: '', ы: 'y', ь: 'i', э: 'e', ю: 'yu', я: 'ya',
+      }
+      const transliterated = val
         .toLowerCase()
-        .replace(/[^a-z0-9\u0400-\u04FF]+/gi, '-')
-        .replace(/^-|-$/g, '')
-      setSlug(autoSlug)
+        .split('')
+        .map((ch) => (MONGOLIAN_MAP[ch] !== undefined ? MONGOLIAN_MAP[ch] : ch))
+        .join('')
+      const autoSlug = transliterated
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+      setSlug(autoSlug || val.toLowerCase().replace(/[^a-z0-9\u0400-\u04FF]+/gi, '-').replace(/^-|-$/g, ''))
     }
   }
 

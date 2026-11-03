@@ -48,8 +48,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Гарчиг заавал шаардлагатай' }, { status: 400 })
     }
 
-    // Auto-generate slug if not provided
-    const slugBase = body.slug?.trim() || body.title.toLowerCase().replace(/[^a-z0-9\u0400-\u04FF]+/gi, '-').replace(/^-|-$/g, '')
+    // Auto-generate clean slug if not provided
+    const MONGOLIAN_MAP: Record<string, string> = {
+      а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'ye', ё: 'yo', ж: 'j', з: 'z',
+      и: 'i', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', ө: 'u', п: 'p',
+      р: 'r', с: 's', т: 't', у: 'u', ү: 'u', ф: 'f', х: 'kh', ц: 'ts', ч: 'ch',
+      ш: 'sh', щ: 'shch', ъ: '', ы: 'y', ь: 'i', э: 'e', ю: 'yu', я: 'ya',
+    }
+    const transliterated = (body.title || '')
+      .toLowerCase()
+      .split('')
+      .map((ch: string) => (MONGOLIAN_MAP[ch] !== undefined ? MONGOLIAN_MAP[ch] : ch))
+      .join('')
+    const autoSlug = transliterated.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+
+    let slugBase = body.slug?.trim() || autoSlug || body.title.toLowerCase().replace(/[^a-z0-9\u0400-\u04FF]+/gi, '-').replace(/^-|-$/g, '')
+    try {
+      slugBase = decodeURIComponent(slugBase)
+    } catch {}
     const slug = slugBase || `resource-${Date.now()}`
 
     const newId = `res_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`
