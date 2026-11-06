@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { ResourceItem, ResourceCategory, ResourceAsset, ResourceStatus, ResourceType } from './types'
+import { ResourceItem, ResourceCategory, ResourceAsset, ResourceStatus, ResourceType, ResourceLead } from './types'
 import { DEFAULT_CATEGORIES, DEFAULT_RESOURCES } from './defaults'
 import { executeD1Query, isCloudflareConfigured } from '../cloudflare'
 
@@ -18,6 +18,7 @@ interface ResourcesStore {
   resources: Record<string, ResourceItem>
   categories: Record<string, ResourceCategory>
   assets: Record<string, ResourceAsset>
+  leads: Record<string, ResourceLead>
 }
 
 let inMemoryStore: ResourcesStore | null = null
@@ -35,6 +36,7 @@ function ensureInitialStore(): ResourcesStore {
     resources: {},
     categories: {},
     assets: {},
+    leads: {},
   }
 
   // Pre-seed default categories
@@ -56,6 +58,7 @@ function ensureInitialStore(): ResourcesStore {
         initial.resources = parsed.resources || {}
         initial.categories = { ...initial.categories, ...(parsed.categories || {}) }
         initial.assets = parsed.assets || {}
+        initial.leads = parsed.leads || {}
       }
     }
   } catch (e) {
@@ -120,6 +123,14 @@ async function initD1ResourcesSchema(): Promise<boolean> {
         mime_type TEXT NOT NULL,
         file_size INTEGER NOT NULL,
         data_base64 TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS resource_leads (
+        id TEXT PRIMARY KEY,
+        resource_id TEXT NOT NULL,
+        resource_title TEXT NOT NULL,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
         created_at TEXT NOT NULL
       );
     `
@@ -516,4 +527,58 @@ export async function incrementResourceDownloads(id: string): Promise<void> {
     item.downloadsCount = (item.downloadsCount || 0) + 1
     await saveResource(item)
   }
+}
+
+export async function saveResourceLead(lead: ResourceLead): Promise<void> {
+  const store = ensureInitialStore()
+  store.leads[lead.id] = lead
+  saveStore()
+
+  if (isCloudflareConfigured()) {
+    try {
+      await initD1ResourcesSchema()
+      const sql = `
+        INSERT INTO resource_leads (id, resource_id, resource_title, name, email, created_at)
+        VALUES (?, ?, ?, ?, ?, ?);
+      `
+      await executeD1Query(sql, [
+        lead.id,
+        lead.resourceId,
+        lead.resourceTitle,
+        lead.name,
+        lead.email,
+        lead.createdAt,
+      ])
+    } catch (e) {
+      console.warn('[D1 saveResourceLead error]', e)
+    }
+  }
+}
+
+export async function getAllResourceLeads(): Promise<ResourceLead[]> {
+  const store = ensureInitialStore()
+
+  if (isCloudflareConfigured()) {
+    try {
+      await initD1ResourcesSchema()
+      const sql = `SELECT * FROM resource_leads ORDER BY created_at DESC;`
+      const res = await executeD1Query<any>(sql)
+      if (res.success && Array.isArray(res.results)) {
+        return res.results.map((r: any) => ({
+          id: r.id,
+          resourceId: r.resource_id,
+          resourceTitle: r.resource_title,
+          name: r.name,
+          email: r.email,
+          createdAt: r.created_at,
+        }))
+      }
+    } catch (e) {
+      console.warn('[D1 getAllResourceLeads error]', e)
+    }
+  }
+
+  return Object.values(store.leads).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )
 }

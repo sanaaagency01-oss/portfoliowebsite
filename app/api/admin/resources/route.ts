@@ -92,6 +92,7 @@ export async function POST(req: NextRequest) {
         description: body.summary,
       },
       status: (body.status || 'draft') as ResourceStatus,
+      gated: body.gated !== false,
       viewsCount: 0,
       downloadsCount: 0,
       createdAt: new Date().toISOString(),

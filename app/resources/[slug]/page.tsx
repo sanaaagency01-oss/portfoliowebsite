@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 import MarkdownRenderer from '@/components/studio/MarkdownRenderer'
+import GatedDownloadSection from '@/components/studio/resources/GatedDownloadSection'
 import {
   getResourceBySlug,
   getAllResources,
@@ -160,76 +161,45 @@ export default async function PublicResourceDetailPage({
 
           {/* Type A: ARTICLE */}
           {resource.type === 'article' && (
-            <div className="max-w-none mb-16 text-[#222222] leading-relaxed text-base md:text-lg">
-              <MarkdownRenderer content={resource.content} />
+            <div className="mb-16 space-y-12">
+              <div className="max-w-none text-[#222222] leading-relaxed text-base md:text-lg">
+                <MarkdownRenderer content={resource.content} />
+              </div>
+
+              {(resource.downloadFiles || []).length > 0 && (
+                <GatedDownloadSection
+                  resourceId={resource.id}
+                  resourceTitle={resource.title}
+                  downloadFiles={resource.downloadFiles}
+                  gated={resource.gated !== false}
+                />
+              )}
             </div>
           )}
 
           {/* Type B: DOWNLOAD / TEMPLATE */}
           {resource.type === 'download' && (
-            <div className="mb-16 space-y-8">
-              <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-8 md:p-10 shadow-xs">
-                <h2 className="text-xl font-bold text-black mb-2 flex items-center gap-2">
-                  <Download className="size-5 text-blue-600" />
-                  <span>Татаж авах файлууд</span>
-                </h2>
-                <p className="text-xs text-[#666666] mb-6">
-                  Дараах эх файлуудыг өөрийн брэнд дизайны төсөлд үнэгүй ашиглах боломжтой.
-                </p>
-
-                <div className="space-y-3">
-                  {(resource.downloadFiles || []).length === 0 ? (
-                    <div className="p-4 rounded-2xl bg-white border border-[#e0e0e0] text-xs text-[#888888]">
-                      Одоогоор татах файл байршуулаагүй байна.
-                    </div>
-                  ) : (
-                    (resource.downloadFiles || []).map((file, idx) => (
-                      <div
-                        key={file.id || idx}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl border border-[#e0e0e0] bg-white hover:border-black/30 transition shadow-xs"
-                      >
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
-                              {file.format}
-                            </span>
-                            <p className="font-bold text-sm text-black truncate">{file.name}</p>
-                          </div>
-                          {file.description && (
-                            <p className="text-xs text-[#666666] mt-1">{file.description}</p>
-                          )}
-                          <span className="text-[11px] text-[#888888] mt-1 block">
-                            Хэмжээ: {file.fileSize || 'Тодорхойгүй'}
-                          </span>
-                        </div>
-
-                        <a
-                          href={file.fileUrl}
-                          download
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shrink-0 shadow-lg"
-                        >
-                          <Download className="size-3.5" />
-                          <span>Файл татах</span>
-                        </a>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
+            <div className="mb-16 space-y-12">
+              {/* Detailed Article, Screenshots & Guide if written by author */}
               {resource.content && (
-                <div className="max-w-none text-base text-[#222222] leading-relaxed">
+                <div className="max-w-none text-[#222222] leading-relaxed text-base md:text-lg">
                   <MarkdownRenderer content={resource.content} />
                 </div>
               )}
+
+              {/* Gated Download Section (Requires Name & Gmail to unlock) */}
+              <GatedDownloadSection
+                resourceId={resource.id}
+                resourceTitle={resource.title}
+                downloadFiles={resource.downloadFiles || []}
+                gated={resource.gated !== false}
+              />
             </div>
           )}
 
           {/* Type C: TOOL / APPLICATION */}
           {resource.type === 'tool' && (
-            <div className="mb-16 space-y-8">
+            <div className="mb-16 space-y-12">
               <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-8 md:p-12 text-center shadow-xs">
                 <div className="size-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4 border border-blue-100">
                   <Wrench className="size-8" />
@@ -253,10 +223,21 @@ export default async function PublicResourceDetailPage({
                 )}
               </div>
 
+              {/* Detailed Article, Screenshots & Guide if written by author */}
               {resource.content && (
-                <div className="max-w-none text-base text-[#222222] leading-relaxed">
+                <div className="max-w-none text-[#222222] leading-relaxed text-base md:text-lg">
                   <MarkdownRenderer content={resource.content} />
                 </div>
+              )}
+
+              {/* Optional attached files if present */}
+              {(resource.downloadFiles || []).length > 0 && (
+                <GatedDownloadSection
+                  resourceId={resource.id}
+                  resourceTitle={resource.title}
+                  downloadFiles={resource.downloadFiles}
+                  gated={resource.gated !== false}
+                />
               )}
             </div>
           )}

@@ -34,6 +34,7 @@ import {
   Minus,
   Columns2,
   X,
+  Lock,
 } from 'lucide-react'
 import { ResourceItem, ResourceType, ResourceStatus, ResourceCategory, DownloadFileItem } from '@/lib/resources/types'
 import MarkdownRenderer from '@/components/studio/MarkdownRenderer'
@@ -72,6 +73,7 @@ export default function ResourceEditorForm({
   const [featured, setFeatured] = useState(initialResource?.featured || false)
   const [readTimeMinutes, setReadTimeMinutes] = useState(initialResource?.readTimeMinutes || 5)
   const [status, setStatus] = useState<ResourceStatus>(initialResource?.status || 'draft')
+  const [gated, setGated] = useState(initialResource?.gated !== false)
 
   // SEO
   const [seoTitle, setSeoTitle] = useState(initialResource?.seo?.title || '')
@@ -334,6 +336,7 @@ export default function ResourceEditorForm({
       featured,
       readTimeMinutes: Number(readTimeMinutes) || 5,
       status: targetStatus,
+      gated,
       seo: {
         title: seoTitle.trim() || title.trim(),
         description: seoDescription.trim() || summary.trim(),
@@ -654,16 +657,151 @@ export default function ResourceEditorForm({
         </div>
       </div>
 
-      {/* 3. TYPE-SPECIFIC CONTENT EDITORS */}
+      {/* 3. TYPE-SPECIFIC ASSETS / LINKS */}
 
-      {/* Case A: ARTICLE / GUIDE -> Structured Rich Markdown Editor */}
-      {type === 'article' && (
+      {/* Case B: DOWNLOAD / TEMPLATE -> Downloadable Files Manager */}
+      {type === 'download' && (
         <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2">
+                <Download className="size-4" />
+                <span>Татаж авах файлууд (Download Assets)</span>
+              </h2>
+              <p className="text-[11px] text-[#71717a] mt-0.5">
+                Хэрэглэгчдийн татаж авах PDF, ZIP, эх файлуудыг энд байршуулна
+              </p>
+            </div>
+
+            <input
+              type="file"
+              ref={downloadFileInputRef}
+              onChange={handleDownloadFileUpload}
+              className="hidden"
+            />
+
+            <button
+              type="button"
+              onClick={() => downloadFileInputRef.current?.click()}
+              disabled={uploadingFile}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-black text-white text-xs font-bold hover:bg-neutral-800 transition"
+            >
+              {uploadingFile ? <Loader2 className="size-3.5 animate-spin" /> : <UploadCloud className="size-3.5" />}
+              <span>{uploadingFile ? 'Хуулж байна...' : 'Шинэ файл оруулах'}</span>
+            </button>
+          </div>
+
+          <div className="space-y-3">
+            {downloadFiles.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-[#d4d4d8] bg-white p-8 text-center text-xs text-[#71717a]">
+                Одоогоор татах файл байхгүй байна. Дээрх товчийг дарж файл оруулаарай.
+              </div>
+            ) : (
+              downloadFiles.map((file, idx) => (
+                <div
+                  key={file.id || idx}
+                  className="flex items-center justify-between p-4 rounded-2xl border border-[#e0e0e0] bg-white"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
+                      {file.format}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="font-bold text-xs text-black truncate">{file.name}</p>
+                      <p className="text-[11px] text-[#71717a] truncate mt-0.5">
+                        {file.fileSize} · {file.fileUrl}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setDownloadFiles((prev) => prev.filter((_, i) => i !== idx))}
+                    className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition"
+                    title="Устгах"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Gated Lead Magnet Toggle */}
+          <div className="mt-6 pt-5 border-t border-[#e0e0e0] flex items-center justify-between">
+            <div>
+              <span className="text-xs font-bold text-black flex items-center gap-1.5">
+                <Lock className="size-3.5 text-blue-600" />
+                <span>Татах файлыг Gmail болон Нэрээр түгжих (Gated Download)</span>
+              </span>
+              <p className="text-[11px] text-[#71717a] mt-0.5">
+                Идэвхтэй үед уншигч файлыг татахын тулд өөрийн нэр болон Gmail хаягаа оруулж байж файл нээгдэнэ.
+              </p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={gated}
+                onChange={(e) => setGated(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+        </div>
+      )}
+
+      {/* Case C: TOOL / APPLICATION -> Destination Link & Description */}
+      {type === 'tool' && (
+        <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
+          <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2 mb-4">
+            <Wrench className="size-4" />
+            <span>Хэрэгслийн холбоос (Destination URL)</span>
+          </h2>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-[#18181b] mb-1.5">
+                Хэрэгсэл рүү үсрэх хаяг <span className="text-rose-500">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="Жишээ нь: /brand-audit эсвэл https://..."
+                value={destinationUrl}
+                onChange={(e) => setDestinationUrl(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-[#e0e0e0] bg-white text-xs font-mono text-black focus:outline-none focus:border-black font-semibold"
+              />
+              <p className="text-[11px] text-[#71717a] mt-1">
+                Дотоод хэрэгсэл бол <code>/brand-audit</code>, <code>/client/brief</code>, эсвэл гадны веб бол бүтэн URL бичнэ.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 4. RICH CONTENT & ARTICLE EDITOR (Available for ALL types: article, download, tool) */}
+      <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div>
             <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2">
               <FileText className="size-4" />
-              <span>Нийтлэлийн агуулга (Rich Text / Markdown Editor)</span>
+              <span>
+                {type === 'article'
+                  ? 'Нийтлэлийн агуулга (Rich Text / Markdown Editor)'
+                  : type === 'download'
+                  ? 'Татах файлын тайлбар & Зааварчилгаа (Нийтлэл / Зураг)'
+                  : 'Хэрэгслийн танилцуулга & Ашиглах заавар (Нийтлэл / Зураг)'}
+              </span>
             </h2>
+            <p className="text-[11px] text-[#71717a] mt-0.5">
+              {type === 'article'
+                ? 'Нийтлэлийн эх бичвэр, дэд сэдвүүд болон зургуудыг оруулна'
+                : type === 'download'
+                ? 'Загварыг хэрхэн ашиглах заавар, дэлгэцийн зургуудыг нийтлэл шиг дэлгэрэнгүй бичиж болно'
+                : 'Хэрэгслийн боломжууд, заавар болон зургуудыг нийтлэл шиг дэлгэрэнгүй бичиж болно'}
+            </p>
+          </div>
 
             <div className="flex items-center gap-1 rounded-xl bg-white border border-[#e0e0e0] p-1 shadow-2xs">
               <button
@@ -987,7 +1125,13 @@ export default function ResourceEditorForm({
                 onChange={(e) => setContent(e.target.value)}
                 onDrop={handleDropOnTextarea}
                 onPaste={handlePasteOnTextarea}
-                placeholder="## Нийтлэлийн гарчиг&#10;&#10;Нийтлэлийн эхний догол мөр...&#10;&#10;💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
+                placeholder={
+                  type === 'download'
+                    ? "## Загварын тухай болон хэрхэн ашиглах заавар\n\nЭнэхүү файлыг өөрийн брэнд төсөлдөө хэрхэн үр дүнтэй ашиглах талаар заавар, алхмууд болон дэлгэцийн зургуудыг оруулна уу...\n\n💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
+                    : type === 'tool'
+                    ? "## Хэрэгслийн тухай болон хэрхэн ашиглах вэ?\n\nХэрэгслийн боломжууд, давуу тал, хэрэглэх заавар болон дэлгэцийн зургуудыг оруулна уу...\n\n💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
+                    : "## Нийтлэлийн гарчиг\n\nНийтлэлийн эхний догол мөр...\n\n💡 Зургийг шууд чирж оруулах эсвэл Ctrl+V дарж paste хийж болно."
+                }
                 className="w-full px-4 py-3 rounded-b-2xl border border-[#e0e0e0] bg-white text-xs font-mono text-black leading-relaxed focus:outline-none focus:border-black"
               />
             </div>
@@ -1001,108 +1145,8 @@ export default function ResourceEditorForm({
             </div>
           )}
         </div>
-      )}
 
-      {/* Case B: DOWNLOAD / TEMPLATE -> Downloadable Files Manager */}
-      {type === 'download' && (
-        <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2">
-                <Download className="size-4" />
-                <span>Татаж авах файлууд (Download Assets)</span>
-              </h2>
-              <p className="text-[11px] text-[#71717a] mt-0.5">
-                Хэрэглэгчдийн татаж авах PDF, ZIP, эх файлуудыг энд байршуулна
-              </p>
-            </div>
-
-            <input
-              type="file"
-              ref={downloadFileInputRef}
-              onChange={handleDownloadFileUpload}
-              className="hidden"
-            />
-
-            <button
-              type="button"
-              onClick={() => downloadFileInputRef.current?.click()}
-              disabled={uploadingFile}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-black text-white text-xs font-bold hover:bg-neutral-800 transition"
-            >
-              {uploadingFile ? <Loader2 className="size-3.5 animate-spin" /> : <UploadCloud className="size-3.5" />}
-              <span>{uploadingFile ? 'Хуулж байна...' : 'Шинэ файл оруулах'}</span>
-            </button>
-          </div>
-
-          <div className="space-y-3">
-            {downloadFiles.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-[#d4d4d8] bg-white p-8 text-center text-xs text-[#71717a]">
-                Одоогоор татах файл байхгүй байна. Дээрх товчийг дарж файл оруулаарай.
-              </div>
-            ) : (
-              downloadFiles.map((file, idx) => (
-                <div
-                  key={file.id || idx}
-                  className="flex items-center justify-between p-4 rounded-2xl border border-[#e0e0e0] bg-white"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
-                      {file.format}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="font-bold text-xs text-black truncate">{file.name}</p>
-                      <p className="text-[11px] text-[#71717a] truncate mt-0.5">
-                        {file.fileSize} · {file.fileUrl}
-                      </p>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setDownloadFiles((prev) => prev.filter((_, i) => i !== idx))}
-                    className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition"
-                    title="Устгах"
-                  >
-                    <Trash2 className="size-4" />
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Case C: TOOL / APPLICATION -> Destination Link & Description */}
-      {type === 'tool' && (
-        <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs">
-          <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2 mb-4">
-            <Wrench className="size-4" />
-            <span>Хэрэгслийн холбоос (Destination URL)</span>
-          </h2>
-
-          <div className="space-y-4">
-            <div>
-              <label className="block text-xs font-bold text-[#18181b] mb-1.5">
-                Хэрэгсэл рүү үсрэх хаяг <span className="text-rose-500">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="Жишээ нь: /brand-audit эсвэл https://..."
-                value={destinationUrl}
-                onChange={(e) => setDestinationUrl(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#e0e0e0] bg-white text-xs font-mono text-black focus:outline-none focus:border-black font-semibold"
-              />
-              <p className="text-[11px] text-[#71717a] mt-1">
-                Дотоод хэрэгсэл бол <code>/brand-audit</code>, <code>/client/brief</code>, эсвэл гадны веб бол бүтэн URL бичнэ.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 4. SEO SETTINGS */}
+      {/* 5. SEO SETTINGS */}
       <div className="rounded-3xl border border-[#e0e0e0] bg-[#fafafa] p-6 md:p-8 mb-8 shadow-xs space-y-4">
         <h2 className="text-sm font-bold text-black uppercase tracking-wider flex items-center gap-2">
           <Globe className="size-4" />

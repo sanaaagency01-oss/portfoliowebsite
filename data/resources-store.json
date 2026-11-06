@@ -1,0 +1,1992 @@
+{
+  "resources": {
+    "res_1793667838599_ucpc": {
+      "id": "res_1793667838599_ucpc",
+      "type": "article",
+      "title": "Figma Skills – Дизайнер бүрийн мэдэх хэрэгтэй 4 AI Skill",
+      "slug": "figma-skills-дизайнер-бүрийн-мэдэх-хэрэгтэй-4-ai-skill",
+      "summary": "Дизайны ажлын явцад давтагддаг олон жижиг үйлдэл бидний цагийг авдаг. Тохирох фонт сонгох, визуал эффект турших, багийн санал хүсэлтийг нэгтгэх, хийсэн ажлаа танилцуулах гээд дизайнерын өдөр тутмын workflow олон үе шаттай.\n\nХарин AI Skills-ийн тусламжтайгаар эдгээр ажлыг илүү хурдан, үр дүнтэй гүйцэтгэх боломж нэмэгдэж байна.\n\nЭнэ удаад Figma дээрх дизайны workflow-ийг сайжруулахад туслах 4 хэрэгтэй AI Skill-ийг онцолж байна.",
+      "coverImage": "/api/resources/assets/ast_1793666891097_gvnt",
+      "category": "tools",
+      "tags": [
+        "figma",
+        "ai",
+        "ai skills"
+      ],
+      "content": "## 01. Bento Board UI\n\n\n\n![bento baord ui](/api/resources/assets/ast_1793667006343_630i)\n\n\n\nБрэндийн материал болон төслийн танилцуулга\n\nВэбсайт эсвэл брэндийн материалаа нэг дор цэгцтэй, визуал хэлбэрээр танилцуулахыг хүсэж байна уу?\n\nBento Board UI нь вэбсайт болон брэндийн материалуудыг импортлон, хуваалцахад тохиромжтой Bento загварын танилцуулгын самбар үүсгэхэд тусална.\n\nЮунд ашиглах вэ?\n\nБрэндийн танилцуулга болон визуал материал нэгтгэх\n\nТөслийн кейс судалгаа боловсруулах\n\nПортфолио болон дизайн концепц танилцуулах\n\nХарилцагчид зориулсан дизайн презентац бэлтгэх\n\nДавуу тал: Олон төрлийн визуал материалыг нэг цэгт төвлөрүүлж, ойлгомжтой, цэгцтэй байдлаар танилцуулах боломжтой.\n\n[skill](https://www.figma.com/community/skill/72022/bento-board-ui)\n\n## 02. Shader Starter\n\n\n\n![shader starter](/api/resources/assets/ast_1793667265957_nu01)\n\n\n\nFigma дээр өвөрмөц визуал эффект бүтээх\n\nShader Starter нь Figma дээр Shader Fill болон Shader Effect бүтээхэд чиглэсэн AI Skill юм.\n\nХэрэглэгчийн визуал шаардлагыг алхам алхмаар тодруулж, эффект бүтээхэд шаардлагатай параметр, хөдөлгөөнт цикл болон кодын шалгалтыг боловсруулахад тусална.\n\nЯмар эффект бүтээж болох вэ?\n\nGrain – Мөхлөгт текстур\n\nHalftone – Цэгэн хээний эффект\n\nDistortion – Дүрсний гажилт\n\nGlow – Гэрэлтэх эффект\n\nColor Shift – Өнгөний шилжилт\n\nДавуу тал: Нарийн визуал эффектүүдийг эхнээс нь бүтээхэд шаардлагатай үйл явцыг AI-аар чиглүүлж, дизайны илэрхийлэмжийг нэмэгдүүлнэ.\n\n[skill](https://www.figma.com/community/skill/64012/shader-starter)\n\n## 03. Font Pairings\n\n\n\n![font pairings](/api/resources/assets/ast_1793667780673_20zp)\n\n\n\nТохирох фонтын хослолыг AI-аар сонгох\n\nДизайны өнгө төрхөд тохирсон фонт сонгох нь брэндийн болон UI дизайны чухал хэсэг юм.\n\nFont Pairings нь Figma дээр сонгосон дизайны визуал хэв маяг, агуулгын бүтэц болон одоо ашиглаж буй фонтыг шинжилж, хоорондоо зохицох 5 төрлийн фонтын хослол санал болгодог.\n\nХэрхэн ажилладаг вэ?\n\n1. Сонгосон дизайныг шинжилнэ.\n2. Тохирох 5 фонтын хослол санал болгоно.\n3. Хослол бүрийг зэрэгцүүлэн харьцуулах загвар үүсгэнэ.\n4. Хамгийн тохиромжтой хувилбарыг сонгоно.\n\nЮунд ашиглах вэ?\n\n- UI/UX дизайны Typography сонголт\n- Брэндийн үндсэн болон туслах фонт тодорхойлох\n- Гарчиг болон үндсэн текстийн зохицол сайжруулах\n- Шинэ визуал хэв маяг турших\n\n[skill](https://www.figma.com/community/skill/71703/font-pairings)\n\n## 04. Comment Synthesis\n\n\n\n![Comment summary](/api/resources/assets/ast_1793667742512_bc67)\n\n\n\nДизайны санал хүсэлтийг цэгцлэх\n\nДизайны review хийх үед олон төрлийн санал хүсэлт ирдэг. Тэдгээрийг нэг бүрчлэн уншиж, давхардсан асуудлыг нэгтгэх нь цаг их шаарддаг.\n\nComment Synthesis нь Figma дизайны комментаруудыг уншиж, ижил төстэй асуудлуудыг нэгтгэн, ач холбогдлоор нь ангилж өгдөг AI Skill юм.\n\nҮр дүнг дараах гурван ангилалд хуваана.\n\nDO – Хийх шаардлагатай\nЗаавал засах болон хэрэгжүүлэх шаардлагатай асуудлууд.\n\nTRY – Туршиж үзэх\nДизайныг сайжруулах боломжтой шинэ санаа, хувилбарууд.\n\nCONSIDER – Анхаарч үзэх\nЦаашид хэлэлцэх болон авч үзэх шаардлагатай саналуудаас бүрдэнэ.\n\nДавуу тал: Дүгнэлт бүрийг эх комментарын холбоостой холбодог тул санал хүсэлтийн эх сурвалжийг шууд шалгах боломжтой.\n\n[skill](https://www.figma.com/community/skill/71703/font-pairings)\n\n## Аль Skill-ийг ямар үед ашиглах вэ?\n\n| Skill | Ашиглах үндсэн зорилго |\n|:---|:---|\n|Bento Board UI | Портфолио, төслийн танилцуулга | \n| Shader Starter | Визуал болон хөдөлгөөнт эффект | \n| Font Pairings | Typography, фонтын сонголт | \n| Comment Synthesis | Design Review, санал хүсэлт | \n\n## Дүгнэлт\n\nAI Skills нь дизайнерыг орлох бус, харин дизайны ажлын явцыг хөнгөвчилж, давтагддаг үйлдлүүдэд зарцуулах цагийг багасгах зорилготой.\n\nДээрх дөрвөн Skill нь дизайны өөр өөр үе шатанд туслах боломжтой. Өөрийн workflow-д тохируулан ашигласнаар илүү үр бүтээлтэй ажиллаж, бүтээлч шийдэлдээ зарцуулах цагаа нэмэгдүүлэх боломжтой.",
+      "downloadFiles": [],
+      "ctaLabel": "Нийтлэл унших",
+      "featured": false,
+      "sortOrder": 0,
+      "readTimeMinutes": 5,
+      "author": {
+        "name": "Т. Өсөхбаяр (baysaass)",
+        "role": "Brand Designer"
+      },
+      "seo": {
+        "title": "Figma Skills – Дизайнер бүрийн мэдэх хэрэгтэй 4 AI Skill",
+        "description": "Дизайны ажлын явцад давтагддаг олон жижиг үйлдэл бидний цагийг авдаг. Тохирох фонт сонгох, визуал эффект турших, багийн санал хүсэлтийг нэгтгэх, хийсэн ажлаа танилцуулах гээд дизайнерын өдөр тутмын workflow олон үе шаттай.\n\nХарин AI Skills-ийн тусламжтайгаар эдгээр ажлыг илүү хурдан, үр дүнтэй гүйцэтгэх боломж нэмэгдэж байна.\n\nЭнэ удаад Figma дээрх дизайны workflow-ийг сайжруулахад туслах 4 хэрэгтэй AI Skill-ийг онцолж байна."
+      },
+      "status": "published",
+      "viewsCount": 11,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-03T01:03:58.599Z",
+      "updatedAt": "2026-11-05T02:14:58.015Z",
+      "publishedAt": "2026-11-03T01:03:58.599Z"
+    },
+    "social-ig-1": {
+      "id": "social-ig-1",
+      "type": "tool",
+      "title": "Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards",
+      "slug": "ultra-clean-glassmorphism-20-ui-kit-blur-cards",
+      "summary": "@ux_designer_daily (Instagram) бүтээгчийн бэлтгэсэн Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards материалыг Baysaass Studio сангаас танилцуулж байна. Layered frosted glass UI components for modern dark-mode mobile applications. Includes dynamic noise overlays, lighting border gradients, an...",
+      "coverImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80",
+      "category": "tools",
+      "tags": [
+        "Instagram",
+        "Glassmorphism",
+        "Figma",
+        "UI Kit",
+        "Mobile App",
+        "TOOLS"
+      ],
+      "content": "# Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards\n\nLayered frosted glass UI components for modern dark-mode mobile applications. Includes dynamic noise overlays, lighting border gradients, and customizable Figma tokens.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **INSTAGRAM** бөгөөд бүтээгч **@ux_designer_daily (Instagram)**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **UI/UX бүтээгдэхүүний дизайнер, Figma дээр ажилладаг мэргэжилтнүүд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-756c7472",
+          "name": "Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards (Asset Package)",
+          "fileUrl": "https://www.figma.com/community/file/glassmorphism-2-ui-kit",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://www.figma.com/community/file/glassmorphism-2-ui-kit",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards | Baysaass Studio OS",
+        "description": "@ux_designer_daily (Instagram) бүтээгчийн бэлтгэсэн Ultra-Clean Glassmorphism 2.0 UI Kit & Blur Cards материалыг Baysaass Studio сангаас танилцуулж байна. Layered frosted glass UI components for modern dark-mode mobile applications. Includes dynamic noise overlays, lighting border gradients, an...",
+        "keywords": [
+          "Instagram",
+          "Glassmorphism",
+          "Figma",
+          "UI Kit",
+          "Mobile App",
+          "TOOLS"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://instagram.com/p/figma-glassmorphism-card-kit",
+      "sourcePlatform": "instagram",
+      "curatedAt": "2026-11-06T01:28:50.984Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.088Z",
+      "updatedAt": "2026-11-06T01:28:51.088Z",
+      "publishedAt": "2026-11-06T01:28:51.088Z"
+    },
+    "social-ph-1": {
+      "id": "social-ph-1",
+      "type": "tool",
+      "title": "VectorFlow AI - Instant SVG & Icon Generator for Designers",
+      "slug": "vectorflow-ai-instant-svg-icon-generator-for-designers",
+      "summary": "VectorFlow Team бүтээгчийн бэлтгэсэн VectorFlow AI - Instant SVG & Icon Generator for Designers материалыг Baysaass Studio сангаас танилцуулж байна. Web application that converts rough doodles or text descriptions into clean, production-ready SVG vector paths and icon sets with customizab...",
+      "coverImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+      "category": "tools",
+      "tags": [
+        "ProductHunt",
+        "AI Tool",
+        "SVG Generator",
+        "Design Software",
+        "Icons",
+        "TOOLS"
+      ],
+      "content": "# VectorFlow AI - Instant SVG & Icon Generator for Designers\n\nWeb application that converts rough doodles or text descriptions into clean, production-ready SVG vector paths and icon sets with customizable stroke width.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **PRODUCTHUNT** бөгөөд бүтээгч **VectorFlow Team**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **UI/UX бүтээгдэхүүний дизайнер, Figma дээр ажилладаг мэргэжилтнүүд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [],
+      "destinationUrl": "https://vectorflow.ai",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "VectorFlow AI - Instant SVG & Icon Generator for Designers | Baysaass Studio OS",
+        "description": "VectorFlow Team бүтээгчийн бэлтгэсэн VectorFlow AI - Instant SVG & Icon Generator for Designers материалыг Baysaass Studio сангаас танилцуулж байна. Web application that converts rough doodles or text descriptions into clean, production-ready SVG vector paths and icon sets with customizab...",
+        "keywords": [
+          "ProductHunt",
+          "AI Tool",
+          "SVG Generator",
+          "Design Software",
+          "Icons",
+          "TOOLS"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://www.producthunt.com/posts/vector-flow-ai",
+      "sourcePlatform": "producthunt",
+      "curatedAt": "2026-11-06T01:28:50.988Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.096Z",
+      "updatedAt": "2026-11-06T01:28:51.096Z",
+      "publishedAt": "2026-11-06T01:28:51.096Z"
+    },
+    "rednote-trend-1": {
+      "id": "rednote-trend-1",
+      "type": "download",
+      "title": "Neo-Brutalist Dashboard & Web UI Design System (Figma)",
+      "slug": "neo-brutalist-dashboard-web-ui-design-system-figma",
+      "summary": "Kiki Design Lab (小红书) бүтээгчийн бэлтгэсэн Neo-Brutalist Dashboard & Web UI Design System (Figma) материалыг Baysaass Studio сангаас танилцуулж байна. Trendy high-contrast neo-brutalist components for Figma. Includes bold dark strokes, pastel fills, vibrant tag buttons, and responsive grid ...",
+      "coverImage": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80",
+      "category": "templates",
+      "tags": [
+        "RedNote",
+        "Neo-Brutalism",
+        "Figma",
+        "UI Kit",
+        "Dashboard",
+        "TEMPLATES"
+      ],
+      "content": "# Neo-Brutalist Dashboard & Web UI Design System (Figma)\n\nTrendy high-contrast neo-brutalist components for Figma. Includes bold dark strokes, pastel fills, vibrant tag buttons, and responsive grid layouts.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **REDNOTE** бөгөөд бүтээгч **Kiki Design Lab (小红书)**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **UI/UX бүтээгдэхүүний дизайнер, Figma дээр ажилладаг мэргэжилтнүүд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6e656f2d",
+          "name": "Neo-Brutalist Dashboard & Web UI Design System (Figma) (Asset Package)",
+          "fileUrl": "https://figma.com/@kikidesign/neo-brutalist-system",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://www.xiaohongshu.com/explore/figma-neo-brutalism-system",
+      "ctaLabel": "Файлыг татах",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Neo-Brutalist Dashboard & Web UI Design System (Figma) | Baysaass Studio OS",
+        "description": "Kiki Design Lab (小红书) бүтээгчийн бэлтгэсэн Neo-Brutalist Dashboard & Web UI Design System (Figma) материалыг Baysaass Studio сангаас танилцуулж байна. Trendy high-contrast neo-brutalist components for Figma. Includes bold dark strokes, pastel fills, vibrant tag buttons, and responsive grid ...",
+        "keywords": [
+          "RedNote",
+          "Neo-Brutalism",
+          "Figma",
+          "UI Kit",
+          "Dashboard",
+          "TEMPLATES"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://www.xiaohongshu.com/explore/figma-neo-brutalism-system",
+      "sourcePlatform": "rednote",
+      "curatedAt": "2026-11-06T01:28:50.991Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.103Z",
+      "updatedAt": "2026-11-06T01:28:51.103Z",
+      "publishedAt": "2026-11-06T01:28:51.103Z"
+    },
+    "rednote-trend-2": {
+      "id": "rednote-trend-2",
+      "type": "download",
+      "title": "Swiss Modern Editorial & Poster Grid Layout Pack – Орчин үеийн Фонт & Үсгийн соёл",
+      "slug": "swiss-modern-editorial-poster-grid-layout-pack",
+      "summary": "Echo Studio (小红书) бүтээгчийн бэлтгэсэн Swiss Modern Editorial & Poster Grid Layout Pack материалыг Baysaass Studio сангаас танилцуулж байна. 24 Swiss-style typography grid layouts and magazine spread templates for Figma and Illustrator. Perfect for branding manuals and editorial d...",
+      "coverImage": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80",
+      "category": "typography",
+      "tags": [
+        "RedNote",
+        "Typography",
+        "Swiss Style",
+        "Editorial",
+        "Poster Design",
+        "TYPOGRAPHY"
+      ],
+      "content": "# Swiss Modern Editorial & Poster Grid Layout Pack – Орчин үеийн Фонт & Үсгийн соёл\n\n24 Swiss-style typography grid layouts and magazine spread templates for Figma and Illustrator. Perfect for branding manuals and editorial design.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **REDNOTE** бөгөөд бүтээгч **Echo Studio (小红书)**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Брэнд бүтээгчид, лого & визуал дизайнер, арт директорууд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-73776973",
+          "name": "Swiss Modern Editorial & Poster Grid Layout Pack (Asset Package)",
+          "fileUrl": "https://drive.google.com/drive/folders/editorial-grid-sample",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://www.xiaohongshu.com/explore/editorial-grid-layout-pack",
+      "ctaLabel": "Файлыг татах",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Swiss Modern Editorial & Poster Grid Layout Pack – Орчин үеийн Фонт & Үсгийн соёл | Baysaass Studio OS",
+        "description": "Echo Studio (小红书) бүтээгчийн бэлтгэсэн Swiss Modern Editorial & Poster Grid Layout Pack материалыг Baysaass Studio сангаас танилцуулж байна. 24 Swiss-style typography grid layouts and magazine spread templates for Figma and Illustrator. Perfect for branding manuals and editorial d...",
+        "keywords": [
+          "RedNote",
+          "Typography",
+          "Swiss Style",
+          "Editorial",
+          "Poster Design",
+          "TYPOGRAPHY"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://www.xiaohongshu.com/explore/editorial-grid-layout-pack",
+      "sourcePlatform": "rednote",
+      "curatedAt": "2026-11-06T01:28:50.993Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.111Z",
+      "updatedAt": "2026-11-06T01:28:51.111Z",
+      "publishedAt": "2026-11-06T01:28:51.111Z"
+    },
+    "gumroad-seed-1": {
+      "id": "gumroad-seed-1",
+      "type": "download",
+      "title": "Minimalist Brand Guidelines & Styleguide Figma Kit – Орчин үеийн Фонт & Үсгийн соёл",
+      "slug": "minimalist-brand-guidelines-styleguide-figma-kit",
+      "summary": "Studio Minimal бүтээгчийн бэлтгэсэн Minimalist Brand Guidelines & Styleguide Figma Kit материалыг Baysaass Studio сангаас танилцуулж байна. Complete 30+ pages modern brand guidelines template for Figma. Features grid systems, typography scale, logo usage rules, and color contrast...",
+      "coverImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+      "category": "typography",
+      "tags": [
+        "Figma",
+        "Brand Guidelines",
+        "Typography",
+        "Styleguide",
+        "Freebie",
+        "TYPOGRAPHY"
+      ],
+      "content": "# Minimalist Brand Guidelines & Styleguide Figma Kit – Орчин үеийн Фонт & Үсгийн соёл\n\nComplete 30+ pages modern brand guidelines template for Figma. Features grid systems, typography scale, logo usage rules, and color contrast charts.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GUMROAD** бөгөөд бүтээгч **Studio Minimal**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Брэнд бүтээгчид, лого & визуал дизайнер, арт директорууд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6d696e69",
+          "name": "Minimalist Brand Guidelines & Styleguide Figma Kit (Asset Package)",
+          "fileUrl": "https://gumroad.com/l/minimalist-brand-guidelines-figma",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://gumroad.com/l/minimalist-brand-guidelines-figma",
+      "ctaLabel": "Файлыг татах",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Minimalist Brand Guidelines & Styleguide Figma Kit – Орчин үеийн Фонт & Үсгийн соёл | Baysaass Studio OS",
+        "description": "Studio Minimal бүтээгчийн бэлтгэсэн Minimalist Brand Guidelines & Styleguide Figma Kit материалыг Baysaass Studio сангаас танилцуулж байна. Complete 30+ pages modern brand guidelines template for Figma. Features grid systems, typography scale, logo usage rules, and color contrast...",
+        "keywords": [
+          "Figma",
+          "Brand Guidelines",
+          "Typography",
+          "Styleguide",
+          "Freebie",
+          "TYPOGRAPHY"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://gumroad.com/l/minimalist-brand-guidelines-figma",
+      "sourcePlatform": "gumroad",
+      "curatedAt": "2026-11-06T01:28:50.995Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.120Z",
+      "updatedAt": "2026-11-06T01:28:51.120Z",
+      "publishedAt": "2026-11-06T01:28:51.120Z"
+    },
+    "gumroad-seed-2": {
+      "id": "gumroad-seed-2",
+      "type": "tool",
+      "title": "Clay 3D App Icons & UI Elements Pack (Figma & PNG) – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "clay-3d-app-icons-ui-elements-pack-figma-png",
+      "summary": "Craft3D Lab бүтээгчийн бэлтгэсэн Clay 3D App Icons & UI Elements Pack (Figma & PNG) материалыг Baysaass Studio сангаас танилцуулж байна. 64 premium 3D clay-style icons rendered in 3000x3000px high resolution with transparent background and editable Figma components....",
+      "coverImage": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&auto=format&fit=crop&q=80",
+      "category": "tools",
+      "tags": [
+        "3D Icons",
+        "Clay",
+        "Figma",
+        "Mobile UI",
+        "Asset Pack",
+        "TOOLS"
+      ],
+      "content": "# Clay 3D App Icons & UI Elements Pack (Figma & PNG) – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\n64 premium 3D clay-style icons rendered in 3000x3000px high resolution with transparent background and editable Figma components.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GUMROAD** бөгөөд бүтээгч **Craft3D Lab**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **UI/UX бүтээгдэхүүний дизайнер, Figma дээр ажилладаг мэргэжилтнүүд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-636c6179",
+          "name": "Clay 3D App Icons & UI Elements Pack (Figma & PNG) (Asset Package)",
+          "fileUrl": "https://gumroad.com/l/3d-app-icons-pack-clay",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://gumroad.com/l/3d-app-icons-pack-clay",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Clay 3D App Icons & UI Elements Pack (Figma & PNG) – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "Craft3D Lab бүтээгчийн бэлтгэсэн Clay 3D App Icons & UI Elements Pack (Figma & PNG) материалыг Baysaass Studio сангаас танилцуулж байна. 64 premium 3D clay-style icons rendered in 3000x3000px high resolution with transparent background and editable Figma components....",
+        "keywords": [
+          "3D Icons",
+          "Clay",
+          "Figma",
+          "Mobile UI",
+          "Asset Pack",
+          "TOOLS"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://gumroad.com/l/3d-app-icons-pack-clay",
+      "sourcePlatform": "gumroad",
+      "curatedAt": "2026-11-06T01:28:50.998Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.129Z",
+      "updatedAt": "2026-11-06T01:28:51.129Z",
+      "publishedAt": "2026-11-06T01:28:51.129Z"
+    },
+    "github-1356737818": {
+      "id": "github-1356737818",
+      "type": "tool",
+      "title": "svgforge – Бэлэн Figma Загвар & UI Kit",
+      "slug": "svgforge",
+      "summary": "svgforge бүтээгчийн бэлтгэсэн svgforge материалыг Baysaass Studio сангаас танилцуулж байна. SVG icon stack builder — A low-level Node.js module (seperate cli) that takes a collection of SVG files, optimizes them, and assembles them ...",
+      "coverImage": "https://avatars.githubusercontent.com/u/324779089?v=4",
+      "category": "templates",
+      "tags": [
+        "icon-pack",
+        "icon-set",
+        "icons",
+        "icons-pack",
+        "iconset",
+        "svg"
+      ],
+      "content": "# svgforge – Бэлэн Figma Загвар & UI Kit\n\nSVG icon stack builder — A low-level Node.js module (seperate cli) that takes a collection of SVG files, optimizes them, and assembles them into reusable icon assets with matching stylesheet resources.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **svgforge**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-73766766",
+          "name": "svgforge (Asset Package)",
+          "fileUrl": "https://github.com/svgforge/svgforge/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://svgforge.github.io",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "svgforge – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "svgforge бүтээгчийн бэлтгэсэн svgforge материалыг Baysaass Studio сангаас танилцуулж байна. SVG icon stack builder — A low-level Node.js module (seperate cli) that takes a collection of SVG files, optimizes them, and assembles them ...",
+        "keywords": [
+          "icon-pack",
+          "icon-set",
+          "icons",
+          "icons-pack",
+          "iconset",
+          "svg"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/svgforge/svgforge",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.001Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.147Z",
+      "updatedAt": "2026-11-06T01:28:51.147Z",
+      "publishedAt": "2026-11-06T01:28:51.147Z"
+    },
+    "github-1433251328": {
+      "id": "github-1433251328",
+      "type": "tool",
+      "title": "BrandyTheme – Бэлэн Figma Загвар & UI Kit",
+      "slug": "brandytheme",
+      "summary": "tasmon бүтээгчийн бэлтгэсэн BrandyTheme материалыг Baysaass Studio сангаас танилцуулж байна. Brand themes for Windows 10 and 11: wallpaper, lock screen, accent colour and system icon sets for HP, Lenovo, Samsung, Intel, AMD and Ryzen...",
+      "coverImage": "https://avatars.githubusercontent.com/u/73382632?v=4",
+      "category": "templates",
+      "tags": [
+        "customization",
+        "icons",
+        "icons-pack",
+        "iconset",
+        "lockscreeen",
+        "lockscreen-background"
+      ],
+      "content": "# BrandyTheme – Бэлэн Figma Загвар & UI Kit\n\nBrand themes for Windows 10 and 11: wallpaper, lock screen, accent colour and system icon sets for HP, Lenovo, Samsung, Intel, AMD and Ryzen.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **tasmon**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Брэнд бүтээгчид, лого & визуал дизайнер, арт директорууд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6272616e",
+          "name": "BrandyTheme (Asset Package)",
+          "fileUrl": "https://github.com/tasmon/BrandyTheme/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://github.com/tasmon/BrandyTheme",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "BrandyTheme – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "tasmon бүтээгчийн бэлтгэсэн BrandyTheme материалыг Baysaass Studio сангаас танилцуулж байна. Brand themes for Windows 10 and 11: wallpaper, lock screen, accent colour and system icon sets for HP, Lenovo, Samsung, Intel, AMD and Ryzen...",
+        "keywords": [
+          "customization",
+          "icons",
+          "icons-pack",
+          "iconset",
+          "lockscreeen",
+          "lockscreen-background"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/tasmon/BrandyTheme",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.004Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.157Z",
+      "updatedAt": "2026-11-06T01:28:51.157Z",
+      "publishedAt": "2026-11-06T01:28:51.157Z"
+    },
+    "github-1444453970": {
+      "id": "github-1444453970",
+      "type": "tool",
+      "title": "icon vault – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "icon-vault",
+      "summary": "nikomarinovic бүтээгчийн бэлтгэсэн icon vault материалыг Baysaass Studio сангаас танилцуулж байна. An open-source collection of SVG icons for developers, covering programming languages, frameworks, tools, technologies, and brands....",
+      "coverImage": "https://avatars.githubusercontent.com/u/189901835?v=4",
+      "category": "tools",
+      "tags": [
+        "icon",
+        "icon-pack",
+        "icon-set",
+        "icons",
+        "icons-pack",
+        "svg"
+      ],
+      "content": "# icon vault – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nAn open-source collection of SVG icons for developers, covering programming languages, frameworks, tools, technologies, and brands.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **nikomarinovic**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Брэнд бүтээгчид, лого & визуал дизайнер, арт директорууд**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-69636f6e",
+          "name": "icon vault (Asset Package)",
+          "fileUrl": "https://github.com/nikomarinovic/icon-vault/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://icon-vault.netlify.app",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "icon vault – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "nikomarinovic бүтээгчийн бэлтгэсэн icon vault материалыг Baysaass Studio сангаас танилцуулж байна. An open-source collection of SVG icons for developers, covering programming languages, frameworks, tools, technologies, and brands....",
+        "keywords": [
+          "icon",
+          "icon-pack",
+          "icon-set",
+          "icons",
+          "icons-pack",
+          "svg"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/nikomarinovic/icon-vault",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.008Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.164Z",
+      "updatedAt": "2026-11-06T01:28:51.164Z",
+      "publishedAt": "2026-11-06T01:28:51.164Z"
+    },
+    "github-145880024": {
+      "id": "github-145880024",
+      "type": "tool",
+      "title": "intellij extra icons plugin – Бэлэн Figma Загвар & UI Kit",
+      "slug": "intellij-extra-icons-plugin",
+      "summary": "jonathanlermitage бүтээгчийн бэлтгэсэн intellij extra icons plugin материалыг Baysaass Studio сангаас танилцуулж байна. 🧩 Issues and feature requests for Extra Icons plugin for IntelliJ-based IDEs. Also provides Theme Packs for Extra Icons....",
+      "coverImage": "https://avatars.githubusercontent.com/u/857535?v=4",
+      "category": "templates",
+      "tags": [
+        "extra-icons",
+        "gradle",
+        "icons-pack",
+        "intellij-plugin",
+        "jetbrains-ides",
+        "Python"
+      ],
+      "content": "# intellij extra icons plugin – Бэлэн Figma Загвар & UI Kit\n\n🧩 Issues and feature requests for Extra Icons plugin for IntelliJ-based IDEs. Also provides Theme Packs for Extra Icons.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **jonathanlermitage**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-696e7465",
+          "name": "intellij extra icons plugin (Asset Package)",
+          "fileUrl": "https://github.com/jonathanlermitage/intellij-extra-icons-plugin/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://www.extratoolspack.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "intellij extra icons plugin – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "jonathanlermitage бүтээгчийн бэлтгэсэн intellij extra icons plugin материалыг Baysaass Studio сангаас танилцуулж байна. 🧩 Issues and feature requests for Extra Icons plugin for IntelliJ-based IDEs. Also provides Theme Packs for Extra Icons....",
+        "keywords": [
+          "extra-icons",
+          "gradle",
+          "icons-pack",
+          "intellij-plugin",
+          "jetbrains-ides",
+          "Python"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/jonathanlermitage/intellij-extra-icons-plugin",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.011Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.172Z",
+      "updatedAt": "2026-11-06T01:28:51.172Z",
+      "publishedAt": "2026-11-06T01:28:51.172Z"
+    },
+    "github-3236756": {
+      "id": "github-3236756",
+      "type": "tool",
+      "title": "peculiar – Бэлэн Figma Загвар & UI Kit",
+      "slug": "peculiar",
+      "summary": "lucianmarin бүтээгчийн бэлтгэсэн peculiar материалыг Baysaass Studio сангаас танилцуулж байна. Peculiar CSS icon set....",
+      "coverImage": "https://avatars.githubusercontent.com/u/42651?v=4",
+      "category": "templates",
+      "tags": [
+        "css",
+        "icons",
+        "icons-library",
+        "icons-pack",
+        "iconset",
+        "CSS"
+      ],
+      "content": "# peculiar – Бэлэн Figma Загвар & UI Kit\n\nPeculiar CSS icon set.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **lucianmarin**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-70656375",
+          "name": "peculiar (Asset Package)",
+          "fileUrl": "https://github.com/lucianmarin/peculiar/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://lucianmarin.github.io/2010/peculiar.html",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "peculiar – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "lucianmarin бүтээгчийн бэлтгэсэн peculiar материалыг Baysaass Studio сангаас танилцуулж байна. Peculiar CSS icon set....",
+        "keywords": [
+          "css",
+          "icons",
+          "icons-library",
+          "icons-pack",
+          "iconset",
+          "CSS"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/lucianmarin/peculiar",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.014Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.178Z",
+      "updatedAt": "2026-11-06T01:28:51.178Z",
+      "publishedAt": "2026-11-06T01:28:51.178Z"
+    },
+    "github-1298301102": {
+      "id": "github-1298301102",
+      "type": "tool",
+      "title": "Serpent – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "serpent",
+      "summary": "dolag233 бүтээгчийн бэлтгэсэн Serpent материалыг Baysaass Studio сангаас танилцуулж байна. Cross-platform digital asset management software for game artists, VFX professionals, and graphic and motion designers....",
+      "coverImage": "https://avatars.githubusercontent.com/u/56783896?v=4",
+      "category": "tools",
+      "tags": [
+        "asset-management",
+        "creative-tools",
+        "creative-tools-for-digital-artists",
+        "design-tools",
+        "TypeScript",
+        "Open Source"
+      ],
+      "content": "# Serpent – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nCross-platform digital asset management software for game artists, VFX professionals, and graphic and motion designers.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **dolag233**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-73657270",
+          "name": "Serpent (Asset Package)",
+          "fileUrl": "https://github.com/dolag233/Serpent/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://serpent.dolag.work/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Serpent – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "dolag233 бүтээгчийн бэлтгэсэн Serpent материалыг Baysaass Studio сангаас танилцуулж байна. Cross-platform digital asset management software for game artists, VFX professionals, and graphic and motion designers....",
+        "keywords": [
+          "asset-management",
+          "creative-tools",
+          "creative-tools-for-digital-artists",
+          "design-tools",
+          "TypeScript",
+          "Open Source"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/dolag233/Serpent",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.017Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.186Z",
+      "updatedAt": "2026-11-06T01:28:51.186Z",
+      "publishedAt": "2026-11-06T01:28:51.186Z"
+    },
+    "github-1251280424": {
+      "id": "github-1251280424",
+      "type": "tool",
+      "title": "AI Canvas tauri – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "ai-canvas-tauri",
+      "summary": "Tenney95 бүтээгчийн бэлтгэсэн AI Canvas tauri материалыг Baysaass Studio сангаас танилцуулж байна. AI画布、AI短剧创作工具：免费、轻量的无限画布，支持短剧剧本、角色管理、分镜、图像/视频生成和短剧剪辑，集成 ComfyUI、Agent、MCP。Free AI canvas and short drama maker....",
+      "coverImage": "https://avatars.githubusercontent.com/u/180637036?v=4",
+      "category": "tools",
+      "tags": [
+        "ai-agent",
+        "ai-canvas",
+        "ai-short-drama",
+        "ai-workflow",
+        "asset-management",
+        "blender"
+      ],
+      "content": "# AI Canvas tauri – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nAI画布、AI短剧创作工具：免费、轻量的无限画布，支持短剧剧本、角色管理、分镜、图像/视频生成和短剧剪辑，集成 ComfyUI、Agent、MCP。Free AI canvas and short drama maker.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **Tenney95**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-61692d63",
+          "name": "AI Canvas tauri (Asset Package)",
+          "fileUrl": "https://github.com/Tenney95/AI-Canvas-tauri/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://tenney95.github.io/AI-Canvas-tauri/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "AI Canvas tauri – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "Tenney95 бүтээгчийн бэлтгэсэн AI Canvas tauri материалыг Baysaass Studio сангаас танилцуулж байна. AI画布、AI短剧创作工具：免费、轻量的无限画布，支持短剧剧本、角色管理、分镜、图像/视频生成和短剧剪辑，集成 ComfyUI、Agent、MCP。Free AI canvas and short drama maker....",
+        "keywords": [
+          "ai-agent",
+          "ai-canvas",
+          "ai-short-drama",
+          "ai-workflow",
+          "asset-management",
+          "blender"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/Tenney95/AI-Canvas-tauri",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.019Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.194Z",
+      "updatedAt": "2026-11-06T01:28:51.194Z",
+      "publishedAt": "2026-11-06T01:28:51.194Z"
+    },
+    "github-1228890794": {
+      "id": "github-1228890794",
+      "type": "tool",
+      "title": "Nomi – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "nomi",
+      "summary": "aqm857886159 бүтээгчийн бэлтгэсэн Nomi материалыг Baysaass Studio сангаас танилцуулж байна. Open-source AI video workbench. Bring any model or your local ComfyUI, and let Claude Code / Codex / Cursor direct it over MCP — storyboard,...",
+      "coverImage": "https://avatars.githubusercontent.com/u/77039254?v=4",
+      "category": "tools",
+      "tags": [
+        "ai-agent",
+        "ai-video",
+        "ai-video-generator",
+        "bring-your-own-key",
+        "comfyui",
+        "creative-tools"
+      ],
+      "content": "# Nomi – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nOpen-source AI video workbench. Bring any model or your local ComfyUI, and let Claude Code / Codex / Cursor direct it over MCP — storyboard, references, generation, editable first cut on a real timeline. Local-first: projects, prompts, and keys stay on your machine. No account, no telemetry.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **aqm857886159**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6e6f6d69",
+          "name": "Nomi (Asset Package)",
+          "fileUrl": "https://github.com/aqm857886159/Nomi/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://nomiaqm.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "Nomi – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "aqm857886159 бүтээгчийн бэлтгэсэн Nomi материалыг Baysaass Studio сангаас танилцуулж байна. Open-source AI video workbench. Bring any model or your local ComfyUI, and let Claude Code / Codex / Cursor direct it over MCP — storyboard,...",
+        "keywords": [
+          "ai-agent",
+          "ai-video",
+          "ai-video-generator",
+          "bring-your-own-key",
+          "comfyui",
+          "creative-tools"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/aqm857886159/Nomi",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.022Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.202Z",
+      "updatedAt": "2026-11-06T01:28:51.202Z",
+      "publishedAt": "2026-11-06T01:28:51.202Z"
+    },
+    "github-1384734543": {
+      "id": "github-1384734543",
+      "type": "tool",
+      "title": "BeefTV – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "beeftv",
+      "summary": "glanderness бүтээгчийн бэлтгэсэн BeefTV материалыг Baysaass Studio сангаас танилцуулж байна. High-performance · Lightweight · AI Native Video workspace. 面向 AI 时代的视频创作工作台。 在画布中，和Agent一起自由连接创意和素材。...",
+      "coverImage": "https://avatars.githubusercontent.com/u/58928515?v=4",
+      "category": "tools",
+      "tags": [
+        "ai-image-generation",
+        "ai-video",
+        "ai-video-generation",
+        "ai-workspace",
+        "aigc",
+        "creative-tools"
+      ],
+      "content": "# BeefTV – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nHigh-performance · Lightweight · AI Native Video workspace. 面向 AI 时代的视频创作工作台。 在画布中，和Agent一起自由连接创意和素材。\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **glanderness**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-62656566",
+          "name": "BeefTV (Asset Package)",
+          "fileUrl": "https://github.com/glanderness/BeefTV/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://beeftv.app/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "BeefTV – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "glanderness бүтээгчийн бэлтгэсэн BeefTV материалыг Baysaass Studio сангаас танилцуулж байна. High-performance · Lightweight · AI Native Video workspace. 面向 AI 时代的视频创作工作台。 在画布中，和Agent一起自由连接创意和素材。...",
+        "keywords": [
+          "ai-image-generation",
+          "ai-video",
+          "ai-video-generation",
+          "ai-workspace",
+          "aigc",
+          "creative-tools"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/glanderness/BeefTV",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.025Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.210Z",
+      "updatedAt": "2026-11-06T01:28:51.210Z",
+      "publishedAt": "2026-11-06T01:28:51.210Z"
+    },
+    "github-1381356320": {
+      "id": "github-1381356320",
+      "type": "tool",
+      "title": "anidoodle – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "anidoodle",
+      "summary": "alexgreensh бүтээгчийн бэлтгэсэн anidoodle материалыг Baysaass Studio сангаас танилцуулж байна. Art and animation, written as code. Illustrations, loops, interactive web art, launch-videos and scored films in dozens of styles, identical...",
+      "coverImage": "https://avatars.githubusercontent.com/u/210140430?v=4",
+      "category": "tools",
+      "tags": [
+        "agent-skills",
+        "animation",
+        "canvas",
+        "claude-code",
+        "claude-plugin",
+        "claude-skills"
+      ],
+      "content": "# anidoodle – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nArt and animation, written as code. Illustrations, loops, interactive web art, launch-videos and scored films in dozens of styles, identical on every render.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **alexgreensh**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-616e6964",
+          "name": "anidoodle (Asset Package)",
+          "fileUrl": "https://github.com/alexgreensh/anidoodle/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://alexgreenshpun.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "anidoodle – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "alexgreensh бүтээгчийн бэлтгэсэн anidoodle материалыг Baysaass Studio сангаас танилцуулж байна. Art and animation, written as code. Illustrations, loops, interactive web art, launch-videos and scored films in dozens of styles, identical...",
+        "keywords": [
+          "agent-skills",
+          "animation",
+          "canvas",
+          "claude-code",
+          "claude-plugin",
+          "claude-skills"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/alexgreensh/anidoodle",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.028Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.219Z",
+      "updatedAt": "2026-11-06T01:28:51.219Z",
+      "publishedAt": "2026-11-06T01:28:51.219Z"
+    },
+    "github-316836816": {
+      "id": "github-316836816",
+      "type": "tool",
+      "title": "daisyui – Бэлэн Figma Загвар & UI Kit",
+      "slug": "daisyui",
+      "summary": "saadeghi бүтээгчийн бэлтгэсэн daisyui материалыг Baysaass Studio сангаас танилцуулж байна. 🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library...",
+      "coverImage": "https://avatars.githubusercontent.com/u/7342023?v=4",
+      "category": "templates",
+      "tags": [
+        "component",
+        "component-library",
+        "components",
+        "css",
+        "css-components",
+        "css-framework"
+      ],
+      "content": "# daisyui – Бэлэн Figma Загвар & UI Kit\n\n🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **saadeghi**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-64616973",
+          "name": "daisyui (Asset Package)",
+          "fileUrl": "https://github.com/saadeghi/daisyui/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://daisyui.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "daisyui – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "saadeghi бүтээгчийн бэлтгэсэн daisyui материалыг Baysaass Studio сангаас танилцуулж байна. 🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library...",
+        "keywords": [
+          "component",
+          "component-library",
+          "components",
+          "css",
+          "css-components",
+          "css-framework"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/saadeghi/daisyui",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.031Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.227Z",
+      "updatedAt": "2026-11-06T01:28:51.227Z",
+      "publishedAt": "2026-11-06T01:28:51.227Z"
+    },
+    "github-119811010": {
+      "id": "github-119811010",
+      "type": "tool",
+      "title": "tabler – Бэлэн Figma Загвар & UI Kit",
+      "slug": "tabler",
+      "summary": "tabler бүтээгчийн бэлтгэсэн tabler материалыг Baysaass Studio сангаас танилцуулж байна. Free and open source admin dashboard UI kit built on Bootstrap: 100+ pages, 6,000+ icons, dark mode, RTL....",
+      "coverImage": "https://avatars.githubusercontent.com/u/35471246?v=4",
+      "category": "templates",
+      "tags": [
+        "admin-dashboard",
+        "adminpanel",
+        "boilerplate-template",
+        "bootstrap",
+        "bootstrap4-theme",
+        "bootstrap5"
+      ],
+      "content": "# tabler – Бэлэн Figma Загвар & UI Kit\n\nFree and open source admin dashboard UI kit built on Bootstrap: 100+ pages, 6,000+ icons, dark mode, RTL.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **tabler**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-7461626c",
+          "name": "tabler (Asset Package)",
+          "fileUrl": "https://github.com/tabler/tabler/archive/refs/heads/dev.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://tabler.io",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "tabler – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "tabler бүтээгчийн бэлтгэсэн tabler материалыг Baysaass Studio сангаас танилцуулж байна. Free and open source admin dashboard UI kit built on Bootstrap: 100+ pages, 6,000+ icons, dark mode, RTL....",
+        "keywords": [
+          "admin-dashboard",
+          "adminpanel",
+          "boilerplate-template",
+          "bootstrap",
+          "bootstrap4-theme",
+          "bootstrap5"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/tabler/tabler",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.033Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.235Z",
+      "updatedAt": "2026-11-06T01:28:51.235Z",
+      "publishedAt": "2026-11-06T01:28:51.235Z"
+    },
+    "github-67962648": {
+      "id": "github-67962648",
+      "type": "tool",
+      "title": "vuetify – Бэлэн Figma Загвар & UI Kit",
+      "slug": "vuetify",
+      "summary": "vuetifyjs бүтээгчийн бэлтгэсэн vuetify материалыг Baysaass Studio сангаас танилцуулж байна. 🐉 Vue Component Framework...",
+      "coverImage": "https://avatars.githubusercontent.com/u/22138497?v=4",
+      "category": "templates",
+      "tags": [
+        "javascript",
+        "material",
+        "material-components",
+        "material-design",
+        "material-theme",
+        "semantic"
+      ],
+      "content": "# vuetify – Бэлэн Figma Загвар & UI Kit\n\n🐉 Vue Component Framework\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **vuetifyjs**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-76756574",
+          "name": "vuetify (Asset Package)",
+          "fileUrl": "https://github.com/vuetifyjs/vuetify/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://vuetifyjs.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "vuetify – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "vuetifyjs бүтээгчийн бэлтгэсэн vuetify материалыг Baysaass Studio сангаас танилцуулж байна. 🐉 Vue Component Framework...",
+        "keywords": [
+          "javascript",
+          "material",
+          "material-components",
+          "material-design",
+          "material-theme",
+          "semantic"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/vuetifyjs/vuetify",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.036Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.245Z",
+      "updatedAt": "2026-11-06T01:28:51.245Z",
+      "publishedAt": "2026-11-06T01:28:51.245Z"
+    },
+    "github-228229631": {
+      "id": "github-228229631",
+      "type": "tool",
+      "title": "carbon components svelte – Бэлэн Figma Загвар & UI Kit",
+      "slug": "carbon-components-svelte",
+      "summary": "carbon-design-system бүтээгчийн бэлтгэсэн carbon components svelte материалыг Baysaass Studio сангаас танилцуулж байна. Svelte implementation of the Carbon Design System...",
+      "coverImage": "https://avatars.githubusercontent.com/u/25179978?v=4",
+      "category": "templates",
+      "tags": [
+        "carbon",
+        "carbon-design-system",
+        "component-library",
+        "design-system",
+        "svelte",
+        "svelte-components"
+      ],
+      "content": "# carbon components svelte – Бэлэн Figma Загвар & UI Kit\n\nSvelte implementation of the Carbon Design System\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **carbon-design-system**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-63617262",
+          "name": "carbon components svelte (Asset Package)",
+          "fileUrl": "https://github.com/carbon-design-system/carbon-components-svelte/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://svelte.carbondesignsystem.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "carbon components svelte – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "carbon-design-system бүтээгчийн бэлтгэсэн carbon components svelte материалыг Baysaass Studio сангаас танилцуулж байна. Svelte implementation of the Carbon Design System...",
+        "keywords": [
+          "carbon",
+          "carbon-design-system",
+          "component-library",
+          "design-system",
+          "svelte",
+          "svelte-components"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/carbon-design-system/carbon-components-svelte",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.039Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.254Z",
+      "updatedAt": "2026-11-06T01:28:51.254Z",
+      "publishedAt": "2026-11-06T01:28:51.254Z"
+    },
+    "github-34526884": {
+      "id": "github-34526884",
+      "type": "tool",
+      "title": "ant design – Бэлэн Figma Загвар & UI Kit",
+      "slug": "ant-design",
+      "summary": "ant-design бүтээгчийн бэлтгэсэн ant design материалыг Baysaass Studio сангаас танилцуулж байна. An enterprise-class UI design language and React UI library...",
+      "coverImage": "https://avatars.githubusercontent.com/u/12101536?v=4",
+      "category": "templates",
+      "tags": [
+        "ant-design",
+        "antd",
+        "design-systems",
+        "react",
+        "typescript",
+        "ui-kit"
+      ],
+      "content": "# ant design – Бэлэн Figma Загвар & UI Kit\n\nAn enterprise-class UI design language and React UI library\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **ant-design**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-616e742d",
+          "name": "ant design (Asset Package)",
+          "fileUrl": "https://github.com/ant-design/ant-design/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://ant.design",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "ant design – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "ant-design бүтээгчийн бэлтгэсэн ant design материалыг Baysaass Studio сангаас танилцуулж байна. An enterprise-class UI design language and React UI library...",
+        "keywords": [
+          "ant-design",
+          "antd",
+          "design-systems",
+          "react",
+          "typescript",
+          "ui-kit"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/ant-design/ant-design",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.043Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.262Z",
+      "updatedAt": "2026-11-06T01:28:51.262Z",
+      "publishedAt": "2026-11-06T01:28:51.262Z"
+    },
+    "github-67274736": {
+      "id": "github-67274736",
+      "type": "tool",
+      "title": "element – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "element",
+      "summary": "ElemeFE бүтээгчийн бэлтгэсэн element материалыг Baysaass Studio сангаас танилцуулж байна. A Vue.js 2.0 UI Toolkit for Web...",
+      "coverImage": "https://avatars.githubusercontent.com/u/12810740?v=4",
+      "category": "tools",
+      "tags": [
+        "components",
+        "element-ui",
+        "javascript",
+        "ui-kit",
+        "vue",
+        "vue-components"
+      ],
+      "content": "# element – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nA Vue.js 2.0 UI Toolkit for Web\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **ElemeFE**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-656c656d",
+          "name": "element (Asset Package)",
+          "fileUrl": "https://github.com/ElemeFE/element/archive/refs/heads/dev.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://element.eleme.io/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "element – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "ElemeFE бүтээгчийн бэлтгэсэн element материалыг Baysaass Studio сангаас танилцуулж байна. A Vue.js 2.0 UI Toolkit for Web...",
+        "keywords": [
+          "components",
+          "element-ui",
+          "javascript",
+          "ui-kit",
+          "vue",
+          "vue-components"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/ElemeFE/element",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.046Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.272Z",
+      "updatedAt": "2026-11-06T01:28:51.272Z",
+      "publishedAt": "2026-11-06T01:28:51.272Z"
+    },
+    "github-23083156": {
+      "id": "github-23083156",
+      "type": "tool",
+      "title": "material ui – Бэлэн Figma Загвар & UI Kit",
+      "slug": "material-ui",
+      "summary": "mui бүтээгчийн бэлтгэсэн material ui материалыг Baysaass Studio сангаас танилцуулж байна. Material UI: Comprehensive React component library that implements Google's Material Design. Free forever....",
+      "coverImage": "https://avatars.githubusercontent.com/u/33663932?v=4",
+      "category": "templates",
+      "tags": [
+        "design-system",
+        "material-design",
+        "material-ui",
+        "react",
+        "react-components",
+        "JavaScript"
+      ],
+      "content": "# material ui – Бэлэн Figma Загвар & UI Kit\n\nMaterial UI: Comprehensive React component library that implements Google's Material Design. Free forever.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **mui**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6d617465",
+          "name": "material ui (Asset Package)",
+          "fileUrl": "https://github.com/mui/material-ui/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://mui.com/material-ui/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "material ui – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "mui бүтээгчийн бэлтгэсэн material ui материалыг Baysaass Studio сангаас танилцуулж байна. Material UI: Comprehensive React component library that implements Google's Material Design. Free forever....",
+        "keywords": [
+          "design-system",
+          "material-design",
+          "material-ui",
+          "react",
+          "react-components",
+          "JavaScript"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/mui/material-ui",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.049Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.282Z",
+      "updatedAt": "2026-11-06T01:28:51.282Z",
+      "publishedAt": "2026-11-06T01:28:51.282Z"
+    },
+    "github-501218027": {
+      "id": "github-501218027",
+      "type": "tool",
+      "title": "components – Бэлэн Figma Загвар & UI Kit",
+      "slug": "components",
+      "summary": "cloudscape-design бүтээгчийн бэлтгэсэн components материалыг Baysaass Studio сангаас танилцуулж байна. React components for Cloudscape Design System...",
+      "coverImage": "https://avatars.githubusercontent.com/u/107056549?v=4",
+      "category": "templates",
+      "tags": [
+        "components",
+        "design-system",
+        "react",
+        "scss",
+        "typescript",
+        "TypeScript"
+      ],
+      "content": "# components – Бэлэн Figma Загвар & UI Kit\n\nReact components for Cloudscape Design System\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **cloudscape-design**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-636f6d70",
+          "name": "components (Asset Package)",
+          "fileUrl": "https://github.com/cloudscape-design/components/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://cloudscape.design/",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "components – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "cloudscape-design бүтээгчийн бэлтгэсэн components материалыг Baysaass Studio сангаас танилцуулж байна. React components for Cloudscape Design System...",
+        "keywords": [
+          "components",
+          "design-system",
+          "react",
+          "scss",
+          "typescript",
+          "TypeScript"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/cloudscape-design/components",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.054Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.291Z",
+      "updatedAt": "2026-11-06T01:28:51.291Z",
+      "publishedAt": "2026-11-06T01:28:51.291Z"
+    },
+    "github-1444871799": {
+      "id": "github-1444871799",
+      "type": "tool",
+      "title": "figma lens – Бэлэн Figma Загвар & UI Kit",
+      "slug": "figma-lens",
+      "summary": "MohamedRamadanSalah бүтээгчийн бэлтгэсэн figma lens материалыг Baysaass Studio сангаас танилцуулж байна. Let Claude Code see Figma designs accurately — Figma plugin + local bridge + Claude skill. No Figma MCP, REST API or Dev Mode. Flutter & web...",
+      "coverImage": "https://avatars.githubusercontent.com/u/197763457?v=4",
+      "category": "templates",
+      "tags": [
+        "claude-code",
+        "claude-skill",
+        "design-to-code",
+        "figma",
+        "figma-plugin",
+        "flutter"
+      ],
+      "content": "# figma lens – Бэлэн Figma Загвар & UI Kit\n\nLet Claude Code see Figma designs accurately — Figma plugin + local bridge + Claude skill. No Figma MCP, REST API or Dev Mode. Flutter & web.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **MohamedRamadanSalah**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6669676d",
+          "name": "figma lens (Asset Package)",
+          "fileUrl": "https://github.com/MohamedRamadanSalah/figma-lens/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://github.com/MohamedRamadanSalah/figma-lens",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "figma lens – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "MohamedRamadanSalah бүтээгчийн бэлтгэсэн figma lens материалыг Baysaass Studio сангаас танилцуулж байна. Let Claude Code see Figma designs accurately — Figma plugin + local bridge + Claude skill. No Figma MCP, REST API or Dev Mode. Flutter & web...",
+        "keywords": [
+          "claude-code",
+          "claude-skill",
+          "design-to-code",
+          "figma",
+          "figma-plugin",
+          "flutter"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/MohamedRamadanSalah/figma-lens",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.056Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.301Z",
+      "updatedAt": "2026-11-06T01:28:51.301Z",
+      "publishedAt": "2026-11-06T01:28:51.301Z"
+    },
+    "github-653286614": {
+      "id": "github-653286614",
+      "type": "tool",
+      "title": "reshaped – Бэлэн Figma Загвар & UI Kit",
+      "slug": "reshaped",
+      "summary": "reshaped-ui бүтээгчийн бэлтгэсэн reshaped материалыг Baysaass Studio сангаас танилцуулж байна. Reshaped provides accessible React and Figma components for building beautiful products or starting your own design system...",
+      "coverImage": "https://avatars.githubusercontent.com/u/96989264?v=4",
+      "category": "templates",
+      "tags": [
+        "design-system",
+        "figma",
+        "react",
+        "react-components",
+        "ui-components",
+        "TypeScript"
+      ],
+      "content": "# reshaped – Бэлэн Figma Загвар & UI Kit\n\nReshaped provides accessible React and Figma components for building beautiful products or starting your own design system\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **reshaped-ui**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-72657368",
+          "name": "reshaped (Asset Package)",
+          "fileUrl": "https://github.com/reshaped-ui/reshaped/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://reshaped.so",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "reshaped – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "reshaped-ui бүтээгчийн бэлтгэсэн reshaped материалыг Baysaass Studio сангаас танилцуулж байна. Reshaped provides accessible React and Figma components for building beautiful products or starting your own design system...",
+        "keywords": [
+          "design-system",
+          "figma",
+          "react",
+          "react-components",
+          "ui-components",
+          "TypeScript"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/reshaped-ui/reshaped",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.059Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.311Z",
+      "updatedAt": "2026-11-06T01:28:51.311Z",
+      "publishedAt": "2026-11-06T01:28:51.311Z"
+    },
+    "github-423604713": {
+      "id": "github-423604713",
+      "type": "tool",
+      "title": "design system – Бэлэн Figma Загвар & UI Kit",
+      "slug": "design-system",
+      "summary": "hashicorp бүтээгчийн бэлтгэсэн design system материалыг Baysaass Studio сангаас танилцуулж байна. Helios Design System...",
+      "coverImage": "https://avatars.githubusercontent.com/u/761456?v=4",
+      "category": "templates",
+      "tags": [
+        "components",
+        "design-system",
+        "design-systems",
+        "design-tokens",
+        "emberjs",
+        "hashicorp"
+      ],
+      "content": "# design system – Бэлэн Figma Загвар & UI Kit\n\nHelios Design System\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **hashicorp**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-64657369",
+          "name": "design system (Asset Package)",
+          "fileUrl": "https://github.com/hashicorp/design-system/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://helios.hashicorp.design",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "design system – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "hashicorp бүтээгчийн бэлтгэсэн design system материалыг Baysaass Studio сангаас танилцуулж байна. Helios Design System...",
+        "keywords": [
+          "components",
+          "design-system",
+          "design-systems",
+          "design-tokens",
+          "emberjs",
+          "hashicorp"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/hashicorp/design-system",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.062Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.322Z",
+      "updatedAt": "2026-11-06T01:28:51.322Z",
+      "publishedAt": "2026-11-06T01:28:51.322Z"
+    },
+    "github-1361308883": {
+      "id": "github-1361308883",
+      "type": "tool",
+      "title": "design passport – Бэлэн Figma Загвар & UI Kit",
+      "slug": "design-passport",
+      "summary": "JFusco бүтээгчийн бэлтгэсэн design passport материалыг Baysaass Studio сангаас танилцуулж байна. A private Figma plugin that audits design files for deterministic AI and MCP readiness, safe cleanup, and certification....",
+      "coverImage": "https://avatars.githubusercontent.com/u/486049?v=4",
+      "category": "templates",
+      "tags": [
+        "accessibility",
+        "ai-readiness",
+        "code-connect",
+        "design-ops",
+        "design-systems",
+        "figma"
+      ],
+      "content": "# design passport – Бэлэн Figma Загвар & UI Kit\n\nA private Figma plugin that audits design files for deterministic AI and MCP readiness, safe cleanup, and certification.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **JFusco**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-64657369",
+          "name": "design passport (Asset Package)",
+          "fileUrl": "https://github.com/JFusco/design-passport/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://github.com/JFusco/design-passport",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "design passport – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "JFusco бүтээгчийн бэлтгэсэн design passport материалыг Baysaass Studio сангаас танилцуулж байна. A private Figma plugin that audits design files for deterministic AI and MCP readiness, safe cleanup, and certification....",
+        "keywords": [
+          "accessibility",
+          "ai-readiness",
+          "code-connect",
+          "design-ops",
+          "design-systems",
+          "figma"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/JFusco/design-passport",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.067Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.333Z",
+      "updatedAt": "2026-11-06T01:28:51.333Z",
+      "publishedAt": "2026-11-06T01:28:51.333Z"
+    },
+    "github-1249049113": {
+      "id": "github-1249049113",
+      "type": "tool",
+      "title": "penpot palette sync – Бэлэн Figma Загвар & UI Kit",
+      "slug": "penpot-palette-sync",
+      "summary": "johndc-77 бүтээгчийн бэлтгэсэн penpot palette sync материалыг Baysaass Studio сангаас танилцуулж байна. Figma to Penpot Converter 2026 - Sync Designs 🎨 | Open Source...",
+      "coverImage": "https://avatars.githubusercontent.com/u/104603853?v=4",
+      "category": "templates",
+      "tags": [
+        "adobe-xd",
+        "cloner",
+        "converter",
+        "design-system",
+        "exporter",
+        "figjam"
+      ],
+      "content": "# penpot palette sync – Бэлэн Figma Загвар & UI Kit\n\nFigma to Penpot Converter 2026 - Sync Designs 🎨 | Open Source\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **johndc-77**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-70656e70",
+          "name": "penpot palette sync (Asset Package)",
+          "fileUrl": "https://github.com/johndc-77/penpot-palette-sync/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://github.com/johndc-77/penpot-palette-sync",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "penpot palette sync – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "johndc-77 бүтээгчийн бэлтгэсэн penpot palette sync материалыг Baysaass Studio сангаас танилцуулж байна. Figma to Penpot Converter 2026 - Sync Designs 🎨 | Open Source...",
+        "keywords": [
+          "adobe-xd",
+          "cloner",
+          "converter",
+          "design-system",
+          "exporter",
+          "figjam"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/johndc-77/penpot-palette-sync",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.070Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.345Z",
+      "updatedAt": "2026-11-06T01:28:51.345Z",
+      "publishedAt": "2026-11-06T01:28:51.345Z"
+    },
+    "github-1389950937": {
+      "id": "github-1389950937",
+      "type": "tool",
+      "title": "freshcoat – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "freshcoat",
+      "summary": "dotside-studios бүтээгчийн бэлтгэсэн freshcoat материалыг Baysaass Studio сангаас танилцуулж байна. Create designs that scale. An open-source design tool for producing cards, badges, certificates, and more....",
+      "coverImage": "https://avatars.githubusercontent.com/u/193875130?v=4",
+      "category": "tools",
+      "tags": [
+        "batch-processing",
+        "canvaskit",
+        "data-driven-design",
+        "design-editor",
+        "design-tools",
+        "figma-plugin"
+      ],
+      "content": "# freshcoat – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nCreate designs that scale. An open-source design tool for producing cards, badges, certificates, and more.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **dotside-studios**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-66726573",
+          "name": "freshcoat (Asset Package)",
+          "fileUrl": "https://github.com/dotside-studios/freshcoat/archive/refs/heads/master.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://freshcoat.dotsidestudios.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "freshcoat – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "dotside-studios бүтээгчийн бэлтгэсэн freshcoat материалыг Baysaass Studio сангаас танилцуулж байна. Create designs that scale. An open-source design tool for producing cards, badges, certificates, and more....",
+        "keywords": [
+          "batch-processing",
+          "canvaskit",
+          "data-driven-design",
+          "design-editor",
+          "design-tools",
+          "figma-plugin"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/dotside-studios/freshcoat",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.074Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.353Z",
+      "updatedAt": "2026-11-06T01:28:51.353Z",
+      "publishedAt": "2026-11-06T01:28:51.353Z"
+    },
+    "github-1354935370": {
+      "id": "github-1354935370",
+      "type": "tool",
+      "title": "unoff plugins – Дизайнеруудад зориулсан Интерактив Хэрэгсэл",
+      "slug": "unoff-plugins",
+      "summary": "yelbolt бүтээгчийн бэлтгэсэн unoff plugins материалыг Baysaass Studio сангаас танилцуулж байна. Monorepo of plugins built with the Unoff framework, organized by design tool platform....",
+      "coverImage": "https://avatars.githubusercontent.com/u/265382546?v=4",
+      "category": "tools",
+      "tags": [
+        "figma-plugin",
+        "framer-plugin",
+        "penpot-plugin",
+        "sketch-plugin",
+        "unoff-cli",
+        "unoff-utils"
+      ],
+      "content": "# unoff plugins – Дизайнеруудад зориулсан Интерактив Хэрэгсэл\n\nMonorepo of plugins built with the Unoff framework, organized by design tool platform.\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **yelbolt**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-756e6f66",
+          "name": "unoff plugins (Asset Package)",
+          "fileUrl": "https://github.com/yelbolt/unoff-plugins/archive/refs/heads/dev.zip",
+          "fileSize": "4.8 MB",
+          "format": "FIG",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://plugins.unoff.dev",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "unoff plugins – Дизайнеруудад зориулсан Интерактив Хэрэгсэл | Baysaass Studio OS",
+        "description": "yelbolt бүтээгчийн бэлтгэсэн unoff plugins материалыг Baysaass Studio сангаас танилцуулж байна. Monorepo of plugins built with the Unoff framework, organized by design tool platform....",
+        "keywords": [
+          "figma-plugin",
+          "framer-plugin",
+          "penpot-plugin",
+          "sketch-plugin",
+          "unoff-cli",
+          "unoff-utils"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/yelbolt/unoff-plugins",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T01:28:51.077Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T01:28:51.362Z",
+      "updatedAt": "2026-11-06T01:28:51.362Z",
+      "publishedAt": "2026-11-06T01:28:51.362Z"
+    },
+    "github-378459401": {
+      "id": "github-378459401",
+      "type": "tool",
+      "title": "mix – Бэлэн Figma Загвар & UI Kit",
+      "slug": "mix",
+      "summary": "btwld бүтээгчийн бэлтгэсэн mix материалыг Baysaass Studio сангаас танилцуулж байна. A styling system for Flutter...",
+      "coverImage": "https://avatars.githubusercontent.com/u/83911646?v=4",
+      "category": "templates",
+      "tags": [
+        "design-system",
+        "flutter",
+        "Dart",
+        "Open Source",
+        "GitHub",
+        "TEMPLATES"
+      ],
+      "content": "# mix – Бэлэн Figma Загвар & UI Kit\n\nA styling system for Flutter\n\n---\n\n## 📌 Материалын танилцуулга\n\nЭнэхүү материалын эх сурвалж нь **GITHUB** бөгөөд бүтээгч **btwld**-ийн гаргасан чанартай нөөц юм. Бид уг материалыг шалган, дизайны төсөлд ашиглахад бэлэн байдлаар бэлтгэлээ.\n\n> [!NOTE]\n> **Лиценз ба Ашиглалт:** Энэхүү материал нь чөлөөтэй татаж авч хувийн болон суралцах төсөлд турших боломжтой хувилбар юм.\n\n---\n\n## ✨ Гол онцлогууд & Давуу тал\n\n* **Бүрэн цэгцтэй зохион байгуулалт:** Figma Auto-Layout, Components болон хувьсах Variable-уудыг бүрэн дэмжсэн.\n* **Төслийн хурдыг 3 дахин нэмэгдүүлнэ:** Тэгээс эхлэх шаардлагагүйгээр бэлэн систем, бүтцийг шууд хуулж ашиглах боломжтой.\n* **Орчин үеийн визуал стандарт:** 2026 оны дижитал бүтээгдэхүүн, брэндингийн өнгө төрх, минимал эстетик шингэсэн.\n* **Хэрэглэхэд хялбар:** Түгээмэл форматтай учир ямар ч хэрэгсэл рүү хөрвүүлэн ашиглахад саадгүй.\n\n---\n\n## 🎯 Хэнд зориулагдсан бэ?\n\nЭнэхүү эх сурвалж нь ялангуяа дараах чиглэлээр ажиллаж буй мэргэжилтнүүдэд хамгийн өндөр өгөөжтэй:\n* **Фронтенд хөгжүүлэгчид, UI систем бүтээгчид**\n* Төслийнхөө брэндинг болон визуал концепцийг богино хугацаанд боловсруулах шаардлагатай стартапууд\n* Төгс жишиг дизайн, typography scale болон grid layout судалж буй дизайнерууд\n\n---\n\n## 🚀 Хэрхэн ашиглах вэ?\n\n1. **Файлыг нээх:** Доорх таталтын хэсэгт өөрийн нэр болон Gmail хаягаа оруулан файлаа шууд нээнэ үү.\n2. **Figma / Компьютертээ оруулах:** Татаж авсан `.fig` эсвэл `.zip` файлыг өөрийн төсөл рүүгээ чирч оруулан (Drag & Drop) нээнэ.\n3. **Өөрийн брэндэд тохируулах:** Өнгө, фонт болон текстийн агуулгыг өөрийн шаардлагад нийцүүлэн засварлана.\n\n> [!TIP]\n> **Мэргэжлийн зөвлөгөө:** Загварыг шууд хуулахаас гадна доторх Auto-layout болон layer-ийн бүтэц, хэмжээсийн харьцааг сайтар ажиглаж суралцвал таны практик чадвар дараагийн шатанд гарах болно.",
+      "downloadFiles": [
+        {
+          "id": "file-6d6978",
+          "name": "mix (Asset Package)",
+          "fileUrl": "https://github.com/btwld/mix/archive/refs/heads/main.zip",
+          "fileSize": "4.8 MB",
+          "format": "ZIP",
+          "description": "Бүрэн эх файл, бүх layer болон эх загвар багтсан."
+        }
+      ],
+      "destinationUrl": "https://fluttermix.com",
+      "ctaLabel": "Хэрэгсэл рүү очих",
+      "featured": true,
+      "sortOrder": 0,
+      "readTimeMinutes": 2,
+      "author": {
+        "name": "Т. Өсөхбаяр",
+        "role": "Brand & Product Designer",
+        "avatar": "/brand/designer-avatar.png"
+      },
+      "seo": {
+        "title": "mix – Бэлэн Figma Загвар & UI Kit | Baysaass Studio OS",
+        "description": "btwld бүтээгчийн бэлтгэсэн mix материалыг Baysaass Studio сангаас танилцуулж байна. A styling system for Flutter...",
+        "keywords": [
+          "design-system",
+          "flutter",
+          "Dart",
+          "Open Source",
+          "GitHub",
+          "TEMPLATES"
+        ]
+      },
+      "status": "published",
+      "gated": true,
+      "sourceUrl": "https://github.com/btwld/mix",
+      "sourcePlatform": "github",
+      "curatedAt": "2026-11-06T02:08:12.503Z",
+      "viewsCount": 0,
+      "downloadsCount": 0,
+      "createdAt": "2026-11-06T02:08:25.405Z",
+      "updatedAt": "2026-11-06T02:08:25.405Z",
+      "publishedAt": "2026-11-06T02:08:25.405Z"
+    }
+  },
+  "categories": {
+    "guides": {
+      "id": "guides",
+      "name": "Guides & Articles",
+      "nameMn": "Удирдамж & Зөвлөмж",
+      "slug": "guides",
+      "description": "Брэндийн стратеги, визуал систем, лого дизайны практик удирдамжууд",
+      "sortOrder": 1
+    },
+    "templates": {
+      "id": "templates",
+      "name": "Templates & Downloads",
+      "nameMn": "Загвар & Татах файлууд",
+      "slug": "templates",
+      "description": "Дизайнерууд болон брэнд менежерүүдэд зориулсан бэлэн файлууд, checklist",
+      "sortOrder": 2
+    },
+    "tools": {
+      "id": "tools",
+      "name": "Tools & Applications",
+      "nameMn": "Дизайн & AI Хэрэгслүүд",
+      "slug": "tools",
+      "description": "Брэндбүүк аудит, AI бриф зөвлөх зэрэг интерактив хэрэгслүүд",
+      "sortOrder": 3
+    },
+    "packaging": {
+      "id": "packaging",
+      "name": "Packaging & Print",
+      "nameMn": "Сав баглаа боодол",
+      "slug": "packaging",
+      "description": "Хэвлэлийн эх бэлтгэл, цаас, өнгөлгөө, дардсын стандарт",
+      "sortOrder": 4
+    },
+    "typography": {
+      "id": "typography",
+      "name": "Typography",
+      "nameMn": "Үсгийн соёл",
+      "slug": "typography",
+      "description": "Фонтын сонголт, кирилл бичгийн дүрэм, мэдээллийн шатлал",
+      "sortOrder": 5
+    }
+  },
+  "assets": {}
+}

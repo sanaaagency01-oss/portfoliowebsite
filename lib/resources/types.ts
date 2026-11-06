@@ -48,9 +48,19 @@ export interface ResourceItem {
   status: ResourceStatus
   viewsCount: number
   downloadsCount: number
+  gated?: boolean // whether download files require name & email to unlock (default true)
   createdAt: string
   updatedAt: string
   publishedAt?: string
+}
+
+export interface ResourceLead {
+  id: string
+  resourceId: string
+  resourceTitle: string
+  name: string
+  email: string
+  createdAt: string
 }
 
 export interface ResourceAsset {

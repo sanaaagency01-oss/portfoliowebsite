@@ -27,14 +27,21 @@ import {
   Tag,
   Eye,
   SlidersHorizontal,
+  Mail,
+  X,
+  Check,
 } from 'lucide-react'
-import { ResourceItem, ResourceType, ResourceStatus, ResourceCategory } from '@/lib/resources/types'
+import { ResourceItem, ResourceType, ResourceStatus, ResourceCategory, ResourceLead } from '@/lib/resources/types'
 import AdminLogoutButton from '@/components/studio/admin/AdminLogoutButton'
 import { CloudflareStatusBadge } from '@/components/studio/CloudflareStatusBadge'
 
 export default function AdminResourcesPage() {
   const [resources, setResources] = useState<ResourceItem[]>([])
   const [categories, setCategories] = useState<ResourceCategory[]>([])
+  const [leads, setLeads] = useState<ResourceLead[]>([])
+  const [isLeadsModalOpen, setIsLeadsModalOpen] = useState(false)
+  const [leadSearch, setLeadSearch] = useState('')
+  const [copiedEmails, setCopiedEmails] = useState(false)
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedStatus, setSelectedStatus] = useState<'all' | ResourceStatus>('all')
@@ -45,11 +52,18 @@ export default function AdminResourcesPage() {
   const loadData = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/resources')
+      const [res, leadsRes] = await Promise.all([
+        fetch('/api/admin/resources'),
+        fetch('/api/admin/resources/leads'),
+      ])
       if (res.ok) {
         const data = await res.json()
         if (data.resources) setResources(data.resources)
         if (data.categories) setCategories(data.categories)
+      }
+      if (leadsRes.ok) {
+        const leadsData = await leadsRes.json()
+        if (leadsData.leads) setLeads(leadsData.leads)
       }
     } catch (e) {
       console.error('Failed loading resources in admin', e)
@@ -263,6 +277,15 @@ export default function AdminResourcesPage() {
               >
                 <RefreshCw className={`size-3.5 ${loading ? 'animate-spin' : ''}`} />
                 <span>Шинэчлэх</span>
+              </button>
+
+              <button
+                onClick={() => setIsLeadsModalOpen(true)}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-blue-200 bg-blue-50/70 text-xs font-semibold text-blue-700 hover:bg-blue-100 transition"
+                title="Файл татсан хэрэглэгчдийн нэр, Gmail бүртгэл"
+              >
+                <Mail className="size-3.5" />
+                <span>Таталтын бүртгэл ({leads.length})</span>
               </button>
 
               <Link
@@ -570,6 +593,121 @@ export default function AdminResourcesPage() {
           </div>
         </section>
       </div>
+
+      {/* LEADS MODAL */}
+      {isLeadsModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-3xl border border-[#e0e0e0] shadow-2xl flex flex-col overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-[#e0e0e0]">
+              <div className="flex items-center gap-3">
+                <div className="size-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <Mail className="size-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-black tracking-tight">
+                    Файл татсан хэрэглэгчдийн бүртгэл (Leads)
+                  </h3>
+                  <p className="text-xs text-[#71717a]">
+                    Нийт {leads.length} хэрэглэгч нэр болон Gmail хаягаа үлдээж файл татсан байна
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsLeadsModalOpen(false)}
+                className="p-2 rounded-xl text-[#71717a] hover:text-black hover:bg-[#f4f4f5] transition"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+
+            {/* Actions & Search */}
+            <div className="p-4 px-6 bg-[#fafafa] border-b border-[#e0e0e0] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="relative flex-1 max-w-sm">
+                <Search className="size-3.5 text-[#888888] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Нэр, и-мэйл эсвэл материалаар хайх..."
+                  value={leadSearch}
+                  onChange={(e) => setLeadSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-[#e0e0e0] bg-white text-xs text-black focus:outline-none focus:border-black"
+                />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const emails = Array.from(new Set(leads.map((l) => l.email))).join(', ')
+                    navigator.clipboard.writeText(emails)
+                    setCopiedEmails(true)
+                    setTimeout(() => setCopiedEmails(false), 2500)
+                  }}
+                  disabled={leads.length === 0}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e0e0e0] bg-white text-xs font-bold text-black hover:bg-[#f4f4f5] transition disabled:opacity-50"
+                >
+                  {copiedEmails ? <Check className="size-3.5 text-emerald-600" /> : <Copy className="size-3.5" />}
+                  <span>{copiedEmails ? 'Хуулагдлаа!' : `Бүх и-мэйлийг хуулах (${Array.from(new Set(leads.map((l) => l.email))).length})`}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Leads Table */}
+            <div className="flex-1 overflow-y-auto p-6">
+              {leads.length === 0 ? (
+                <div className="p-12 text-center text-xs text-[#71717a]">
+                  Одоогоор файл таталтын бүртгэл байхгүй байна.
+                </div>
+              ) : (
+                <div className="border border-[#e0e0e0] rounded-2xl overflow-hidden">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-[#f4f4f5] border-b border-[#e0e0e0] text-[#52525b] font-bold">
+                      <tr>
+                        <th className="py-3 px-4">Огноо</th>
+                        <th className="py-3 px-4">Нэр</th>
+                        <th className="py-3 px-4">Gmail / И-мэйл</th>
+                        <th className="py-3 px-4">Татсан материал</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#e0e0e0]">
+                      {leads
+                        .filter((l) => {
+                          if (!leadSearch.trim()) return true
+                          const q = leadSearch.toLowerCase()
+                          return (
+                            l.name.toLowerCase().includes(q) ||
+                            l.email.toLowerCase().includes(q) ||
+                            l.resourceTitle.toLowerCase().includes(q)
+                          )
+                        })
+                        .map((l) => (
+                          <tr key={l.id} className="hover:bg-[#fafafa]">
+                            <td className="py-3 px-4 text-[#71717a] font-mono whitespace-nowrap">
+                              {new Date(l.createdAt).toLocaleString('mn-MN')}
+                            </td>
+                            <td className="py-3 px-4 font-bold text-black">
+                              {l.name}
+                            </td>
+                            <td className="py-3 px-4 text-blue-600 font-mono">
+                              <a href={`mailto:${l.email}`} className="hover:underline">
+                                {l.email}
+                              </a>
+                            </td>
+                            <td className="py-3 px-4 text-neutral-800 max-w-xs truncate" title={l.resourceTitle}>
+                              {l.resourceTitle}
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }
